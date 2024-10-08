@@ -1,1 +1,1 @@
-# Contribution Log for Jackson Macdonald
+# Contribution Log for Jackson MacDonald
