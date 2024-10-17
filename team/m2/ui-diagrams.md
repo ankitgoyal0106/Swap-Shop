@@ -31,8 +31,12 @@ The **explore page** is the compilation of all items listed on our website. You 
   1. Explore page which gives the all of the possible listing of the items
   2. Cart/Saved Items, here user can save the items they want to buy or the items they wish to buy in future.
   3. Profile Log-in button where user can login to there profile or can register if they do not have a profile.
-
 - Use Case: Home page is a quick introduction of the web application. From this page a user can nevigate to anywhere they want.
+# Description and Use Case for the Profile page
+- The user can acces to the profile page by clicking on the button available on the top right corner.
+- The Profile Page will display key information about the seller or buyer. It will feature a minimal yet intuitive design, showing the user's profile picture at the top, followed by their name, and bio. It will also contain tabs or sections to navigate between active listings (for sellers) or purchase history (for buyers).
+- Sellers can update their listings, view ratings, and respond to messages, while buyers can track orders and leave feedback. Users can also edit their profile details. If accessed without login, the system redirects to the login page, ensuring secure access.
+
 ## Login Screen
 
 The login popup screen will appear when users click on the login button on the upper right of any main page of the application.
