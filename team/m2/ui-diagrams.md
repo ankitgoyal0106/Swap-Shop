@@ -3,8 +3,24 @@
 Diagrams and explanations of the UI, including how users will interact with the interface.
 
 ## Item and Explore Page
+The **Item page** will display our sellers' listings and allow buyers to browse items they are interested in. It is a minimalistic page with the title of the item, pictures of the items viewable by clicking through the middle, and more specifics on the details. 
+
+The **explore page** is the compilation of all items listed on our website. You will have a few items that are recommended for you at the top of the page based on past views, past purchases, and filters. Below that will be all other listings that will by default be filtered by most popular, but we have a sort-by option to specify how you want the listings to appear. Along with the sort by, you can also filter using the search bar for keywords to get the items you desire.
 
 ![Item and Explore Page](Images/UI%20Mocks-1.png)
+
+1. **Item page main elements:**
+
+    a. **Viewing of the item** - The user should be able to see multiple pictures of the item they are interested in by scrolling through the images uploaded by the seller including a big title above. The pictures are the main attraction of this page and we want the user to be able to view them easily both on the web and phone.
+
+    b. **Specific description of the item:** The page will include everything the user needs to know such as location, price, details about the seller, and a description of the item. These will be set by the seller, and the rating will be from the sellers page. The description will also be given from the seller with any further context needed. 
+
+    c. ** Message and save items:** These buttons will be available for the user to save items to their "Cart". and message the seller for buying details or more questions about the item. This will work very similar to Facebook marketplace, or any other swap app where we won't deal with the transaction but instead allow the buyer and seller to coordinate a time, place, and way of money transaction.
+
+    d. **Use Cases:** The use case for the item page is to engage the buyer with an item, get them more details, and connect them with the seller if they are interested in buying. It will allow for a deeper insight into the item so the buyer can be more assured they are getting the product they desire.
+  
+2. Description for explore page
+  a. Th
 
 ## Home and Profile Page
 
