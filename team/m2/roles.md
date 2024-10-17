@@ -9,3 +9,11 @@ A markdown file detailing each team member's role and their top 3 commits for th
    1. [Commit 1](https://github.com/ankitgoyal0106/326-Group-Project/commit/ff52e96e34b388455afe70c56f6b6855e79accf7): Added drawn diagrams and the description for the login page in ui-diagrams.md.
    2. [Commit 2](link): Description
    3. [Commit 3](link): Description
+
+## Ankit Goyal - Repository Manager 
+
+- **Role:** Look at the organization, maintenance, and access control of the repository, ensuring proper control, documentation, and collaboration among the group members.
+- **Top Three Commits:**
+   1. [Created the repo](https://github.com/ankitgoyal0106/326-Group-Project/commit/aeb5fd20fa964e6aa7d805033bfda3d3d0e05a14)
+   2. [Description for the Home Page](https://github.com/ankitgoyal0106/326-Group-Project/commit/d67bd2c39da4c95d820834b6f6d9dea23ed9b3ae)
+   3. [Description for the Profile Page](https://github.com/ankitgoyal0106/326-Group-Project/commit/bdb20dd3d299b292c07c5eba8a7849e243311535)
