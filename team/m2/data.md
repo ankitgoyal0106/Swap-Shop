@@ -8,13 +8,17 @@ A file that describes the types of data the application will handle, but without
     - `name` (string): The user's full name.
     - `email` (string): The user's email address.
     - `phoneNo` (string): The user's phone number.
+    - `college` (string): The college that the user attends.
     - `password` (string): An encrypted version of the user's password.
     - `profilePicture` (string): A link to the user's profile picture.
     - `role` (string): Defines wether the user is a buyer, seller, or both.
+    - `rating` (float): The rating of how well the user is at buying, selling, and messaging.
     - `createdAt` (timestamp): The date and time when the account was created.
     - `updatedAt` (timestamp): The last time when the buyer's profile was updated.
     - `preferences` (JSON): Stores user preferences such as categories of interest.
     - `achievements` (array): A list of JSON achievements unlocked by the user.
+    - `savedListings` (array): A list of `listingIDs` that the user has saved.
+    - `recentlyViewed` (array): A list of `listingIDs` that were recently viewed by the user.
 - **Data Source**: User-input data when registering or updating their profile.
 
 ### 2. Company Information
@@ -24,6 +28,7 @@ A file that describes the types of data the application will handle, but without
     - `owners` (array of strings): An array of `userIDs` of those who have access to the company.
     - `companyName` (string): The name of the seller's company.
     - `companyDescription` (string): A description of the company.
+    - `companyRating` (float): The rating of how good the company is.
     - `companyLocation` (string): The location of the company.
     - `companyEmail` (string): The email address associated with the company.
 - **Data Source**: User-input data while updating their profile.
@@ -63,6 +68,7 @@ A file that describes the types of data the application will handle, but without
     - `userID` (string): The `userID` of the user receiving the suggestion.
     - `recommendedItems` (array): A list of `listingIDs` to be suggested.
     - `suggestedAt` (timestamp): The date and time when the suggestion was generated.
+    - `viewedSuggestions` (array): A list of the recently viewed suggestions for a user.
 - **Data Source**: System-generated based on user interaction and browsing history.
 
 ## Data Relationships
