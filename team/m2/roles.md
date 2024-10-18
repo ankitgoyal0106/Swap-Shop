@@ -23,7 +23,7 @@ A markdown file detailing each team member's role and their top 3 commits for th
 - **Top Three Commits**:
    1. [Description for the Explore Page in UI](https://github.com/ankitgoyal0106/326-Group-Project/commit/819ac099a632852eb95f1b2c472553a15c7acee8)
    2. [Description for the Items Page in UI](https://github.com/ankitgoyal0106/326-Group-Project/commit/27e8d1b42283626c8f955a1dcb67b41f8ddc2072)
-   3. [Commit 3](link): Description
+   3. [Reviewed data.md and added comments ](https://github.com/ankitgoyal0106/326-Group-Project/commit/3e203fa36cd2285dd02c9cc6bd71911698874c32)
 
 ## Scott Puopolo - Project Manager (Timekeeper)
 - **Role**: Track project deadlines and communicate the dates with the team to assure each one is met. Assure each task gets done in a timely manner.
