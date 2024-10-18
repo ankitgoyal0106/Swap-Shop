@@ -2,10 +2,11 @@
 
 A markdown file detailing each team member's role and their top 3 commits for this milestone submission, with links to those commits in GitHub and short descriptions of their contributions.
 
-## Nathan Palmer - Communication Lead
+## Tyler Tang - Documentation Lead
 
-- **Role**: Manage group communication by keeping contact in the group chat, as well as including all members in group discussions.
-- **Top Three Commits**:
-   1. [Commit 1](https://github.com/ankitgoyal0106/326-Group-Project/commit/ff52e96e34b388455afe70c56f6b6855e79accf7): Added drawn diagrams and the description for the login page in ui-diagrams.md.
-   2. [Commit 2](link): Description
-   3. [Commit 3](link): Description
+- **Role**: Responsible for overseeing the organization and maintenance of all project documentation.
+- **Top 3 Commits**:
+  1. [Commit 1](https://github.com/ankitgoyal0106/326-Group-Project/commit/9fff27b5f7748f2a416ae83732fb28f77c4a8564): Wrote out description for problem we are looking to resolve and how our application will resolve it
+  2. [Commit 2](link): Description
+  3. [Commit 3](link): Description
+
