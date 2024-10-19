@@ -44,6 +44,6 @@ A markdown file detailing each team member's role and their top 3 commits for th
 - **Role**: Record information and notes for team meetings, submit any assignments involving all group members.
 
 - **Top Three Commits**
-   1. [First draft of the users.md file + Team Roles] 
+   1. [First draft of the users.md file + Team Roles] https://github.com/ankitgoyal0106/Swap-Shop/commit/5813d410a8341f2daf6ca199776fae717fa2f802
    2. [Completed the users.md file]
-   3. [Added a contribution for myself in report file]
+   3. [Added a contribution for myself in report file] 
