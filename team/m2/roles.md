@@ -46,9 +46,9 @@ A markdown file detailing each team member's role and their top 3 commits for th
 
 - **Role**: Delegate milestone tasks to team members and ensure that all responsibilities have been assigned
 - **Top Three Commits**:
-   1. [Completion of the 'features.md' file](Link)
-   2. [Updated personal contribution report](Link)
-   3. [Completed section of 'roles.md' file](Link)
+   1. [Completion of the 'features.md' file](https://github.com/ankitgoyal0106/Swap-Shop/commit/ce047b6cce4d98d0f3c854db2ae32e1bab28c55a)
+   2. [Updated personal contribution report](https://github.com/ankitgoyal0106/Swap-Shop/commit/28a178e7c1c913a21cb8f931381c3adb26ebe2d6)
+   3. [Completed section of 'roles.md' file](https://github.com/ankitgoyal0106/Swap-Shop/commit/5911a958ab61a76f9d327c75ad2c092d94604ec0)
 
 ## Snigdha Thatikonda - Note Taker
 

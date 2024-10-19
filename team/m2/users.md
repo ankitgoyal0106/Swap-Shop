@@ -6,7 +6,7 @@ We aim to solve this problem by providing a streamlined marketplace for local bu
 
 - Customizable Profiles for Buyers and Sellers
 - Direct Messaging
-- Explore Page w Search Capability
+- Explore Page with Search Capability
 - Advertising
 
 Addressing the problems identified in both the student marketplace and local vendor ecosystems will greatly benefit our target users, as SwapShop will eliminate the inefficiency of current methods and provide a simple and reliable way to declutter dorms by selling used items or finding affordable secondhand goods. It will also help foster stronger connections between students who share similar buying and selling interests.
