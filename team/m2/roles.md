@@ -39,3 +39,11 @@ A markdown file detailing each team member's role and their top 3 commits for th
    1. [First draft of the `data.md` file](https://github.com/ankitgoyal0106/326-Group-Project/commit/65a4ec9c19b64f6505597d11f829252e04b70474)
    2. [Completed the `data.md` file](https://github.com/ankitgoyal0106/326-Group-Project/commit/3e203fa36cd2285dd02c9cc6bd71911698874c32)
    3. [Added a contribution for myself.](https://github.com/ankitgoyal0106/326-Group-Project/commit/ab1e3e111cc9d63a2653d786a2d12b5d3c6c8a5c)
+
+## Snigdha Thatikonda - Note Taker
+- **Role**: Record information and notes for team meetings, submit any assignments involving all group members.
+
+- **Top Three Commits**
+   1. [First draft of the users.md file + Team Roles] 
+   2. [Completed the users.md file]
+   3. [Added a contribution for myself in report file]
