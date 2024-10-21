@@ -1,6 +1,6 @@
 A markdown file that explains your target users and their specific needs.
 
-SwapShop aims to bridge the gap between local buyers and sellers. The target users of this application are students at UMass, as the lack of an efficient and centralized system leads to frustration when trying to sell or buy used items, and farmers' market and local vendors, as vendors struggle to advertise their offerings to the student population and miss out on opportunities to attract potential buyers. Students either hold onto items they no longer need or miss out on items they could have purchased from peers at a reasonable price. This disconnect between local sellers and students leads to lost sales and lower foot traffic at markets
+SwapShop aims to bridge the gap between local buyers and sellers. The target users of this application are students at UMass and farmers' market and local vendors. The lack of an efficient and centralized system leads to frustration when trying to sell or buy used items as vendors struggle to advertise their offerings to the student population and miss out on opportunities to attract potential buyers. Students either hold onto items they no longer need or miss out on items they could have purchased from peers at a reasonable price. This disconnect between local sellers and students leads to lost sales and lower foot traffic at markets
 
 We aim to solve this problem by providing a streamlined marketplace for local buying and selling with the following features:
 
