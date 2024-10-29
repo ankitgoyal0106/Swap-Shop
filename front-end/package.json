@@ -1,6 +1,8 @@
 {
-  "name": "Back-End",
+  "name": "",
   "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
   "type": "module",
   "license": "AGPL-version-3.0",
   "private": false,
@@ -20,13 +22,17 @@
     "email": "",
     "url": ""
   },
-  "contributors": [],
+  "contributors": [
+
+  ],
   "scripts": {
     "dev": "",
     "test": ""
   },
   "dependencies": {
-    "express": "^4.21.1",
-    "ws": "^8.18.0"
+
+  },
+  "devDependencies": {
+
   }
 }
