@@ -1,8 +1,8 @@
 {
-  "name": "",
+  "name": "front-end",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "index.html",
   "type": "module",
   "license": "AGPL-version-3.0",
   "private": false,
@@ -22,17 +22,13 @@
     "email": "",
     "url": ""
   },
-  "contributors": [
-
-  ],
+  "contributors": [],
   "scripts": {
+    "start-server": "http-server ./src -p 3000",
     "dev": "",
     "test": ""
   },
   "dependencies": {
-
-  },
-  "devDependencies": {
-
+    "http-server": "^14.1.1"
   }
 }
