@@ -119,5 +119,5 @@ input[type="email"], input[type="password"] {
 
 .background-section {
     flex: 1;
-    background: url('background-image.jpg') no-repeat center center / cover; /* Add your background image path here */
+    background: url('Images/background-image.jpg') no-repeat center center / cover;
 }
