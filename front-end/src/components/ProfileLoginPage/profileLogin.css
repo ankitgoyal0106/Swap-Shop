@@ -1,66 +1,123 @@
-body {
+body, html {
+    margin: 0;
+    padding: 0;
     font-family: Arial, sans-serif;
-}
-
-#loginButton {
-    margin: 20px;
-    padding: 10px 20px;
-    font-size: 16px;
-}
-
-.popup {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.5);
+    display: flex;
     justify-content: center;
     align-items: center;
+    height: 100vh;
+    background-color: #f0f0f0;
 }
 
-.popup-content {
-    background: #fff;
-    padding: 20px;
-    border-radius: 8px;
-    width: 300px;
-    position: relative;
+.container {
+    display: flex;
+    width: 80%;
+    max-width: 1200px;
+    height: 70vh;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    border-radius: 10px;
 }
 
-.close {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    font-size: 24px;
-    cursor: pointer;
+.login-form-container {
+    flex: 1;
+    padding: 40px;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
-input {
+.login-form-content {
+    max-width: 350px;
+    margin: 0 auto;
+}
+
+.logo {
+    max-width: 100px;
+    margin-bottom: 20px;
+}
+
+h2 {
+    margin-bottom: 10px;
+}
+
+p {
+    margin-bottom: 20px;
+}
+
+input[type="email"], input[type="password"] {
     width: 100%;
-    padding: 8px;
-    margin: 5px 0;
+    padding: 10px;
+    margin-bottom: 15px;
     border: 1px solid #ccc;
     border-radius: 4px;
 }
 
-button {
-    padding: 10px;
-    background-color: #007BFF;
-    color: white;
-    border: none;
-    border-radius: 4px;
+.password-container {
+    position: relative;
+}
+
+.password-container .password-toggle {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
     cursor: pointer;
 }
 
-button:hover {
-    background-color: #0056b3;
-}
-/* Keep existing CSS */
-#loginFormContainer, #createAccountFormContainer {
-    display: none;
+.form-options {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
 }
 
-.popup-content {
-    transition: opacity 0.3s ease-in-out;
+.btn-primary, .btn-google {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 10px;
+}
+
+.btn-primary {
+    background-color: #5c67ff;
+    color: white;
+}
+
+.btn-primary:hover {
+    background-color: #3e49cc;
+}
+
+.btn-google {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: white;
+    border: 1px solid #ccc;
+}
+
+.btn-google img {
+    width: 20px;
+    margin-right: 10px;
+}
+
+.separator {
+    text-align: center;
+    margin: 15px 0;
+    font-size: 14px;
+    color: #666;
+}
+
+.register-link {
+    text-align: center;
+    margin-top: 15px;
+}
+
+.background-section {
+    flex: 1;
+    background: url('background-image.jpg') no-repeat center center / cover; /* Add your background image path here */
 }
