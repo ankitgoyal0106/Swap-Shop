@@ -1,13 +1,4 @@
 import { BaseComponent } from "../BaseComponent/BaseComponent.js";
-// for(let i = 0; i < 10; i++){//attach listeners to each of these divs
-//     const convo1 = document.createElement("div");
-//     convo1.classList.add("convoElement");
-//     const text1 = document.createTextNode("Convo" + i);
-//     convo1.appendChild(text1);
-//     convoContainer.appendChild(convo1);
-// }
-
-//when clicking on a conversation, it should pop it from convoList and append it after to make it most recent
 
 export class conversationList extends BaseComponent{
     #container = null;
@@ -94,7 +85,7 @@ export class conversationList extends BaseComponent{
         const infoForm = document.createElement("form");
         const groupName = document.createElement("input");
         groupName.type = "text";
-        groupName.placeholder = "Enter Group Name"
+        groupName.placeholder = "Enter Group Name";
         groupName.id = "groupName";
         groupName.required = true;
         infoForm.appendChild(groupName);
@@ -127,7 +118,7 @@ export class conversationList extends BaseComponent{
                 if(tempNames === null || tempNames.length === 0){
                     tempNames = [];
                 }
-
+                //TODO: before submitting, verify whether or not that username is a valid username (existing within database or smth) before pushing to localStorage
                 tempNames.push(newName);
 
                 newMember.value = "";

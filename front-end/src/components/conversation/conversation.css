@@ -6,9 +6,10 @@
     height: 500px; /*make relative*/
     overflow-y: scroll;
     overflow-x:hidden;
-    display:grid;
-    grid-auto-flow:row;
-    grid-row-gap: 1px;
+    display:flex;
+    flex-direction: column;
+    /* grid-auto-flow:row;
+    grid-row-gap: 1px; */
     border: 3px solid #f1f1f1;    
     background-color: #8967B3;
 }
@@ -57,7 +58,7 @@
     font-size: 20px;
     text-align: center;
     width:15%;
-    height:35%;
+    height:20%;
     display: none;
     background-color: #8967B3;
     position: fixed;
