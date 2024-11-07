@@ -34,11 +34,23 @@ export class AchievementPage extends BaseComponent {
     #attachEventListeners() {
         const hub = EventHub.getInstance();
 
+        //TODO: Make all functions for response to these events
         //Subscribe to sign up event
+        hub.subscribe(Events.SignUp, signUpAchievement());
+
         //Subscribe to list item event
+        hub.subscribe(Events.ListItem, listItemAchievement());
+
         //Subscribe to chat new person event
-        //Subsribe to mark item as sold event
+        hub.subscribe(Events.StartNewChat, newChatAchievement());
+
+        //Subscribe to mark item as sold event
+        hub.subscribe(Events.MarkItemSold, itemsSoldAchievement());
+
         //Subscribe to easter egg item
+        hub.subscribe(Events.FindEasterEgg, easterEggAchievement());
+
         //Subscribe to view item event
+        hub.subscribe(Events.ViewItem, viewItemsAchievement());
     }
 }

@@ -7,5 +7,12 @@ export const Events = {
 
     ClearNotifications: 'ClearNotifications',
     ClearNotificationsSuccess: 'ClearNotificationsSuccess',
-    ClearNotificationsFailure: 'ClearNotificationsFailure'
+    ClearNotificationsFailure: 'ClearNotificationsFailure',
+
+    SignUp: 'SignUp',
+    ListItem: 'ListItem',
+    StartNewChat: 'StartNewChat',
+    MarkItemSold: 'MarkItemSold',
+    FindEasterEgg: 'FindEasterEgg',
+    ViewItem: 'ViewItem'
 };
