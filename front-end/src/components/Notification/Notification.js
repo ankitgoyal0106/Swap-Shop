@@ -15,8 +15,10 @@ export class Notification extends BaseComponent {
         }
         this.#container = document.createElement('div');
         this.#container.classList.add('notification-item');
-        // Render notification info
-        // 
+        
+        const text = this.#createNotifText();
+        this.#container.appendChild(text);
+
         return this.#container;
     }
     

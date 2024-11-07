@@ -1,0 +1,17 @@
+.notif-list{
+    background-color: #E6D9A2;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.notif-list h2 {
+    text-align: center;
+
+}
+
+.notif-list button {
+    background-color: #CB80AB;
+    color: white;
+    border-radius: 12px;
+    border: none;
+}

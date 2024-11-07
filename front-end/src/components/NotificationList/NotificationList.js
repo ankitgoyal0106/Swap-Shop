@@ -25,22 +25,42 @@ export class NotificationList extends BaseComponent {
     }
 
     #setupContainerContent() {
-        this.#container.innerHTML = "";
+        this.#container.innerHTML = `
+            <h2>Notifications<h2>
+            <ul id="notifList"></ul>
+            <button id="clearNotifBtn">Clear All Notifications</button>
+        `;
     }
 
     #attachEventListeners() {
         const hub = EventHub.getInstance();
 
-        // Subscribe to necessary events
+        // Subscribe to new notification event
+        hub.subscribe(Events.NewNotification, notifData => this.#pushNotification(notifData));
 
-        // Attach evnet listener for clearing notifications
+        // Attach event listener for clearing notifications
+        const clearNotifBtn = this.#container.querySelector('#clearNotifBtn');
+        clearNotifBtn.addEventListener('click', () => this.#clearNotifs());
+
+        // If clear data success, clear screen
+        hub.subscribe(Events.ClearNotificationsSuccess, () => this.#clearNotifList());
     }
 
     #pushNotification(notifData) {
-        //get notif list (TODO)
+        const notifs = this.#container.querySelector('#notifList');
         const notifContainer = document.createElement('li');
 
         const notif = new Notification(notifData);
-        //append notif to list (TODO)
+        notifs.appendChild(notif.render());
+    }
+
+    #clearNotifs(){
+        const hub = EventHub.getInstance();
+        hub.publish(Events.ClearNotifications, null);
+    }
+
+    #clearNotifList(){
+        const notifList = this.#container.querySelector('#notifList');
+        notifList.innerHTML = '';
     }
 }
