@@ -2,6 +2,7 @@
 import { conversationList } from "./components/conversation/conversation.js";
 import { explorePage } from "./components/explorePage/explorePage.js";
 import { homeComponent } from "./components/homePage/homePage.js";
+import { profilePage } from "./components/profilePage/profilePage.js";
 
 document.addEventListener("DOMContentLoaded", function () {
  
@@ -28,9 +29,9 @@ document.addEventListener("DOMContentLoaded", function () {
   // Event listener for the Profile button 
   document.getElementById('profileBtn').addEventListener('click', function () {
     // Implement the profilePage functionality here
-    // const profilePageComponent = new profileComponent();
-    // app.innerHTML = '';
-    // app.appendChild(profilePageComponent.render());
+    const profilePageComponent = new profilePage();
+    app.innerHTML = '';
+    app.appendChild(profilePageComponent.render());
   });
 });
 
