@@ -21,9 +21,9 @@ document.addEventListener("DOMContentLoaded", function () {
   // Event listener for the Explore button
   document.getElementById('exploreBtn').addEventListener('click', function () {
     // Implement the explorePage functionality here
-    // const explorePageComponent = new exploreComponent();
-    // app.innerHTML = '';
-    // app.appendChild(explorePageComponent.render());
+    const explorePageComponent = new explorePage();
+    app.innerHTML = '';
+    app.appendChild(explorePageComponent.render());
   });
 
   // Event listener for the Profile button 
