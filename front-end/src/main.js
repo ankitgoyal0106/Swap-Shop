@@ -1,5 +1,6 @@
 
 import { conversationList } from "./components/conversation/conversation.js";
+import { explorePage } from "./components/explorePage/explorePage.js";
 import { homeComponent } from "./components/homePage/homePage.js";
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -43,4 +44,3 @@ toggleBtn.addEventListener("click", () => {
   menu.classList.toggle("active");
   icons.classList.toggle("active");
 });
-
