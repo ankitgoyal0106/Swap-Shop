@@ -8,18 +8,18 @@ export class profilePage extends BaseComponent {
   #addNewItemButton = null;
   #loginRegisterButton = null;
 
-  constructor(user) {
+  constructor() {
     super();
-    this.user = user; // Assuming 'user' is an object containing user details
-    this.userItems = this.#getUserItems(); // Fetch items listed by the user
-    this.loadCSS("profile"); // Load the CSS specific to the profile page
+    // this.user = user; // Assuming 'user' is an object containing user details
+    // this.userItems = this.#getUserItems(); // Fetch items listed by the user
+    // this.loadCSS("profile"); // Load the CSS specific to the profile page
   }
 
   render() {
     this.#container = document.createElement('div');
     this.#container.className = 'profile-page';
 
-    // Create and append sections
+    // // Create and append sections
     this.#container.appendChild(this.#createUserInfoSection());
     this.#container.appendChild(this.#createButtonsSection());
     this.#container.appendChild(this.#createItemsGrid());
@@ -33,7 +33,7 @@ export class profilePage extends BaseComponent {
 
     const userName = document.createElement('h1');
     userName.className = 'user-name';
-    userName.textContent = this.user.name;
+    // userName.textContent = this.user.name;
 
     // Additional user info can be added here
 
@@ -46,10 +46,10 @@ export class profilePage extends BaseComponent {
     this.#itemsGrid.className = 'items-grid';
 
     // Display user's items
-    this.userItems.forEach(item => {
-      const itemCard = this.#createItemCard(item);
-      this.#itemsGrid.appendChild(itemCard);
-    });
+    // this.userItems.forEach(item => {
+    //   const itemCard = this.#createItemCard(item);
+    //   this.#itemsGrid.appendChild(itemCard);
+    // });
 
     return this.#itemsGrid;
   }
@@ -74,34 +74,33 @@ export class profilePage extends BaseComponent {
     return itemCard;
   }
 
+
   #createButtonsSection() {
     const buttonsSection = document.createElement('div');
     buttonsSection.className = 'buttons-section';
-  
-    if (!this.user || !this.user.name) {
-      // User is not logged in, show Login/Register button
-      this.#loginRegisterButton = document.createElement('button');
-      this.#loginRegisterButton.className = 'login-register-button';
-      this.#loginRegisterButton.textContent = 'Login/Register';
-      this.#loginRegisterButton.addEventListener('click', () => this.#handleLoginRegister());
-      buttonsSection.appendChild(this.#loginRegisterButton);
-    } else {
-      // User is logged in, show Edit Profile and Add New Item buttons
-      this.#editProfileButton = document.createElement('button');
-      this.#editProfileButton.className = 'edit-profile-button';
-      this.#editProfileButton.textContent = 'Edit Profile';
-      this.#editProfileButton.addEventListener('click', () => this.#handleEditProfile());
-  
-      this.#addNewItemButton = document.createElement('button');
-      this.#addNewItemButton.className = 'add-new-item-button';
-      this.#addNewItemButton.textContent = 'Add New Item';
-      this.#addNewItemButton.addEventListener('click', () => this.#handleAddNewItem());
-  
-      buttonsSection.append(this.#editProfileButton, this.#addNewItemButton);
-    }
-  
+
+    // Login/Register Button
+    this.#loginRegisterButton = document.createElement('button');
+    this.#loginRegisterButton.className = 'login-register-button';
+    this.#loginRegisterButton.textContent = 'Login/Register';
+    this.#loginRegisterButton.addEventListener('click', () => this.#handleLoginRegister());
+
+    // Edit Profile Button
+    this.#editProfileButton = document.createElement('button');
+    this.#editProfileButton.className = 'edit-profile-button';
+    this.#editProfileButton.textContent = 'Edit Profile';
+    this.#editProfileButton.addEventListener('click', () => this.#handleEditProfile());
+
+    // Add New Item Button
+    this.#addNewItemButton = document.createElement('button');
+    this.#addNewItemButton.className = 'add-new-item-button';
+    this.#addNewItemButton.textContent = 'Add New Item';
+    this.#addNewItemButton.addEventListener('click', () => this.#handleAddNewItem());
+
+    buttonsSection.append(this.#loginRegisterButton, this.#editProfileButton, this.#addNewItemButton);
     return buttonsSection;
-  }
+  } 
+ 
   #handleLoginRegister() {
     // Implement navigation to the login page
     window.location.href = ''; // Adjust the URL as needed
