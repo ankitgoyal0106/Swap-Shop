@@ -2,14 +2,6 @@ body{
     background-color: #624E88;
 }
 
-#app {
-    max-width: 800px;
-    margin: 20px auto;
-    padding: 20px;
-    background-color: #fff;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
 .create-item-page form {
     display: flex;
     flex-direction: column;
@@ -40,18 +32,4 @@ body{
 
 .create-item-page button:hover {
     background-color: #0056b3;
-}
-
-.backButton{
-    font-size: 25px; /*make relative*/
-    height:auto;
-    width:auto;
-    float:left;
-}
-
-.newItemButton{
-    font-size: 25px; /*make relative*/
-    height:auto;
-    width:auto;
-    float: right;
 }

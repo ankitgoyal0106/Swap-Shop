@@ -1,7 +1,11 @@
-import { conversationList } from "./components/conversation/conversation.js";
+//import { BaseComponent } from "../BaseComponent/BaseComponent.js";
+import {CreateItemPage} from "./components/itemPage/createItemPage.js";
 
-const app = document.getElementById("app");
+const app = document.getElementbyId("app");
 app.innerHTML = "";
 
-const conversationComponent = new conversationList("user1");
-app.appendChild(conversationComponent.render());
+const app2 = document.getElementbyId("app");
+app2.innerHTML = "";
+
+const create = CreateItemPage();
+app.appendChild(create.render());
