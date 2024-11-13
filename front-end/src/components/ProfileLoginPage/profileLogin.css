@@ -1,11 +1,11 @@
-body, html {
+ body, html {
     margin: 0;
     padding: 0;
     font-family: Arial, sans-serif;
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    min-height: 100vh;
     background-color: #f0f0f0;
 }
 
@@ -17,12 +17,12 @@ body, html {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     overflow: hidden;
     border-radius: 10px;
+    background-color: white;
 }
 
 .login-form-container {
     flex: 1;
     padding: 40px;
-    background-color: white;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -35,15 +35,19 @@ body, html {
 
 .logo {
     max-width: 100px;
-    margin-right: 10px;
+    margin-bottom: 20px;
 }
 
 h2 {
     margin-bottom: 10px;
+    font-size: 24px;
+    font-weight: bold;
 }
 
 p {
     margin-bottom: 20px;
+    color: #555;
+    font-size: 14px;
 }
 
 input[type="email"], input[type="password"] {
@@ -52,6 +56,14 @@ input[type="email"], input[type="password"] {
     margin-bottom: 15px;
     border: 1px solid #ccc;
     border-radius: 4px;
+    font-size: 14px;
+    box-sizing: border-box;
+}
+
+input[type="email"]:focus, input[type="password"]:focus {
+    outline: none;
+    border-color: #5c67ff;
+    box-shadow: 0 0 5px rgba(92, 103, 255, 0.5);
 }
 
 .password-container {
@@ -71,6 +83,20 @@ input[type="email"], input[type="password"] {
     justify-content: space-between;
     align-items: center;
     margin-bottom: 15px;
+    font-size: 14px;
+}
+
+.form-options label {
+    cursor: pointer;
+}
+
+.forgot-password {
+    color: #5c67ff;
+    text-decoration: none;
+}
+
+.forgot-password:hover {
+    text-decoration: underline;
 }
 
 .btn-primary, .btn-google {
@@ -81,6 +107,7 @@ input[type="email"], input[type="password"] {
     cursor: pointer;
     font-size: 16px;
     margin-top: 10px;
+    transition: background-color 0.3s;
 }
 
 .btn-primary {
@@ -98,11 +125,17 @@ input[type="email"], input[type="password"] {
     justify-content: center;
     background-color: white;
     border: 1px solid #ccc;
+    color: #333;
+    transition: border-color 0.3s;
 }
 
 .btn-google img {
-    width: 40px;
-    margin-right: 20px;
+    width: 20px;
+    margin-right: 10px;
+}
+
+.btn-google:hover {
+    border-color: #888;
 }
 
 .separator {
@@ -115,9 +148,14 @@ input[type="email"], input[type="password"] {
 .register-link {
     text-align: center;
     margin-top: 15px;
+    font-size: 14px;
 }
 
-/* .background-section {
-    flex: 1;
-    background: url('Images/background-image.jpg') no-repeat center center / cover;
-} */
+.register-link a {
+    color: #5c67ff;
+    text-decoration: none;
+}
+
+.register-link a:hover {
+    text-decoration: underline;
+}

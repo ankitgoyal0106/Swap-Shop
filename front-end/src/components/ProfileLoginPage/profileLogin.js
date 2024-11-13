@@ -6,3 +6,4 @@ document.querySelector('.password-toggle').addEventListener('click', function ()
         passwordField.type = 'password';
     }
 });
+
