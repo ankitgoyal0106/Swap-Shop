@@ -1,4 +1,6 @@
 import { BaseComponent } from '../BaseComponent/BaseComponent.js';
+import { EventHub } from '../../eventhub/EventHub.js';
+import { Events } from '../../eventhub/Events.js';
 
 export class Registration extends BaseComponent {
     #container = null;
@@ -121,5 +123,30 @@ export class Registration extends BaseComponent {
 
         console.log("Form submitted successfully", userData);
         // Further processing of the form data, such as sending it to a server, can be done here
+        const timestamp = new Date().toISOString();
+        // Encrypt the user data before storing
+        const encryptedPassword = btoa(userData.password); // Simple base64 encoding for demonstration purposes
+        const profileData = {
+            userID: crypto.randomUUID(), // Generate a unique ID for each user
+            name: `${userData['first-name']} ${userData['last-name']}`,
+            email: userData.email,
+            phoneNo: userData['phone-number'],
+            college: userData.college,
+            password: encryptedPassword,
+            profilePicture: null,
+            role: userData.role,
+            rating: null,
+            createdAt: timestamp,
+            updatedAt: timestamp,
+            preferences: {},
+            achievements: [],
+            savedListings: [],
+            recentlyViewed: []
+        };
+
+        console.log("Profile Data:", profileData);
+        const hub = EventHub.getInstance();
+        hub.publish(Events.NewProfile, profileData);
+        hub.publish(Events.StoreProfile, profileData);
     }
 }
