@@ -2,7 +2,7 @@
 import { conversationList } from "./components/conversation/conversation.js";
 import { explorePage } from "./components/explorePage/explorePage.js";
 import { homeComponent } from "./components/homePage/homePage.js";
-import { profilePage } from "./components/mainProfilePage/profile.js";
+import { profilePage } from "./components/mainProfilePage/mainProfilePage.js";
 
 document.addEventListener("DOMContentLoaded", function () {
  
