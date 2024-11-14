@@ -1,5 +1,6 @@
 
 import { conversationList } from "./components/conversation/conversation.js";
+import { NotificationList } from "./components/NotificationList/NotificationList.js";
 import { explorePage } from "./components/explorePage/explorePage.js";
 import { homeComponent } from "./components/homePage/homePage.js";
 import { ProfileRepositoryService } from "./services/ProfileRepositoryService.js";
