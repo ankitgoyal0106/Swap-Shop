@@ -49,6 +49,7 @@ export class ProfileRepositoryService extends Service {
 
             request.onsuccess = () => {
                 this.publish(Events.StoreProfileSuccess, profileData);
+                console.log('Profile stored successfully', profileData);
                 resolve('Profile stored successfully');
             };
 
@@ -59,43 +60,44 @@ export class ProfileRepositoryService extends Service {
         });
     }
 
-    async loadProfileFromDB(userID) {
+    async getProfileFromDB(userID) {
         return new Promise((resolve, reject) => {
             const transaction = this.db.transaction([this.storeName], 'readonly');
             const store = transaction.objectStore(this.storeName);
+            
             const request = store.get(userID); //Not sure if this is the correct way to get the user profile
 
             request.onsuccess = event => {
                 const profileData = event.target.result;
                 if (profileData) {
-                    this.publish(Events.LoadProfileSuccess, profileData);
+                    this.publish(Events.GetProfileSuccess, profileData);
                     resolve(profileData);
                 } else {
-                    this.publish(Events.LoadProfileFailure, profileData);
+                    this.publish(Events.GetProfileFailure, profileData);
                     reject('Profile not found');
                 }
             };
 
             request.onerror = () => {
-                this.publish(Events.LoadProfileFailure);
+                this.publish(Events.GetProfileFailure);
                 reject('Error retrieving profile');
             };
         });
     }
 
-    async unStoreProfile(userID) {
+    async deleteProfile(userID) {
         return new Promise((resolve, reject) => {
             const transaction = this.db.transaction([this.storeName], 'readwrite');
             const store = transaction.objectStore(this.storeName);
             const request = store.delete(userID);
 
             request.onsuccess = () => {
-                this.publish(Events.UnStoreProfileSuccess);
+                this.publish(Events.DeleteProfileSuccess);
                 resolve('Profile deleted successfully');
             };
 
             request.onerror = () => {
-                this.publish(Events.UnStoreProfileFailure);
+                this.publish(Events.DeleteProfileFailure);
                 reject('Error deleting profile');
             };
         });
@@ -106,12 +108,12 @@ export class ProfileRepositoryService extends Service {
             this.storeProfile(data);
         });
 
-        this.subscribe(Events.LoadProfile, userID => {
-            this.loadProfileFromDB(userID);
+        this.subscribe(Events.GetProfile, userID => {
+            this.getProfileFromDB(userID);
         });
 
-        this.subscribe(Events.UnStoreProfile, userID => {
-            this.unStoreProfile(userID);
+        this.subscribe(Events.DeleteProfile, userID => {
+            this.deleteProfile(userID);
         });
     }
 }
