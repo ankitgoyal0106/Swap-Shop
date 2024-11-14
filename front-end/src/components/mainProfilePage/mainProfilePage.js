@@ -14,12 +14,12 @@ import { BaseComponent } from "../BaseComponent/BaseComponent.js";
             // You can add more user details here
           };
       this.userItems = this.#getUserItems();
-      this.loadCSS("profile");
+      this.loadCSS("mainProfilePage");
     }
   
     render() {
       this.#container = document.createElement('div');
-      this.#container.className = 'explore-page';
+      this.#container.className = 'profile-page';
       
       this.#container.appendChild(this.#createTitle());
 
@@ -34,7 +34,7 @@ import { BaseComponent } from "../BaseComponent/BaseComponent.js";
   
     #createTitle() {
       const title = document.createElement('h1');
-      title.className = 'explore-title';
+      title.className = 'profile-title';
       title.textContent = 'Profile Page!';
       return title;
     }
