@@ -1,14 +1,20 @@
 
 import { conversationList } from "./components/conversation/conversation.js";
+import { NotificationList } from "./components/NotificationList/NotificationList.js";
 import { explorePage } from "./components/explorePage/explorePage.js";
 import { homeComponent } from "./components/homePage/homePage.js";
 import { profilePage } from "./components/mainProfilePage/mainProfilePage.js";
+import { Registration } from "./components/registrationPage/registrationPage.js";
+import { ProfileRepositoryService } from "./services/ProfileRepositoryService.js";
 
 document.addEventListener("DOMContentLoaded", function () {
  
   //INITIALIZATION  FOR THE "APP"
   const app = document.getElementById("app");
   app.innerHTML = "";
+
+ // Begin the IndexDB for Profile Data
+ const profileRepository = new ProfileRepositoryService();
 
   // Event listener for the Home button
   document.getElementById('homeBtn').addEventListener('click', function () {
@@ -33,6 +39,14 @@ document.addEventListener("DOMContentLoaded", function () {
     app.innerHTML = '';
     app.appendChild(profilePageComponent.render());
   });
+
+  document.getElementById('registerBtn').addEventListener('click', function () {
+    // Implement the profilePage functionality here
+    const registerPageComponent = new Registration();
+    app.innerHTML = '';
+    app.appendChild(registerPageComponent.render());
+  });
+  
 });
 
 
