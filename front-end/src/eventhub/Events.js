@@ -15,5 +15,9 @@ export const Events = {
 
     DeleteProfile: 'DeleteProfile',
     DeleteProfileSuccess: 'DeleteProfileSuccess',
-    DeleteProfileFailure: 'DeleteProfileFailure'
+    DeleteProfileFailure: 'DeleteProfileFailure',
+
+    LoadProfile: 'LoadProfile',
+    LoadProfileSuccess: 'LoadProfileSuccess',
+    LoadProfileFailure: 'LoadProfileFailure'
 };
