@@ -1,0 +1,152 @@
+/* Container styling */
+#editProfile-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    max-width: 600px;
+    width: 90%;
+    margin: 0 auto;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Form styling */
+#editProfileForm {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 15px;
+}
+
+/* Profile image container */
+.profileImage {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+/* Profile image preview */
+.profileImage img {
+    border-radius: 50%;
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    margin-bottom: 10px;
+    border: 2px solid #ddd;
+}
+
+/* Profile image input */
+#profileImageInput {
+    margin-top: 5px;
+    font-size: 14px;
+}
+
+/* Text input fields */
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+textarea,
+select {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+    transition: border-color 0.3s;
+}
+
+/* Focus state for inputs */
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="tel"]:focus,
+textarea:focus,
+select:focus {
+    outline: none;
+    border-color: #007bff;
+}
+
+/* Dropdown styling */
+.roleInput {
+    padding: 10px;
+    font-size: 16px;
+}
+
+/* Submit button styling */
+.submitButton {
+    padding: 12px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #fff;
+    background-color: #007bff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.submitButton:hover {
+    background-color: #0056b3;
+}
+
+/* Placeholder styling */
+input::placeholder,
+textarea::placeholder {
+    color: #999;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    #editProfile-container {
+        max-width: 100%;
+        padding: 10px;
+        box-shadow: none;
+    }
+
+    .profileImage img {
+        width: 80px;
+        height: 80px;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="tel"],
+    textarea,
+    select {
+        font-size: 14px;
+        padding: 8px;
+    }
+
+    .submitButton {
+        padding: 10px;
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 480px) {
+    #editProfile-container {
+        padding: 5px;
+    }
+
+    .profileImage img {
+        width: 60px;
+        height: 60px;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="tel"],
+    textarea,
+    select {
+        font-size: 12px;
+        padding: 6px;
+    }
+
+    .submitButton {
+        padding: 8px;
+        font-size: 12px;
+    }
+}
