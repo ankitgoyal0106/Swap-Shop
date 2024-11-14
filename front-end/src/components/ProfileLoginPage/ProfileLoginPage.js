@@ -1,4 +1,5 @@
 import { BaseComponent } from '../BaseComponent/BaseComponent.js';
+import { Registration } from "../registrationPage/registrationPage.js";
 
 export class ProfileLoginPage extends BaseComponent {
     #container = null;
@@ -42,11 +43,18 @@ export class ProfileLoginPage extends BaseComponent {
                             <input type="submit" value="Log In" class="btn-primary" />
                         </form>
 
-                        <p class="register-link">Don't have an account? <a href="#">Register here</a></p>
+                        <p class="register-link">Don't have an account? <a href="#" id="registerBtn">Register here </a></p>
+
                     </div>
                 </div>
             </div>
         `
+
+        login.querySelector('#registerBtn').addEventListener('click', function () { 
+            const registrationPage = new Registration();
+            document.getElementById('app').innerHTML = '';
+            document.getElementById('app').appendChild(registrationPage.render());
+        });
 
         /*
         document.querySelector('.password-toggle').addEventListener('click', function () {

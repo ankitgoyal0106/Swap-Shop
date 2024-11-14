@@ -6,6 +6,7 @@ import { homeComponent } from "./components/homePage/homePage.js";
 import { profilePage } from "./components/mainProfilePage/mainProfilePage.js";
 import { Registration } from "./components/registrationPage/registrationPage.js";
 import { ProfileRepositoryService } from "./services/ProfileRepositoryService.js";
+import { ProfileLoginPage } from "./components/ProfileLoginPage/ProfileLoginPage.js";
 
 document.addEventListener("DOMContentLoaded", function () {
  
@@ -40,11 +41,11 @@ document.addEventListener("DOMContentLoaded", function () {
     app.appendChild(profilePageComponent.render());
   });
 
-  document.getElementById('registerBtn').addEventListener('click', function () {
+  document.getElementById('loginBtn').addEventListener('click', function () {
     // Implement the profilePage functionality here
-    const registerPageComponent = new Registration();
+    const loginPage = new ProfileLoginPage();
     app.innerHTML = '';
-    app.appendChild(registerPageComponent.render());
+    app.appendChild(loginPage.render());
   });
   
 });
