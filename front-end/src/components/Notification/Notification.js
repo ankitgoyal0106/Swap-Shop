@@ -5,7 +5,7 @@ export class Notification extends BaseComponent {
 
     constructor(notification = {}) {
         super();
-        this.notication = notification;
+        this.notification = notification;
         this.loadCSS('Notification');
     }
 
@@ -24,8 +24,18 @@ export class Notification extends BaseComponent {
     
     // Private method to create notification text element
     #createNotifText() {
-        const notifText = document.createElement('span');
-        notifText.textContent = this.notification.text;
+        const notifText = document.createElement('p');
+
+        const notifType = document.createElement('span');
+        notifType.classList.add('notif-type');
+        notifType.textContent = this.notification.type + ": ";
+        notifText.appendChild(notifType);
+
+        const notifDet = document.createElement('span');
+        notifDet.classList.add('notif-details');
+        notifDet.textContent = this.notification.text;
+        notifText.appendChild(notifDet);
+
         return notifText;
     }
 }
