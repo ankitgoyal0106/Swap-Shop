@@ -1,0 +1,75 @@
+.chatBox{
+    margin-top: auto;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    flex-direction: column;
+    overflow-y: scroll;
+    scroll-behavior: smooth;
+    width: 60%; /*make relative*/
+    height: 500px; /*make relative*/
+    border: 3px solid #f1f1f1;    
+    background-color: #8967B3;
+}
+
+.chatmsg{
+    /* width:auto; make relative to screen size
+    height: 50px; make relative to screen size */
+    background-color: white;
+    min-width: 5%;
+    max-width: 80%;
+    min-height: auto; 
+}
+
+.inputBar{
+    display: grid;
+    grid-auto-flow: column;
+    margin-left: auto;
+    margin-right: auto;
+    width: 60%;
+    height:auto;
+}
+
+.inputBar button{
+    width: 25%;
+    height: 80%;
+}
+
+.msgInput{
+    min-width: 10%;
+    max-width: 50%;
+    min-height: 15%;
+    max-height: 80%;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.userMsg{
+    margin-right: 1%;
+    margin-bottom: 1%;
+    margin-left: auto;
+    text-align:right;
+    background-color: white;
+    overflow-y: visible;
+    overflow-x: hidden;
+    padding: 5px;
+
+    min-width: 20%;
+    max-width: 50%;
+    height: auto;
+}
+
+.otherMsg{
+    margin-left: 1%;
+    margin-bottom: 1%;
+    margin-right: auto;
+    text-align:left;
+    background-color: grey;
+    overflow-y: visible;
+    overflow-x: hidden;
+    padding: 5px;
+
+    min-width: 20%;
+    max-width: 50%;
+    height: auto;
+}
