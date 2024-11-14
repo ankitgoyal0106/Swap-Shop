@@ -8,10 +8,12 @@ export class EditProfilePage extends BaseComponent {
         this.loadCSS('editProfilePage');
     }
 
+    //Need to add logic to get user data from the backend to populate the form
     render() {
         this.#container = document.createElement('div');
         this.#container.id = 'editProfile-container';
         this.#container.classList.add('editProfile-container');
+        this.#appendBackButton();
         this.#buildProfileEditor();
 
         return this.#container;
@@ -28,6 +30,8 @@ export class EditProfilePage extends BaseComponent {
         editProfileForm.appendChild(this.#createTextInput('lastName', 'Last Name', 'text'));
         editProfileForm.appendChild(this.#createTextInput('emailInput', 'Email', 'email'));
         editProfileForm.appendChild(this.#createTextInput('phoneInput', 'Phone Number', 'tel'));
+        editProfileForm.appendChild(this.#createTextInput('password', 'New Password', 'text'));
+        editProfileForm.appendChild(this.#createTextInput('confirmPassword', 'Confirm New Password', 'text'));
         editProfileForm.appendChild(this.#createRoleInput());
         editProfileForm.appendChild(this.#createSubmitButton());
 
@@ -43,6 +47,22 @@ export class EditProfilePage extends BaseComponent {
             <img src="https://via.placeholder.com/150" alt="profile image" id="profileImageDisplay">
             <input type="file" value="Upload Image" id="profileImageInput" name="profileImageInput" accept="image/*">
         `;
+
+        // Add event listener to display the selected image
+        const profileImageInput = profileImage.querySelector('#profileImageInput');
+        const profileImageDisplay = profileImage.querySelector('#profileImageDisplay');
+
+        profileImageInput.addEventListener('change', (event) => {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    profileImageDisplay.src = e.target.result;
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+
         return profileImage;
     }
 
@@ -76,7 +96,26 @@ export class EditProfilePage extends BaseComponent {
         submitButton.id = 'submitButton';
         submitButton.classList.add('submitButton');
         submitButton.type = 'submit';
-        submitButton.textContent = 'Submit';
+        submitButton.textContent = 'Update';
+        submitButton.addEventListener('click', this.#handleFormSubmission);
         return submitButton;
+    }
+
+    #appendBackButton() {
+        const backButton = document.createElement('button');
+        backButton.id = 'backButton';
+        backButton.classList.add('backButton');
+        backButton.textContent = 'Back to Profile';
+        backButton.addEventListener('click', () => {
+            //Add logic to back to the profile page
+        });
+        this.#container.appendChild(backButton);
+    }
+
+    // Private method to handle form submission
+    #handleFormSubmission(event) {
+        event.preventDefault();
+        console.log('Form submitted');
+        // Add logic to send form data to the backend
     }
 }

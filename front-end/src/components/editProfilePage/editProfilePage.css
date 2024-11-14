@@ -1,6 +1,7 @@
 /* Container styling */
 #editProfile-container {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     padding: 20px;
@@ -10,6 +11,21 @@
     width: 90%;
     margin: 0 auto;
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Back button styling */
+#backButton {
+    align-self: flex-start;
+    background: none;
+    border: none;
+    color: #007bff;
+    font-size: 16px;
+    cursor: pointer;
+    margin-bottom: 20px;
+}
+
+#backButton:hover {
+    text-decoration: underline;
 }
 
 /* Form styling */
