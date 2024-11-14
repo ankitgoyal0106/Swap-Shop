@@ -19,5 +19,19 @@ export const Events = {
 
     LoadProfile: 'LoadProfile',
     LoadProfileSuccess: 'LoadProfileSuccess',
-    LoadProfileFailure: 'LoadProfileFailure'
+    LoadProfileFailure: 'LoadProfileFailure',
+
+    NewNotification: 'NewNotification',
+
+    LoadNotifications: 'LoadNotifications',
+    LoadNotificationsSuccess: 'LoadNotificationsSuccess',
+    LoadNotificationsFailure: 'LoadNotificationsFailure',
+
+    StoreNotification: 'StoreNotification',
+    StoreNotificationSuccess: 'StoreNotificationSuccess',
+    StoreNotificationFailure: 'StoreNotificationFailure',
+
+    ClearNotifications: 'ClearNotifications',
+    ClearNotificationsSuccess: 'ClearNotificationsSuccess',
+    ClearNotificationsFailure: 'ClearNotificationsFailure'
 };

@@ -1,0 +1,36 @@
+import Service from "./Service.js";
+import { fetch } from "../utility/fetch.js";
+import { Events } from '../eventhub/Events.js';
+
+export class NotifRemoteFakeService extends Service {
+  constructor() {
+    super();
+  }
+
+  async storeNotif(notifData) {
+    const response = await fetch("http://localhost:3000/notif", {
+      //method: "POST",
+      //body: JSON.stringify(notifData),
+    });
+    const data = await response.json();
+    return data;
+  }
+
+  async clearNotifs() {
+    const response = await fetch("http://localhost:3000/notifs", {
+      //method: "DELETE",
+    });
+    const data = await response.json();
+    return data;
+  }
+
+  addSubscriptions() {
+    this.subscribe(Events.StoreNotification, (data) => {
+      this.storeNotif(data);
+    });
+
+    this.subscribe(Events.ClearNotifications, () => {
+      this.clearNotifs();
+    });
+  }
+}
