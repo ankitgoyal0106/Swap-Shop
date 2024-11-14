@@ -3,6 +3,7 @@ import { conversationList } from "./components/conversation/conversation.js";
 import { NotificationList } from "./components/NotificationList/NotificationList.js";
 import { explorePage } from "./components/explorePage/explorePage.js";
 import { homeComponent } from "./components/homePage/homePage.js";
+import { profilePage } from "./components/mainProfilePage/mainProfilePage.js";
 import { Registration } from "./components/registrationPage/registrationPage.js";
 import { ProfileRepositoryService } from "./services/ProfileRepositoryService.js";
 
@@ -34,9 +35,9 @@ document.addEventListener("DOMContentLoaded", function () {
   // Event listener for the Profile button 
   document.getElementById('profileBtn').addEventListener('click', function () {
     // Implement the profilePage functionality here
-    // const profilePageComponent = new profileComponent();
-    // app.innerHTML = '';
-    // app.appendChild(profilePageComponent.render());
+    const profilePageComponent = new profilePage();
+    app.innerHTML = '';
+    app.appendChild(profilePageComponent.render());
   });
 
   document.getElementById('registerBtn').addEventListener('click', function () {
