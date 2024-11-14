@@ -93,7 +93,7 @@ body {
     color: #333333;
     font-size: 1em;
 }
-.explore-page {
+/* .explore-page {
     background-color: #F5F7F8;
     font-family: Verdana, sans-serif;
     margin: 0;
@@ -108,7 +108,7 @@ body {
     padding: 20px;
     text-align: center;
     width: 100%;
-}
+} */
 
 .items-grid {
     width: 55%; /* Middle section to be larger */
