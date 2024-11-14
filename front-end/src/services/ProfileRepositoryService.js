@@ -11,7 +11,7 @@ export class ProfileRepositoryService extends Service {
         // Initialize the database
         this.initDB()
             .then(() => {
-                this.loadProfileFromDB(); // Load profile on initialization
+                this.loadProfilesFromDB(); // Load profile on initialization
             })
             .catch(error => {
                 console.error(error);
@@ -60,6 +60,31 @@ export class ProfileRepositoryService extends Service {
         });
     }
 
+    async loadProfilesFromDB() {
+        return new Promise((resolve, reject) => {
+            const transaction = this.db.transaction([this.storeName], 'readonly');
+            const store = transaction.objectStore(this.storeName);
+            
+            const request = store.getAll();
+
+            request.onsuccess = event => {
+                const profileData = event.target.result;
+                if (profileData) {
+                    this.publish(Events.LoadProfileSuccess, profileData);
+                    resolve(profileData);
+                } else {
+                    this.publish(Events.LoadProfileFailure, profileData);
+                    reject('Profile not found');
+                }
+            };
+
+            request.onerror = () => {
+                this.publish(Events.LoadProfileFailure);
+                reject('Error retrieving profile');
+            };
+        });
+    }
+    
     async getProfileFromDB(userID) {
         return new Promise((resolve, reject) => {
             const transaction = this.db.transaction([this.storeName], 'readonly');
