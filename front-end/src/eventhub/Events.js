@@ -5,15 +5,15 @@
 export const Events = {
     NewProfile: 'NewProfile',
 
-    LoadProfile: 'LoadProfile',
-    LoadProfileSuccess: 'LoadProfileSuccess',
-    LoadProfileFailure: 'LoadProfileFailure',
+    GetProfile: 'GetProfile',
+    GetProfileSuccess: 'GetProfileSuccess',
+    GetProfileFailure: 'GetProfileFailure',
 
     StoreProfile: 'StoreProfile',
     StoreProfileSuccess: 'StoreProfileSuccess',
     StoreProfileFailure: 'StoreProfileFailure',
 
-    UnStoreProfile: 'UnStoreProfile',
-    UnStoreProfileSuccess: 'UnStoreProfileSuccess',
-    UnStoreProfileFailure: 'UnStoreProfileFailure'
+    DeleteProfile: 'DeleteProfile',
+    DeleteProfileSuccess: 'DeleteProfileSuccess',
+    DeleteProfileFailure: 'DeleteProfileFailure'
 };
