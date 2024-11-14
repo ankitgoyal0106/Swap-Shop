@@ -26,6 +26,7 @@ export class chatInterface extends BaseComponent{
 
     render(){
         this.#container = document.createElement("div");
+        this.#container.classList.add("container");
         this.#container.style.display = "block";
         const title = document.createElement("h1");
         title.innerText = this.groupName;
@@ -46,7 +47,7 @@ export class chatInterface extends BaseComponent{
 
     //TODO: create div for each text message, two different CSS classes: one for user which are margined to the right and other users which are margined to left
     #createMsgBlock(userID, msg){
-        const msgDiv = document.createElement("p");
+        const msgDiv = document.createElement("div");
         if(userID.localeCompare(this.userID) === 0){
             msgDiv.classList.add("userMsg");
         }
@@ -55,7 +56,8 @@ export class chatInterface extends BaseComponent{
         }
         const id = document.createTextNode(userID);
         const br = document.createElement("br");
-        const txtMsg = document.createTextNode(msg);
+        const txtMsg = document.createElement("p");
+        txtMsg.innerText = msg;
         // const makeNewLine = textMessage =>{
 
         // };
@@ -76,9 +78,26 @@ export class chatInterface extends BaseComponent{
 
         const msgInput = document.createElement("input");
         msgInput.type = "text";
-        msgInput.placeHolder = "Enter Message Here";
+        msgInput.placeholder = "Enter Message Here";
         msgInput.id = "msg";
-        msgInput.classList.add("msgInput");
+        msgInput.addEventListener("input", () =>{
+            hide.textContent = txt.value;
+            txt.style.width = hide.offsetWidth + "px";
+        })
+        //msgInput.classList.add("msgInput");
+        form.addEventListener("submit",  event => {
+            //maybe push new entry into array and reload msgLoad array 
+            event.preventDefault();
+            const userMsg = document.getElementById("msg");
+            const chatBox = document.getElementById("chatBox");
+            const newMsg = {userID: this.userID, msg:userMsg.value};
+            this.loadedMsgs.push(newMsg);
+            //chatBox.appendChild(msgBlock);
+            chatBox.innerHTML = "";
+            this.#renderMsgs(chatBox);
+            chatBox.scrollTop = chatBox.scrollHeight;
+            userMsg.value = "";
+        });
         form.appendChild(msgInput);
 
         const sendButton = document.createElement("input");
@@ -104,7 +123,7 @@ export class chatInterface extends BaseComponent{
             console.log("back to conversation log page");
         });
 
-        inputBar.appendChild(backButton);
+        //inputBar.appendChild(backButton);
         form.appendChild(sendButton);
         inputBar.appendChild(form);
         return inputBar;
