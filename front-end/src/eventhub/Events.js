@@ -6,7 +6,7 @@ export const Events = {
     SwitchToHomePage: 'SwitchToHomePage',
     SwitchToExplorePage: 'SwitchToExplorePage',
     SwitchToProfilePage: 'SwitchToProfilePage',
-    SwtichToLoginPage: 'SwitchToLoginPage',
+    SwitchToLoginPage: 'SwitchToLoginPage',
 
     NewProfile: 'NewProfile',
 

@@ -6,7 +6,7 @@ import { ViewProfile } from "../ViewProfile/ViewProfile.js";
 
 export class ProfileContoller extends BaseComponent {
   #container = null;
-  #currentView = 'notif';
+  #currentView = 'profile';
   #notificationList = null;
   #viewProfile = null;
   //TODO: Add other screens here
