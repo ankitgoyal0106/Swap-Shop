@@ -11,6 +11,7 @@
     transition: background-color 0.3s ease, box-shadow 0.3s ease;
     box-sizing: border-box;
     font-size: 1.1rem;
+    text-align: left;
 }
 
 .notification-item:hover {
@@ -21,4 +22,8 @@
     color: #CB80AB;
     font-weight: bolder;
     font-size: 1.25rem;
+}
+
+.notif-details {
+    color: black;
 }

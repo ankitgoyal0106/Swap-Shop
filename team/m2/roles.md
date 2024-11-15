@@ -14,9 +14,9 @@ A markdown file detailing each team member's role and their top 3 commits for th
 
 - **Role**: Manage group communication by keeping contact in the group chat, as well as including all members in group discussions.
 - **Top Three Commits**:
-   1. [Commit 1](Link): Created the group Discord and formatted the initial channels.
-   2. [Commit 2](https://github.com/ankitgoyal0106/Swap-Shop/commit/4f33dbd85974dea0ab2ceb710e1f3a86cf6e11fd): Began the roles.md logging and logging in nathan-palmer.md.
-   3. [Commit 3](https://github.com/ankitgoyal0106/326-Group-Project/commit/ff52e96e34b388455afe70c56f6b6855e79accf7): Added drawn diagrams and the description for the login page in ui-diagrams.md.
+   1. [Commit 1](https://github.com/ankitgoyal0106/Swap-Shop/commit/5047e6895db59ea05080a97d7253d4fee929a7de): Completed and styled the notifications page setup.
+   2. [Commit 2](https://github.com/ankitgoyal0106/Swap-Shop/commit/402525c6ec42b76227874e8c2cee6d846985dc90): Restructured the profile page for stylization and the implementation of multi-view page use.
+   3. [Commit 3](https://github.com/ankitgoyal0106/Swap-Shop/commit/07cfd63d5261ef09abd0d50bc2b4201844f37af6): Implementation of fake backend for notification storage. (To be completed in milestone 3)
 
 ## Ankit Goyal - Repository Manager
 

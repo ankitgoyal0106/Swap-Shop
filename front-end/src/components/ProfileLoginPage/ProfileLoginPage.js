@@ -1,5 +1,6 @@
 import { BaseComponent } from '../BaseComponent/BaseComponent.js';
 import { Registration } from "../registrationPage/registrationPage.js";
+import { EventHub } from '../../eventhub/EventHub.js';
 
 export class ProfileLoginPage extends BaseComponent {
     #container = null;
@@ -51,9 +52,8 @@ export class ProfileLoginPage extends BaseComponent {
         `
 
         login.querySelector('#registerBtn').addEventListener('click', function () { 
-            const registrationPage = new Registration();
-            document.getElementById('app').innerHTML = '';
-            document.getElementById('app').appendChild(registrationPage.render());
+            const hub = EventHub.getInstance();
+            hub.publish('SwitchToRegisterPage', null);
         });
 
         /*
