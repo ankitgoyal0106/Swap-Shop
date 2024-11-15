@@ -25,11 +25,20 @@ export class NotificationList extends BaseComponent {
     }
 
     #setupContainerContent() {
-        this.#container.innerHTML = `
-            <h2>Notifications<h2>
+        this.#container.appendChild(this.#setupHeader());
+        this.#container.innerHTML += `
             <ul id="notifList"></ul>
             <button id="clearNotifBtn">Clear All Notifications</button>
         `;
+        this.#pushNotification({text: "From Nate: 'Can you meet up tomorrow?'", type: "New Chat"});
+        this.#pushNotification({text: "Someone viewed your listing for Black Sweater Men's Medium!!", type: "Listing Viewed"})
+    }
+
+    #setupHeader() {
+        const header = document.createElement('h1');
+        header.classList.add('notif-header');
+        header.textContent = 'Notifications'
+        return header;
     }
 
     #attachEventListeners() {

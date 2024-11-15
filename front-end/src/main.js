@@ -1,11 +1,24 @@
-import { conversationList } from "./components/conversation/conversation.js";
-import { NotificationList } from "./components/NotificationList/NotificationList.js";
+import { ProfileRepositoryService } from "./services/ProfileRepositoryService.js";
+import { AppController } from "./components/AppController/AppController.js";
 
-const app = document.getElementById("app");
-app.innerHTML = "";
+document.addEventListener("DOMContentLoaded", function () {
+ const appController = new AppController();
 
-// const conversationComponent = new conversationList("user1");
-// app.appendChild(conversationComponent.render());
+  //INITIALIZATION  FOR THE "APP"
+  const app = document.getElementById("app");
+  app.appendChild(appController.render());
 
-const notif = new NotificationList();
-app.appendChild(notif.render());
+ // Begin the IndexDB for Profile Data
+ //TODO: Implement profile repository factory services
+ const profileRepository = new ProfileRepositoryService();
+});
+
+//NAVIGATION BAR SET UP
+const toggleBtn = document.querySelector(".navbar__toggleBtn");
+const menu = document.querySelector(".navbar__menu");
+const icons = document.querySelector(".navbar__icons");
+
+toggleBtn.addEventListener("click", () => {
+  menu.classList.toggle("active");
+  icons.classList.toggle("active");
+});

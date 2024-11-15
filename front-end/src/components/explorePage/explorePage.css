@@ -1,0 +1,571 @@
+body {
+    background-color: #F5F7F8;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+/* Container for the entire explore page */
+.explore-page {
+    background-color: #F5F7F8;
+    font-family: Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Title section of the explore page */
+.explore-title {
+    background-color: #624E88;
+    color: #ffffff;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    text-align: center;
+    width: 100%;
+}
+
+/* Grid layout for items */
+.items-grid {
+    width: 55%; /* Middle section to be larger */
+    max-width: 100%;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(200px, 1fr));
+    gap: 16px;
+}
+
+/* Card style for individual items */
+.item-card {
+    background-color: #FFFFFF;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Image styling within item cards */
+.item-card img {
+    max-width: 100%;
+    border-radius: 10px;
+}
+
+/* Title styling within item cards */
+.item-card h2 {
+    color: #624E88;
+    font-size: 1.2em;
+    margin: 10px 0;
+}
+
+/* Paragraph styling within item cards */
+.item-card p {
+    color: #333333;
+    font-size: 1em;
+}
+
+/* Search bar container */
+.search-bar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    margin: 20px 0;
+    width: 100%;
+    max-width: 600px;
+}
+
+/* Input field within search bar */
+.search-bar input[type="text"] {
+    padding: 10px;
+    border: 1px solid #CB80AB;
+    border-radius: 5px;
+    font-size: 1em;
+    flex-grow: 1;
+    margin-right: 10px;
+    transition: border-color 0.3s ease;
+}
+
+/* Button within search bar */
+.search-bar button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: white;
+    color: #624E88;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+/* Hover effect for search bar button */
+.search-bar button:hover {
+    background-color: #8967B3;
+}
+
+/* Dropdown for category selection */
+.category-dropdown {
+    padding: 10px;
+    border-radius: 5px;
+    font-size: 1em;
+    width: 200px;
+    margin: 0 10px;
+    border: 1px solid #CB80AB;
+    background-color: #FFFFFF;
+    color: #624E88;
+    cursor: pointer;
+    transition: border-color 0.3s ease, background-color 0.3s ease;
+}
+
+/* Hover effect for category dropdown */
+.category-dropdown:hover {
+    border-color: #8967B3;
+    background-color: #F5F7F8;
+}
+
+/* Section for recently viewed items */
+.recently-viewed-section {
+    width: 100%;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    background-color: #FFFFFF;
+    color: #624E88;
+    text-align: center;
+}
+
+/* Container for recently viewed items */
+.recently-viewed-container {
+    display: flex;
+    overflow-x: auto;
+    gap: 16px;
+    padding: 20px;
+}
+
+/* Pagination controls container */
+.pagination-controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px 0;
+}
+
+/* Buttons for pagination controls */
+.pagination-controls button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: #624E88;
+    color: #FFFFFF;
+    font-size: 1em;
+    cursor: pointer;
+    margin: 0 10px;
+    transition: background-color 0.3s ease;
+}
+
+/* Disabled state for pagination buttons */
+.pagination-controls button:disabled {
+    background-color: #CB80AB;
+    cursor: not-allowed;
+}
+
+/* Hover effect for pagination buttons */
+.pagination-controls button:hover:not(:disabled) {
+    background-color: #8967B3;
+}
+
+/* Container for recommended items */
+.recommended-container {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    width: 100%;
+}
+
+/* Card style for recommended items */
+.recommended-item-card {
+    background-color: #8967B3;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    color: #F5F7F8;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Image styling within recommended item cards */
+.recommended-item-card img {
+    max-width: 100%;
+    border-radius: 10px;
+}
+
+/* Title styling within recommended item cards */
+.recommended-item-card h3 {
+    color: #FFFFFF;
+    font-size: 1.2em;
+    margin: 10px 0;
+}
+
+/* Paragraph styling within recommended item cards */
+.recommended-item-card p {
+    color: #F5F7F8;
+    font-size: 1em;
+}
+
+/* Responsive design for smaller screens */
+@media (max-width: 1000px) {
+    .recommended-section {
+        order: -1; /* Move the recommended section to the top */
+    }
+    .filter-section {
+        order: -1; /* Move the filter section to the top */
+    }
+    .main-content {
+        flex-direction: column; /* Stack the sections vertically */
+        align-items: center;
+    }
+    .filter-section, .items-grid, .recommended-section {
+        width: 100%; /* Full width for each section */
+        max-width: 100%;
+    }
+    .items-grid {
+        grid-template-columns: repeat(2, minmax(150px, 1fr)); /* Two items per row on smaller screens */
+    }
+}
+
+@media (max-width: 480px) {
+    .items-grid {
+        grid-template-columns: 1fr; /* One item per row on extra small screens */
+    }
+}
+
+/* Filter section styling */
+.filter-section {
+    margin-top: 20px;
+}
+
+/* Button styling for filter section */
+.filter-button {
+    width: 100%;
+    padding: 10px;
+    background-color: #624E88;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    text-align: left;
+    font-size: 1em;
+    cursor: pointer;
+    outline: none;
+    transition: background-color 0.3s ease;
+}
+
+/* Hover effect for filter button */
+.filter-button:hover {
+    background-color: #8967B3;
+}
+
+/* Hidden state for filter content */
+.filter-content.hidden {
+    display: none;
+}
+
+/* Filter content styling */
+.filter-content {
+    padding: 20px;
+    border-top: 1px solid #CB80AB;
+    background-color: #f5f7f8;
+}
+
+/* Options within filter content */
+.filter-options {
+    display: flex;
+    gap: 100px; /* Increase the gap between each filter */
+    margin-top: 10px;
+}
+/* New container to align items-grid and recommended-section horizontally */
+  .main-content {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    width: 100%;
+    max-width: 1200px;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.filter-section {
+    width: 20%;
+    max-width: 250px;
+}
+
+.recommended-section {
+    width: 20%;
+    max-width: 250px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+
+.explore-page {
+    background-color: #F5F7F8;
+    font-family: Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.items-grid {
+    width: 55%; /* Middle section to be larger */
+    max-width: 100%;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(200px, 1fr));
+    gap: 16px;
+}
+
+.explore-card {
+    background-color: #8967B3;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin: 10px;
+    padding: 20px;
+    width: 300px;
+    color: #F5F7F8;
+}
+
+.item-card {
+    background-color: #FFFFFF;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.item-card img {
+    max-width: 100%;
+    border-radius: 10px;
+}
+
+.item-card h2 {
+    color: #624E88;
+    font-size: 1.2em;
+    margin: 10px 0;
+}
+
+.item-card p {
+    color: #333333;
+    font-size: 1em;
+}
+
+.search-bar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    margin: 20px 0;
+    width: 100%;
+    max-width: 600px;
+}
+
+.search-bar input[type="text"] {
+    padding: 10px;
+    border: 1px solid #CB80AB;
+    border-radius: 5px;
+    font-size: 1em;
+    flex-grow: 1;
+    margin-right: 10px;
+    transition: border-color 0.3s ease;
+}
+
+.search-bar button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: white;
+    color: #624E88;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.search-bar button:hover {
+    background-color: #8967B3;
+}
+
+
+.category-dropdown {
+    padding: 10px;
+    border-radius: 5px;
+    font-size: 1em;
+    width: 200px;
+    margin: 0 10px;
+    border: 1px solid #CB80AB;
+    background-color: #FFFFFF;
+    color: #624E88;
+    cursor: pointer;
+    transition: border-color 0.3s ease, background-color 0.3s ease;
+}
+
+.category-dropdown:hover {
+    border-color: #8967B3;
+    background-color: #F5F7F8;
+}
+
+.recently-viewed-container {
+    display: flex;
+    overflow-x: auto;
+    gap: 16px;
+    padding: 20px;
+}
+
+
+.pagination-controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px 0;
+}
+
+.pagination-controls button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: #624E88;
+    color: #FFFFFF;
+    font-size: 1em;
+    cursor: pointer;
+    margin: 0 10px;
+    transition: background-color 0.3s ease;
+}
+
+.pagination-controls button:disabled {
+    background-color: #CB80AB;
+    cursor: not-allowed;
+}
+
+.pagination-controls button:hover:not(:disabled) {
+    background-color: #8967B3;
+}
+
+
+.recommended-container {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    width: 100%;
+}
+
+.recommended-item-card {
+    background-color: #8967B3;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    color: #F5F7F8;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.recommended-item-card img {
+    max-width: 100%;
+    border-radius: 10px;
+}
+
+.recommended-item-card h3 {
+    color: #FFFFFF;
+    font-size: 1.2em;
+    margin: 10px 0;
+}
+
+.recommended-item-card p {
+    color: #F5F7F8;
+    font-size: 1em;
+}
+
+/* Responsive design for smaller screens */
+@media (max-width: 1000px) {
+    .recommended-section {
+        order: -1; /* Move the recommended section to the top */
+    }
+    .fi-section {
+        order: -1; /* Move the recommended section to the top */
+    }
+.filter-button {
+    display: block;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: #624E88;
+    color: #FFFFFF;
+    font-size: 1em;
+    cursor: pointer;
+    margin: 20px 0;
+    transition: background-color 0.3s ease;
+}
+
+.filter-button:hover {
+    background-color: #8967B3;
+}
+    .main-content {
+        flex-direction: column; /* Stack the sections vertically */
+        align-items: center;
+    }
+
+    .filter-section, .items-grid, .recommended-section {
+        width: 100%; /* Full width for each section */
+        max-width: 100%;
+    }
+
+    .items-grid {
+        grid-template-columns: repeat(2, minmax(150px, 1fr)); /* Two items per row on smaller screens */
+    }
+}
+
+@media (max-width: 480px) {
+    .items-grid {
+        grid-template-columns: 1fr; /* One item per row on extra small screens */
+    }
+}
+
+.filter-section {
+    margin-top: 20px;
+}
+
+.filter-button {
+    width: 100%;
+    padding: 10px;
+    background-color: #624E88;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    text-align: left;
+    font-size: 1em;
+    cursor: pointer;
+    outline: none;
+    transition: background-color 0.3s ease;
+}
+
+.filter-button:hover {
+    background-color: #8967B3;
+}
+
+.filter-content.hidden {
+    display: none;
+}
+
+.filter-content {
+    padding: 20px;
+    border-top: 1px solid #CB80AB;
+
+    background-color: #f5f7f8;
+}
+
+.filter-options {
+    display: flex;
+    gap: 100px; /* Increase the gap between each filter */
+    margin-top: 10px;
+}

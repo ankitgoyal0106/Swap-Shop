@@ -1,17 +1,38 @@
 .notif-list{
-    background-color: #E6D9A2;
+    background-color: #f5f7f8;
     margin-left: auto;
     margin-right: auto;
-}
-
-.notif-list h2 {
+    align-items: center;
     text-align: center;
-
 }
 
 .notif-list button {
-    background-color: #CB80AB;
-    color: white;
-    border-radius: 12px;
+    padding: 10px 20px;
     border: none;
+    border-radius: 5px;
+    background-color: #624E88;
+    color: #f5f7f8;
+    font-size: 1em;
+    cursor: pointer;
+    margin: 0 10px;
+    transition: background-color 0.3s ease;
+}
+
+.notif-list button:hover {
+    background-color: #8967B3;
+}
+
+.notif-header {
+    background-color: #f5f7f8;
+    color: #624E88;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    text-align: center;
+    width: 100%;
+}
+
+#notifList {
+    margin-left: 4rem;
+    margin-right: 4rem;
+    padding-inline-start: 0;
 }
