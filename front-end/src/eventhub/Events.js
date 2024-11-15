@@ -3,6 +3,11 @@
  */
 
 export const Events = {
+    SwitchToHomePage: 'SwitchToHomePage',
+    SwitchToExplorePage: 'SwitchToExplorePage',
+    SwitchToProfilePage: 'SwitchToProfilePage',
+    SwtichToLoginPage: 'SwitchToLoginPage',
+
     NewProfile: 'NewProfile',
 
     GetProfile: 'GetProfile',
