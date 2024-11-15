@@ -46,22 +46,20 @@
     margin-right: auto;
     width: 60%;
     height:auto;
-    background-color: #624E88;
+    /* background-color: #624E88; */
 }
 
-.inputBar button{
-    width: 25%;
-    height: 80%;
-}
+/* .inputBar button{
+    height: auto;
+} */
 
 .inputBar input[type="text"]{
-    margin-left: 0;
     padding: 10px;
     border: 1px solid;
     border-radius: 5px;
     font-size: 1em;
     margin-right: 10px;
-    width:90%;
+    width:80%;
     min-height: 15%;
     max-height: 80%;
     /* transition: border-color 0.3s ease; */

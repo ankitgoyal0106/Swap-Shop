@@ -98,7 +98,6 @@ export class chatInterface extends BaseComponent{
             chatBox.scrollTop = chatBox.scrollHeight;
             userMsg.value = "";
         });
-        form.appendChild(msgInput);
 
         const sendButton = document.createElement("input");
         sendButton.value = "Send";
@@ -123,7 +122,8 @@ export class chatInterface extends BaseComponent{
             console.log("back to conversation log page");
         });
 
-        //inputBar.appendChild(backButton);
+        form.appendChild(backButton);
+        form.appendChild(msgInput);
         form.appendChild(sendButton);
         inputBar.appendChild(form);
         return inputBar;
