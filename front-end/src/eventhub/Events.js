@@ -21,6 +21,9 @@ export const Events = {
     LoadProfileSuccess: 'LoadProfileSuccess',
     LoadProfileFailure: 'LoadProfileFailure',
 
+    SwitchProfileToNotif: 'SwitchProfileToNotif',
+    SwitchProfileToView: 'SwitchProfileToView',
+
     NewNotification: 'NewNotification',
 
     LoadNotifications: 'LoadNotifications',

@@ -1,0 +1,46 @@
+.user-info-section {
+    text-align: center;
+    margin-bottom: 40px;
+    align-items: center;
+  }
+  
+  .user-name {
+    font-size: 5em;
+    color: #5d5a63;
+  }
+  /* Grid layout for items */
+.items-grid {
+    width: 100%; /* Middle section to be larger */
+    max-width: 100%;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(200px, 1fr));
+    gap: 16px;
+    align-items: center;
+}
+/* Card style for individual items */
+.item-card {
+    background-color: #FFFFFF;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+/* Image styling within item cards */
+.item-card img {
+    max-width: 100%;
+    border-radius: 10px;
+}
+/* Title styling within item cards */
+.item-card h2 {
+    color: #624E88;
+    font-size: 1.2em;
+    margin: 10px 0;
+}
+
+/* Paragraph styling within item cards */
+.item-card p {
+    color: #333333;
+    font-size: 1em;
+}
