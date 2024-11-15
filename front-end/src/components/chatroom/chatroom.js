@@ -99,10 +99,10 @@ export class chatInterface extends BaseComponent{
             userMsg.value = "";
         });
 
-        const sendButton = document.createElement("input");
-        sendButton.value = "Send";
-        sendButton.type = "button";
-        sendButton.onclick = () => {
+        const sendButton = document.createElement("button");
+        sendButton.innerText = "Send";
+        //sendButton.type = "button";
+        sendButton.addEventListener("click", () => {
             //maybe push new entry into array and reload msgLoad array 
             const userMsg = document.getElementById("msg");
             const chatBox = document.getElementById("chatBox");
@@ -113,7 +113,7 @@ export class chatInterface extends BaseComponent{
             this.#renderMsgs(chatBox);
             chatBox.scrollTop = chatBox.scrollHeight;
             userMsg.value = "";
-        };
+        });
 
         const backButton = document.createElement("button");
         const backLabel = document.createTextNode("Back");
@@ -122,10 +122,10 @@ export class chatInterface extends BaseComponent{
             console.log("back to conversation log page");
         });
 
-        form.appendChild(backButton);
+        inputBar.appendChild(backButton);
         form.appendChild(msgInput);
-        form.appendChild(sendButton);
         inputBar.appendChild(form);
+        inputBar.appendChild(sendButton);
         return inputBar;
     }
 
