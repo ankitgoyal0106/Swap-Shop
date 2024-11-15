@@ -31,7 +31,7 @@ import { ProfileContoller } from "../ProfileController/ProfileController.js";
     #createTitle() {
       const title = document.createElement('h1');
       title.className = 'profile-title';
-      title.textContent = 'Profile Page!';
+      title.textContent = 'User Profile';
       return title;
     }
 }
