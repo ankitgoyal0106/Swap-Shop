@@ -2,6 +2,7 @@ import { explorePage } from "../explorePage/explorePage.js";
 import { homeComponent } from "../homePage/homePage.js";
 import { profilePage } from "../mainProfilePage/mainProfilePage.js";
 import { ProfileLoginPage } from "../ProfileLoginPage/ProfileLoginPage.js";
+import { Registration } from "../registrationPage/registrationPage.js";
 import { EventHub } from "../../eventhub/EventHub.js";
 
 export class AppController {
@@ -11,6 +12,7 @@ export class AppController {
     #explorePage = null;
     #profilePage = null;
     #loginPage = null;
+    #registerPage = null;
     #hub = null;
 
     constructor(){
@@ -19,6 +21,7 @@ export class AppController {
         this.#explorePage = new explorePage();
         this.#profilePage = new profilePage();
         this.#loginPage = new ProfileLoginPage();
+        this.#registerPage = new Registration();
     }
 
     render() {
@@ -30,6 +33,7 @@ export class AppController {
         this.#explorePage.render();
         this.#profilePage.render();
         this.#loginPage.render();
+        this.#registerPage.render();
 
         this.#renderCurrentView();
 
@@ -89,6 +93,11 @@ export class AppController {
             this.#currentView = 'login';
             this.#renderCurrentView();
         });
+
+        this.#hub.subscribe('SwitchToRegisterPage', () => {
+            this.#currentView = 'register';
+            this.#renderCurrentView();
+        });
     }
 
     #toggleView(view) {
@@ -104,6 +113,9 @@ export class AppController {
         }else if(view === 'login'){
             this.#currentView = view;
             this.#hub.publish('SwitchToLoginPage', null);
+        }else if(view === 'register'){
+            this.#currentView = view;
+            this.#hub.publish('SwitchToRegisterPage', null);
         }
     }
 
@@ -119,6 +131,8 @@ export class AppController {
             viewContainer.appendChild(this.#profilePage.render());
         }else if(this.#currentView === 'login'){
             viewContainer.appendChild(this.#loginPage.render());
+        }else if(this.#currentView === 'register'){
+            viewContainer.appendChild(this.#registerPage.render());
         }
     }
 }
