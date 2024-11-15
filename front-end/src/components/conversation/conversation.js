@@ -4,10 +4,10 @@ import { chatInterface } from "../chatroom/chatroom.js";
 export class conversationList extends BaseComponent{
     #container = null;
     
-    constructor(userID){
+    constructor(userID, convoLog){
         super();
         this.userID = userID;
-        this.convoLog = this.#loadConvos(); //hashmap that maps convoID to convoObj
+        this.convoLog = convoLog; //hashmap that maps convoID to convoObj
         this.loadCSS("conversation");
     }
 
@@ -17,7 +17,7 @@ export class conversationList extends BaseComponent{
         this.#container.appendChild(this.#createConvoBar()); //renders the convoBar with backButton and addConvoButton (need to implement how to create new convos)
         this.#container.appendChild(this.#createContainer()); //renders container for conversations
         this.#container.appendChild(this.#createNewConvoBox());//renders pop up box to create new conversation
-        this.#loadConvos();//load existing conversations from database and display each conversation
+        //this.#loadConvos();//load existing conversations from database and display each conversation
 
         return this.#container;
     }
@@ -71,7 +71,9 @@ export class conversationList extends BaseComponent{
             //     convoID: generateConvoID(),
             //     names: ""
             // }
-            const chatRoom = new chatInterface(this.userID, convoObj.convoID,convoObj.groupName, [{userID: "user1", msg:"Innovation shapes our world, driving everything from the technology we use to the ways we interact and solve problems. In an ever-evolving landscape, creativity and adaptability are more important than ever, allowing individuals and teams to push boundaries and discover new solutions. Whether in science, art, or technology, innovation thrives on curiosity and a willingness to challenge the status quo, ultimately enriching our lives and paving the way for a more connected, sustainable future."}, {userID: "currUser", msg:"what?"},{userID: "user2", msg:"sigh"}])//need to loadMsgs from IndexedDB
+
+            //figure out a better way to do this, don't forget to check to see if that instance already exists
+            const chatRoom = new chatInterface(this.userID, convoObj.convoID,convoObj.groupName, [{userID: "user1", msg:"Innovation shapes our world, driving everything from the technology we use to the ways we interact and solve problems. In an ever-evolving landscape, creativity and adaptability are more important than ever, allowing individuals and teams to push boundaries and discover new solutions. Whether in science, art, or technology, innovation thrives on curiosity and a willingness to challenge the status quo, ultimately enriching our lives and paving the way for a more connected, sustainable future."}, {userID: this.userID, msg:"what?"},{userID: "user2", msg:"sigh"}])//need to loadMsgs from IndexedDB
             this.#container.innerHTML = "";//concern here of DOM tree hell
             this.#container.appendChild(chatRoom.render());
         })
@@ -225,16 +227,26 @@ export class conversationList extends BaseComponent{
     }
     
     //TODO: implement loadConvos
-    #loadConvos(){
+    loadConvos(){
         /*
         use convoID to grab existsing log of conversations from database, if does not exist, initialize empty array and save that to database
         -> returns some array then run forEach since each element will be a convoObj and render each with this.#createContainerElem(convoObj)
         and appendChild to convoContainer div !!IN REVERSE ORDER SINCE TAIL END IS MOST RECENT CONVOS!!
 
         return convoLog
-        */
-       return [];
 
+        const convoObj = {
+                        groupName: newGroupName,
+                        convoID: generateConvoID(),
+                        names: tempNames
+                    }
+        hashmap of convoLog[convoID] = convoObj
+        */
+        const container = document.getElementById("convoContainer");
+        Object.values(this.convoLog).forEach(obj => {
+            const convoElem = this.#createContainerElem(obj);
+            container.appendChild(convoElem);
+        });
     }
 
     //TODO: implement loadChatRooms
