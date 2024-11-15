@@ -88,3 +88,15 @@
 - **Task**: CSS Bug fixes and Stylistic changes
 - **Details**: Fixed a bug caused by css priority levels that caused notification text to go white. Additionally, changed the heading on the profile page to match stylistic choices.
 - **Link to Commit**: [Commit](https://github.com/ankitgoyal0106/Swap-Shop/commit/6c96bfffb457b41413a6edd63b4a24a15ba135cc)
+
+- **Task**: Completion of contribution log and a typo fix.
+- **Details**: Caught up the contribution log for Nathan Palmer to now, and fixed a small typo in events.js.
+- **Link to Commit**: [Commit](https://github.com/ankitgoyal0106/Swap-Shop/commit/c604666fe7e2b6b80ab48e8c2e8f6e342ddcbeca)
+
+- **Task**: Completion of sequence diagram for notification list.
+- **Details**: Completion of the sequence diagram file for Nathan Palmer, which was about the notification list element.
+- **Link to Commit**: [Commit](https://github.com/ankitgoyal0106/Swap-Shop/commit/420816752d64c9cbbc4f11513a30636bf6458bfb)
+
+- **Task**: New diagrams for ui-diagrams and a quick bug fix for profile.
+- **Details**: Created and added new diagrams for the ui-diagrams file, as well as a standardization of the structure of that file. Additionally, a quick fix to ensure the profile page boots to the info section.
+- **Link to Commit**: [Commit](https://github.com/ankitgoyal0106/Swap-Shop/commit/a7c64a3d877df31cc9e02d65effe2ed66876a7d1)
