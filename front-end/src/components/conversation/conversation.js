@@ -74,8 +74,9 @@ export class conversationList extends BaseComponent{
 
             //figure out a better way to do this, don't forget to check to see if that instance already exists
             const chatRoom = new chatInterface(this.userID, convoObj.convoID,convoObj.groupName, [{userID: "user1", msg:"Innovation shapes our world, driving everything from the technology we use to the ways we interact and solve problems. In an ever-evolving landscape, creativity and adaptability are more important than ever, allowing individuals and teams to push boundaries and discover new solutions. Whether in science, art, or technology, innovation thrives on curiosity and a willingness to challenge the status quo, ultimately enriching our lives and paving the way for a more connected, sustainable future."}, {userID: this.userID, msg:"what?"},{userID: "user2", msg:"sigh"}])//need to loadMsgs from IndexedDB
-            this.#container.innerHTML = "";//concern here of DOM tree hell
-            this.#container.appendChild(chatRoom.render());
+            const app = document.getElementById("app")
+            app.innerHTML = "";//concern here of DOM tree hell
+            app.appendChild(chatRoom.render());
         })
         convoBox.appendChild(upper);
         convoBox.appendChild(br);

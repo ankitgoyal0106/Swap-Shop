@@ -30,6 +30,7 @@ export class chatInterface extends BaseComponent{
         this.#container.style.display = "block";
         const title = document.createElement("h1");
         title.innerText = this.groupName;
+        title.classList.add("header");
         this.#container.appendChild(title);
         const chatBox = this.#createChat();
         this.#renderMsgs(chatBox);
