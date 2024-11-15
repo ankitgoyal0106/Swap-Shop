@@ -34,6 +34,8 @@ The **explore page** is the compilation of all items listed on our website. You 
 - The user can acces to the profile page by clicking on the button available on the top right corner.
 - The Profile Page will display key information about the seller or buyer. It will feature a minimal yet intuitive design, showing the user's profile picture at the top, followed by their name, and bio. It will also contain tabs or sections to navigate between active listings (for sellers) or purchase history (for buyers).
 - Sellers can update their listings, view ratings, and respond to messages, while buyers can track orders and leave feedback. Users can also edit their profile details. If accessed without login, the system redirects to the login page, ensuring secure access.
+- User can see if they have any notifications by clicking the notification button.
+  
 
 ## Item Page
 
@@ -62,11 +64,13 @@ On this popup users can enter in a username and password in order to access thei
 ![Register Page](Images/RegisterPage.png)
 
 ### Description for Register Page
-Describe here.
+- The registration page will pop-up if the user does not have any account. In this page the user will enter their credentials like their name, email, password, and if they want a buyer's account or seller's or both. Once they hit register a personalized profile page will pop-up for them. 
 
 ## Notifications Page
 
 ![Notifications Page](Images/NotificationsPage.png)
 
 ### Description for Notifications Page
-Describe here.
+- The Notifications Page provides users with updates and alerts related to their account activity. It will be easily accessible by clicking the notification botton located on the profile page.
+- The page will list notifications in chronological order, showing recent updates at the top. Notifications will include messages such as order confirmations, updates from sellers, item recommendations, messages from buyers or sellers, and any changes in the status of active listings.
+- Use Cases: This page keeps users informed about their interactions and activities on the platform, ensuring they do not miss important messages or updates about their listings, purchases, or profile activity.
