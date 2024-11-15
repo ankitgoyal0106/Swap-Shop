@@ -2,6 +2,7 @@ import { BaseComponent } from "../BaseComponent/BaseComponent.js";
 import { EventHub } from "../../eventhub/EventHub.js"
 import { NotificationList } from "../NotificationList/NotificationList.js"
 import { ViewProfile } from "../ViewProfile/ViewProfile.js";
+import { conversationList } from "../conversation/conversation.js";
 //TODO: Import other screens here
 
 export class ProfileContoller extends BaseComponent {
@@ -9,6 +10,7 @@ export class ProfileContoller extends BaseComponent {
   #currentView = 'notif';
   #notificationList = null;
   #viewProfile = null;
+  #conversationList = null;
   //TODO: Add other screens here
   #hub = null;
 
@@ -17,6 +19,7 @@ export class ProfileContoller extends BaseComponent {
     this.#hub = EventHub.getInstance();
     this.#notificationList = new NotificationList();
     this.#viewProfile = new ViewProfile();
+    this.#conversationList = new conversationList();
     //TODO: Instantiate other screens here
     this.loadCSS("ProfileController");
   }
@@ -48,6 +51,7 @@ export class ProfileContoller extends BaseComponent {
       <div id="sidebar">
         <button id="viewProfileBtn">View Profile</button>
         <button id="viewNotifBtn">Notifications</button>
+        <button id="viewConvoBtn">Conversations</button>
       </div>
       <div id="viewContainer"></div>`
       ;
@@ -57,6 +61,7 @@ export class ProfileContoller extends BaseComponent {
   #attachEventListeners() {
     const viewProfileBtn = this.#container.querySelector('#viewProfileBtn');
     const viewNotifBtn = this.#container.querySelector('#viewNotifBtn');
+    const viewConvoBtn = this.#container.querySelector('#viewConvoBtn');
 
     // Event listener for switching to profile view
     viewProfileBtn.addEventListener('click', () => {
@@ -66,6 +71,11 @@ export class ProfileContoller extends BaseComponent {
     // Event listener for switching to notification view
     viewNotifBtn.addEventListener('click', () => {
       this.#toggleView('notif');
+    });
+
+    // Event listener for switching to conversation listing view
+    viewConvoBtn.addEventListener('click', () => {
+      this.#toggleView('convo');
     });
 
     
@@ -78,6 +88,11 @@ export class ProfileContoller extends BaseComponent {
 
     this.#hub.subscribe('SwitchProfileToView', () => {
       this.#currentView = 'profile';
+      this.#renderCurrentView();
+    })
+
+    this.#hub.subscribe('SwitchProfileToConvo', () => {
+      this.#currentView = 'convo';
       this.#renderCurrentView();
     })
 
@@ -96,6 +111,11 @@ export class ProfileContoller extends BaseComponent {
       this.#currentView = view;
       this.#hub.publish('SwitchProfileToView', null);
     }
+
+    if(view === 'convo'){
+      this.#currentView = view;
+      this.#hub.publish('SwitchProfileToConvo', null);
+    }
     //TODO: Add toggles for other views
   }
 
@@ -110,6 +130,10 @@ export class ProfileContoller extends BaseComponent {
 
     if (this.#currentView === 'profile'){
       viewContainer.appendChild(this.#viewProfile.render());
+    }
+
+    if (this.#currentView === 'convo'){
+      viewContainer.appendChild(this.#conversationList.render());
     }
     //TODO: Add other views
   }
