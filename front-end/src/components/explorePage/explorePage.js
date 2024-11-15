@@ -75,6 +75,7 @@ import { BaseComponent } from "../BaseComponent/BaseComponent.js";
       // Search button
       const searchButton = document.createElement('button');
       searchButton.textContent = 'Search';
+      searchButton.addEventListener('click', () => this.#updateItemsGrid());
   
       this.#searchBar.append(categoryDropdown, searchInput, searchButton);
       return this.#searchBar;
@@ -83,6 +84,19 @@ import { BaseComponent } from "../BaseComponent/BaseComponent.js";
     #createItemsGrid() {
       this.#itemsGrid = document.createElement('div');
       this.#itemsGrid.className = 'items-grid';
+      return this.#itemsGrid;
+    }
+
+    #updateItemsGrid() {
+      console.log('Updating items grid...');
+      const category = this.#searchBar.querySelector('.category-dropdown').value;
+      const searchQuery = this.#searchBar.querySelector('input').value.toLowerCase();
+  
+      this.items = this.#getItems().filter(item => {
+        return (item.itemName.toLowerCase().includes(searchQuery) || item.itemDescription.toLowerCase().includes(searchQuery)) && (category === 'all' || item.category.toLowerCase() === category);
+      });
+
+      this.#displayItems(this.currentPage);
       return this.#itemsGrid;
     }
     
@@ -129,15 +143,15 @@ import { BaseComponent } from "../BaseComponent/BaseComponent.js";
   
       const img = document.createElement('img');
       img.src = item.src;
-      img.alt = item.title;
+      img.alt = item.itemName;
       itemCard.appendChild(img);
   
       const itemTitle = document.createElement('h2');
-      itemTitle.textContent = item.title;
+      itemTitle.textContent = item.itemName;
       itemCard.appendChild(itemTitle);
   
       const itemDescription = document.createElement('p');
-      itemDescription.textContent = item.description;
+      itemDescription.textContent = item.itemDescription;
       itemCard.appendChild(itemDescription);
   
       return itemCard;
@@ -267,50 +281,107 @@ import { BaseComponent } from "../BaseComponent/BaseComponent.js";
   
     #getItems() {
       return [
-        { src: '', title: 'Item 1', description: 'Description for item 1' },
-        { src: '', title: 'Item 2', description: 'Description for item 2' },
-        { src: '', title: 'Item 3', description: 'Description for item 3' },
-        { src: '', title: 'Item 4', description: 'Description for item 4' },
-        { src: '', title: 'Item 5', description: 'Description for item 5' },
-        { src: '', title: 'Item 6', description: 'Description for item 6' },
-        { src: '', title: 'Item 7', description: 'Description for item 7' },
-        { src: '', title: 'Item 8', description: 'Description for item 8' },
-        { src: '', title: 'Item 9', description: 'Description for item 9' },
-        { src: '', title: 'Item 10', description: 'Description for item 10' },
-        { src: '', title: 'Item 11', description: 'Description for item 11' },
-        { src: '', title: 'Item 12', description: 'Description for item 12' },
-        { src: '', title: 'Item 13', description: 'Description for item 13' },
-        { src: '', title: 'Item 14', description: 'Description for item 14' },
-        { src: '', title: 'Item 15', description: 'Description for item 15' },
-        { src: '', title: 'Item 16', description: 'Description for item 16' },
-        { src: '', title: 'Item 17', description: 'Description for item 17' },
-        { src: '', title: 'Item 18', description: 'Description for item 18' },
-        { src: '', title: 'Item 19', description: 'Description for item 19' },
-        { src: '', title: 'Item 20', description: 'Description for item 20' },
-        { src: '', title: 'Item 21', description: 'Description for item 21' },
-        { src: '', title: 'Item 22', description: 'Description for item 22' }
-        // Add other items...
+        {
+          ListingID: '1',
+          itemName: 'Mock Electronic',
+          itemDescription: 'Description for item 2',
+          category: 'Electronics',
+          price: 100.0,
+          associatedCompany: 'Company A',
+          postedAt: new Date('2023-01-01T10:00:00Z'),
+          itemLocation: 'Location A',
+          images: ['img1.jpg', 'img2.jpg'],
+          amountAvailable: 10,
+          updatedAt: new Date('2023-01-02T10:00:00Z')
+        },
+        {
+          ListingID: '2',
+          itemName: 'Item 3',
+          itemDescription: 'Mock Clothing',
+          category: 'Clothing',
+          price: 50.0,
+          associatedCompany: 'Company B',
+          postedAt: new Date('2023-01-03T10:00:00Z'),
+          itemLocation: 'Location B',
+          images: ['img3.jpg', 'img4.jpg'],
+          amountAvailable: 5,
+          updatedAt: new Date('2023-01-04T10:00:00Z')
+        },
+        {
+          ListingID: '3',
+          itemName: 'Item 4',
+          itemDescription: 'Mock Books',
+          category: 'Books',
+          price: 20.0,
+          associatedCompany: 'Company C',
+          postedAt: new Date('2023-01-05T10:00:00Z'),
+          itemLocation: 'Location C',
+          images: ['img5.jpg', 'img6.jpg'],
+          amountAvailable: 15,
+          updatedAt: new Date('2023-01-06T10:00:00Z')
+        },
+        {
+          ListingID: '4',
+          itemName: 'Item 5',
+          itemDescription: 'Mock Furniture',
+          category: 'Furniture',
+          price: 200.0,
+          associatedCompany: 'Company D',
+          postedAt: new Date('2023-01-07T10:00:00Z'),
+          itemLocation: 'Location D',
+          images: ['img7.jpg', 'img8.jpg'],
+          amountAvailable: 2,
+          updatedAt: new Date('2023-01-08T10:00:00Z')
+        },
+        {
+          ListingID: '5',
+          itemName: 'Mock IClicker',
+          itemDescription: 'Brand New IClicker',
+          category: 'IClicker',
+          price: 30.0,
+          associatedCompany: 'Company E',
+          postedAt: new Date('2023-01-09T10:00:00Z'),
+          itemLocation: 'Location E',
+          images: ['img9.jpg', 'img10.jpg'],
+          amountAvailable: 8,
+          updatedAt: new Date('2023-01-10T10:00:00Z')
+        }
       ];
     }
   
     #getRecommendedItems() {
         return [ 
-            { src: '', title: 'Recommended 1', description: 'Description for recommended item 1' },
+          {
+            ListingID: '1',
+            itemName: 'Item 2',
+            itemDescription: 'Description for item 2',
+            category: 'Electronics',
+            price: 100.0,
+            associatedCompany: 'Company A',
+            postedAt: new Date('2023-01-01T10:00:00Z'),
+            itemLocation: 'Location A',
+            images: ['img1.jpg', 'img2.jpg'],
+            amountAvailable: 10,
+            updatedAt: new Date('2023-01-02T10:00:00Z')
+          }
         ]
     }
 
     #getRecentlyViewedItems() {
       return [
-        { src: '', title: 'Recently Viewed 1', description: 'Description for recently viewed item 1' },
-        { src: '', title: 'Recently Viewed 2', description: 'Description for recently viewed item 2' },
-        { src: '', title: 'Recently Viewed 3', description: 'Description for recently viewed item 3' },
-        { src: '', title: 'Recently Viewed 4', description: 'Description for recently viewed item 4' },
-        { src: '', title: 'Recently Viewed 5', description: 'Description for recently viewed item 5' },
-        { src: '', title: 'Recently Viewed 6', description: 'Description for recently viewed item 6' },
-        { src: '', title: 'Recently Viewed 7', description: 'Description for recently viewed item 7' },
-        { src: '', title: 'Recently Viewed 8', description: 'Description for recently viewed item 8' },
-        { src: '', title: 'Recently Viewed 9', description: 'Description for recently viewed item 9' },
-        { src: '', title: 'Recently Viewed 10', description: 'Description for recently viewed item 10' }
+        {
+          ListingID: '1',
+          itemName: 'Item 2',
+          itemDescription: 'Description for item 2',
+          category: 'Electronics',
+          price: 100.0,
+          associatedCompany: 'Company A',
+          postedAt: new Date('2023-01-01T10:00:00Z'),
+          itemLocation: 'Location A',
+          images: ['img1.jpg', 'img2.jpg'],
+          amountAvailable: 10,
+          updatedAt: new Date('2023-01-02T10:00:00Z')
+        }
       ];
     }
   }
