@@ -62,3 +62,8 @@
 - **Details**: Pulled the commits from GitHub and attempted to link conversationListing page to the ProfileController. Added a temporary link between conversationListing to chatRooms by instantiating new chatInterface object in conversationListing but is very naive at the moment
 - **Link to Commit**: [Commit](https://github.com/ankitgoyal0106/Swap-Shop/commit/69d047f7fa579c5a491ab8cd4920853ddeb1a8a6)
 
+## November 16, 2024
+
+- **Task**: Bug fixes to conversationListing and chatInterface, updated data.md, and uploaded sequence diagram
+- **Details**: Adjusted data types for conversationListing and chatInterface to coincide with the data.md file. Created a sequence diagram for conversationListing.
+- **Link to Commit**: [Commit](https://github.com/ankitgoyal0106/Swap-Shop/commit/ae851853783ddf0e8388ab592716d00b2a18fff5)
