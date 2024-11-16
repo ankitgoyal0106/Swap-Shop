@@ -38,9 +38,9 @@ A markdown file detailing each team member's role and their top 3 commits for th
 
 - **Role**: Track project deadlines and communicate the dates with the team to assure each one is met. Assure each task gets done in a timely manner.
 - **Top Three Commits**:
-   1. [First draft of the `data.md` file](https://github.com/ankitgoyal0106/326-Group-Project/commit/65a4ec9c19b64f6505597d11f829252e04b70474)
-   2. [Completed the `data.md` file](https://github.com/ankitgoyal0106/326-Group-Project/commit/3e203fa36cd2285dd02c9cc6bd71911698874c32)
-   3. [Added a contribution for myself.](https://github.com/ankitgoyal0106/326-Group-Project/commit/ab1e3e111cc9d63a2653d786a2d12b5d3c6c8a5c)
+   1. [Commit for Registration Page Rough Draft](https://github.com/ankitgoyal0106/Swap-Shop/commit/255fcf065edd444d8c6369590060b2085614734a)
+   2. [Commit for Profile Editing Page Rough Draft](https://github.com/ankitgoyal0106/Swap-Shop/commit/6343a034adf47e12846e351bf88cb80639211715)
+   3. [Commit for Creating the Profile Repo Service and Adding Event Names](https://github.com/ankitgoyal0106/Swap-Shop/commit/3e332b5878854175dacdef12056e8e25a6a4153d)
 
 ## Emily Larkin - Task Manager
 
