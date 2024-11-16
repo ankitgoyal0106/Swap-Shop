@@ -22,9 +22,9 @@ A markdown file detailing each team member's role and their top 3 commits for th
 
 - **Role:** Look at the organization, maintenance, and access control of the repository, ensuring proper control, documentation, and collaboration among the group members.
 - **Top Three Commits:**
-   1. [Created the repo](https://github.com/ankitgoyal0106/326-Group-Project/commit/aeb5fd20fa964e6aa7d805033bfda3d3d0e05a14)
-   2. [Description for the Home Page](https://github.com/ankitgoyal0106/326-Group-Project/commit/d67bd2c39da4c95d820834b6f6d9dea23ed9b3ae)
-   3. [Description for the Profile Page](https://github.com/ankitgoyal0106/326-Group-Project/commit/bdb20dd3d299b292c07c5eba8a7849e243311535)
+   1. [Completed the UI for the profile page setup.](https://github.com/ankitgoyal0106/Swap-Shop/commit/75e1eeddc09c7f1d375bd9f19fa1473a3fc81143)
+   2. [Implemented the front-end for the profile Log-in page.](https://github.com/ankitgoyal0106/Swap-Shop/commit/edb19579980705a2c8455d3a36ce75eb88115ca9)
+   3. [Added the descriptions for the ui-diagrams.](https://github.com/ankitgoyal0106/Swap-Shop/commit/4799dcfb649ad157a01541ad4e344f6f31e565da)
 
 ## Jackson MacDonald - Meeting Coordinator/Quality Control
 

@@ -7,7 +7,7 @@ import { conversationList } from "../conversation/conversation.js";
 
 export class ProfileContoller extends BaseComponent {
   #container = null;
-  #currentView = 'notif';
+  #currentView = 'profile';
   #notificationList = null;
   #viewProfile = null;
   #conversationList = null;

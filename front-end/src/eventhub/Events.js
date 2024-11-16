@@ -6,7 +6,7 @@ export const Events = {
     SwitchToHomePage: 'SwitchToHomePage',
     SwitchToExplorePage: 'SwitchToExplorePage',
     SwitchToProfilePage: 'SwitchToProfilePage',
-    SwtichToLoginPage: 'SwitchToLoginPage',
+    SwitchToLoginPage: 'SwitchToLoginPage',
 
     NewProfile: 'NewProfile',
 
@@ -42,5 +42,12 @@ export const Events = {
 
     ClearNotifications: 'ClearNotifications',
     ClearNotificationsSuccess: 'ClearNotificationsSuccess',
-    ClearNotificationsFailure: 'ClearNotificationsFailure'
+    ClearNotificationsFailure: 'ClearNotificationsFailure',
+
+    SignUp: 'SignUp',
+    ListItem: 'ListItem',
+    StartNewChat: 'StartNewChat',
+    MarkItemSold: 'MarkItemSold',
+    FindEasterEgg: 'FindEasterEgg',
+    ViewItem: 'ViewItem'
 };
