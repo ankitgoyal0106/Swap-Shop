@@ -47,12 +47,6 @@ export class Registration extends BaseComponent {
         form.appendChild(collegeLabel);
         form.appendChild(collegeSelect);
 
-        // Add dropdown for Role
-        const roleOptions = ["Buyer", "Seller", "Both"];
-        const { label: roleLabel, input: roleSelect } = this.#createSelectField('Role:', 'role', roleOptions);
-        form.appendChild(roleLabel);
-        form.appendChild(roleSelect);
-
         // Add the submit button
         form.innerHTML += `<input id="submit-button" class="registration-button" type="submit" value="Register">`;
 
@@ -134,14 +128,12 @@ export class Registration extends BaseComponent {
             college: userData.college,
             password: encryptedPassword,
             profilePicture: null,
-            role: userData.role,
-            rating: null,
             createdAt: timestamp,
             updatedAt: timestamp,
-            preferences: {},
             achievements: [],
             savedListings: [],
-            recentlyViewed: []
+            recentlyViewed: [],
+            conversationList: []
         };
 
         console.log("Profile Data:", profileData);
