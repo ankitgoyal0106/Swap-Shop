@@ -62,6 +62,11 @@
     3. [Commit for Merge #59](https://github.com/ankitgoyal0106/Swap-Shop/commit/b02c5f5f26812cf830d6ab4cf7962e68d89e157d)
     4. [Commit for Merge #61](https://github.com/ankitgoyal0106/Swap-Shop/commit/4a14f21e3c52b7f7485c8ccc02bfcc8a604671b0)
 
+- **Task**: Update `data.md`.
+- **Details**: Collaborated with team members to update `data.md` to reflect current data logic.
+- **Link to Commit(s)**:
+    1. [Commit for Updated `data.md`](https://github.com/ankitgoyal0106/Swap-Shop/commit/e1e1d2d61e46f637e433bf0f493369efb91289c1)
+
 ## November 16, 2024
 - **Task**: Update the type of data that the registration page collects to reflect the updated data.md.
 - **Details**: Had to remove role type and preferences from the data, but added conversation list which reflects the data.md file.
