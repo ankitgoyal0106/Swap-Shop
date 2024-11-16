@@ -5,21 +5,20 @@ import { homeComponent } from "./components/homePage/homePage.js";
 
 document.addEventListener("DOMContentLoaded", function () {
  
-  //INITIALIZATION  FOR THE "APP"
+  //INITIALIZATION FOR THE "APP"
   const app = document.getElementById("app");
   app.innerHTML = "";
 
   // Event listener for the Home button
   document.getElementById('homeBtn').addEventListener('click', function () {
     console.log('Home button clicked');
-    const homePageComponent = new homeComponent();  // Create the homeComponent instance
-    app.innerHTML = '';  // Clear existing content in the app container
-    app.appendChild(homePageComponent.render());  // Render the homePage content
+    const homePageComponent = new homeComponent();  
+    app.innerHTML = ''; 
+    app.appendChild(homePageComponent.render()); 
   });
 
   // Event listener for the Explore button
   document.getElementById('exploreBtn').addEventListener('click', function () {
-    // Implement the explorePage functionality here
     const explorePageComponent = new explorePage();
     app.innerHTML = '';
     app.appendChild(explorePageComponent.render());
