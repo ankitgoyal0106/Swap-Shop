@@ -6,9 +6,9 @@ A markdown file detailing each team member's role and their top 3 commits for th
 
 - **Role**: Responsible for overseeing the organization and maintenance of all project documentation.
 - **Top Three Commits**:
-  1. [Commit 1](https://github.com/ankitgoyal0106/326-Group-Project/commit/9fff27b5f7748f2a416ae83732fb28f77c4a8564): Wrote out description for problem we are looking to resolve and how our application will resolve it
-  2. [Commit 2](https://github.com/ankitgoyal0106/Swap-Shop/commit/fed58f6ac247f59c36369c7762190be086eaf916): Updated completed task report in tyler-tang.md
-  3. [Commit 3](https://github.com/ankitgoyal0106/Swap-Shop/commit/f2a7ac4c2689157a0b37f3a17e7732d0387437bc): Added my contributions to roles.md
+  1. [Commit 1](https://github.com/ankitgoyal0106/Swap-Shop/commit/8c6267cdc375995335f2dba1dda6e72c13d4d361): Completed implementation of conversationListing feature that allows users to view and add ongoing conversation groups
+  2. [Commit 2](https://github.com/ankitgoyal0106/Swap-Shop/commit/c4325367e9fb4a8687d388615aa77f72aed502d3): Completed implementation of chatRooms feature that creates an interface for the chat log of a specific conversation
+  3. [Commit 3](https://github.com/ankitgoyal0106/Swap-Shop/commit/d36cab0cf806127ae0105c3c077f57ef517513c6): Updated contributionl log with most recent changes
 
 ## Nathan Palmer - Communication Lead
 

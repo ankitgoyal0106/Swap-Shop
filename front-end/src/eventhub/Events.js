@@ -28,6 +28,7 @@ export const Events = {
 
     SwitchProfileToNotif: 'SwitchProfileToNotif',
     SwitchProfileToView: 'SwitchProfileToView',
+    SwitchProfileToConvo: 'SwitchProfileToConvo',
 
     NewNotification: 'NewNotification',
 
