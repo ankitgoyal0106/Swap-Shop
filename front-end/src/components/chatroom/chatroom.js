@@ -8,17 +8,16 @@ import { BaseComponent } from "../BaseComponent/BaseComponent.js";
 export class chatInterface extends BaseComponent{
     #container = null;
 
-    constructor(userID, convoID, groupName, loadedMsgs){
+    constructor(userID, groupName, loadedMsgs){
         super();
         this.userID = userID;
-        this.convoID = convoID;
         this.groupName = groupName;
         this.loadedMsgs = loadedMsgs;
         /*
         msg{
             userID: "",
             msg: "",
-            timestamp: ""
+            readAt: t/f
         }
         */
         this.loadCSS("chatroom");
@@ -114,6 +113,7 @@ export class chatInterface extends BaseComponent{
             this.#renderMsgs(chatBox);
             chatBox.scrollTop = chatBox.scrollHeight;
             userMsg.value = "";
+            //TODO: interact with backend server to save loadedMsg to database (based on convoID prob)
         });
 
         const backButton = document.createElement("button");
@@ -123,7 +123,7 @@ export class chatInterface extends BaseComponent{
             console.log("back to conversation log page");
         });
 
-        inputBar.appendChild(backButton);
+        //inputBar.appendChild(backButton);
         form.appendChild(msgInput);
         inputBar.appendChild(form);
         inputBar.appendChild(sendButton);
@@ -132,7 +132,6 @@ export class chatInterface extends BaseComponent{
 
     #renderMsgs(chatBox){
         this.loadedMsgs.forEach(m =>{
-            console.log(chatBox);
             chatBox.appendChild(this.#createMsgBlock(m.userID, m.msg));
         });
     }

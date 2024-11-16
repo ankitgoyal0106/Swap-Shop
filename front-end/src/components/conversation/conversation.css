@@ -18,18 +18,18 @@ button{
 
 .convoContainer{
     margin-top: 10px; /*make relative*/
-    margin-left:auto;
-    margin-right:auto;
-    width: 80%; /*make relative*/
-    height: 500px; /*make relative*/
-    overflow-y: scroll;
+    margin-left:5%;
+    margin-right:5%;
+    /* width: 80%; */
+    /* height: 400px; /*make relative*/
+    /* overflow-y: auto; */
     overflow-x:hidden;
     display:flex;
-    flex-direction: column;
+    flex-direction: column-reverse;
     /* grid-auto-flow:row;
     grid-row-gap: 1px; */
     border: 3px solid #f1f1f1;    
-    background-color: #624E88;
+    /* background-color: #624E88; */
     font-family: Arial, sans-serif;
 }
 
@@ -74,8 +74,8 @@ button{
 
 .convoInfoBox{
     color: #FFFFFF;
-    margin-top:10%;
-    margin-right:10%;
+    margin-top:12%;
+    margin-right:7%;
     font-size: 20px;
     text-align: center;
     width:15%;

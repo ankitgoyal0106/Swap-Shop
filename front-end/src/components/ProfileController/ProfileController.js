@@ -32,6 +32,7 @@ export class ProfileContoller extends BaseComponent {
     this.#notificationList.render();
     this.#viewProfile.render();
     //TODO: Render other screens here
+    this.#conversationList.render();
 
     this.#renderCurrentView();
 
