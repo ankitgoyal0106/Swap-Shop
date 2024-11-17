@@ -49,5 +49,7 @@ export const Events = {
     StartNewChat: 'StartNewChat',
     MarkItemSold: 'MarkItemSold',
     FindEasterEgg: 'FindEasterEgg',
-    ViewItem: 'ViewItem'
+    ViewItem: 'ViewItem',
+
+    ProfileEdited: 'EditedProfile'
 };
