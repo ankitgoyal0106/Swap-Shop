@@ -55,4 +55,10 @@
     2. [Chat-Hub page](https://github.com/ankitgoyal0106/Swap-Shop/commit/e2ea6b21be55ed2726a107db1667865892eded04)
     3. [Register page and Notification page.](https://github.com/ankitgoyal0106/Swap-Shop/commit/4799dcfb649ad157a01541ad4e344f6f31e565da)
 
+  - **Task:** Updated my documentation.
+- **Details:** Edited my contribution log, and updated my top 3 commits.
+- **Link to Commit:**
+    1. [Commit 1](https://github.com/ankitgoyal0106/Swap-Shop/commit/531d40f8dd7d3bd5d70e513346590434c7be2586)
+    2. [Commit 2](https://github.com/ankitgoyal0106/Swap-Shop/commit/e5bfb8e8921d96f260b25472ec5d4838c3c0b015)
+
 
