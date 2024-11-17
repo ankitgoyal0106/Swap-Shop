@@ -38,9 +38,12 @@ export class homeComponent extends BaseComponent {
     galleryTitle.textContent = 'View our gallery';
 
     const imagePaths = [
-      'images/sushi.jpeg', 
-      'images/containers.jpeg', 
-      'images/farmers-market.jpeg'
+      'images/jewelry.PNG', 
+      'images/painting.PNG', 
+      'images/farmers-market.jpeg',
+      'images/shop.jpeg',
+      'images/shop2.jpeg',
+      'images/stickers.PNG'
     ]; 
 
     const imageContainer = document.createElement('div');
