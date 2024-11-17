@@ -35,3 +35,24 @@
     1. [Commit for edits in profile page](https://github.com/ankitgoyal0106/Swap-Shop/commit/75e1eeddc09c7f1d375bd9f19fa1473a3fc81143)
     2. [Final implementation for the log-in page](https://github.com/ankitgoyal0106/Swap-Shop/commit/b64dc83717ce6342835dc5d96968ae7e6783f71d)
 
+## November 16, 2024
+
+- **Task:** Sequences diagram for the Profile-Page.
+- **Details:** Created a detailed sequence diagram for the profile-page in m3/ankit-goyal.
+- **Link to Commit:**
+    1. [Commit for the sequence diagram](https://github.com/ankitgoyal0106/Swap-Shop/commit/587b417e90bdfd4f0096b8656f1622fd7517fc9f)
+
+- **Task:** Reviewed and merged some pull requests.
+- **Details:** reviewed and merged various pull requests (#65, #72, #73, #78, #79, #80)
+- **Link to Commit:**
+    1. [Most recent Commit](https://github.com/ankitgoyal0106/Swap-Shop/commit/4084e65fb4df7b36bae0db73113ee0f1889aacae)
+## November 17, 2024
+
+- **Task:** Descriptions for the ui-diagram.
+- **Details:** Added the description for the Home Page, Create Item page, Achievement page, Chat-Hub page, Register page and Notification page.
+- **Link to Commit:**
+    1. [Home Page, Create Item page, Achievement page](https://github.com/ankitgoyal0106/Swap-Shop/commit/bdf49373a00d42b9d6082d9accc3e45838a780cc)
+    2. [Chat-Hub page](https://github.com/ankitgoyal0106/Swap-Shop/commit/e2ea6b21be55ed2726a107db1667865892eded04)
+    3. [Register page and Notification page.](https://github.com/ankitgoyal0106/Swap-Shop/commit/4799dcfb649ad157a01541ad4e344f6f31e565da)
+
+
