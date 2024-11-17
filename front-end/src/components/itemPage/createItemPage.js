@@ -2,12 +2,33 @@ import { BaseComponent } from "../BaseComponent/BaseComponent.js";
 
 export class CreateItemPage extends BaseComponent {
     #container = null;
+    #db = null;
 
     constructor() {
         super();
         this.#container = document.createElement('div');
         this.#container.style.display = "block";
         this.#container.classList.add("create-item-page");
+        this.#initDB();
+    }
+
+    #initDB() {
+        const request = indexedDB.open("ItemDatabase", 1);
+
+        request.onupgradeneeded = (event) => {
+            const db = event.target.result;
+            if (!db.objectStoreNames.contains("items")) {
+                db.createObjectStore("items", { keyPath: "listingID" });
+            }
+        };
+
+        request.onsuccess = (event) => {
+            this.#db = event.target.result;
+        };
+
+        request.onerror = (event) => {
+            console.error("Database error:", event.target.errorCode);
+        };
     }
 
     render() {
@@ -199,14 +220,18 @@ export class CreateItemPage extends BaseComponent {
         geoButton.addEventListener("click", this.geoFindMe.bind(this));
         form.appendChild(geoButton);
 
-
         // Submit Button
         const submitButton = document.createElement("button");
         submitButton.type = "submit";
         submitButton.textContent = "Create Item";
         form.appendChild(submitButton);
 
-        form.addEventListener('submit', this.handleSubmit);
+        // Message Element
+        const messageElement = document.createElement("p");
+        messageElement.id = "form-message";
+        form.appendChild(messageElement);
+
+        form.addEventListener('submit', this.handleSubmit.bind(this));
 
         return form;
     }
@@ -233,53 +258,69 @@ export class CreateItemPage extends BaseComponent {
         } else {
             status.textContent = "Locating…";
             navigator.geolocation.getCurrentPosition(success, error);
-
         }
     }
 
     generateUniqueId() {
         return 'listing-' + Date.now() + '-' + Math.floor(Math.random() * 1000);
     }
-    
 
+    handleSubmit(event) {
+        event.preventDefault();
 
-// change the form to match all of the information in the listings data section
-// make an object with the information from the form, send that to indexdb as a json object
-// use each object to populate new pages?
-// need to see how to update the same object so the amount of items available can be changed
+        const listingID = document.getElementById('listing-id').value;
+        const associatedCompany = document.getElementById('associated-company').value;
+        const postedAt = document.getElementById('posted-at').value;
+        const images = document.getElementById('item-image').files;
+        const updatedAt = document.getElementById('updated-at').value;
+        const itemName = document.getElementById('item-name').value;
+        const description = document.getElementById('item-description').value;
+        const category = document.getElementById('item-category').value;
+        const condition = document.getElementById('item-condition').value;
+        const price = document.getElementById('item-price').value;
+        const itemLocation = document.getElementById('item-location').value;
 
-handleSubmit(event) {
-    event.preventDefault();
+        const imageUrls = Array.from(images).map(file => URL.createObjectURL(file));
 
-    const listingID = document.getElementById('listing-id').value;
-    const associatedCompany = document.getElementById('associated-company').value;
-    const postedAt = document.getElementById('posted-at').value;
-    const images = document.getElementById('item-image').files;
-    const updatedAt = document.getElementById('updated-at').value;
-    const itemName = document.getElementById('item-name').value;
-    const description = document.getElementById('item-description').value;
-    const category = document.getElementById('item-category').value;
-    const condition = document.getElementById('item-condition').value;
-    const price = document.getElementById('item-price').value;
-    const itemLocation = document.getElementById('item-location').value;
+        const listingData = {
+            listingID,
+            associatedCompany,
+            postedAt,
+            images: imageUrls, // Array of strings (URLs)
+            updatedAt,
+            itemName,
+            description,
+            category,
+            condition,
+            price,
+            itemLocation
+        };
 
-    const imageUrls = Array.from(images).map(file => URL.createObjectURL(file));
+        this.#saveToIndexedDB(listingData);
+    }
 
-    const listingData = {
-        listingID,
-        associatedCompany,
-        postedAt,
-        images: imageUrls, // Array of strings (URLs)
-        updatedAt,
-        itemName,
-        description,
-        category,
-        condition,
-        price,
-        itemLocation
-    };
+    #saveToIndexedDB(data) {
+        const transaction = this.#db.transaction(["items"], "readwrite");
+        const objectStore = transaction.objectStore("items");
+        const request = objectStore.add(data);
 
-    console.log('Item Created:', listingData);
-    // Add logic to handle item creation, e.g., sending data to a server or saving to IndexedDB
-}
+        request.onsuccess = () => {
+            this.#displayMessage("Item added to the database successfully.", "success");
+        };
+
+        request.onerror = (event) => {
+            this.#displayMessage("Error adding item to the database: " + event.target.errorCode, "error");
+        };
+    }
+
+    #displayMessage(message, type) {
+        const messageElement = document.getElementById("form-message");
+        messageElement.textContent = message;
+        messageElement.style.backgroundColor = "#624E88"; // Purple background
+        messageElement.style.color = "#ffffff"; // White text
+        messageElement.style.padding = '20px'; // Padding around the text
+        messageElement.style.textAlign = 'center'; // Center the text
+        messageElement.style.width = '100%'; // Full width
+        messageElement.style.fontFamily = 'Verdana, sans-serif'; // Match font with header
+    }
 }
