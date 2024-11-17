@@ -4,6 +4,7 @@ import { NotificationList } from "../NotificationList/NotificationList.js"
 import { ViewProfile } from "../ViewProfile/ViewProfile.js";
 import { conversationList } from "../conversation/conversation.js";
 //TODO: Import other screens here
+import { EditProfilePage } from "../editProfilePage/editProfilePage.js";
 
 export class ProfileContoller extends BaseComponent {
   #container = null;
@@ -13,6 +14,7 @@ export class ProfileContoller extends BaseComponent {
   #conversationList = null;
   //TODO: Add other screens here
   #hub = null;
+  #editorPage = null;
 
   constructor() {
     super();
@@ -21,6 +23,7 @@ export class ProfileContoller extends BaseComponent {
     this.#viewProfile = new ViewProfile();
     this.#conversationList = new conversationList();
     //TODO: Instantiate other screens here
+    this.#editorPage = new EditProfilePage();
     this.loadCSS("ProfileController");
   }
 
@@ -33,6 +36,7 @@ export class ProfileContoller extends BaseComponent {
     this.#viewProfile.render();
     //TODO: Render other screens here
     this.#conversationList.render();
+    this.#editorPage.render();
 
     this.#renderCurrentView();
 
@@ -53,6 +57,7 @@ export class ProfileContoller extends BaseComponent {
         <button id="viewProfileBtn">View Profile</button>
         <button id="viewNotifBtn">Notifications</button>
         <button id="viewConvoBtn">Conversations</button>
+        <button id="editProfileBtn">Edit Profile</button>
       </div>
       <div id="viewContainer"></div>`
       ;
@@ -63,6 +68,7 @@ export class ProfileContoller extends BaseComponent {
     const viewProfileBtn = this.#container.querySelector('#viewProfileBtn');
     const viewNotifBtn = this.#container.querySelector('#viewNotifBtn');
     const viewConvoBtn = this.#container.querySelector('#viewConvoBtn');
+    const editProfileBtn = this.#container.querySelector('#editProfileBtn');
 
     // Event listener for switching to profile view
     viewProfileBtn.addEventListener('click', () => {
@@ -79,7 +85,12 @@ export class ProfileContoller extends BaseComponent {
       this.#toggleView('convo');
     });
 
-    
+    //Event listener for switching to edit profile view
+    editProfileBtn.addEventListener('click', () => {
+      this.#toggleView('edit');
+    });
+
+
 
     // Subscribe to event hub events to manage switching
     this.#hub.subscribe('SwitchProfileToNotif', () => {
@@ -98,7 +109,10 @@ export class ProfileContoller extends BaseComponent {
     })
 
     //TODO: Add event subscriptions and listners for other views
-
+    this.#hub.subscribe('SwitchProfileToEdit', () => {
+      this.#currentView = 'edit';
+      this.#renderCurrentView();
+    });
   }
 
   // Toggle view based on button pressed
@@ -118,6 +132,10 @@ export class ProfileContoller extends BaseComponent {
       this.#hub.publish('SwitchProfileToConvo', null);
     }
     //TODO: Add toggles for other views
+    if (view === 'edit'){
+      this.#currentView = view;
+      this.#hub.publish('SwitchProfileToEdit', null);
+    }
   }
 
   // Render current view depending on #currentView
@@ -137,5 +155,8 @@ export class ProfileContoller extends BaseComponent {
       viewContainer.appendChild(this.#conversationList.render());
     }
     //TODO: Add other views
+    if (this.#currentView === 'edit'){
+      viewContainer.appendChild(this.#editorPage.render());
+    }
   }
 }
