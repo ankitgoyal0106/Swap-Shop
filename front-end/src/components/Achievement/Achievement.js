@@ -3,18 +3,20 @@ import { BaseComponent } from "../BaseComponent/BaseComponent.js";
 export class Achievement extends BaseComponent {
     #container = null;
 
+    constructor() {
+        super();
+        this.loadCSS('Achievement');
+      }
+
+    
     render() {
-        if (this.#container) {
-            return this.#container;
-        }
-
-        this.#container = document.createElement('div');
-        this.#container.classList.add('achievement-item');
-
-        //create and append text
-        //create and append badge
-        //create and append progress
-
-        return this.#container;
+        const container = document.createElement('div');
+        container.classList.add('achievements');
+    
+        const achievementText = document.createElement('p');
+        achievementText.textContent = "Congratulations! You've earned 100 points!";
+        container.appendChild(achievementText);
+    
+        return container;
     }
 }
