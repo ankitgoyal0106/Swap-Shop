@@ -4,7 +4,7 @@ Diagrams and explanations of the UI, including how users will interact with the 
 
 ## Home Page
 
-![Home Page]()
+![Home Page](Images/HomePage.png)
 
 ### Description of the Home Page
 - The home screen is the first screen users will see after logging into the application. The layout is designed to provide a quick overview of what we are, with a clean and simple interface that make it easy to understand.
@@ -80,3 +80,15 @@ On this popup users can enter in a username and password in order to access thei
 ![Chat Hub and Chat Page](Images/ChatPages.png)
 
 ### Description for Chat Page
+
+## Create Item Page
+
+![Create Item Page](Images/NewItem.png)
+
+### Description for Create Item Page
+
+## Achievement Page
+
+![Achievement Page](Images/AchievementPage.png)
+
+### Description for Achievement Page
