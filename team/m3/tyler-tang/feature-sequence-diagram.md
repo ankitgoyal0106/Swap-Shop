@@ -3,7 +3,7 @@
 ### Description
 - This view is accessible through the profilePage sidebar by pressing the "Conversations" button
 - Presents a listing of all the current coversations with other users
-- Clicking on a conversation will change teh view to the chat room layout
+- Clicking on a conversation will change the view to the chat room layout
 
 ```mermaid
 sequenceDiagram
@@ -23,7 +23,9 @@ sequenceDiagram
     UI->>JS: handles events for when New Group and Add Member buttons are pressed
     JS->>localStorage: saves whenever Add Member button is pressed
     localStorage->>JS: returns list of members to be added to group when New Group is pressed
+    JS->>JS: generates convoID for new group
     JS->>UI: creates div component in the listing with the newly added conversation info
+    JS->>Server: stores conversation info
 
     User->>UI: clicks on a conversation entry
     UI->>JS: handles click event
