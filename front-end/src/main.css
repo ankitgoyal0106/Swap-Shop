@@ -2,7 +2,7 @@
     --text-color: #F5F7F8;
     --background-color: #624E88;
     --accent-color: #CB80AB;
-    --hover-background-color: #E6D9A2; /* Yellow background color for hover */
+    --hover-background-color: #E6D9A2;
   }
   
   body {
@@ -66,6 +66,10 @@
     right: 32px;
     font-size: 24px;
     color: var(--accent-color);
+  }
+
+  footer {
+    color: black;
   }
   
   @media screen and (max-width: 768px) {
