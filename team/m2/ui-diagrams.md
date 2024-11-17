@@ -4,7 +4,7 @@ Diagrams and explanations of the UI, including how users will interact with the 
 
 ## Home Page
 
-![Home Page]()
+![Home Page](Images/HomePage.png)
 
 ### Description of the Home Page
 - The home screen is the first screen users will see after logging into the application. The layout is designed to provide a quick overview of what we are, with a clean and simple interface that make it easy to understand.
@@ -80,3 +80,27 @@ On this popup users can enter in a username and password in order to access thei
 ![Chat Hub and Chat Page](Images/ChatPages.png)
 
 ### Description for Chat Page
+- The Chat Page provides a messaging platform within the application, enabling direct communication between buyers and sellers. It is accessible via the chat button on the profile page, it allows users to negotiate, ask questions, and arrange transactions efficiently.
+- Messages are visually differentiated between sender and receiver for clarity.
+- Users can type messages in Message Input Field and can send messages by clicking the send button.
+- Use Cases:
+  - Negotiation: Buyers and sellers can discuss and agree upon prices.
+  - Inquiry: Buyers can ask for more details or request additional images of the item.
+  - Transaction Coordination: Users can arrange meet-up times and locations for exchanging items.
+  - Post-Purchase Communication: Discuss any post-sale questions or provide feedback.
+ 
+
+## Create Item Page
+
+![Create Item Page](Images/NewItem.png)
+
+### Description for Create Item Page
+
+## Achievement Page
+
+![Achievement Page](Images/AchievementPage.png)
+
+### Description for Achievement Page
+
+
+

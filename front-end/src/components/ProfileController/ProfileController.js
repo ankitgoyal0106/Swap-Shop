@@ -5,6 +5,7 @@ import { ViewProfile } from "../ViewProfile/ViewProfile.js";
 import { conversationList } from "../conversation/conversation.js";
 import { Achievement } from "../Achievement/Achievement.js";
 //TODO: Import other screens here
+import { EditProfilePage } from "../editProfilePage/editProfilePage.js";
 
 export class ProfileContoller extends BaseComponent {
   #container = null;
@@ -15,6 +16,7 @@ export class ProfileContoller extends BaseComponent {
   #achievements = null;
   //TODO: Add other screens here
   #hub = null;
+  #editorPage = null;
 
   constructor() {
     super();
@@ -24,6 +26,7 @@ export class ProfileContoller extends BaseComponent {
     this.#conversationList = new conversationList();
     this.#achievements = new Achievement();
     //TODO: Instantiate other screens here
+    this.#editorPage = new EditProfilePage();
     this.loadCSS("ProfileController");
   }
 
@@ -37,6 +40,8 @@ export class ProfileContoller extends BaseComponent {
     this.#conversationList.render();
     this.#achievements.render();
     //TODO: Render other screens here
+    this.#conversationList.render();
+    this.#editorPage.render();
 
     this.#renderCurrentView();
 
@@ -58,6 +63,7 @@ export class ProfileContoller extends BaseComponent {
         <button id="viewNotifBtn">Notifications</button>
         <button id="viewConvoBtn">Conversations</button>
         <button id="viewAchievementsBtn">Achievements</button>
+        <button id="editProfileBtn">Edit Profile</button>
       </div>
       <div id="viewContainer"></div>`
       ;
@@ -69,6 +75,7 @@ export class ProfileContoller extends BaseComponent {
     const viewNotifBtn = this.#container.querySelector('#viewNotifBtn');
     const viewConvoBtn = this.#container.querySelector('#viewConvoBtn');
     const viewAchievementsBtn = this.#container.querySelector('#viewAchievementsBtn');
+    const editProfileBtn = this.#container.querySelector('#editProfileBtn');
 
     // Event listener for switching to profile view
     viewProfileBtn.addEventListener('click', () => {
@@ -88,6 +95,12 @@ export class ProfileContoller extends BaseComponent {
     // Event listener for viewing achievements
     viewAchievementsBtn.addEventListener('click', () => {
       this.#toggleView('achievements');
+    });
+
+
+    //Event listener for switching to edit profile view
+    editProfileBtn.addEventListener('click', () => {
+      this.#toggleView('edit');
     });
 
 
@@ -113,7 +126,10 @@ export class ProfileContoller extends BaseComponent {
       this.#renderCurrentView();
     })
     //TODO: Add event subscriptions and listners for other views
-
+    this.#hub.subscribe('SwitchProfileToEdit', () => {
+      this.#currentView = 'edit';
+      this.#renderCurrentView();
+    });
   }
 
   // Toggle view based on button pressed
@@ -138,6 +154,10 @@ export class ProfileContoller extends BaseComponent {
       this.#hub.publish('SwitchProfileToAchievements', null);
     }
     //TODO: Add toggles for other views
+    if (view === 'edit'){
+      this.#currentView = view;
+      this.#hub.publish('SwitchProfileToEdit', null);
+    }
   }
 
   // Render current view depending on #currentView
@@ -162,5 +182,8 @@ export class ProfileContoller extends BaseComponent {
       console.log('Rendering: ', this.#currentView);
     }
     //TODO: Add other views
+    if (this.#currentView === 'edit'){
+      viewContainer.appendChild(this.#editorPage.render());
+    }
   }
 }

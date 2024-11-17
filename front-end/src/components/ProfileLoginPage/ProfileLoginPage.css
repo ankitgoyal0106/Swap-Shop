@@ -52,8 +52,8 @@ input {
     box-sizing: border-box;
 }
 
-input[type="email"],
-input[type="password"] {
+input[id="email"],
+input[id="password"] {
     width: 100%;
     padding: 0.75rem;
     margin-top: 0.5rem;
@@ -65,8 +65,8 @@ input[type="password"] {
     font-size: 1rem;
 }
 
-input[type="email"]:focus,
-input[type="password"]:focus {
+input[id="email"]:focus,
+input[id="password"]:focus {
     border-color: var(--accent-color);
     outline: none;
 }
