@@ -1,11 +1,16 @@
 import { BaseComponent } from '../BaseComponent/BaseComponent.js';
+import { EventHub } from '../../eventhub/EventHub.js';
+import { Events } from '../../eventhub/Events.js';
 
 export class EditProfilePage extends BaseComponent {
     #container = null;
+    #hub = null;
+    #profilePicture = null;
 
     constructor() {
         super();
         this.loadCSS('editProfilePage');
+        this.#hub = EventHub.getInstance();
     }
 
     //Need to add logic to get user data from the backend to populate the form
@@ -13,8 +18,8 @@ export class EditProfilePage extends BaseComponent {
         this.#container = document.createElement('div');
         this.#container.id = 'editProfile-container';
         this.#container.classList.add('editProfile-container');
-        this.#appendBackButton();
         this.#buildProfileEditor();
+        //this.#autoFillProfileData();
 
         return this.#container;
     }
@@ -26,13 +31,12 @@ export class EditProfilePage extends BaseComponent {
 
         // Adding each section of the form
         editProfileForm.appendChild(this.#createProfileImageInput());
-        editProfileForm.appendChild(this.#createTextInput('firstName', 'First Name', 'text'));
-        editProfileForm.appendChild(this.#createTextInput('lastName', 'Last Name', 'text'));
-        editProfileForm.appendChild(this.#createTextInput('emailInput', 'Email', 'email'));
-        editProfileForm.appendChild(this.#createTextInput('phoneInput', 'Phone Number', 'tel'));
-        editProfileForm.appendChild(this.#createTextInput('password', 'New Password', 'text'));
-        editProfileForm.appendChild(this.#createTextInput('confirmPassword', 'Confirm New Password', 'text'));
-        editProfileForm.appendChild(this.#createRoleInput());
+        editProfileForm.appendChild(this.#createTextInput('editFirstName', 'First Name', 'text'));
+        editProfileForm.appendChild(this.#createTextInput('editLastName', 'Last Name', 'text'));
+        editProfileForm.appendChild(this.#createTextInput('editEmailInput', 'Email', 'email'));
+        editProfileForm.appendChild(this.#createTextInput('editPhoneInput', 'Phone Number', 'tel'));
+        editProfileForm.appendChild(this.#createTextInput('editPassword', 'New Password', 'password'));
+        editProfileForm.appendChild(this.#createTextInput('confirmEditPassword', 'Confirm New Password', 'password'));
         editProfileForm.appendChild(this.#createSubmitButton());
 
         this.#container.appendChild(editProfileForm);
@@ -60,6 +64,7 @@ export class EditProfilePage extends BaseComponent {
                     profileImageDisplay.src = e.target.result;
                 };
                 reader.readAsDataURL(file);
+                this.#profilePicture = file;
             }
         });
 
@@ -76,20 +81,6 @@ export class EditProfilePage extends BaseComponent {
         return input;
     }
 
-    // Private method to create a role selection dropdown
-    #createRoleInput() {
-        const roleInput = document.createElement('select');
-        roleInput.id = 'roleInput';
-        roleInput.classList.add('roleInput');
-        roleInput.innerHTML = `
-            <option value="" disabled selected>Role</option>
-            <option value="buyer">Buyer</option>
-            <option value="seller">Seller</option>
-            <option value="both">Both</option>
-        `;
-        return roleInput;
-    }
-
     // Private method to create submit button
     #createSubmitButton() {
         const submitButton = document.createElement('button');
@@ -97,25 +88,59 @@ export class EditProfilePage extends BaseComponent {
         submitButton.classList.add('submitButton');
         submitButton.type = 'submit';
         submitButton.textContent = 'Update';
-        submitButton.addEventListener('click', this.#handleFormSubmission);
+        submitButton.addEventListener('click', this.#handleFormSubmission.bind(this));
         return submitButton;
-    }
-
-    #appendBackButton() {
-        const backButton = document.createElement('button');
-        backButton.id = 'backButton';
-        backButton.classList.add('backButton');
-        backButton.textContent = 'Back to Profile';
-        backButton.addEventListener('click', () => {
-            //Add logic to back to the profile page
-        });
-        this.#container.appendChild(backButton);
     }
 
     // Private method to handle form submission
     #handleFormSubmission(event) {
         event.preventDefault();
-        console.log('Form submitted');
-        // Add logic to send form data to the backend
+    
+        // Query elements within the container
+        const editFirstName = this.#container.querySelector('#editFirstName').value;
+        const editLastName = this.#container.querySelector('#editLastName').value;
+        const email = this.#container.querySelector('#editEmailInput').value;
+        const phone = this.#container.querySelector('#editPhoneInput').value;
+        const newPassword = this.#container.querySelector('#editPassword').value;
+        const confirmEditPassword = this.#container.querySelector('#confirmEditPassword').value;
+    
+        // Validate if passwords match
+        if (newPassword !== confirmEditPassword) {
+            alert("Passwords do not match!");
+            return;
+        }
+
+        // Validate phone number format
+        const phonePattern = /^\d{3}-\d{3}-\d{4}$/;
+        if (!phonePattern.test(phone)) {
+            alert("Please enter a valid phone number in the format XXX-XXX-XXXX.");
+            return;
+        }
+
+        // Validate email format
+        const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailPattern.test(email)) {
+            alert("Please enter a valid email address.");
+            return;
+        }
+    
+        // Prepare updated profile data
+        const updatedProfileData = {
+            profilePicture: this.#profilePicture,
+            name: `${editFirstName} ${editLastName}`,
+            email: email,
+            phone: phone,
+            password: btoa(newPassword), // Base64 encoding (use secure methods in production)
+        };
+    
+        // Publish the updated profile data
+        this.#hub.publish(Events.ProfileEdited, updatedProfileData);
+        alert('Profile updated successfully');
+        console.log("Profile Data", updatedProfileData);
     }
+    // TODO: Implement logic to autofill profile data
+    /*
+    #autoFillProfileData() {
+        
+    }*/
 }
