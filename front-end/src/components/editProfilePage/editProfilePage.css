@@ -1,0 +1,186 @@
+/* Container styling */
+#editProfile-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    max-width: 600px;
+    width: 90%;
+    margin: 0 auto;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Form styling */
+#editProfileForm {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 15px;
+}
+
+/* Profile image container */
+.profileImage {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+/* Profile image preview */
+.profileImage img {
+    border-radius: 50%;
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    margin-bottom: 10px;
+    border: 2px solid #ddd;
+}
+
+/* Profile image input */
+#profileImageInput {
+    margin-top: 5px;
+    font-size: 14px;
+}
+
+/* Specific styling for email input by ID */
+#editEmailInput {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+/* Focus state for the email input */
+#editEmailInput:focus {
+    outline: none;
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+/* Validation error styles for the email input */
+#editEmailInput:invalid {
+    border-color: #dc3545;
+    box-shadow: 0 0 5px rgba(220, 53, 69, 0.5);
+}
+
+/* Remove red outline for email input in some browsers (like Chrome) */
+#editEmailInput:invalid:focus {
+    outline: none;
+}
+
+/* Dropdown styling */
+.roleInput {
+    padding: 10px;
+    font-size: 16px;
+}
+
+/* Text input fields (general styling for other inputs, scoped by ID) */
+input[id="editFirstName"],
+input[id="editLastName"],
+input[id="editPhoneInput"],
+input[id="editPassword"],
+input[id="confirmEditPassword"] {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+/* Focus state for general inputs */
+input[id="editFirstName"]:focus,
+input[id="editLastName"]:focus,
+input[id="editPhoneInput"]:focus,
+input[id="editPassword"]:focus,
+input[id="confirmEditPassword"]:focus {
+    outline: none;
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+/* Submit button styling */
+.submitButton {
+    padding: 12px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #fff;
+    background-color: #624E88;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.submitButton:hover {
+    background-color: #8967B3;
+}
+
+/* Placeholder styling */
+input::placeholder,
+textarea::placeholder {
+    color: #999;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    #editProfile-container {
+        max-width: 100%;
+        padding: 10px;
+        box-shadow: none;
+    }
+
+    .profileImage img {
+        width: 80px;
+        height: 80px;
+    }
+
+    input[id="editFirstName"],
+    input[id="editLastName"],
+    input[id="editEmailInput"],
+    input[id="editPhoneInput"],
+    input[id="editPassword"],
+    input[id="confirmEditPassword"] {
+        font-size: 14px;
+        padding: 8px;
+    }
+
+    .submitButton {
+        padding: 10px;
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 480px) {
+    #editProfile-container {
+        padding: 5px;
+    }
+
+    .profileImage img {
+        width: 60px;
+        height: 60px;
+    }
+
+    input[id="editFirstName"],
+    input[id="editLastName"],
+    input[id="editEmailInput"],
+    input[id="editPhoneInput"],
+    input[id="editPassword"],
+    input[id="confirmEditPassword"] {
+        font-size: 12px;
+        padding: 6px;
+    }
+
+    .submitButton {
+        padding: 8px;
+        font-size: 12px;
+    }
+}
+

@@ -19,7 +19,8 @@ body {
 .explore-title {
     background-color: #624E88;
     color: #ffffff;
-    padding: 20px;
+    padding-top: 20px;
+    padding-bottom: 20px;
     text-align: center;
     width: 100%;
 }
@@ -31,17 +32,6 @@ body {
     display: grid;
     grid-template-columns: repeat(3, minmax(200px, 1fr));
     gap: 16px;
-}
-
-/* Card style for explore items */
-.explore-card {
-    background-color: #8967B3;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    margin: 10px;
-    padding: 20px;
-    width: 300px;
-    color: #F5F7F8;
 }
 
 /* Card style for individual items */
@@ -136,7 +126,8 @@ body {
 /* Section for recently viewed items */
 .recently-viewed-section {
     width: 100%;
-    padding: 20px;
+    padding-top: 20px;
+    padding-bottom: 20px;
     background-color: #FFFFFF;
     color: #624E88;
     text-align: center;
@@ -325,13 +316,6 @@ body {
     flex-direction: column;
     align-items: center;
 }
-.explore-title {
-    background-color: #624E88;
-    color: #ffffff;
-    padding: 20px;
-    text-align: center;
-    width: 100%;
-}
 
 .items-grid {
     width: 55%; /* Middle section to be larger */
@@ -429,14 +413,6 @@ body {
 .category-dropdown:hover {
     border-color: #8967B3;
     background-color: #F5F7F8;
-}
-
-.recently-viewed-section {
-    width: 100%;
-    padding: 20px;
-    background-color: #FFFFFF;
-    color: #624E88;
-    text-align: center;
 }
 
 .recently-viewed-container {
