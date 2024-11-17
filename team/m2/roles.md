@@ -57,4 +57,4 @@ A markdown file detailing each team member's role and their top 3 commits for th
 - **Top Three Commits**
    1. [Initial Create Item page form](https://github.com/ankitgoyal0106/Swap-Shop/commit/cceb18b7911913380da1735f37fd313239c9439a)
    2. [Implemented IndexedDB](https://github.com/ankitgoyal0106/Swap-Shop/commit/d8ef419d461eea5926e1a471c73b6aad5d6ad11d)
-   3. [Updated roles.md, users.md, snigdha-thatikonda.md] (https://github.com/ankitgoyal0106/Swap-Shop/commit/f129257271cf559b2c9b8988362365fc241537ed)
+   3. [Updated roles.md, users.md, snigdha-thatikonda.md] (https://github.com/ankitgoyal0106/Swap-Shop/commit/6d10aa183da6a4ff0c6a7cd8930aff08dff4c083)
