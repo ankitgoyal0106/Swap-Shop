@@ -74,3 +74,9 @@ On this popup users can enter in a username and password in order to access thei
 - The Notifications Page provides users with updates and alerts related to their account activity. It will be easily accessible by clicking the notification botton located on the profile page.
 - The page will list notifications in chronological order, showing recent updates at the top. Notifications will include messages such as order confirmations, updates from sellers, item recommendations, messages from buyers or sellers, and any changes in the status of active listings.
 - Use Cases: This page keeps users informed about their interactions and activities on the platform, ensuring they do not miss important messages or updates about their listings, purchases, or profile activity.
+
+## Chat Hub and Chat Page
+
+![Chat Hub and Chat Page](Images/ChatPages.png)
+
+### Description for Chat Page
