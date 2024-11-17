@@ -77,3 +77,27 @@
 - **Details**: Updated the markdown file with the feature sequence diagram for the registration page and a description of the diagram.
 - **Link to Commit(s)**:
     1. [Commit for Feature Sequence Diagram](https://github.com/ankitgoyal0106/Swap-Shop/commit/5105342245c18020fdb3fed44b0c5bdbac68ba91)
+
+- **Task**: Clean up.
+- **Details**: Removed the 'forgot password' and 'remember me' buttons from the login page as they are not being used. Also got rid of unused images.
+- **Link to Commit(s)**:
+    1. [Commit for Login Page](https://github.com/ankitgoyal0106/Swap-Shop/commit/cd3d929a55cf70e188438cc43eeb3a2c6fd2ffaa)
+    2. [Commit for Unused Images](https://github.com/ankitgoyal0106/Swap-Shop/commit/23ef2a841f0d7f2cfe0fa1e5f7c2a0347f676a9e)
+
+## November 17, 2024
+- **Task**: Update CSS
+- **Details**: Updated CSS for the profile login to stop the CSS from formatting all email and password input fields throughout the whole application.
+- **Link to Commit(s)**:
+    1. [Commit for CSS Changes](https://github.com/ankitgoyal0106/Swap-Shop/commit/701f704c9582eac775f0568b2345f9d90d01bf0b)
+
+- **Task**: Added Page to Profile Side Bar
+- **Details**: Added the edit profile page to the side bar of the profile page and modified the edit profile page to look nice and be able to send data off.
+- **Link to Commit(s)**:
+    1. [Commit for the Sidebar](https://github.com/ankitgoyal0106/Swap-Shop/commit/ae3a27bccdee9e1edbffae59f08ba8c83c709e30)
+    2. [Commit for the Profile Editing Page Edits](https://github.com/ankitgoyal0106/Swap-Shop/commit/659fe07c7fc65f716f4dc6321c19ba6e7764e4b4)
+
+- **Task**: Review and Merge Pull Request
+- **Details**: Had to deal with a merge conflict regarding the profile controller. Then I merged the branch.
+- **Link to Commit(s)**:
+    1. [Commit for Resolving Merge Conflict](https://github.com/ankitgoyal0106/Swap-Shop/commit/d10de34ffd9e5800c1e277138f974181c812165c)
+    2. [Commit for Branch Merge](https://github.com/ankitgoyal0106/Swap-Shop/commit/f6c2b75838ed1040e9e8cbbaa0764991e83b8b3e)
