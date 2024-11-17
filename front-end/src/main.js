@@ -33,6 +33,14 @@ document.addEventListener("DOMContentLoaded", function () {
     // app.innerHTML = '';
     // app.appendChild(profilePageComponent.render());
   });
+
+  // Event listener for the Create Item button 
+  document.getElementById('itemBtn').addEventListener('click', function () {
+    // Implement the profilePage functionality here
+    const createItemComponent = new CreateItemPage();
+    app.innerHTML = '';
+    app.appendChild(createItemComponent.render());
+  });
 });
 
 
