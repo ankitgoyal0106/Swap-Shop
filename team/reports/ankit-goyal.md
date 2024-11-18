@@ -60,5 +60,10 @@
 - **Link to Commit:**
     1. [Commit 1](https://github.com/ankitgoyal0106/Swap-Shop/commit/531d40f8dd7d3bd5d70e513346590434c7be2586)
     2. [Commit 2](https://github.com/ankitgoyal0106/Swap-Shop/commit/e5bfb8e8921d96f260b25472ec5d4838c3c0b015)
+       
+- **Task:** Add createItem button in AppContoller
+- **Details:** Added a "createItem" button to the AppController class and configuring it to allow users to switch views to a "Create Item" page. This includes defining the button's event listener, updating the #toggleView method to handle the new view, and ensuring the page is rendered correctly using the #renderCurrentView method.
+- **Link to Commit:**
+  1. [Commit](https://github.com/ankitgoyal0106/Swap-Shop/commit/13ec93d15b3a8ac64b43759e2591fbe4a2433307)
 
 
