@@ -41,6 +41,11 @@ Here we outline the list of key features that we implemented during this milesto
 **Point Value:** 3 points
 **Team Member:** Jackson MacDonald
 
+7. **Feature Name:** A page for Edit profile.
+**Description:** The Edit Profile page allows users to update their profile information, including fields such as First Name, Last Name, Email, Phone Number, and Password. Users can also upload or update their profile picture. Upon submission, all changes are validated to ensure data integrity (e.g., proper email format, password confirmation matching). When changes are confirmed and updated, the relevant profile page will display the modified data in real-time. This page requires handling complex form validation, user interactions, and IndexedDB storage operations for efficient data management.
+**Point Value:** 3 points
+**Team Member:** Scott Puopolo
+
 
 ### Large Features (5 points)
 
