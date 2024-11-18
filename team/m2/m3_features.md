@@ -41,11 +41,6 @@ Here we outline the list of key features that we implemented during this milesto
 **Point Value:** 3 points
 **Team Member:** Jackson MacDonald
 
-7. **Feature Name:** A page for Edit profile.
-**Description:** The Edit Profile page allows users to update their profile information, including fields such as First Name, Last Name, Email, Phone Number, and Password. Users can also upload or update their profile picture. Upon submission, all changes are validated to ensure data integrity (e.g., proper email format, password confirmation matching). When changes are confirmed and updated, the relevant profile page will display the modified data in real-time. This page requires handling complex form validation, user interactions, and IndexedDB storage operations for efficient data management.
-**Point Value:** 3 points
-**Team Member:** Scott Puopolo
-
 
 ### Large Features (5 points)
 
@@ -77,7 +72,7 @@ Here we outline the list of key features that we implemented during this milesto
 6. **Feature Name:** Profile Log-In Page 
 **Description:** This page allows users to provide their email and password to successfully log into their SwapShop account. Both the email and password information will be paired and stored in the back-end. Upon successful verification, the profile page to be visible to the user. There are also options to create an account if the user does not have one. If the user clicks "register here", the eventHub activates to switch to the registration page. This log-in requires many different complex interactions between various parts of the application and based on user input.
 **Point Value:** 5 points
-**Team Member:** Ankit Goyal
+**Team Member:** Ankit Goya
 
 7. **Feature Name:** Create Item Pages (Making the page)
 **Description:** The create item page allows a user to create a listing for an item and stores all the information as an object in IndexedDB. This the information will then be used to render a listing for other users on their explore page and will also appear within the users own profile page under their listed items. It utilizes IndexedDB to create and store the data for the item page (i.e. item name, item description, images of the item, etc.) and also requires handling complex user interactions. 
