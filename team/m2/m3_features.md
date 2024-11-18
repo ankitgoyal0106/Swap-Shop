@@ -74,17 +74,12 @@ Here we outline the list of key features that we implemented during this milesto
 **Point Value:** 5 points
 **Team Member:** Ankit Goyal
 
-7. **Feature Name:** Create Item Page
-**Description:** The create item page allows a user to create a listing for an item and . It utilizes IndexedDB to create and store the data for the item page (i.e. item name, item pages)
-**Point Value:** 5 points
-**Team Member:** Snigdha Thatikonda
-
-8. **Feature Name:** Create Item Pages (Making the page)
+7. **Feature Name:** Create Item Pages (Making the page)
 **Description:** The create item page allows a user to create a listing for an item and stores all the information as an object in IndexedDB. This the information will then be used to render a listing for other users on their explore page and will also appear within the users own profile page under their listed items. It utilizes IndexedDB to create and store the data for the item page (i.e. item name, item description, images of the item, etc.) and also requires handling complex user interactions. 
 **Point Value:** 5 points
 **Team Member:** Snigdha Thatikonda
 
-9. **Feature Name:** Create Item Page Form (Making the user input form)
+8. **Feature Name:** Create Item Page Form (Making the user input form)
 **Description:** The create item page form allows a user to create a listing for an item and stores all the information in an item page. The form section allows the user to input all necessary data about their listed item and utilizes IndexedDB to store the data for the item page (i.e. item name, item description, images of the item, etc.) and also requires handling complex user interactions. All of the variables from the form map to vairables that are listed in the data.md file. This also includes the use of the Geolocation API to track the users location.
 **Point Value:** 5 points
 **Team Member:** Snigdha Thatikonda

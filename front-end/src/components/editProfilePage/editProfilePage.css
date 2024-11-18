@@ -13,21 +13,6 @@
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-/* Back button styling */
-#backButton {
-    align-self: flex-start;
-    background: none;
-    border: none;
-    color: #007bff;
-    font-size: 16px;
-    cursor: pointer;
-    margin-bottom: 20px;
-}
-
-#backButton:hover {
-    text-decoration: underline;
-}
-
 /* Form styling */
 #editProfileForm {
     display: flex;
@@ -60,29 +45,33 @@
     font-size: 14px;
 }
 
-/* Text input fields */
-input[type="text"],
-input[type="email"],
-input[type="tel"],
-textarea,
-select {
+/* Specific styling for email input by ID */
+#editEmailInput {
     width: 100%;
     padding: 10px;
     font-size: 16px;
     border: 1px solid #ccc;
     border-radius: 5px;
     box-sizing: border-box;
-    transition: border-color 0.3s;
+    transition: border-color 0.3s, box-shadow 0.3s;
 }
 
-/* Focus state for inputs */
-input[type="text"]:focus,
-input[type="email"]:focus,
-input[type="tel"]:focus,
-textarea:focus,
-select:focus {
+/* Focus state for the email input */
+#editEmailInput:focus {
     outline: none;
     border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+/* Validation error styles for the email input */
+#editEmailInput:invalid {
+    border-color: #dc3545;
+    box-shadow: 0 0 5px rgba(220, 53, 69, 0.5);
+}
+
+/* Remove red outline for email input in some browsers (like Chrome) */
+#editEmailInput:invalid:focus {
+    outline: none;
 }
 
 /* Dropdown styling */
@@ -91,13 +80,39 @@ select:focus {
     font-size: 16px;
 }
 
+/* Text input fields (general styling for other inputs, scoped by ID) */
+input[id="editFirstName"],
+input[id="editLastName"],
+input[id="editPhoneInput"],
+input[id="editPassword"],
+input[id="confirmEditPassword"] {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+/* Focus state for general inputs */
+input[id="editFirstName"]:focus,
+input[id="editLastName"]:focus,
+input[id="editPhoneInput"]:focus,
+input[id="editPassword"]:focus,
+input[id="confirmEditPassword"]:focus {
+    outline: none;
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
 /* Submit button styling */
 .submitButton {
     padding: 12px;
     font-size: 16px;
     font-weight: bold;
     color: #fff;
-    background-color: #007bff;
+    background-color: #624E88;
     border: none;
     border-radius: 5px;
     cursor: pointer;
@@ -105,7 +120,7 @@ select:focus {
 }
 
 .submitButton:hover {
-    background-color: #0056b3;
+    background-color: #8967B3;
 }
 
 /* Placeholder styling */
@@ -127,11 +142,12 @@ textarea::placeholder {
         height: 80px;
     }
 
-    input[type="text"],
-    input[type="email"],
-    input[type="tel"],
-    textarea,
-    select {
+    input[id="editFirstName"],
+    input[id="editLastName"],
+    input[id="editEmailInput"],
+    input[id="editPhoneInput"],
+    input[id="editPassword"],
+    input[id="confirmEditPassword"] {
         font-size: 14px;
         padding: 8px;
     }
@@ -152,11 +168,12 @@ textarea::placeholder {
         height: 60px;
     }
 
-    input[type="text"],
-    input[type="email"],
-    input[type="tel"],
-    textarea,
-    select {
+    input[id="editFirstName"],
+    input[id="editLastName"],
+    input[id="editEmailInput"],
+    input[id="editPhoneInput"],
+    input[id="editPassword"],
+    input[id="confirmEditPassword"] {
         font-size: 12px;
         padding: 6px;
     }
@@ -166,3 +183,4 @@ textarea::placeholder {
         font-size: 12px;
     }
 }
+

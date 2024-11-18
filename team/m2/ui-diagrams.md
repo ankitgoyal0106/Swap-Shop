@@ -4,14 +4,13 @@ Diagrams and explanations of the UI, including how users will interact with the 
 
 ## Home Page
 
-![Home Page]()
+![Home Page](Images/HomePage.png)
 
 ### Description of the Home Page
 - The home screen is the first screen users will see after logging into the application. The layout is designed to provide a quick overview of what we are, with a clean and simple interface that make it easy to understand.
 - On this screen the user can interact with:
   1. Explore page which gives the all of the possible listing of the items
-  2. Cart/Saved Items, here user can save the items they want to buy or the items they wish to buy in future.
-  3. Profile Log-in button where user can login to there profile or can register if they do not have a profile.
+  2. Profile Log-in button where user can login to there profile or can register if they do not have a profile.
 - Use Case: Home page is a quick introduction of the web application. From this page a user can navigate to anywhere they want.
 
 ## Explore Page
@@ -74,3 +73,47 @@ On this popup users can enter in a username and password in order to access thei
 - The Notifications Page provides users with updates and alerts related to their account activity. It will be easily accessible by clicking the notification botton located on the profile page.
 - The page will list notifications in chronological order, showing recent updates at the top. Notifications will include messages such as order confirmations, updates from sellers, item recommendations, messages from buyers or sellers, and any changes in the status of active listings.
 - Use Cases: This page keeps users informed about their interactions and activities on the platform, ensuring they do not miss important messages or updates about their listings, purchases, or profile activity.
+
+## Chat Hub and Chat Page
+
+![Chat Hub and Chat Page](Images/ChatPages.png)
+
+### Description for Chat Page
+- The Chat Page provides a messaging platform within the application, enabling direct communication between buyers and sellers. It is accessible via the chat button on the profile page, it allows users to negotiate, ask questions, and arrange transactions efficiently.
+- Messages are visually differentiated between sender and receiver for clarity.
+- Users can type messages in Message Input Field and can send messages by clicking the send button.
+- Use Cases:
+  - Negotiation: Buyers and sellers can discuss and agree upon prices.
+  - Inquiry: Buyers can ask for more details or request additional images of the item.
+  - Transaction Coordination: Users can arrange meet-up times and locations for exchanging items.
+  - Post-Purchase Communication: Discuss any post-sale questions or provide feedback.
+ 
+
+## Create Item Page
+
+![Create Item Page](Images/NewItem.png)
+
+### Description for Create Item Page
+- The Create Item Page allows users to add new listings to the platform for items they wish to sell. The page is structured to provide a simple, step-by-step process for adding details, ensuring that sellers can easily input relevant information for potential buyers.
+  - Listing ID - A unique identifier is automatically generated for each listing, ensuring every item has a distinct reference. This field is auto-filled and does not require user input.
+  - Item Name and Description - Users can specify a name for the item, such as "Vase," and provide a detailed description of the item, including its features, purpose, or any notable characteristics. For example, the description may state "Vase for flowers."
+  - Category Selection - A drop-down menu allows users to categorize their item, such as "Furniture," to help buyers filter and find items of interest.
+  - Image Upload - Sellers can upload images of their item to visually showcase it. Clicking the "Choose Files" button allows users to select files from their device for uploading, providing potential buyers with a clear view of the item.
+  - Condition - Users can specify the condition of the item (e.g., "New," "Used") from a drop-down list.
+  - Price Field - This allows users to input the price they wish to sell the item for, ensuring transparency for potential buyers.
+  - Location Details - Users have the option to input or use their current location to provide latitude and longitude coordinates for potential buyers, making it easier to find the item's location.
+  - Buttons for Actions -
+    - "Use Current Location" button automatically fills in the location coordinates using the user's current geolocation.
+    - "Create Item" button finalizes the process, adding the listing to the platform and confirming with a success message.
+- Use Cases: The Create Item Page streamlines the process of listing an item, enabling sellers to quickly add their products with all necessary information in one place. This ensures clarity and improves the buyer's browsing experience on the platform.
+## Achievement Page
+
+![Achievement Page](Images/AchievementPage.png)
+
+### Description for Achievement Page
+- The Achievement Page provides users with a visual representation of their milestones and accomplishments on the platform. This page is designed to reward and motivate users by showcasing their progress and achievements through various badges and recognitions.
+- The page features a grid layout showcasing different badges and icons representing the user's achievements. Each badge corresponds to a specific milestone or accomplishment, such as listing or selling a certain number of items.
+- Use Case - The Achievement Page serves as an incentive mechanism that encourages users to engage more with the platform. By providing visible goals and rewards, users are motivated to list more items, make sales, and interact with the platform, leading to a more active platform.
+
+
+

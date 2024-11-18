@@ -50,7 +50,6 @@ A file that describes the types of data the application will handle, but without
 - **Attributes**:
     - `senderID` (string): The `userID` of the sender.
     - `content` (string): The actual message text.
-    - `readStatus` (boolean): Whether the message has been read by the receiver.
 - **Data Source** User-input data through in-app messaging.
 
 ## Data Relationships

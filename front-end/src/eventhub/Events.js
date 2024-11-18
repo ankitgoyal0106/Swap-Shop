@@ -28,6 +28,7 @@ export const Events = {
 
     SwitchProfileToNotif: 'SwitchProfileToNotif',
     SwitchProfileToView: 'SwitchProfileToView',
+    SwitchProfileToConvo: 'SwitchProfileToConvo',
 
     NewNotification: 'NewNotification',
 
@@ -48,5 +49,7 @@ export const Events = {
     StartNewChat: 'StartNewChat',
     MarkItemSold: 'MarkItemSold',
     FindEasterEgg: 'FindEasterEgg',
-    ViewItem: 'ViewItem'
+    ViewItem: 'ViewItem',
+
+    ProfileEdited: 'EditedProfile'
 };

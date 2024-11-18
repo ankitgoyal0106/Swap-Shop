@@ -35,11 +35,6 @@ export class ProfileLoginPage extends BaseComponent {
                                 <input type="password" id="password" name="password" placeholder="Enter password" required>
                             </div>
 
-                            <div class="form-options">
-                                <label><input type="checkbox" name="rememberMe"> Remember me</label>
-                                <a href="#" class="forgot-password">Forgot your password?</a>
-                            </div>
-
                             <!-- <button type="submit" class="btn-primary">Log In</button> -->
                             <input type="submit" value="Log In" class="btn-primary" />
                         </form>
