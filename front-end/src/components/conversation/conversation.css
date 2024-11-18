@@ -1,20 +1,41 @@
+body{
+    background-color: #F5F7F8;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+button{
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: #624E88;
+    color: #FFFFFF;
+    font-size: 1em;
+    /* cursor: pointer; */
+    transition: background-color 0.3s ease;
+}
+
 .convoContainer{
     margin-top: 10px; /*make relative*/
-    margin-left:auto;
-    margin-right:auto;
-    width: 80%; /*make relative*/
-    height: 500px; /*make relative*/
-    overflow-y: scroll;
+    margin-left:5%;
+    margin-right:5%;
+    /* width: 80%; */
+    /* height: 400px; /*make relative*/
+    /* overflow-y: auto; */
     overflow-x:hidden;
     display:flex;
-    flex-direction: column;
+    flex-direction: column-reverse;
     /* grid-auto-flow:row;
     grid-row-gap: 1px; */
     border: 3px solid #f1f1f1;    
-    background-color: #8967B3;
+    /* background-color: #624E88; */
+    font-family: Arial, sans-serif;
 }
 
 .convoElement{
+    color: #FFFFFF;
+    padding:5px;
     margin-top:10px;
     margin-bottom:10px;
     align-content: center;
@@ -25,15 +46,18 @@
     width: 95% ;
     border: solid;
     border-color: #E6D9A2;
-    background-color: #CB80AB;
+    border: 1px solid #F5F7F8;
+    border-radius: 5px;
+    background-color: #8967B3;
+    cursor: pointer;
 }
 
 .convoElement:hover{
-    background-color: #a8688c;
+    background-color: #7f649f;
 }
 
 .convoBar{
-    margin-top: auto; /*make relative*/
+    margin-top: 1%; /*make relative*/
     margin-left:auto;
     margin-right:auto;
     height:50px;/*make relative*/
@@ -41,31 +65,44 @@
 }
 
 .newConvoButton{
-    font-size: 25px; /*make relative*/
-    height:auto;
-    width:auto;
     float: right;
 }
 
 .backButton{
-    font-size: 25px; /*make relative*/
-    height:auto;
-    width:auto;
     float:left;
 }
 
 .convoInfoBox{
+    color: #FFFFFF;
+    margin-top:12%;
+    margin-right:7%;
     font-size: 20px;
     text-align: center;
     width:15%;
-    height:20%;
+    height:30%;
     display: none;
-    background-color: #8967B3;
+    background-color: #624E88;
     position: fixed;
     top:0px;
     right: 0;
-    border: 3px solid #f1f1f1; 
+    border: 1px solid #F5F7F8;
+    border-radius: 5px;
     z-index: 9;
+}
+
+.convoInfoBox button{
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #624E88;
+    color: #FFFFFF;
+    font-size: 0.75em;
+    /* cursor: pointer; */
+    transition: background-color 0.3s ease;
+}
+
+.convoInfoBox button:hover{
+    background-color: #746491;
 }
 
 .memberBox{

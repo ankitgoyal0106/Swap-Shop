@@ -1,0 +1,33 @@
+body {
+    background-color: #F5F7F8;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+/* Container for the entire explore page */
+.profile-page {
+    background-color: #F5F7F8;
+    font-family: Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.main-content {
+    display: flex;
+    flex-direction: row;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+}
+
+/* Title section of the profile page */
+.profile-title {
+    background-color: #624E88;
+    color: #ffffff;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    text-align: center;
+    width: 100%;
+}

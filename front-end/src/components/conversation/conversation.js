@@ -1,12 +1,20 @@
 import { BaseComponent } from "../BaseComponent/BaseComponent.js";
+import { chatInterface } from "../chatroom/chatroom.js";
+//import { ProfileContoller } from "../ProfileController/ProfileController.js";
 
 export class conversationList extends BaseComponent{
     #container = null;
     
-    constructor(userID){
+    constructor(){
         super();
-        this.userID = userID;
-        this.convoLog = this.#loadConvos(); //hashmap that maps convoID to convoObj
+        this.userID = "john1234"; //load from database
+        // const convoObj = {
+        //     groupName: newGroupName,
+        //     convoID: generateConvoID(),
+        //     names: []
+        //     msgs: [{}]
+        // }
+        this.convoLog = {1:this.#makeConvoObj("hang out friends", 1, ["james", "jim", "john1234"], [{userID: "james", msg:"Innovation shapes our world, driving everything from the technology we use to the ways we interact and solve problems. In an ever-evolving landscape, creativity and adaptability are more important than ever, allowing individuals and teams to push boundaries and discover new solutions. Whether in science, art, or technology, innovation thrives on curiosity and a willingness to challenge the status quo, ultimately enriching our lives and paving the way for a more connected, sustainable future."}, {userID: "john1234", msg:"what?"},{userID: "jim", msg:"sigh"}])}//need to loadMsgs from IndexedDB]), 2:this.#makeConvoObj()}; //hashmap that maps convoID to convoObj, load from database
         this.loadCSS("conversation");
     }
 
@@ -16,9 +24,18 @@ export class conversationList extends BaseComponent{
         this.#container.appendChild(this.#createConvoBar()); //renders the convoBar with backButton and addConvoButton (need to implement how to create new convos)
         this.#container.appendChild(this.#createContainer()); //renders container for conversations
         this.#container.appendChild(this.#createNewConvoBox());//renders pop up box to create new conversation
-        this.#loadConvos();//load existing conversations from database and display each conversation
+        //this.loadConvos();//load existing conversations from database and display each conversation
 
         return this.#container;
+    }
+
+    #makeConvoObj(userGroupName, id, tempNames, msgs = []){
+        return {
+            convoName: userGroupName,
+            convoID: id,
+            names: tempNames,
+            txtLog: msgs
+        }
     }
 
     #createConvoBar(){
@@ -37,15 +54,7 @@ export class conversationList extends BaseComponent{
                 document.getElementById("infoBox").style.display = "block";
             }
         });
-
-        const backButton = document.createElement("button");
-        const backLabel = document.createTextNode("<< Back to Profile Page");
-        backButton.appendChild(backLabel);
-        backButton.classList.add("backButton");
-        backButton.addEventListener("click", () => console.log("back button pressed"))//TODO: make backButton functionality
-
         convoBar.appendChild(newConvoButton);
-        convoBar.appendChild(backButton);
         return convoBar;
     }
 
@@ -53,18 +62,34 @@ export class conversationList extends BaseComponent{
         const convoContainer = document.createElement("div");
         convoContainer.id = "convoContainer";
         convoContainer.classList.add("convoContainer");
+        if(this.convoLog != {}){
+            Object.values(this.convoLog).forEach(obj => {
+                const convoElem = this.#createContainerElem(obj);
+                convoContainer.appendChild(convoElem);
+            });
+        }
         return convoContainer;
     }
 
     #createContainerElem(convoObj){
         const convoBox = document.createElement("div");
         convoBox.classList.add("convoElement");
-        const upper = document.createTextNode(convoObj.groupName + " | Members: " + convoObj.names.length);
+        const upper = document.createTextNode(convoObj.convoName + " | Members: " + convoObj.names.length);
         const br = document.createElement("br");
         const lower = document.createTextNode("id#" + convoObj.convoID);
-        //TODO: make it so when clicked on (addEventListener) it brings to chatRoom using the convoID (innerHTML nuke)
         convoBox.addEventListener("click", () => {
-            alert(convoObj.convoID +" was pressed, move to chat room");
+            // alert(convoObj.convoID +" was pressed, move to chat room");
+            // const convoObj = {
+            //     groupName: "",
+            //     convoID: generateConvoID(),
+            //     names: ""
+            // }
+
+            //TODO: figure out a way to use EventHub instead
+            const chatRoom = new chatInterface(this.userID, convoObj.convoName, convoObj.txtLog);//integrate this with 
+            const parent = this.#container.parentElement;
+            parent.innerHTML = "";
+            parent.appendChild(chatRoom.render());
         })
         convoBox.appendChild(upper);
         convoBox.appendChild(br);
@@ -169,14 +194,9 @@ export class conversationList extends BaseComponent{
 
                     localStorage.setItem("addMembers", JSON.stringify([]));
 
-                    const convoObj = {
-                        groupName: newGroupName,
-                        convoID: generateConvoID(),
-                        names: tempNames
-                    }
+                    const convoObj = this.#makeConvoObj(newGroupName, generateConvoID(), tempNames);
                     const newConvoElem = this.#createContainerElem(convoObj);
                     const convoContainer = document.getElementById("convoContainer");
-                    //this.convoLog.push(convoObj);
                     this.convoLog[convoObj.convoID] = convoObj;//better for searching
                     convoContainer.appendChild(newConvoElem);
                     console.log(this.convoLog);
@@ -214,25 +234,4 @@ export class conversationList extends BaseComponent{
         convoInfoBox.appendChild(membersAdded);
         return convoInfoBox;
     }
-    
-    //TODO: implement loadConvos
-    #loadConvos(){
-        /*
-        use convoID to grab existsing log of conversations from database, if does not exist, initialize empty array and save that to database
-        -> returns some array then run forEach since each element will be a convoObj and render each with this.#createContainerElem(convoObj)
-        and appendChild to convoContainer div !!IN REVERSE ORDER SINCE TAIL END IS MOST RECENT CONVOS!!
-
-        return convoLog
-        */
-       return [];
-
-    }
-
-    //TODO: implement loadChatRooms
-    /*
-    click function for each convo div
-    #loadChatRoom(convoID, messageLog){
-
-    } 
-    */
 }

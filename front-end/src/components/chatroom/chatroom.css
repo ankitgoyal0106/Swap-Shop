@@ -1,0 +1,119 @@
+body{
+    background-color: #F5F7F8;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+ .header{
+    color: #624E88;
+    margin-left:auto;
+    margin-right:auto;
+    margin-bottom: 0;
+    text-align: center;
+}
+
+button{
+    font-size: 1em;
+}
+
+button:hover{
+    background-color: #CB80AB;
+}
+.chatBox{
+    margin-top: 0;
+    margin-left: 5%;
+    margin-right: 5%;
+    margin-bottom:0;
+    display: flex;
+    flex-direction: column;
+    padding: 10px 20px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+    border: 3px solid #f1f1f1; 
+    height: 400px;
+    /* border: 3px solid #E6D9A2;    */
+    /* border-radius: 5px;  */
+    /* background-color: #8967B3; */
+}
+
+.chatmsg{
+    /* width:auto; make relative to screen size
+    height: 50px; make relative to screen size */
+    background-color: white;
+    min-width: 5%;
+    max-width: 80%;
+    min-height: auto; 
+}
+
+.inputBar{
+    display: grid;
+    grid-auto-flow: column;
+    margin-left: auto;
+    margin-right: auto;
+    width: 60%;
+    height:auto;
+    /* background-color: #624E88; */
+}
+
+/* .inputBar button{
+    height: auto;
+} */
+
+.inputBar input[type="text"]{
+    padding: 10px;
+    border: 1px solid;
+    border-radius: 5px;
+    font-size: 1em;
+    margin-right: 10px;
+    width:80%;
+    min-height: 15%;
+    max-height: 80%;
+    /* transition: border-color 0.3s ease; */
+}
+
+.userMsg{
+    color:white;
+    margin-right: 0.5%;
+    margin-bottom: 1%;
+    margin-left: auto;
+    margin-top: 5px;
+    text-align:right;
+    background-color: #8967B3;
+    border: 1px solid #F5F7F8;
+    border-radius: 5px;
+    padding: 5px;
+
+    min-width: 20%;
+    max-width: 80%;
+    height:auto;
+    /* min-height:100px;
+    max-height:auto; */
+}
+.userMsg p{
+    align-content:left;
+}
+
+.otherMsg{
+    color:white;
+    margin-left: 0.5%;
+    margin-bottom: 1%;
+    margin-right: auto;
+    margin-top: 5px;
+    text-align:left;
+    background-color: #8967B3;
+    border: 1px solid #F5F7F8;
+    border-radius: 5px;
+    padding: 5px;
+
+    min-width: 20%;
+    max-width: 80%;
+    height:auto;
+    /* min-height:100px;
+    max-height:auto; */
+}
+
+.otherMsg p{
+    align-content:left;
+}
