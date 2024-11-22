@@ -101,3 +101,9 @@
 - **Link to Commit(s)**:
     1. [Commit for Resolving Merge Conflict](https://github.com/ankitgoyal0106/Swap-Shop/commit/d10de34ffd9e5800c1e277138f974181c812165c)
     2. [Commit for Branch Merge](https://github.com/ankitgoyal0106/Swap-Shop/commit/f6c2b75838ed1040e9e8cbbaa0764991e83b8b3e)
+
+## November 22, 2024
+- **Task**: Create SQLite Profile Model
+- **Details**: Populated the SQLiteProfileModel.js file with a model to describe the user's profile information. This file allows other processes to access the user information.
+- **Link to Commit(s)**:
+    1. [Commit for First Draft of the model](https://github.com/ankitgoyal0106/Swap-Shop/commit/04016b8d1598811968a9b0bc230deb678a9d3294)
