@@ -1,35 +1,17 @@
 import { BaseComponent } from "../BaseComponent/BaseComponent.js";
+import { EventHub } from "../../eventhub/EventHub.js";
+import { Events } from "../../eventhub/Events.js";
 
 export class CreateItemPage extends BaseComponent {
     #container = null;
-    #db = null;
 
     constructor() {
         super();
         this.#container = document.createElement('div');
         this.#container.style.display = "block";
         this.#container.classList.add("create-item-page");
-        this.#initDB();
     }
 
-    #initDB() {
-        const request = indexedDB.open("ItemDatabase", 1);
-
-        request.onupgradeneeded = (event) => {
-            const db = event.target.result;
-            if (!db.objectStoreNames.contains("items")) {
-                db.createObjectStore("items", { keyPath: "listingID" });
-            }
-        };
-
-        request.onsuccess = (event) => {
-            this.#db = event.target.result;
-        };
-
-        request.onerror = (event) => {
-            console.error("Database error:", event.target.errorCode);
-        };
-    }
 
     render() {
         this.#container = document.createElement('div');
@@ -296,32 +278,28 @@ export class CreateItemPage extends BaseComponent {
             itemLocation
         };
 
-        this.#saveToIndexedDB(listingData);
+        //this.#saveToIndexedDB(listingData);
+        //publish new item
+        this.#publishNewItem(listingData);
+
+        //TODO: Clear inputs
     }
 
-    #saveToIndexedDB(data) {
-        const transaction = this.#db.transaction(["items"], "readwrite");
-        const objectStore = transaction.objectStore("items");
-        const request = objectStore.add(data);
-
-        request.onsuccess = () => {
-            this.#displayMessage("Item added to the database successfully.", "success");
-        };
-
-        request.onerror = (event) => {
-            this.#displayMessage("Error adding item to the database: " + event.target.errorCode, "error");
-        };
+    #publishNewItem(data){
+        const hub = EventHub.getInstance();
+        hub.publish(Events.NewItem, data);
+        hub.publish(Events.StoreItem, data);
     }
 
-    #displayMessage(message, type) {
-        const messageElement = document.getElementById("form-message");
-        messageElement.textContent = message;
-        messageElement.style.backgroundColor = "#624E88"; // Purple background
-        messageElement.style.color = "#ffffff"; // White text
-        messageElement.style.padding = '20px'; // Padding around the text
-        messageElement.style.textAlign = 'center'; // Center the text
-        messageElement.style.width = '100%'; // Full width
-        messageElement.style.fontFamily = 'Verdana, sans-serif'; // Match font with header
-    }
+    // #displayMessage(message, type) {
+    //     const messageElement = document.getElementById("form-message");
+    //     messageElement.textContent = message;
+    //     messageElement.style.backgroundColor = "#624E88"; // Purple background
+    //     messageElement.style.color = "#ffffff"; // White text
+    //     messageElement.style.padding = '20px'; // Padding around the text
+    //     messageElement.style.textAlign = 'center'; // Center the text
+    //     messageElement.style.width = '100%'; // Full width
+    //     messageElement.style.fontFamily = 'Verdana, sans-serif'; // Match font with header
+    // }
 
 }
