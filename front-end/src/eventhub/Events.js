@@ -44,6 +44,18 @@ export const Events = {
     ClearNotificationsSuccess: 'ClearNotificationsSuccess',
     ClearNotificationsFailure: 'ClearNotificationsFailure',
 
+    //Items storage events
+    NewItem: 'NewItem',
+    StoreItem: 'StoreItem',
+    StoreItemSuccess: 'StoreItemSuccess',
+    StoreItemFailure: 'StoreItemFailure',
+    
+    LoadItemsFailure: 'LoadItemsFailure',
+
+    ClearItems: 'ClearItems',
+    ClearItemsSuccess: 'ClearItemsSuccess',
+    ClearItemsFailure: 'ClearItemsFailure',
+
     SignUp: 'SignUp',
     ListItem: 'ListItem',
     StartNewChat: 'StartNewChat',
