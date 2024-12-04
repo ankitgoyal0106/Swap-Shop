@@ -1,13 +1,26 @@
+
 import { Sequelize, DataTypes, UUID } from "sequelize";
 
 //Initialize a new Sequelize instance with SQLite
+
+import { Sequelize, DataTypes } from "sequelize";
+
+// Initialize a new Sequelize instance with SQLite
+
 const sequelize = new Sequelize({
     dialect: "sqlite",
     storage: "database.sqlite"
 });
+
 //Define the Item model
 const Item = sequelize.define("Item", {
     listingID: {
+
+
+// Define the Item model
+const Item = sequelize.define("Item", {
+    itemID: {
+
         type: DataTypes.UUID,
         defaultValue: DataTypes.UUIDV4,
         primaryKey: true
@@ -17,7 +30,11 @@ const Item = sequelize.define("Item", {
         allowNull: false
     },
     itemDescription: {
+
         type: DataTypes.TEXT,
+
+        type: DataTypes.STRING,
+
         allowNull: false
     },
     category: {
@@ -38,7 +55,11 @@ const Item = sequelize.define("Item", {
     },
     images: {
         type: DataTypes.ARRAY(DataTypes.STRING),
+
         allowNull: false
+
+        allowNull: true
+
     },
     amountAvailable: {
         type: DataTypes.INTEGER,
@@ -55,11 +76,16 @@ class _SQLiteItemModel {
 
     async init(fresh = false) {
         await sequelize.authenticate();
+
         await sequelize.sync({ force: true });
+
+        await sequelize.sync({ force: fresh });
+
         // An exception will be thrown if either of these operations fail.
 
         if (fresh) {
             await this.delete();
+
 
             // Test to see if it works
             await this.create(
@@ -79,19 +105,43 @@ class _SQLiteItemModel {
         }
     }
     
+
+            // Just a test to see that it actually works
+            await this.create({
+                itemName: "Sample Item",
+                itemDescription: "Description for sample item",
+                category: "Furniture",
+                price: 50.0,
+                postedAt: new Date(),
+                itemLocation: "Sample Location",
+                images: ["img1.jpg", "img2.jpg"],
+                amountAvailable: 10,
+                updatedAt: new Date()
+            });
+        }
+    }
+
+
     async create(item) {
         return await Item.create(item);
     }
 
+
     async read(listingID = null) {
         if (listingID) {
             return await Item.findByPk(listingID);
+
+    async read(itemID = null) {
+        if (itemID) {
+            return await Item.findByPk(itemID);
+
         }
 
         return await Item.findAll();
     }
 
     async update(item) {
+
         const item_update = await Item.findByPk(item.userID);
         if (!item_update) {
             return null;
@@ -99,6 +149,15 @@ class _SQLiteItemModel {
         
         await item_update.update(item);
         return item_update;
+
+        const itemu = await Item.findByPk(item.itemID);
+        if (!itemu) {
+            return null;
+        }
+
+        await itemu.update(item);
+        return itemu;
+
     }
 
     async delete(item = null) {
@@ -107,7 +166,11 @@ class _SQLiteItemModel {
             return;
         }
 
+
         await Item.destroy({ where: { listingID: item.userID } });
+
+        await Item.destroy({ where: { itemID: item.itemID } });
+
         return item;
     }
 }
