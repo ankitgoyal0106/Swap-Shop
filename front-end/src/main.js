@@ -1,4 +1,4 @@
-import { ProfileRepositoryService } from "./services/ProfileRepositoryService.js";
+import { ProfileRepoFactory } from "./services/ProfileRepoFactory.js";
 import { ItemRepoFactory } from "./services/ItemRepoFactory.js";
 import { AppController } from "./components/AppController/AppController.js";
 
@@ -10,8 +10,8 @@ document.addEventListener("DOMContentLoaded", function () {
   const app = document.getElementById("app");
   app.appendChild(appController.render());
 
- // Begin the IndexDB for Profile Data
- const profileRepository = new ProfileRepositoryService();
+ // Begin profile repository service (Defaulting to indexedDB rn)
+ const profileRepository = ProfileRepoFactory.get();
  // Begin item repository service (Defaulting to indexedDB rn)
  const itemRepository = ItemRepoFactory.get();
 
