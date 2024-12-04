@@ -5,6 +5,7 @@ import { ProfileLoginPage } from "../ProfileLoginPage/ProfileLoginPage.js";
 import { Registration } from "../registrationPage/registrationPage.js";
 import {CreateItemPage} from "../itemPage/createItemPage.js";
 import { EventHub } from "../../eventhub/EventHub.js";
+import { ItemPage } from "../itemPage/itemPage.js";
 
 export class AppController {
     #container = null;
@@ -15,9 +16,18 @@ export class AppController {
     #loginPage = null;
     #registerPage = null;
     #createItemPage = null;
+    #itemPage = null;
     #hub = null;
 
     constructor(){
+        const imagePaths = [
+            'images/jewelry.PNG', 
+            'images/painting.PNG', 
+            'images/farmers-market.jpeg',
+            'images/shop.jpeg',
+            'images/shop2.jpeg',
+            'images/stickers.PNG'
+          ]; 
         this.#hub = EventHub.getInstance();
         this.#homePage = new homeComponent();
         this.#explorePage = new explorePage();
@@ -25,6 +35,15 @@ export class AppController {
         this.#loginPage = new ProfileLoginPage();
         this.#registerPage = new Registration();
         this.#createItemPage = new CreateItemPage();
+        this.#itemPage = new ItemPage({
+            itemName: "Item",
+            description: "This is an item.",
+            category: "Electronics",
+            condition: "New",
+            price: "4.78",
+            itemLocation: "Here",
+            images: imagePaths
+        });
     }
 
     render() {
@@ -38,6 +57,7 @@ export class AppController {
         this.#loginPage.render();
         this.#registerPage.render();
         this.#createItemPage.render();
+        this.#itemPage.render();
 
         this.#renderCurrentView();
 
@@ -61,7 +81,8 @@ export class AppController {
         const exploreBtn = document.getElementById('exploreBtn');
         const profileBtn = document.getElementById('profileBtn');
         const loginBtn = document.getElementById('loginBtn');
-        const createItemBtn = document.getElementById('itemBtn');
+        const createItemBtn = document.getElementById('createItemBtn');
+        const itemBtn = document.getElementById('itemBtn');
 
         homeBtn.addEventListener('click', () => {
             this.#toggleView('home');
@@ -78,8 +99,13 @@ export class AppController {
         loginBtn.addEventListener('click', () => {
             this.#toggleView('login');
         });
+
         createItemBtn.addEventListener('click', () => {
             this.#toggleView('createItem');
+        });
+
+        itemBtn.addEventListener('click', () => {
+            this.#toggleView('item');
         });
 
         this.#hub.subscribe('SwitchToHomePage', () => {
@@ -110,6 +136,10 @@ export class AppController {
             this.#currentView = 'createItem';
             this.#renderCurrentView();
         });
+        this.#hub.subscribe('SwitchToItemPage', () => {
+            this.#currentView = 'item';
+            this.#renderCurrentView();
+        })
     }
 
     #toggleView(view) {
@@ -128,11 +158,13 @@ export class AppController {
         }else if(view === 'register'){
             this.#currentView = view;
             this.#hub.publish('SwitchToRegisterPage', null);
-        }
-        else if(view === 'createItem'){
+        }else if(view === 'createItem'){
             this.#currentView = view;
             this.#hub.publish('SwitchToCreateItemPage', null);
-        }   
+        }else if(view === 'item'){
+            this.#currentView = view;
+            this.#hub.publish('SwitchToItemPage', null);
+        }
     }
 
     #renderCurrentView(){
@@ -149,9 +181,10 @@ export class AppController {
             viewContainer.appendChild(this.#loginPage.render());
         }else if(this.#currentView === 'register'){
             viewContainer.appendChild(this.#registerPage.render());
-        }
-        else if(this.#currentView === 'createItem'){
+        }else if(this.#currentView === 'createItem'){
             viewContainer.appendChild(this.#createItemPage.render());
+        }else if(this.#currentView === 'item'){
+            viewContainer.appendChild(this.#itemPage.render());
         }
     }
 }
