@@ -85,7 +85,7 @@ export class Registration extends BaseComponent {
         return { label, input: select };
     }
 
-    #onSubmit(event) {
+    async #onSubmit(event) {
         event.preventDefault();
         const form = document.querySelector('#registration-form');
         const formData = new FormData(form);
@@ -117,26 +117,95 @@ export class Registration extends BaseComponent {
 
         console.log("Form submitted successfully", userData);
         // Further processing of the form data, such as sending it to a server, can be done here
-        const timestamp = new Date().toISOString();
-        // Encrypt the user data before storing
-        const encryptedPassword = btoa(userData.password); // Simple base64 encoding for demonstration purposes
+        const timestamp = new Date();
+
+        // Create the user profile as an object
         const profileData = {
-            userID: crypto.randomUUID(), // Generate a unique ID for each user
             name: `${userData['first-name']} ${userData['last-name']}`,
             email: userData.email,
             phoneNo: userData['phone-number'],
             college: userData.college,
-            password: encryptedPassword,
+            password: userData.password,
             profilePicture: null,
             createdAt: timestamp,
             updatedAt: timestamp,
-            achievements: [],
+            achievements: [
+                {
+                    "title": "Welcome",
+                    "obtained": true
+                },
+                {
+                    "title": "List 1 Item",
+                    "obtained": false
+                },
+                {
+                    "title": "List 10 Items",
+                    "obtained": false
+                },
+                {
+                    "title": "List 50 Items",
+                    "obtained": false
+                },
+                {
+                    "title": "Sell 1 Item",
+                    "obtained": false
+                },
+                {
+                    "title": "Sell 10 Items",
+                    "obtained": false
+                },
+                {
+                    "title": "Sell 50 Items",
+                    "obtained": false
+                },
+                {
+                    "title": "View 1 Item",
+                    "obtained": false
+                },
+                {
+                    "title": "View 10 Items",
+                    "obtained": false
+                },
+                {
+                    "title": "View 50 Items",
+                    "obtained": false
+                },
+                {
+                    "title": "Easter Egg",
+                    "obtained": false
+                }
+            ],
+            achievementCounts: {
+                "listed": 0,
+                "sold": 0,
+                "viewed": 0
+            },
             savedListings: [],
             recentlyViewed: [],
             conversationList: []
         };
 
-        console.log("Profile Data:", profileData);
+        // Send the profile data to the server
+        const response = await fetch("/register", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(profileData),
+        });
+
+        // Handle a failed request
+        if (!response.ok) {
+            const message = `An error has occurred: ${response.status}`;
+            console.error(message);
+            alert(message);
+            return;
+        }
+
+        // Handle a successful request
+        const data = await response.json();
+        console.log(JSON.stringify(data, null, 2));
+        alert(data.message);
+
+        // Publish the profile data to the event hub
         const hub = EventHub.getInstance();
         hub.publish(Events.NewProfile, profileData);
         hub.publish(Events.StoreProfile, profileData);
