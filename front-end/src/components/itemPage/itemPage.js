@@ -1,15 +1,16 @@
 import { BaseComponent } from "../BaseComponent/BaseComponent.js";
 
 export class ItemPage extends BaseComponent {
+    container = null;
     constructor(itemData) {
         super();
         this.itemData = itemData;
-        this.container = document.createElement('div');
-        this.container.className = 'item-page';
-        this.render();
     }
 
     render() {
+        this.container = document.createElement('div');
+        this.container.className = 'item-page';
+
         const title = document.createElement('h1');
         title.textContent = this.itemData.itemName;
         this.container.appendChild(title);
