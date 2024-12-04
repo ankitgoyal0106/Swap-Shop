@@ -1,7 +1,7 @@
 import express from "express";
 import ItemController from "./controller/ItemController.js";
 
-class routes {
+class Routes {
     constructor(){
         this.router = express.Router();
         this.initializeRoutes();
@@ -53,4 +53,4 @@ class routes {
     }
 }
 
-export default new routes().getRouter();
+export default new Routes().getRouter();
