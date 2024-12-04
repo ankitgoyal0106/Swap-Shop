@@ -1,0 +1,107 @@
+body {
+    background-color: #F5F7F8;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.item-page {
+    background-color: #FFFFFF;
+    font-family: Verdana, sans-serif;
+    margin: 20px auto;
+    padding: 20px;
+    max-width: 800px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+.item-page h1 {
+    background-color: #624E88;
+    color: #ffffff;
+    padding: 20px;
+    text-align: center;
+    width: 100%;
+    font-family: Verdana, sans-serif;
+    margin: 0 0 20px 0;
+    border-radius: 8px 8px 0 0;
+}
+
+.item-page .content-container {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 20px;
+    padding: 20px; /* Add padding to the content container */
+}
+
+.item-page .description-box,
+.item-page .details-box,
+.item-page .seller-profile-container {
+    flex: 1;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.item-page p {
+    margin: 10px 0;
+    font-size: 16px;
+    color: #000000;
+    line-height: 1.5;
+}
+
+.item-page .seller-profile-container p {
+    margin: 0;
+}
+
+.item-page .seller-profile-button {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #624E88;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    margin-top: 10px; /* Ensure margin-top is applied */
+}
+
+.item-page .seller-profile-button:hover {
+    background-color: #0056b3;
+}
+
+.item-page .images-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 20px;
+    padding: 0 0 20px 0; /* Add padding to the content container */
+    justify-content: center; /* Center the images container */
+}
+
+.item-page .images-container img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 4px;
+    border: 2px solid #ddd; /* Add border around images */
+    cursor: pointer;
+    transition: transform 0.2s, border-color 0.2s;
+}
+
+.item-page .images-container img:hover {
+    transform: scale(1.1);
+    border-color: #624E88; /* Change border color on hover */
+}
+
+.item-page .main-image {
+    width: 100%;
+    height: auto;
+    max-height: 400px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}

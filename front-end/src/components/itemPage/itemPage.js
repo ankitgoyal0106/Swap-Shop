@@ -5,6 +5,7 @@ export class ItemPage extends BaseComponent {
     constructor(itemData) {
         super();
         this.itemData = itemData;
+        this.loadCSS("itemPage");
     }
 
     render() {
@@ -15,36 +16,73 @@ export class ItemPage extends BaseComponent {
         title.textContent = this.itemData.itemName;
         this.container.appendChild(title);
 
-        const description = document.createElement('p');
-        description.textContent = this.itemData.description;
-        this.container.appendChild(description);
+        // Main image display
+        const mainImage = document.createElement('img');
+        mainImage.className = 'main-image';
+        mainImage.src = this.itemData.images[0];
+        this.container.appendChild(mainImage);
 
-        const category = document.createElement('p');
-        category.textContent = `Category: ${this.itemData.category}`;
-        this.container.appendChild(category);
-
-        const condition = document.createElement('p');
-        condition.textContent = `Condition: ${this.itemData.condition}`;
-        this.container.appendChild(condition);
-
-        const price = document.createElement('p');
-        price.textContent = `Price: $${this.itemData.price}`;
-        this.container.appendChild(price);
-
-        const location = document.createElement('p');
-        location.textContent = `Location: ${this.itemData.itemLocation}`;
-        this.container.appendChild(location);
-
+        // Images container
         const imagesContainer = document.createElement('div');
+        imagesContainer.className = 'images-container';
         this.itemData.images.forEach(url => {
             const img = document.createElement('img');
             img.src = url;
-            img.style.width = '100px';
-            img.style.height = '100px';
+            img.addEventListener('click', () => {
+                mainImage.src = url;
+            });
             imagesContainer.appendChild(img);
         });
         this.container.appendChild(imagesContainer);
 
+        // Content container
+        const contentContainer = document.createElement('div');
+        contentContainer.className = 'content-container';
+
+        const sellerProfileContainer = document.createElement('div');
+        sellerProfileContainer.className = 'seller-profile-container';
+        const sellerName = document.createElement('p');
+        sellerName.textContent = `Seller: ${this.itemData.sellerName}`;
+        sellerProfileContainer.appendChild(sellerName);
+        const sellerProfileButton = document.createElement('button');
+        sellerProfileButton.className = 'seller-profile-button';
+        sellerProfileButton.textContent = 'View Seller Profile';
+        sellerProfileButton.addEventListener('click', () => {
+            // Handle seller profile button click
+            alert('Seller profile button clicked');
+        });
+        sellerProfileContainer.appendChild(sellerProfileButton);
+        contentContainer.appendChild(sellerProfileContainer);
+
+
+        // Description box
+        const descriptionBox = document.createElement('div');
+        descriptionBox.className = 'description-box';
+        const description = document.createElement('p');
+        description.textContent = this.itemData.description;
+        descriptionBox.appendChild(description);
+        contentContainer.appendChild(descriptionBox);
+
+        // Details box
+        const detailsBox = document.createElement('div');
+        detailsBox.className = 'details-box';
+        const category = document.createElement('p');
+        category.textContent = `Category: ${this.itemData.category}`;
+        detailsBox.appendChild(category);
+        const condition = document.createElement('p');
+        condition.textContent = `Condition: ${this.itemData.condition}`;
+        detailsBox.appendChild(condition);
+        const price = document.createElement('p');
+        price.textContent = `Price: $${this.itemData.price}`;
+        detailsBox.appendChild(price);
+        const location = document.createElement('p');
+        location.textContent = `Location: ${this.itemData.itemLocation}`;
+        detailsBox.appendChild(location);
+        contentContainer.appendChild(detailsBox);
+
+        this.container.appendChild(contentContainer);
         return this.container;
+
+
     }
 }
