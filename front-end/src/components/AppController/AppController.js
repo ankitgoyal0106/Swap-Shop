@@ -3,7 +3,7 @@ import { homeComponent } from "../homePage/homePage.js";
 import { profilePage } from "../mainProfilePage/mainProfilePage.js";
 import { ProfileLoginPage } from "../ProfileLoginPage/ProfileLoginPage.js";
 import { Registration } from "../registrationPage/registrationPage.js";
-import {CreateItemPage} from "../itemPage/createItemPage.js";
+// import {CreateItemPage} from "../itemPage/createItemPage.js";
 import { EventHub } from "../../eventhub/EventHub.js";
 
 export class AppController {
@@ -14,7 +14,7 @@ export class AppController {
     #profilePage = null;
     #loginPage = null;
     #registerPage = null;
-    #createItemPage = null;
+    // #createItemPage = null;
     #hub = null;
 
     constructor(){
@@ -24,7 +24,7 @@ export class AppController {
         this.#profilePage = new profilePage();
         this.#loginPage = new ProfileLoginPage();
         this.#registerPage = new Registration();
-        this.#createItemPage = new CreateItemPage();
+        // this.#createItemPage = new CreateItemPage();
     }
 
     render() {
@@ -37,7 +37,7 @@ export class AppController {
         this.#profilePage.render();
         this.#loginPage.render();
         this.#registerPage.render();
-        this.#createItemPage.render();
+        // this.#createItemPage.render();
 
         this.#renderCurrentView();
 
@@ -61,7 +61,7 @@ export class AppController {
         const exploreBtn = document.getElementById('exploreBtn');
         const profileBtn = document.getElementById('profileBtn');
         const loginBtn = document.getElementById('loginBtn');
-        const createItemBtn = document.getElementById('itemBtn');
+        // const createItemBtn = document.getElementById('itemBtn');
 
         homeBtn.addEventListener('click', () => {
             this.#toggleView('home');
@@ -78,9 +78,9 @@ export class AppController {
         loginBtn.addEventListener('click', () => {
             this.#toggleView('login');
         });
-        createItemBtn.addEventListener('click', () => {
-            this.#toggleView('createItem');
-        });
+        // createItemBtn.addEventListener('click', () => {
+        //     this.#toggleView('createItem');
+        // });
 
         this.#hub.subscribe('SwitchToHomePage', () => {
             this.#currentView = 'home';
@@ -106,10 +106,10 @@ export class AppController {
             this.#currentView = 'register';
             this.#renderCurrentView();
         });
-        this.#hub.subscribe('SwitchToCreateItemPage', () => {
-            this.#currentView = 'createItem';
-            this.#renderCurrentView();
-        });
+        // this.#hub.subscribe('SwitchToCreateItemPage', () => {
+        //     this.#currentView = 'createItem';
+        //     this.#renderCurrentView();
+        // });
     }
 
     #toggleView(view) {
@@ -129,10 +129,10 @@ export class AppController {
             this.#currentView = view;
             this.#hub.publish('SwitchToRegisterPage', null);
         }
-        else if(view === 'createItem'){
-            this.#currentView = view;
-            this.#hub.publish('SwitchToCreateItemPage', null);
-        }   
+        // else if(view === 'createItem'){
+        //     this.#currentView = view;
+        //     this.#hub.publish('SwitchToCreateItemPage', null);
+        // }   
     }
 
     #renderCurrentView(){
@@ -150,8 +150,8 @@ export class AppController {
         }else if(this.#currentView === 'register'){
             viewContainer.appendChild(this.#registerPage.render());
         }
-        else if(this.#currentView === 'createItem'){
-            viewContainer.appendChild(this.#createItemPage.render());
-        }
+        // else if(this.#currentView === 'createItem'){
+        //     viewContainer.appendChild(this.#createItemPage.render());
+        // }
     }
 }
