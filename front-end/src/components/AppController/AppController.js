@@ -3,7 +3,7 @@ import { homeComponent } from "../homePage/homePage.js";
 import { profilePage } from "../mainProfilePage/mainProfilePage.js";
 import { ProfileLoginPage } from "../ProfileLoginPage/ProfileLoginPage.js";
 import { Registration } from "../registrationPage/registrationPage.js";
-import {CreateItemPage} from "../itemPage/createItemPage.js";
+// import {CreateItemPage} from "../itemPage/createItemPage.js";
 import { EventHub } from "../../eventhub/EventHub.js";
 import { ItemPage } from "../itemPage/itemPage.js";
 
