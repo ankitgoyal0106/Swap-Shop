@@ -1,6 +1,5 @@
 import express from "express";  
-//IMPORT the TaskRoutes from he file ex: import TaskRoutes from "./routes/TaskRoutes.js";
-//import Routes from "./routes/Routes.js"
+import routes from "./routes/Routes.js";
 class Server{
   constructor(){
     this.app = express();
@@ -17,7 +16,7 @@ configureMiddleware(){
 }
 
 setupRoutes(){
-    this.app.use("/v1", Routes); //update the name based on the class in the taskroutes file
+    this.app.use("/v1", routes); //update the name based on the class in the taskroutes file
 }
 
 start(port = 3000) {
