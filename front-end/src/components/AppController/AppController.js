@@ -3,7 +3,7 @@ import { homeComponent } from "../homePage/homePage.js";
 import { profilePage } from "../mainProfilePage/mainProfilePage.js";
 import { ProfileLoginPage } from "../ProfileLoginPage/ProfileLoginPage.js";
 import { Registration } from "../registrationPage/registrationPage.js";
-// import {CreateItemPage} from "../itemPage/createItemPage.js";
+import {CreateItemPage} from "../itemPage/createItemPage.js";
 import { EventHub } from "../../eventhub/EventHub.js";
 import { ItemPage } from "../itemPage/itemPage.js";
 
@@ -81,7 +81,6 @@ export class AppController {
         const exploreBtn = document.getElementById('exploreBtn');
         const profileBtn = document.getElementById('profileBtn');
         const loginBtn = document.getElementById('loginBtn');
-        const createItemBtn = document.getElementById('createItemBtn');
         const itemBtn = document.getElementById('itemBtn');
 
         homeBtn.addEventListener('click', () => {
@@ -98,10 +97,6 @@ export class AppController {
 
         loginBtn.addEventListener('click', () => {
             this.#toggleView('login');
-        });
-
-        createItemBtn.addEventListener('click', () => {
-            this.#toggleView('createItem');
         });
 
         itemBtn.addEventListener('click', () => {
