@@ -18,9 +18,9 @@ body {
 .item-page h1 {
     background-color: #624E88;
     color: #ffffff;
-    padding: 20px;
     text-align: center;
     width: 100%;
+    padding: 20px 0px 20px 0; /* Increase padding to make the header taller */
     font-family: Verdana, sans-serif;
     margin: 0 0 20px 0;
     border-radius: 8px 8px 0 0;
@@ -37,7 +37,6 @@ body {
 .item-page .details-box,
 .item-page .seller-profile-container {
     flex: 1;
-    padding: 20px;
     border: 1px solid #ddd;
     border-radius: 8px;
     display: flex;
