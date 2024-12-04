@@ -20,7 +20,6 @@ export class ItemRepoRemoteService extends Service {
 
   async #initItems() {
     const response = await fetch("/v1/items");
-
     if (!response.ok) {
       throw new Error("Failed to fetch items");
     }
@@ -71,4 +70,15 @@ export class ItemRepoRemoteService extends Service {
 
     return data;
   }
+
+  async getItems() {
+    const response = await fetch("/v1/items");
+    if (!response.ok) {
+      throw new Error("Failed to fetch items");
+    }
+
+    const data = await response.json();
+    return data.items;
+  }
+  
 }
