@@ -1,14 +1,13 @@
-import { Sequelize, DataTypes } from "sequelize";
+import { Sequelize, DataTypes, UUID } from "sequelize";
 
-// Initialize a new Sequelize instance with SQLite
+//Initialize a new Sequelize instance with SQLite
 const sequelize = new Sequelize({
     dialect: "sqlite",
     storage: "database.sqlite"
 });
-
-// Define the Item model
+//Define the Item model
 const Item = sequelize.define("Item", {
-    itemID: {
+    listingID: {
         type: DataTypes.UUID,
         defaultValue: DataTypes.UUIDV4,
         primaryKey: true
@@ -18,7 +17,7 @@ const Item = sequelize.define("Item", {
         allowNull: false
     },
     itemDescription: {
-        type: DataTypes.STRING,
+        type: DataTypes.TEXT,
         allowNull: false
     },
     category: {
@@ -39,7 +38,7 @@ const Item = sequelize.define("Item", {
     },
     images: {
         type: DataTypes.ARRAY(DataTypes.STRING),
-        allowNull: true
+        allowNull: false
     },
     amountAvailable: {
         type: DataTypes.INTEGER,
@@ -56,47 +55,50 @@ class _SQLiteItemModel {
 
     async init(fresh = false) {
         await sequelize.authenticate();
-        await sequelize.sync({ force: fresh });
+        await sequelize.sync({ force: true });
         // An exception will be thrown if either of these operations fail.
 
         if (fresh) {
             await this.delete();
 
-            // Just a test to see that it actually works
-            await this.create({
-                itemName: "Sample Item",
-                itemDescription: "Description for sample item",
-                category: "Furniture",
-                price: 50.0,
-                postedAt: new Date(),
-                itemLocation: "Sample Location",
-                images: ["img1.jpg", "img2.jpg"],
+            // Test to
+            await this.create(
+            {
+                listingID: '1',
+                itemName: 'Mock Electronic',
+                itemDescription: 'Description for item 2',
+                category: 'Electronics',
+                price: 100.0,
+                postedAt: new Date('2023-01-01T10:00:00Z'),
+                itemLocation: 'Location A',
+                images: ['img1.jpg', 'img2.jpg'],
                 amountAvailable: 10,
-                updatedAt: new Date()
-            });
+                updatedAt: new Date('2023-01-02T10:00:00Z')
+            }
+            );
         }
     }
-
-    async create(item) {
+    
+    async create(Item) {
         return await Item.create(item);
     }
 
-    async read(itemID = null) {
-        if (itemID) {
-            return await Item.findByPk(itemID);
+    async read(listingID = null) {
+        if (listingID) {
+            return await Item.findByPk(listingID);
         }
 
         return await Item.findAll();
     }
 
     async update(item) {
-        const itemu = await Item.findByPk(item.itemID);
-        if (!itemu) {
+        const item_update = await Item.findByPk(item.userID);
+        if (!item_update) {
             return null;
         }
 
-        await itemu.update(item);
-        return itemu;
+        await item_update.update(item);
+        return item_update;
     }
 
     async delete(item = null) {
@@ -105,7 +107,7 @@ class _SQLiteItemModel {
             return;
         }
 
-        await Item.destroy({ where: { itemID: item.itemID } });
+        await Item.destroy({ where: { listingID: item.userID } });
         return item;
     }
 }
