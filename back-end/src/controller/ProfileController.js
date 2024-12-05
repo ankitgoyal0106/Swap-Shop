@@ -8,7 +8,7 @@ class ProfileController{
     }
 
     async getProfile(req,res){
-        const profile = await this.model.read(req.body.email);//get profile for specific userID
+        const profile = await this.model.read(req.body.email);//get profile for specific email
         res.json({profile});
     }
 
