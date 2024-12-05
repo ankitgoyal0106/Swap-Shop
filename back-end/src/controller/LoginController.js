@@ -1,6 +1,7 @@
 import bcrypt from "bcryptjs";
 import dotenv from "dotenv";
-import SQLiteProfileModel from "../model/SQLiteProfileModel";
+import SQLiteProfileModel from "../model/SQLiteProfileModel.js";
+import ProfileController from "./ProfileController.js";
 
 // Load environment variables from a .env file
 dotenv.config();
@@ -9,22 +10,24 @@ dotenv.config();
 // This function creates a response object with a status and a message.
 const factoryResponse = (status, message) => ({ status, message });
 
-const existsUser = async (username) => {
-  const user = await SQLiteProfileModel.findOne({ where: { username } });
+const existsUser = async (email) => {
+  const user = await SQLiteProfileModel.findOne({ where: { email } });
   return user;
 };
 
 // Registration route.
 // This route creates a new user in the database.
 export const register = async (req, res) => {
-  const { username, password } = req.body;
+  const profileData = req.body;
 
-  // Check if the username is already taken
-  if (await existsUser(username))
-    return res.status(400).json(factoryResponse(400, "Username already taken"));
+  // Check if the email is already taken
+  if (await existsUser(profileData.email)) {
+    return res.status(400).json(factoryResponse(400, "Email already in use"));
+  }
 
-  const hash = await bcrypt.hash(password, 10);
-  await User.create({ username, password: hash });
+  const hash = await bcrypt.hash(profileData.password, 10);
+  profileData.password = hash;
+  await ProfileController.createProfile(req, res);
   res.json(factoryResponse(200, "Registration successful"));
   console.log("User registered successfully");
 };
@@ -32,8 +35,8 @@ export const register = async (req, res) => {
 // Login route.
 // This route checks the user's credentials and logs them in.
 export const login = async (req, res, next) => {
-  const { username, password } = req.body;
-  const user = await SQLiteProfileModel.findOne({ where: { username } });
+  const { email, password } = req.body;
+  const user = await SQLiteProfileModel.findOne({ where: { email } });
   if (!user || !(await bcrypt.compare(password, user.password))) {
     return res.status(401).json(factoryResponse(401, "Invalid credentials"));
   }
