@@ -5,7 +5,7 @@ import {
   login,
   logout,
   getProfile,
-} from "../controller/LoginController.js/index.js";
+} from "../controller/LoginController.js";
 import { authenticate } from "../auth/middleware.js";
 
 class Routes {
