@@ -1,5 +1,5 @@
 import express from "express";
-import ItemController from "./controller/ItemController.js";
+import ItemController from "../controller/ItemController.js";
 
 class Routes {
     constructor(){
@@ -8,6 +8,12 @@ class Routes {
     }
 
     initializeRoutes(){
+
+    //TODO: get rid of later
+    //Get nothing at all
+    this.router.get("/", (req, res) => {
+      res.sendStatus(200);
+    });
 
     //Get Item
     this.router.get("/items", async (req, res) => {

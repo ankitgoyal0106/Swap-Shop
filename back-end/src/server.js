@@ -21,7 +21,7 @@ setupRoutes(){
 
 start(port = 3000) {
     this.app.listen(port, () => {
-      console.log(`Server started on port ${port}`);
+      console.log(`Server is running on http://localhost:${port}`);
     });
   }
 }

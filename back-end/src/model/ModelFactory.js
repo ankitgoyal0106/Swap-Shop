@@ -1,5 +1,6 @@
 import InMemoryItemModel from "./InMemoryItemModel.js";
-import SQLiteModel from "./SQLiteModel.js";
+//TODO: get SQLite working
+//import SQLiteModel from "./SQLiteItemModel.js";
 
 class _ModelFactory {
     async getModel(model = "memory"){
