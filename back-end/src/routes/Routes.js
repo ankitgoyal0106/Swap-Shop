@@ -85,6 +85,15 @@ class Routes {
         res.status(500).json({ message: "Failed to remove item" });
       }
     });
+
+    //Update Profile
+    this.router.post("/edit-profile", async (req, res) => {
+      try {
+        await ProfileController.editProfile(req, res);
+      } catch (error) {
+        res.status(500).json({ message: "Failed to update profile" });
+      }
+    });
   }
 
   getRouter() {
