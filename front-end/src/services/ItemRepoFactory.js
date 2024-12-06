@@ -13,7 +13,7 @@ export class ItemRepoFactory {
     throw new Error("Cannot instantiate a ItemRepoFactory object");
   }
 
-  static get(repoType = "local") {
+  static get(repoType = "remote") {
     if (repoType === "local") {
       return new ItemRepoService();
     } else if (repoType === "remote") {
