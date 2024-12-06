@@ -130,56 +130,11 @@ export class Registration extends BaseComponent {
             profilePicture: null,
             createdAt: timestamp,
             updatedAt: timestamp,
-            achievements: [
-                {
-                    "title": "Welcome",
-                    "obtained": true
-                },
-                {
-                    "title": "List 1 Item",
-                    "obtained": false
-                },
-                {
-                    "title": "List 10 Items",
-                    "obtained": false
-                },
-                {
-                    "title": "List 50 Items",
-                    "obtained": false
-                },
-                {
-                    "title": "Sell 1 Item",
-                    "obtained": false
-                },
-                {
-                    "title": "Sell 10 Items",
-                    "obtained": false
-                },
-                {
-                    "title": "Sell 50 Items",
-                    "obtained": false
-                },
-                {
-                    "title": "View 1 Item",
-                    "obtained": false
-                },
-                {
-                    "title": "View 10 Items",
-                    "obtained": false
-                },
-                {
-                    "title": "View 50 Items",
-                    "obtained": false
-                },
-                {
-                    "title": "Easter Egg",
-                    "obtained": false
-                }
-            ],
             achievementCounts: {
                 "listed": 0,
                 "sold": 0,
-                "viewed": 0
+                "viewed": 0,
+                "easterEgg": false
             },
             savedListings: [],
             recentlyViewed: [],
@@ -190,6 +145,7 @@ export class Registration extends BaseComponent {
         const hub = EventHub.getInstance();
         hub.publish(Events.NewProfile, profileData);
         hub.publish(Events.StoreProfile, profileData);
+        hub.publish(Events.Registered, profileData);
         saveEmailToLocalStorage(profileData.email); // Add the email to the local storage to be used throughout the app
     }
 }
