@@ -39,10 +39,10 @@ export class ProfileRepoRemoteService extends Service {
       //Fetch the information for the achievements page
       const profileData = {
           achievementCounts: {
-          listed: profile.itemsListed || 0,  // For example, assume `itemsListed` in the API
-          sold: profile.itemsSold || 0,      // Similar for `itemsSold`
-          viewed: profile.itemsViewed || 0,  // Similar for `itemsViewed`
-          easterEgg: profile.foundEasterEgg || false,  // Assuming a flag for Easter Egg
+          listed: profile.itemsListed || 0, 
+          sold: profile.itemsSold || 0,     
+          viewed: profile.itemsViewed || 0, 
+          easterEgg: profile.foundEasterEgg || false,  
         }
       };
 
