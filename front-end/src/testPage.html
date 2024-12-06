@@ -1,0 +1,32 @@
+<!-- testPage.html -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Testing Page</title>
+  </head>
+  <body>
+    <div id="app"></div>
+    <script type="module">
+      import { ItemRepoFactory } from "../src/services/ItemRepoFactory.js";
+      // Expose the factory to the window object. This allows us to use it in
+      // the browser console for testing purposes.
+      window.ItemRepoFactory = ItemRepoFactory.get("remote");
+
+      import { CreateItemPage } from "../src/components/itemPage/createItemPage.js";
+      // Expose the component to the window object. This allows us to use it in
+      // the browser console for testing purposes.
+      window.CreateItemPage = CreateItemPage;
+
+      const createItemPage = new CreateItemPage();
+      const element = createItemPage.render();
+
+      // Use assert to verify the functioning of the component.
+      console.assert(element !== undefined);
+      console.assert(element !== null);
+      console.assert(element instanceof HTMLElement);
+      document.getElementById("app").appendChild(element);
+    </script>
+  </body>
+</html>

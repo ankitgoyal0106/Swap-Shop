@@ -86,6 +86,16 @@ export class CreateItemPage extends BaseComponent {
         form.appendChild(descriptionLabel);
         form.appendChild(descriptionInput);
 
+        // Amount Available
+        const amountLabel = document.createElement("label");
+        amountLabel.textContent = "Amount Available:";
+        const amountInput = document.createElement("input");
+        amountInput.type = "number";
+        amountInput.id = "amount-available";
+        amountInput.required = true;
+        form.appendChild(amountLabel);
+        form.appendChild(amountInput);
+
         // Category
         const categoryLabel = document.createElement("label");
         categoryLabel.textContent = "Category:";
@@ -152,16 +162,6 @@ export class CreateItemPage extends BaseComponent {
         priceInput.required = true;
         form.appendChild(priceLabel);
         form.appendChild(priceInput);
-
-        // Associated Company
-        const associatedCompanyLabel = document.createElement("label");
-        associatedCompanyLabel.textContent = "Associated Company:";
-        const associatedCompanyInput = document.createElement("input");
-        associatedCompanyInput.type = "text";
-        associatedCompanyInput.id = "associated-company";
-        associatedCompanyInput.required = true;
-        form.appendChild(associatedCompanyLabel);
-        form.appendChild(associatedCompanyInput);
 
         // Posted At
         const postedAtLabel = document.createElement("label");
@@ -251,30 +251,30 @@ export class CreateItemPage extends BaseComponent {
         event.preventDefault();
 
         const listingID = document.getElementById('listing-id').value;
-        const associatedCompany = document.getElementById('associated-company').value;
         const postedAt = document.getElementById('posted-at').value;
         const images = document.getElementById('item-image').files;
         const updatedAt = document.getElementById('updated-at').value;
         const itemName = document.getElementById('item-name').value;
-        const description = document.getElementById('item-description').value;
+        const itemDescription = document.getElementById('item-description').value;
         const category = document.getElementById('item-category').value;
         const condition = document.getElementById('item-condition').value;
         const price = document.getElementById('item-price').value;
+        const amountAvailable = document.getElementById('amount-available').value;
         const itemLocation = document.getElementById('item-location').value;
 
         const imageUrls = Array.from(images).map(file => URL.createObjectURL(file));
 
         const listingData = {
             listingID,
-            associatedCompany,
             postedAt,
             images: imageUrls, // Array of strings (URLs)
             updatedAt,
             itemName,
-            description,
+            itemDescription,
             category,
             condition,
             price,
+            amountAvailable,
             itemLocation
         };
 

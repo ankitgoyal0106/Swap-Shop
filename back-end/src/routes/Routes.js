@@ -1,5 +1,5 @@
 import express from "express";
-import ItemController from "./controller/ItemController.js";
+import ItemController from "../controller/ItemController.js";
 import {
   register,
   login,

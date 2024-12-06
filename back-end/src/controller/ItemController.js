@@ -2,7 +2,7 @@ import ModelFactory from "../model/ModelFactory.js";
 
 class ItemController{
     constructor(){
-        ModelFactory.getModel().then((model) => {
+        ModelFactory.getModel("sqlite").then((model) => {
             this.model = model;
           });
     }
@@ -19,7 +19,7 @@ class ItemController{
 
     async createItem(req,res){
         try{
-            if (!req.body || !req.body.itemID) {
+            if (!req.body || !req.body.listingID) {
                 return res.status(400).json({ error: "Invalid item information." });
             }        
 
