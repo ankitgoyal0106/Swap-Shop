@@ -1,6 +1,5 @@
 import Service from "./Service.js";
 import { Events } from "../eventhub/Events.js";
-//TODO: Import base64
 
 export class ProfileRepoRemoteService extends Service {
   constructor() {
@@ -16,6 +15,10 @@ export class ProfileRepoRemoteService extends Service {
     this.subscribe(Events.DeleteProfile, () => {
       this.deleteProfile();
     });
+
+    this.subscribe(Events.GetProfile, (email) => {
+      this.getProfile(email);
+    });
   }
 
   async #initProfiles() {
@@ -28,14 +31,12 @@ export class ProfileRepoRemoteService extends Service {
     const data = await response.json();
 
     data.profiles.forEach(async (profile) => {
-      //TODO: Add base 64 conversion
 
       this.publish(Events.NewProfile, profile);
     });
   }
 
   async storeProfile(profileData) {
-    //TODO: Add base 64 conversion
 
     const response = await fetch("/v1/profile", {
       method: "POST",
@@ -53,10 +54,21 @@ export class ProfileRepoRemoteService extends Service {
     return data;
   }
 
-  //TODO: Add base 64 method here
 
   async deleteProfile() {
     //TODO: Create delete profile method. Def need to add parameter.
     this.publish(Events.DeleteProfileSuccess);
+  }
+
+  async getProfile(email) {
+    const response = await fetch(`/v1/profile/${email}`);
+
+    if (!response.ok) {
+      throw new Error("Failed to fetch profile");
+    }
+
+    const data = await response.json();
+    
+    this.publish(Events.GetProfileSuccess, data);
   }
 }

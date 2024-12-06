@@ -24,6 +24,10 @@ const Item = sequelize.define("Item", {
         type: DataTypes.STRING,
         allowNull: false
     },
+    condition: {
+        type: DataTypes.STRING,
+        allowNull: false
+    },
     price: {
         type: DataTypes.FLOAT,
         allowNull: false
@@ -37,8 +41,14 @@ const Item = sequelize.define("Item", {
         allowNull: false
     },
     images: {
-        type: DataTypes.ARRAY(DataTypes.STRING),
-        allowNull: false
+        type: DataTypes.TEXT,
+        allowNull: false,
+        get () {
+            return JSON.parse(this.getDataValue('images'));
+        },
+        set (value) {
+            this.setDataValue('images', JSON.stringify(value));
+        },
     },
     amountAvailable: {
         type: DataTypes.INTEGER,
@@ -69,6 +79,7 @@ class _SQLiteItemModel {
                 itemDescription: 'Description for item 2',
                 category: 'Electronics',
                 price: 100.0,
+                condition: 'New',
                 postedAt: new Date('2023-01-01T10:00:00Z'),
                 itemLocation: 'Location A',
                 images: ['img1.jpg', 'img2.jpg'],
@@ -79,7 +90,7 @@ class _SQLiteItemModel {
         }
     }
     
-    async create(Item) {
+    async create(item) {
         return await Item.create(item);
     }
 
