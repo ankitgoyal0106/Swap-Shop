@@ -57,6 +57,7 @@ export const Events = {
     ClearItemsSuccess: 'ClearItemsSuccess',
     ClearItemsFailure: 'ClearItemsFailure',
 
+    //Achievements
     SignUp: 'SignUp',
     ListItem: 'ListItem',
     StartNewChat: 'StartNewChat',
