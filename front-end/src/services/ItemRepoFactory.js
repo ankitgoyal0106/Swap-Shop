@@ -1,5 +1,5 @@
 import { ItemRepoService } from "./ItemRepoService.js";
-//TODO: Import remote service
+import { ItemRepoRemoteService } from "./ItemRepoRemoteService.js";
 
 /**
  * Factory class to create instances of item repository services.
@@ -17,8 +17,7 @@ export class ItemRepoFactory {
     if (repoType === "local") {
       return new ItemRepoService();
     } else if (repoType === "remote") {
-      //TODO: Return remote service
-      //return new ItemRepoRemoteService();
+      return new ItemRepoRemoteService();
     } else {
       throw new Error("Invalid repository type");
     }

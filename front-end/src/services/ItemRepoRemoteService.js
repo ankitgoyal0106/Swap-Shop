@@ -19,7 +19,7 @@ export class ItemRepoRemoteService extends Service {
   }
 
   async #initItems() {
-    const response = await fetch("/v1/items");
+    const response = await fetch("http://localhost:3000/v1/items");
     if (!response.ok) {
       throw new Error("Failed to fetch items");
     }
@@ -35,8 +35,9 @@ export class ItemRepoRemoteService extends Service {
 
   async storeItem(itemData) {
     //TODO: Add base 64 conversion
-
-    const response = await fetch("/v1/item", {
+    console.log("Attempting to store");
+    console.log(JSON.stringify(itemData));
+    const response = await fetch("http://localhost:3000/v1/item", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

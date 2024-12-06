@@ -12,7 +12,7 @@
       import { ItemRepoFactory } from "../src/services/ItemRepoFactory.js";
       // Expose the factory to the window object. This allows us to use it in
       // the browser console for testing purposes.
-      window.ItemRepoFactory = ItemRepoFactory.get();
+      window.ItemRepoFactory = ItemRepoFactory.get("remote");
 
       import { CreateItemPage } from "../src/components/itemPage/createItemPage.js";
       // Expose the component to the window object. This allows us to use it in

@@ -1,5 +1,6 @@
 import express from "express";  
 import Routes from "./routes/Routes.js";
+import cors from 'cors';
 class Server{
   constructor(){
     this.app = express();
@@ -13,6 +14,10 @@ configureMiddleware(){
     this.app.use(express.static("../front-end/src"));
 
     this.app.use(express.json({ limit: "10mb" }));
+
+    this.app.use(cors({
+      origin: 'http://localhost:5500'
+    }));
 }
 
 setupRoutes(){
