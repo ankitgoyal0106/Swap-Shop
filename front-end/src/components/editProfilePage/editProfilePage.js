@@ -2,7 +2,7 @@ import { BaseComponent } from '../BaseComponent/BaseComponent.js';
 import { EventHub } from '../../eventhub/EventHub.js';
 import { Events } from '../../eventhub/Events.js';
 import { getEmailFromLocalStorage } from '../../services/LocalStorage.js';
-import bcrypt from "bcryptjs";
+//import { bcryptjs } from 'bcryptjs';
 
 export class EditProfilePage extends BaseComponent {
     #container = null;
@@ -124,7 +124,7 @@ export class EditProfilePage extends BaseComponent {
         }
 
         // Hash the new password
-        const hash = await bcrypt.hash(newPassword, 10);
+        const hash = await bcryptjs.hash(newPassword, 10);
 
         // Prepare updated profile data
         const updatedProfileData = {
