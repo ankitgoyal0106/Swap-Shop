@@ -40,14 +40,26 @@ class Routes {
       }
     });
 
-    // Get User Profile
+    // Get All User Profiles
     this.router.get("/profile", authenticate, async (req, res) => {
       try {
         await getProfile(req, res);
       } catch (error) {
+        res.status(500).json({ message: "Failed to retrieve all profiles" });
+      }
+    });
+
+    // Get A User Profile By Email
+    this.router.get("/profile:email", authenticate, async (req, res) => {
+      try {
+        const email = req.params.email;
+        req.body.email = email;
+        await getProfile(req, res);
+      } catch {
         res.status(500).json({ message: "Failed to retrieve profile" });
       }
     });
+
     //Get Item
     this.router.get("/items", async (req, res) => {
       try {
