@@ -45,10 +45,6 @@ const Profile = sequelize.define("Profile", {
         type: DataTypes.DATE,
         allowNull: false
     },
-    achievements: {
-        type: DataTypes.ARRAY(DataTypes.JSON),
-        allowNull: true
-    },
     achievementCounts: {
         type: DataTypes.JSON,
         allowNull: true

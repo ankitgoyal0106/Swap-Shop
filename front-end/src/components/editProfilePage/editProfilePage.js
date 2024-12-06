@@ -2,7 +2,7 @@ import { BaseComponent } from '../BaseComponent/BaseComponent.js';
 import { EventHub } from '../../eventhub/EventHub.js';
 import { Events } from '../../eventhub/Events.js';
 import { getEmailFromLocalStorage } from '../../services/LocalStorage.js';
-//import { bcryptjs } from 'bcryptjs';
+import bcryptjs from 'https://cdn.jsdelivr.net/npm/bcryptjs@2.4.3/+esm';
 
 export class EditProfilePage extends BaseComponent {
     #container = null;
@@ -21,7 +21,8 @@ export class EditProfilePage extends BaseComponent {
         this.#container.id = 'editProfile-container';
         this.#container.classList.add('editProfile-container');
         this.#buildProfileEditor();
-        await this.#autoFillProfileData();
+        this.#hub.subscribe(Events.Login, await this.#autoFillProfileData.bind(this));
+        this.#hub.subscribe(Events.Registered, await this.#autoFillProfileData.bind(this));
 
         return this.#container;
     }
@@ -130,57 +131,27 @@ export class EditProfilePage extends BaseComponent {
         const updatedProfileData = {
             profilePicture: this.#profilePicture,
             name: `${editFirstName} ${editLastName}`,
-            email: getEmail(), // Gets email from local storage
+            email: getEmailFromLocalStorage(), // Gets email from local storage
             phone: phone,
             password: hash
         };
 
-        // Send the profile data to the server
-        const response = await fetch("/edit-profile", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(updatedProfileData),
-        });
-
-        // Handle a failed request
-        if (!response.ok) {
-            const message = `An error has occurred: ${response.status}`;
-            console.error(message);
-            alert(message);
-            return;
-        }
-
-        // Handle a successful request
-        const data = await response.json();
-        console.log(JSON.stringify(data, null, 2));
-        alert(data.message);
-    
         // Publish the updated profile data
         this.#hub.publish(Events.ProfileEdited, updatedProfileData);
-        alert('Profile updated successfully');
+        alert('Profile updated');
         console.log("Profile Data", updatedProfileData);
     }
     
     async #autoFillProfileData() {
-        // Get the profile data from the server
-        const response = await fetch("/profile", {
-            method: "GET",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(getEmailFromLocalStorage()),
-        });
+        const email = getEmailFromLocalStorage();
 
-        // Handle a failed request
-        if (!response.ok) {
-            const message = `An error has occurred: ${response.status}`;
-            console.error(message);
-            alert(message);
-            return;
-        }
+        this.#hub.publish(Events.GetProfile, email);
+        this.#hub.subscribe(Events.GetProfileSuccess, populateProfileForm.bind(this));
 
-        // Handle a successful request
-        const userData = await response.json();
-        this.#container.querySelector('#editFirstName').value = userData.name.split(' ')[0];
-        this.#container.querySelector('#editLastName').value = userData.name.split(' ')[1];
-        this.#container.querySelector('#editPhoneInput').value = userData.phone;
+        function populateProfileForm(userData) {
+            this.#container.querySelector('#editFirstName').value = userData.name.split(' ')[0];
+            this.#container.querySelector('#editLastName').value = userData.name.split(' ')[1];
+            this.#container.querySelector('#editPhoneInput').value = userData.phone;
+        };
     }
 }

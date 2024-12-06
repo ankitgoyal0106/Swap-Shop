@@ -64,5 +64,8 @@ export const Events = {
     FindEasterEgg: 'FindEasterEgg',
     ViewItem: 'ViewItem',
 
-    ProfileEdited: 'EditedProfile'
+    ProfileEdited: 'EditedProfile',
+    Login: 'Login',
+    Logout: 'Logout',
+    Registered: 'Registered'
 };
