@@ -90,8 +90,8 @@ class _SQLiteItemModel {
         }
     }
     
-    async create(item) {
-        return await Item.create(item);
+    async create(Item) {
+        return await Item.create(Item);
     }
 
     async read(listingID = null) {
