@@ -18,6 +18,10 @@ export class ProfileRepoRemoteService extends Service {
     });
   }
 
+  async initializeProfiles() {
+    await this.#initProfiles();
+  }
+
   async #initProfiles() {
     const response = await fetch("/v1/profiles");
 
