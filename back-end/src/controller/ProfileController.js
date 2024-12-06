@@ -4,17 +4,17 @@ class ProfileController{
     constructor(){
         ModelFactory.getModel().then((model) => {
             this.model = model;
-          });
+        });
     }
 
     async getProfile(req,res){
-        const profile = await this.model.read(req.body.userID);//get profile for specific userID
+        const profile = await this.model.read(req.body.email);//get profile for specific email
         res.json({profile});
     }
 
     async createProfile(req,res){
         try{
-            if (!req.body || !req.body.userID) {
+            if (!req.body || !req.body.email) {
                 return res.status(400).json({ error: "Invalid profile information." });
             }        
 
@@ -29,11 +29,11 @@ class ProfileController{
 
     async editProfile(req,res){
         try{
-            if(!req.body || !req.body.userID){
+            if(!req.body || !req.body.email){
                 return res.status(400).json({ error: "Invalid profile information." });
             }
 
-            const profile = await this.model.update(profile);
+            const profile = await this.model.update(req.body);
 
             res.status(201).json(profile);
         }

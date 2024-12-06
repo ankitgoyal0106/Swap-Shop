@@ -1,6 +1,7 @@
 import { BaseComponent } from '../BaseComponent/BaseComponent.js';
 import { EventHub } from '../../eventhub/EventHub.js';
 import { Events } from '../../eventhub/Events.js';
+import { saveEmailToLocalStorage } from '../../services/LocalStorage.js';
 
 export class Registration extends BaseComponent {
     #container = null;
@@ -204,6 +205,7 @@ export class Registration extends BaseComponent {
         const data = await response.json();
         console.log(JSON.stringify(data, null, 2));
         alert(data.message);
+        saveEmailToLocalStorage(profileData.email); // Add the email to the local storage to be used throughout the app
 
         // Publish the profile data to the event hub
         const hub = EventHub.getInstance();
