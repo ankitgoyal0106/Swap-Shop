@@ -18,10 +18,12 @@ export class ProfileRepoRemoteService extends Service {
     });
   }
 
+  //Public method for profile fetching (to be used to fetch achievement info)
   async initializeProfiles() {
     await this.#initProfiles();
   }
 
+  //Private method for fetching profile data
   async #initProfiles() {
     const response = await fetch("/v1/profiles");
 
@@ -34,7 +36,17 @@ export class ProfileRepoRemoteService extends Service {
     data.profiles.forEach(async (profile) => {
       //TODO: Add base 64 conversion
 
-      this.publish(Events.NewProfile, profile);
+      //Fetch the information for the achievements page
+      const profileData = {
+          achievementCounts: {
+          listed: profile.itemsListed || 0,  // For example, assume `itemsListed` in the API
+          sold: profile.itemsSold || 0,      // Similar for `itemsSold`
+          viewed: profile.itemsViewed || 0,  // Similar for `itemsViewed`
+          easterEgg: profile.foundEasterEgg || false,  // Assuming a flag for Easter Egg
+        }
+      };
+
+      this.publish(Events.NewProfile, profileData);
     });
   }
 
