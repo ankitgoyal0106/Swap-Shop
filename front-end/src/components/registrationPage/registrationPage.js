@@ -186,30 +186,10 @@ export class Registration extends BaseComponent {
             conversationList: []
         };
 
-        // Send the profile data to the server
-        const response = await fetch("/register", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(profileData),
-        });
-
-        // Handle a failed request
-        if (!response.ok) {
-            const message = `An error has occurred: ${response.status}`;
-            console.error(message);
-            alert(message);
-            return;
-        }
-
-        // Handle a successful request
-        const data = await response.json();
-        console.log(JSON.stringify(data, null, 2));
-        alert(data.message);
-        saveEmailToLocalStorage(profileData.email); // Add the email to the local storage to be used throughout the app
-
         // Publish the profile data to the event hub
         const hub = EventHub.getInstance();
         hub.publish(Events.NewProfile, profileData);
         hub.publish(Events.StoreProfile, profileData);
+        saveEmailToLocalStorage(profileData.email); // Add the email to the local storage to be used throughout the app
     }
 }
