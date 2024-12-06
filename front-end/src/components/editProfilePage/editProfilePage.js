@@ -1,6 +1,8 @@
 import { BaseComponent } from '../BaseComponent/BaseComponent.js';
 import { EventHub } from '../../eventhub/EventHub.js';
 import { Events } from '../../eventhub/Events.js';
+import { getEmailFromLocalStorage } from '../../services/LocalStorage.js';
+import bcrypt from "bcryptjs";
 
 export class EditProfilePage extends BaseComponent {
     #container = null;
@@ -14,12 +16,12 @@ export class EditProfilePage extends BaseComponent {
     }
 
     //Need to add logic to get user data from the backend to populate the form
-    render() {
+    async render() {
         this.#container = document.createElement('div');
         this.#container.id = 'editProfile-container';
         this.#container.classList.add('editProfile-container');
         this.#buildProfileEditor();
-        //this.#autoFillProfileData();
+        await this.#autoFillProfileData();
 
         return this.#container;
     }
@@ -33,7 +35,6 @@ export class EditProfilePage extends BaseComponent {
         editProfileForm.appendChild(this.#createProfileImageInput());
         editProfileForm.appendChild(this.#createTextInput('editFirstName', 'First Name', 'text'));
         editProfileForm.appendChild(this.#createTextInput('editLastName', 'Last Name', 'text'));
-        editProfileForm.appendChild(this.#createTextInput('editEmailInput', 'Email', 'email'));
         editProfileForm.appendChild(this.#createTextInput('editPhoneInput', 'Phone Number', 'tel'));
         editProfileForm.appendChild(this.#createTextInput('editPassword', 'New Password', 'password'));
         editProfileForm.appendChild(this.#createTextInput('confirmEditPassword', 'Confirm New Password', 'password'));
@@ -56,6 +57,7 @@ export class EditProfilePage extends BaseComponent {
         const profileImageInput = profileImage.querySelector('#profileImageInput');
         const profileImageDisplay = profileImage.querySelector('#profileImageDisplay');
 
+        // TODO: Change how the image is stored in the database
         profileImageInput.addEventListener('change', (event) => {
             const file = event.target.files[0];
             if (file) {
@@ -73,6 +75,11 @@ export class EditProfilePage extends BaseComponent {
 
     // Private method to create text inputs (e.g., name, email, phone, college)
     #createTextInput(id, placeholder, type = 'text') {
+        const label = document.createElement('label');
+        label.htmlFor = id;
+        label.textContent = placeholder;
+        label.classList.add('editProfileLabel');
+
         const input = document.createElement('input');
         input.id = id;
         input.classList.add(id);
@@ -93,13 +100,12 @@ export class EditProfilePage extends BaseComponent {
     }
 
     // Private method to handle form submission
-    #handleFormSubmission(event) {
+    async #handleFormSubmission(event) {
         event.preventDefault();
     
         // Query elements within the container
         const editFirstName = this.#container.querySelector('#editFirstName').value;
         const editLastName = this.#container.querySelector('#editLastName').value;
-        const email = this.#container.querySelector('#editEmailInput').value;
         const phone = this.#container.querySelector('#editPhoneInput').value;
         const newPassword = this.#container.querySelector('#editPassword').value;
         const confirmEditPassword = this.#container.querySelector('#confirmEditPassword').value;
@@ -117,30 +123,64 @@ export class EditProfilePage extends BaseComponent {
             return;
         }
 
-        // Validate email format
-        const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (!emailPattern.test(email)) {
-            alert("Please enter a valid email address.");
-            return;
-        }
-    
+        // Hash the new password
+        const hash = await bcrypt.hash(newPassword, 10);
+
         // Prepare updated profile data
         const updatedProfileData = {
             profilePicture: this.#profilePicture,
             name: `${editFirstName} ${editLastName}`,
-            email: email,
+            email: getEmail(), // Gets email from local storage
             phone: phone,
-            password: btoa(newPassword), // Base64 encoding (use secure methods in production)
+            password: hash
         };
+
+        // Send the profile data to the server
+        const response = await fetch("/edit-profile", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(updatedProfileData),
+        });
+
+        // Handle a failed request
+        if (!response.ok) {
+            const message = `An error has occurred: ${response.status}`;
+            console.error(message);
+            alert(message);
+            return;
+        }
+
+        // Handle a successful request
+        const data = await response.json();
+        console.log(JSON.stringify(data, null, 2));
+        alert(data.message);
     
         // Publish the updated profile data
         this.#hub.publish(Events.ProfileEdited, updatedProfileData);
         alert('Profile updated successfully');
         console.log("Profile Data", updatedProfileData);
     }
-    // TODO: Implement logic to autofill profile data
-    /*
-    #autoFillProfileData() {
-        
-    }*/
+    
+    async #autoFillProfileData() {
+        // Get the profile data from the server
+        const response = await fetch("/profile", {
+            method: "GET",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(getEmailFromLocalStorage()),
+        });
+
+        // Handle a failed request
+        if (!response.ok) {
+            const message = `An error has occurred: ${response.status}`;
+            console.error(message);
+            alert(message);
+            return;
+        }
+
+        // Handle a successful request
+        const userData = await response.json();
+        this.#container.querySelector('#editFirstName').value = userData.name.split(' ')[0];
+        this.#container.querySelector('#editLastName').value = userData.name.split(' ')[1];
+        this.#container.querySelector('#editPhoneInput').value = userData.phone;
+    }
 }
