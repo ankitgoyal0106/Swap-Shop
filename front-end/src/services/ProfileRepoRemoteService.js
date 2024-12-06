@@ -34,8 +34,6 @@ export class ProfileRepoRemoteService extends Service {
     const data = await response.json();
 
     data.profiles.forEach(async (profile) => {
-      //TODO: Add base 64 conversion
-
       //Fetch the information for the achievements page
       const profileData = {
           achievementCounts: {

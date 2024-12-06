@@ -30,5 +30,8 @@
   },
   "devDependencies": {
     "http-server": "^14.1.1"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3"
   }
 }
