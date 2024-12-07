@@ -41,7 +41,7 @@ class Routes {
     });
 
     // Get All User Profiles
-    this.router.get("/profiles", authenticate, async (req, res) => {
+    this.router.get("/profiles", async (req, res) => {
       try {
         await ProfileController.getAllProfiles(req, res);
       } catch (error) {
