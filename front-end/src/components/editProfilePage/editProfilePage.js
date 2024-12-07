@@ -133,7 +133,8 @@ export class EditProfilePage extends BaseComponent {
             name: `${editFirstName} ${editLastName}`,
             email: getEmailFromLocalStorage(), // Gets email from local storage
             phone: phone,
-            password: hash
+            password: hash,
+            updatedAt: new Date()
         };
 
         // Publish the updated profile data

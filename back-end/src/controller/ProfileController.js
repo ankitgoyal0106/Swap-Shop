@@ -24,7 +24,7 @@ class ProfileController{
             }        
 
             const profile = await this.model.create(req.body);
-            
+
             return res.status(201).json(profile);
         }
         catch(e){

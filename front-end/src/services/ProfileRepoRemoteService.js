@@ -12,7 +12,7 @@ export class ProfileRepoRemoteService extends Service {
       this.storeProfile(data);
     });
 
-    this.subscribe(Events.NewProfile, (data) => {
+    this.subscribe(Events.RegisterProfile, (data) => {
       this.registerProfile(data);
     });
 
@@ -58,6 +58,7 @@ export class ProfileRepoRemoteService extends Service {
     }
 
     const data = await response.json();
+    this.publish(Events.Registered, data);
     return data
   }
 
