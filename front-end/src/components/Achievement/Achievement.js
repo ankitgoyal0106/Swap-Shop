@@ -1,6 +1,6 @@
 import { BaseComponent } from "../BaseComponent/BaseComponent.js";
 import { Events } from "../../eventhub/Events.js";
-import { EventsHub } from "../../eventhub/EventHub.js";
+import { EventHub } from "../../eventhub/EventHub.js";
 import { getEmailFromLocalStorage } from '../../services/LocalStorage.js';
 
 export class Achievement extends BaseComponent {
