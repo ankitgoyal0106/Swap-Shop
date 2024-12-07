@@ -1,6 +1,5 @@
 import Service from "./Service.js";
 import { Events } from "../eventhub/Events.js";
-//TODO: Import base64
 
 export class ProfileRepoRemoteService extends Service {
   constructor() {
@@ -25,7 +24,7 @@ export class ProfileRepoRemoteService extends Service {
 
   //Private method for fetching profile data
   async #initProfiles() {
-    const response = await fetch("/v1/profiles");
+    const response = await fetch("http://localhost:3000/v1/profiles");
 
     if (!response.ok) {
       throw new Error("Failed to fetch profiles");
@@ -51,7 +50,7 @@ export class ProfileRepoRemoteService extends Service {
   async storeProfile(profileData) {
     //TODO: Add base 64 conversion
 
-    const response = await fetch("/v1/profile", {
+    const response = await fetch("http://localhost:3000/v1/profiles", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
