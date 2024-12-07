@@ -2,7 +2,7 @@ import ModelFactory from "../model/ModelFactory.js";
 
 class ProfileController{
     constructor(){
-        ModelFactory.getModel().then((model) => {
+        ModelFactory.getModel("sqlite").then((model) => {
             this.model = model;
         });
     }
