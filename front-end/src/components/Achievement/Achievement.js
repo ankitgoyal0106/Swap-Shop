@@ -1,6 +1,7 @@
 import { BaseComponent } from "../BaseComponent/BaseComponent.js";
 import { ProfileRepoRemoteService } from "../../services/ProfileRepoRemoteService.js";
 import { Events } from "../../eventhub/Events.js";
+import { EventsHub } from "../../eventhub/EventHub.js";
 
 export class Achievement extends BaseComponent {
     #container = null;

@@ -15,16 +15,14 @@ export class ProfileRepoRemoteService extends Service {
     this.subscribe(Events.DeleteProfile, () => {
       this.deleteProfile();
     });
+
+    this.subscribe(Events.GetProfile, (email) => {
+      this.getProfile(email);
+    });
   }
 
-  //Public method for profile fetching (to be used to fetch achievement info)
-  async initializeProfiles() {
-    await this.#initProfiles();
-  }
-
-  //Private method for fetching profile data
   async #initProfiles() {
-    const response = await fetch("http://localhost:3000/v1/profiles");
+    const response = await fetch("/v1/profiles");
 
     if (!response.ok) {
       throw new Error("Failed to fetch profiles");
@@ -33,24 +31,14 @@ export class ProfileRepoRemoteService extends Service {
     const data = await response.json();
 
     data.profiles.forEach(async (profile) => {
-      //Fetch the information for the achievements page
-      const profileData = {
-          achievementCounts: {
-          listed: profile.itemsListed || 0, 
-          sold: profile.itemsSold || 0,     
-          viewed: profile.itemsViewed || 0, 
-          easterEgg: profile.foundEasterEgg || false,  
-        }
-      };
 
-      this.publish(Events.NewProfile, profileData);
+      this.publish(Events.NewProfile, profile);
     });
   }
 
   async storeProfile(profileData) {
-    //TODO: Add base 64 conversion
 
-    const response = await fetch("http://localhost:3000/v1/profiles", {
+    const response = await fetch("/v1/profile", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -66,10 +54,21 @@ export class ProfileRepoRemoteService extends Service {
     return data;
   }
 
-  //TODO: Add base 64 method here
 
   async deleteProfile() {
     //TODO: Create delete profile method. Def need to add parameter.
     this.publish(Events.DeleteProfileSuccess);
+  }
+
+  async getProfile(email) {
+    const response = await fetch(`/v1/profile/${email}`);
+
+    if (!response.ok) {
+      throw new Error("Failed to fetch profile");
+    }
+
+    const data = await response.json();
+    
+    this.publish(Events.GetProfileSuccess, data);
   }
 }
