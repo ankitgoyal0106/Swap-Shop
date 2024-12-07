@@ -144,7 +144,6 @@ export class Registration extends BaseComponent {
         // Publish the profile data to the event hub
         const hub = EventHub.getInstance();
         hub.publish(Events.NewProfile, profileData);
-        hub.publish(Events.StoreProfile, profileData);
         hub.publish(Events.Registered, profileData);
         saveEmailToLocalStorage(profileData.email); // Add the email to the local storage to be used throughout the app
     }
