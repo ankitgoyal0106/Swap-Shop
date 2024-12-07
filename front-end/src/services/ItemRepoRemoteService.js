@@ -1,6 +1,5 @@
 import Service from "./Service.js";
 import { Events } from "../eventhub/Events.js";
-//TODO: Import base64
 
 export class ItemRepoRemoteService extends Service {
   constructor() {
@@ -19,7 +18,7 @@ export class ItemRepoRemoteService extends Service {
   }
 
   async #initItems() {
-    const response = await fetch("/v1/items");
+    const response = await fetch("http://localhost:3000/v1/items");
     if (!response.ok) {
       throw new Error("Failed to fetch items");
     }
@@ -27,16 +26,13 @@ export class ItemRepoRemoteService extends Service {
     const data = await response.json();
 
     data.items.forEach(async (item) => {
-      //TODO: Add base 64 conversion
 
       this.publish(Events.NewItem, item);
     });
   }
 
   async storeItem(itemData) {
-    //TODO: Add base 64 conversion
-
-    const response = await fetch("/v1/item", {
+    const response = await fetch("http://localhost:3000/v1/item", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -52,10 +48,8 @@ export class ItemRepoRemoteService extends Service {
     return data;
   }
 
-  //TODO: Add base 64 method here
-
   async clearItems() {
-    const response = await fetch("/v1/items", {
+    const response = await fetch("http://localhost:3000/v1/items", {
       method: "DELETE",
     });
     const data = await response.json();
@@ -72,7 +66,7 @@ export class ItemRepoRemoteService extends Service {
   }
 
   async getItems() {
-    const response = await fetch("/v1/items");
+    const response = await fetch("http://localhost:3000/v1/items");
     if (!response.ok) {
       throw new Error("Failed to fetch items");
     }

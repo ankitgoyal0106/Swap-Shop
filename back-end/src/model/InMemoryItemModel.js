@@ -49,7 +49,7 @@ class _InMemoryItemModel {
   
   // Initialize the model with some sample items.
   InMemoryItemModel.create({
-    ListingID: '1',
+    listingID: '1',
     itemName: 'Mock Electronic',
     itemDescription: 'Description for item 2',
     category: 'Electronics',
