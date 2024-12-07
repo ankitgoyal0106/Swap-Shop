@@ -1,10 +1,10 @@
 import express from "express";
 import ItemController from "../controller/ItemController.js";
+import ProfileController from "../controller/ProfileController.js";
 import {
   register,
   login,
-  logout,
-  getProfile,
+  logout
 } from "../controller/LoginController.js";
 import { authenticate } from "../auth/middleware.js";
 
@@ -41,11 +41,20 @@ class Routes {
     });
 
     // Get All User Profiles
-    this.router.get("/profile", authenticate, async (req, res) => {
+    this.router.get("/profiles", authenticate, async (req, res) => {
       try {
-        await getProfile(req, res);
+        await ProfileController.getAllProfiles(req, res);
       } catch (error) {
         res.status(500).json({ message: "Failed to retrieve all profiles" });
+      }
+    });
+
+    // Create A User Profile Without Registering
+    this.router.post("/profile", async (req, res) => {
+      try {
+        await ProfileController.createProfile(req, res);
+      } catch {
+        res.status(500).json({ message: "Failed to create profile" });
       }
     });
 
@@ -54,9 +63,18 @@ class Routes {
       try {
         const email = req.params.email;
         req.body.email = email;
-        await getProfile(req, res);
+        await ProfileController.getProfile(req, res);
       } catch {
         res.status(500).json({ message: "Failed to retrieve profile" });
+      }
+    });
+
+    //Update Profile
+    this.router.put("/edit-profile", async (req, res) => {
+      try {
+        await ProfileController.editProfile(req, res);
+      } catch (error) {
+        res.status(500).json({ message: "Failed to update profile" });
       }
     });
 
@@ -95,15 +113,6 @@ class Routes {
         await ItemController.removeItem(req, res);
       } catch (error) {
         res.status(500).json({ message: "Failed to remove item" });
-      }
-    });
-
-    //Update Profile
-    this.router.post("/edit-profile", async (req, res) => {
-      try {
-        await ProfileController.editProfile(req, res);
-      } catch (error) {
-        res.status(500).json({ message: "Failed to update profile" });
       }
     });
   }

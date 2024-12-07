@@ -10,8 +10,10 @@ dotenv.config();
 // This function creates a response object with a status and a message.
 const factoryResponse = (status, message) => ({ status, message });
 
+//TODO: Look back at this in case of removal
+// May not need this. SQLite checks this anyway
 const existsUser = async (email) => {
-  const user = await SQLiteProfileModel.findOne({ where: { email } });
+  const user = await SQLiteProfileModel.read(email);
   return user;
 };
 
@@ -20,15 +22,9 @@ const existsUser = async (email) => {
 export const register = async (req, res) => {
   const profileData = req.body;
 
-  // Check if the email is already taken
-  if (await existsUser(profileData.email)) {
-    return res.status(400).json(factoryResponse(400, "Email already in use"));
-  }
-
   const hash = await bcrypt.hash(profileData.password, 10);
   profileData.password = hash;
   await ProfileController.createProfile(req, res);
-  res.json(factoryResponse(200, "Registration successful"));
   console.log("User registered successfully");
 };
 
