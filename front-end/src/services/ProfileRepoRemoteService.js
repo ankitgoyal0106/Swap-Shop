@@ -12,6 +12,10 @@ export class ProfileRepoRemoteService extends Service {
       this.storeProfile(data);
     });
 
+    this.subscribe(Events.NewProfile, (data) => {
+      this.registerProfile(data);
+    });
+
     this.subscribe(Events.DeleteProfile, () => {
       this.deleteProfile();
     });
@@ -38,6 +42,23 @@ export class ProfileRepoRemoteService extends Service {
 
       this.publish(Events.NewProfile, profile);
     });
+  }
+
+  async registerProfile(profileData) {
+    const response = await fetch("http://localhost:3000/v1/register", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(profileData),
+    });
+
+    if (!response.ok) {
+      throw new Error("Failed to register profile");
+    }
+
+    const data = await response.json();
+    return data
   }
 
   async storeProfile(profileData) {
