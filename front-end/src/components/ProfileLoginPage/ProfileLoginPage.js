@@ -53,7 +53,7 @@ export class ProfileLoginPage extends BaseComponent {
             hub.publish('SwitchToRegisterPage', null);
         });
 
-        login.querySelector('#loginForm').addEventListener('submit', async (event) => {
+        login.querySelector('#loginForm').addEventListener('submit', (event) => {
             event.preventDefault();
 
             const credentials = {

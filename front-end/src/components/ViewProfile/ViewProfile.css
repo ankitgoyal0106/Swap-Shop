@@ -44,3 +44,12 @@
     color: #333333;
     font-size: 1em;
 }
+
+.profile-picture {
+    border-radius: 50%;
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+    margin-bottom: 10px;
+    border: 2px solid #ddd;
+}

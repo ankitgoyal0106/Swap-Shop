@@ -136,6 +136,7 @@ export class ProfileRepoRemoteService extends Service {
     }
 
     const data = await response.json();
+    this.publish(Events.ProfileEditedSuccess, data);
     return data;
   }
 }

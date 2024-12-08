@@ -1,4 +1,7 @@
 import { BaseComponent } from "../BaseComponent/BaseComponent.js";
+import { EventHub } from "../../eventhub/EventHub.js";
+import { Events } from "../../eventhub/Events.js";
+import { getEmailFromLocalStorage } from "../../services/LocalStorage.js";
 
 export class ViewProfile extends BaseComponent {
     #container = null;
@@ -12,6 +15,7 @@ export class ViewProfile extends BaseComponent {
         this.#container = document.createElement('div');
         this.#container.classList.add('user-info-section');
         this.#setupContainerContent();
+        this.#attachEventListeners();
 
         return this.#container;
     }
@@ -24,12 +28,19 @@ export class ViewProfile extends BaseComponent {
         const userInfo = document.createElement('div');
         userInfo.classList.add('user-info-section');
 
+        const profilePicture = document.createElement('img');
+        profilePicture.className = 'profile-picture';
+        profilePicture.id = 'home-profile-picture';
+        profilePicture.src = 'https://via.placeholder.com/150';
+        profilePicture.alt = 'Profile Picture';
+
         const userName = document.createElement('h1');
         userName.className = 'user-name';
-        userName.textContent = "John"
+        userName.textContent = "Hello, FirstName!";
   
         // Additional user info can be added here
   
+        userInfo.appendChild(profilePicture);
         userInfo.appendChild(userName);
         return userInfo;
     }
@@ -81,4 +92,22 @@ export class ViewProfile extends BaseComponent {
           // Add more items as needed
         ];
       }
+
+    #attachEventListeners() {
+      const hub = EventHub.getInstance();
+      hub.subscribe(Events.LoginSuccess, (profileData) => {
+        this.#container.querySelector('.user-name').textContent = `Hello, ${profileData.user.name.split(' ')[0]}!`;
+        //if (profileData.user.profilePicture) {
+        //  this.#container.querySelector('.profile-picture').src = profileData.user.profilePicture;
+        //}
+        // TODO: Add additional user info here that needs to be loaded upon login
+      });
+      hub.subscribe(Events.ProfileEditedSuccess, (profileData) => {
+        this.#container.querySelector('.user-name').textContent = `Hello, ${profileData.profile.name.split(' ')[0]}!`;
+        
+        //if (profileData.profilePicture) {
+        //  this.#container.querySelector('.profile-picture').src = profileData.profile.profilePicture;
+        //}
+      });
+    }
 }
