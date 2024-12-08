@@ -1,4 +1,8 @@
 import { BaseComponent } from "../BaseComponent/BaseComponent.js";
+import { EventHub } from "../../eventhub/EventHub.js";
+import { Events } from "../../eventhub/Events.js";
+import { getEmailFromLocalStorage } from "../../services/LocalStorage.js";
+
 /*
 1. create chatroom interface dynamically
 2. dynamically add messages into the div
@@ -8,18 +12,14 @@ import { BaseComponent } from "../BaseComponent/BaseComponent.js";
 export class chatInterface extends BaseComponent{
     #container = null;
 
-    constructor(userID, groupName, loadedMsgs){
+    constructor(convoID){
         super();
-        this.userID = userID;
-        this.groupName = groupName;
-        this.loadedMsgs = loadedMsgs;
-        /*
-        msg{
-            userID: "",
-            msg: "",
-            readAt: t/f
-        }
-        */
+        this.userID = getEmailFromLocalStorage();
+        this.convoID = convoID;
+        this.groupName = "";//fetch this using convoID
+        this.loadedMsgs = [];//fetch this using convoID
+        //setInterval(1000, () => {fetch using convoID and re-rendering}) //this will periodically make a fetch to the back end to keep the chat room up to date
+        //new fear unlocked: if it takes too long to fetch, we might lose messages
         this.loadCSS("chatroom");
     }
 
@@ -37,7 +37,7 @@ export class chatInterface extends BaseComponent{
         this.#container.appendChild(this.#createInputBar());
         return this.#container;
     }
-    //TODO: create the chat interface to display messages in loadMsgs
+    //create the chat interface to display messages in loadMsgs
     #createChat(){
         const chatBox = document.createElement("div");
         chatBox.classList.add("chatBox")
@@ -45,7 +45,7 @@ export class chatInterface extends BaseComponent{
         return chatBox;
     }
 
-    //TODO: create div for each text message, two different CSS classes: one for user which are margined to the right and other users which are margined to left
+    //create div for each text message, two different CSS classes: one for user which are margined to the right and other users which are margined to left
     #createMsgBlock(userID, msg){
         const msgDiv = document.createElement("div");
         if(userID.localeCompare(this.userID) === 0){
@@ -58,18 +58,13 @@ export class chatInterface extends BaseComponent{
         const br = document.createElement("br");
         const txtMsg = document.createElement("p");
         txtMsg.innerText = msg;
-        // const makeNewLine = textMessage =>{
-
-        // };
-        // txtMsg.innerText = msg;
         msgDiv.appendChild(id);
         msgDiv.appendChild(br);
         msgDiv.appendChild(txtMsg);
-        //msgDiv.innerText = userID + "\n" + msg;
         return msgDiv;
     }
 
-    //TODO: this will include the text input for a message to be sent by currUser as well as the send button to do so
+    //includes the text input for a message to be sent by currUser as well as the send button to do so
     #createInputBar(){
         const inputBar = document.createElement("div");
         inputBar.classList.add("inputBar");
@@ -85,36 +80,30 @@ export class chatInterface extends BaseComponent{
             txt.style.width = hide.offsetWidth + "px";
         })
         //msgInput.classList.add("msgInput");
-        form.addEventListener("submit",  event => {
-            //maybe push new entry into array and reload msgLoad array 
-            event.preventDefault();
+
+        const send = () => {
             const userMsg = document.getElementById("msg");
             const chatBox = document.getElementById("chatBox");
             const newMsg = {userID: this.userID, msg:userMsg.value};
             this.loadedMsgs.push(newMsg);
-            //chatBox.appendChild(msgBlock);
             chatBox.innerHTML = "";
             this.#renderMsgs(chatBox);
             chatBox.scrollTop = chatBox.scrollHeight;
             userMsg.value = "";
+            //TODO: PUT request to server with this.loadedMsgs using repo service for given convoID
+            const hub = EventHub.getInstance();
+        }
+
+        form.addEventListener("submit",  event => {
+            //push new entry into array and reload msgLoad array 
+            event.preventDefault();
+            send();
         });
 
         const sendButton = document.createElement("button");
         sendButton.innerText = "Send";
         //sendButton.type = "button";
-        sendButton.addEventListener("click", () => {
-            //maybe push new entry into array and reload msgLoad array 
-            const userMsg = document.getElementById("msg");
-            const chatBox = document.getElementById("chatBox");
-            const newMsg = {userID: this.userID, msg:userMsg.value};
-            this.loadedMsgs.push(newMsg);
-            //chatBox.appendChild(msgBlock);
-            chatBox.innerHTML = "";
-            this.#renderMsgs(chatBox);
-            chatBox.scrollTop = chatBox.scrollHeight;
-            userMsg.value = "";
-            //TODO: interact with backend server to save loadedMsg to database (based on convoID prob)
-        });
+        sendButton.addEventListener("click", send);
 
         const backButton = document.createElement("button");
         const backLabel = document.createTextNode("Back");
