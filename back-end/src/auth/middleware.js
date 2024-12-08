@@ -1,4 +1,4 @@
-//import bcryptjs from 'https://cdn.jsdeliver.net/npm/bcryptjs@2.4.3/+esm';
+import bcrypt from 'bcryptjs';
 import SQLiteProfileModel from "../model/SQLiteProfileModel.js";
 export const authenticate = async (req, res, next) => {
     try {
