@@ -10,15 +10,15 @@ export class ChattingRepoRemoteService extends Service {
 
   addSubscriptions() {
     this.subscribe(Events.SaveNewChat, (data) => { //TODO: add SaveNewChat to Events
-      this.saveNewChat(data);
+       this.saveNewChat(data);
     });
 
     this.subscribe(Events.UpdateChat, (data) => { //TODO: add UpdateChat to Events
-        this.updateChat(data);
-      });
+       this.updateChat(data);
+    });
 
-    this.subscribe(Events.GetConvo, (data) => { //TODO: add GetConvos to Events
-        this.getConvo(data);
+    this.subscribe(Events.GetConvo, (data) => { //TODO: add GetConvo to Events
+       this.getConvo(data);
     });
   }
 
@@ -52,7 +52,8 @@ export class ChattingRepoRemoteService extends Service {
       return data;
   }
 
-  async updateChat(convoData) {//updating existing conversation entry for when messageLog is updated
+  //updating existing conversation entry for when messageLog is updated
+  async updateChat(convoData) {
     const response = await fetch(`/v1/updatechat/${convoData.convoID}`, {
       method: "PUT",
       headers: {
@@ -66,17 +67,24 @@ export class ChattingRepoRemoteService extends Service {
     }
 
     const data = await response.json();
-    return data;
+    //TODO: put a publish here so front end can re-render
+    this.publish(Events.UpdateChatSuccess, data);//publish so front end components can be passed the data from the back end
   }
 
-  async getConvo(convoData) { //fetch for a single conversation entry
-    const response = await fetch(`/v1/getconvo/${convoData.convoID}`);
+  //fetch for a single conversation entry
+  async getConvo(convoID) {
+    const response = await fetch(`/v1/getconvo/${convoID}`);
     if (!response.ok) {
       throw new Error("Failed to get convo info");
     }
 
     const data = await response.json();
-    return data;
+    if(!data.ok){
+      //throw new Error("Failed to retrieve conversation");
+      this.publish(Events.GetConvoFailure, `Unable to retrieve conversation`);
+    }
+
+    this.publish(Events.GetConvoSuccess, data);//publish so front end components can be passed the data from the back end
   }
   
 }

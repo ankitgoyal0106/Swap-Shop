@@ -64,7 +64,8 @@ export class ProfileRepoRemoteService extends Service {
     const response = await fetch(`/v1/profile/${email}`);
 
     if (!response.ok) {
-      throw new Error("Failed to fetch profile");
+      //throw new Error("Failed to fetch profile");
+      this.publish(Events.GetProfileFailure, `Profile does not exist`);
     }
 
     const data = await response.json();
