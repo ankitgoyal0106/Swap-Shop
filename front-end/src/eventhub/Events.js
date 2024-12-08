@@ -66,7 +66,9 @@ export const Events = {
 
     ProfileEdited: 'EditedProfile',
     Login: 'Login',
+    LoginSuccess: 'LoginSuccess',
     Logout: 'Logout',
+    LogoutSuccess: 'LogoutSuccess',
     Registered: 'Registered',
     RegisterProfile: 'RegisterProfile'
 };

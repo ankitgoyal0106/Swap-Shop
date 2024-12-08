@@ -23,14 +23,24 @@ class Routes {
         res.status(500).json({ message: "Registration failed" });
       }
     });
-    // User Login
-    this.router.post("/login", async (req, res) => {
-      try {
-        await login(req, res);
-      } catch (error) {
-        res.status(500).json({ message: "Login failed" });
-      }
+
+    // DESCRIPTION
+    //   Get profile data of the user trying to log in. This endpoint returns an object with a 'user' property
+    //   containing an object of the users profile data.
+    // REQUEST
+    //   GET /login/credentials?email=""&password=""
+    // RESPONSE
+    //   {
+    //     "user": { ... }
+    //   }
+    // STATUS CODES
+    //   200 - OK: The request was successful
+    //   401 - Unauthorized: The user is not authorized to access the requested resource
+    //   500 - Internal Server Error: The server encountered an error
+    this.router.get("/login/credentials", async (req, res) => {
+      await login(req, res);
     });
+
     // User Logout
     this.router.post("/logout", authenticate, async (req, res) => {
       try {

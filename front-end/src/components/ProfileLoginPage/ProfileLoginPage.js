@@ -1,6 +1,8 @@
 import { BaseComponent } from '../BaseComponent/BaseComponent.js';
 import { Registration } from "../registrationPage/registrationPage.js";
 import { EventHub } from '../../eventhub/EventHub.js';
+import { Events } from '../../eventhub/Events.js';
+import { saveEmailToLocalStorage } from '../../services/LocalStorage.js';
 
 export class ProfileLoginPage extends BaseComponent {
     #container = null;
@@ -51,16 +53,21 @@ export class ProfileLoginPage extends BaseComponent {
             hub.publish('SwitchToRegisterPage', null);
         });
 
-        /*
-        document.querySelector('.password-toggle').addEventListener('click', function () {
-            const passwordField = document.getElementById('password');
-            if (passwordField.type === 'password') {
-                passwordField.type = 'text';
-            } else {
-                passwordField.type = 'password';
-            }
+        login.querySelector('#loginForm').addEventListener('submit', async (event) => {
+            event.preventDefault();
+
+            const credentials = {
+                email: event.target.email.value,
+                password: event.target.password.value
+            };
+
+            const hub = EventHub.getInstance();
+            hub.publish(Events.Login, credentials)
+            hub.subscribe(Events.LoginSuccess, (profileData) => {
+                saveEmailToLocalStorage(profileData.user.email);
+                hub.publish(Events.SwitchToHomePage, null);
+            });
         });
-        */
 
         this.#container.appendChild(login);
     }
