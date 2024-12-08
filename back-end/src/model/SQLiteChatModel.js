@@ -7,20 +7,21 @@ const sequelize = new Sequelize({
 });
 //Define the Item model
 const Conversation = sequelize.define("Conversation", {
-    convoID: {
+    convoID: {//unique ID for a chatroom
         type: DataTypes.UUID,
-        defaultValue: DataTypes.UUIDV4,
+        //defaultValue: DataTypes.UUIDV4,
+        allowNull: false,
         primaryKey: true
     },
-    groupName: {
+    groupName: { //name of chatroom
         type: DataTypes.STRING,
         allowNull: false
     },
-    groupMembers: {
+    groupMembers: { //list of participants
         type: DataTypes.ARRAY(DataTypes.STRING),
         allowNull: false
     },
-    msgLog: {
+    msgLog: { //array containing {name:, msg:} objects that represent messages sent between users
         type: DataTypes.ARRAY(DataTypes.JSON),
         allowNull: false
     }
