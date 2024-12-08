@@ -5,7 +5,10 @@ import { ProfileLoginPage } from "../ProfileLoginPage/ProfileLoginPage.js";
 import { Registration } from "../registrationPage/registrationPage.js";
 import {CreateItemPage} from "../itemPage/createItemPage.js";
 import { EventHub } from "../../eventhub/EventHub.js";
+import { Events } from "../../eventhub/Events.js";
 import { ItemPage } from "../itemPage/itemPage.js";
+import { clearLocalStorage } from "../../services/LocalStorage.js";
+import { logout } from "../../utility/Logout.js";
 
 export class AppController {
     #container = null;
@@ -47,6 +50,7 @@ export class AppController {
     }
 
     render() {
+        clearLocalStorage();
         this.#createContainer();
         this.#setupContainerContent();
         this.#attachEventListeners();
@@ -70,6 +74,10 @@ export class AppController {
     }
 
     #setupContainerContent(){
+        document.querySelector('#logoutBtn').style.display = 'none';
+        document.querySelector('#exploreBtn').style.display = 'none';
+        document.querySelector('#profileBtn').style.display = 'none';
+        document.querySelector('#itemBtn').style.display = 'none';
         this.#container.innerHTML = `
             <div id="viewContainer"></div>
             `
@@ -82,6 +90,7 @@ export class AppController {
         const profileBtn = document.getElementById('profileBtn');
         const loginBtn = document.getElementById('loginBtn');
         const itemBtn = document.getElementById('itemBtn');
+        const logoutBtn = document.getElementById('logoutBtn');
 
         homeBtn.addEventListener('click', () => {
             this.#toggleView('home');
@@ -101,6 +110,16 @@ export class AppController {
 
         itemBtn.addEventListener('click', () => {
             this.#toggleView('item');
+        });
+
+        logoutBtn.addEventListener('click', () => {
+            this.#hub.publish(Events.Logout, null);
+            document.querySelector('#logoutBtn').style.display = 'none';
+            document.querySelector('#exploreBtn').style.display = 'none';
+            document.querySelector('#profileBtn').style.display = 'none';
+            document.querySelector('#itemBtn').style.display = 'none';
+            document.querySelector('#loginBtn').style.display = 'block';
+            logout();
         });
 
         this.#hub.subscribe('SwitchToHomePage', () => {
@@ -134,7 +153,15 @@ export class AppController {
         this.#hub.subscribe('SwitchToItemPage', () => {
             this.#currentView = 'item';
             this.#renderCurrentView();
-        })
+        });
+        this.#hub.subscribe(Events.LoginSuccess, () =>{
+            document.querySelector('#logoutBtn').style.display = 'block';
+            document.querySelector('#exploreBtn').style.display = 'block';
+            document.querySelector('#profileBtn').style.display = 'block';
+            document.querySelector('#itemBtn').style.display = 'block';
+            document.querySelector('#loginBtn').style.display = 'none';
+            document.querySelector('#logoutBtn').style.display = 'block';
+        });
     }
 
     #toggleView(view) {
