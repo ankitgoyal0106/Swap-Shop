@@ -57,6 +57,17 @@ export const Events = {
     ClearItemsSuccess: 'ClearItemsSuccess',
     ClearItemsFailure: 'ClearItemsFailure',
 
+    //Conversation storage events
+    SaveNewChat: `SaveNewChat`,
+
+    UpdateChat: `UpdateChat`,
+    UpdateChatSuccess: `UpdateChatSuccess`,
+    UpdateChatFailure: `UpdateChatFailure`,
+
+    GetConvo: `GetConvo`,
+    GetConvoSuccess: `GetConvoSuccess`,
+    GetConvoFailure: `GetConvoFailure`,
+
     SignUp: 'SignUp',
     ListItem: 'ListItem',
     StartNewChat: 'StartNewChat',
