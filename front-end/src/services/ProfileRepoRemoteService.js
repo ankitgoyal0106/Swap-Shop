@@ -12,6 +12,10 @@ export class ProfileRepoRemoteService extends Service {
       this.storeProfile(data);
     });
 
+    this.subscribe(Events.RegisterProfile, (data) => {
+      this.registerProfile(data);
+    });
+
     this.subscribe(Events.DeleteProfile, () => {
       this.deleteProfile();
     });
@@ -19,10 +23,14 @@ export class ProfileRepoRemoteService extends Service {
     this.subscribe(Events.GetProfile, (email) => {
       this.getProfile(email);
     });
+
+    this.subscribe(Events.ProfileEdited, (data) => {
+      this.updateProfile(data);
+    });
   }
 
   async #initProfiles() {
-    const response = await fetch("/v1/profiles");
+    const response = await fetch("http://localhost:3000/v1/profiles");
 
     if (!response.ok) {
       throw new Error("Failed to fetch profiles");
@@ -36,9 +44,27 @@ export class ProfileRepoRemoteService extends Service {
     });
   }
 
+  async registerProfile(profileData) {
+    const response = await fetch("http://localhost:3000/v1/register", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(profileData),
+    });
+
+    if (!response.ok) {
+      throw new Error("Failed to register profile");
+    }
+
+    const data = await response.json();
+    this.publish(Events.Registered, data);
+    return data
+  }
+
   async storeProfile(profileData) {
 
-    const response = await fetch("/v1/profile", {
+    const response = await fetch("http://localhost:3000/v1/profile", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -61,7 +87,12 @@ export class ProfileRepoRemoteService extends Service {
   }
 
   async getProfile(email) {
-    const response = await fetch(`/v1/profile/${email}`);
+    const response = await fetch(`http://localhost:3000/v1/profile/${email}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      }
+    });
 
     if (!response.ok) {
       //throw new Error("Failed to fetch profile");
@@ -71,5 +102,22 @@ export class ProfileRepoRemoteService extends Service {
     const data = await response.json();
     
     this.publish(Events.GetProfileSuccess, data);
+  }
+
+  async updateProfile(profileData) {
+    const response = await fetch("http://localhost:3000/v1/edit-profile", {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(profileData)
+    });
+
+    if (!response.ok) {
+      throw new Error("Failed to update profile");
+    }
+
+    const data = await response.json();
+    return data;
   }
 }
