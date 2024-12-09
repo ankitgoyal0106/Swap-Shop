@@ -8,7 +8,7 @@ const sequelize = new Sequelize({
 //Define the Item model
 const Conversation = sequelize.define("Conversation", {
     convoID: {//unique ID for a chatroom
-        type: DataTypes.UUID,
+        type: DataTypes.STRING,
         //defaultValue: DataTypes.UUIDV4,
         allowNull: false,
         primaryKey: true
@@ -18,13 +18,15 @@ const Conversation = sequelize.define("Conversation", {
         allowNull: false
     },
     groupMembers: { //list of participants
-        type: DataTypes.ARRAY(DataTypes.STRING),
+        type: DataTypes.STRING,
         allowNull: false
     },
     msgLog: { //array containing {name:, msg:} objects that represent messages sent between users
-        type: DataTypes.ARRAY(DataTypes.JSON),
+        type: DataTypes.STRING,
         allowNull: false
     }
+}, {
+    timestamps: false
 });
 
 class _SQLiteConvoModel {
@@ -39,13 +41,14 @@ class _SQLiteConvoModel {
             await this.delete();
 
             // Test to
-            await this.create(
-            {
-                groupName: `hang out group`,
-                groupMembers: [`john`, `jim`],
-                msgLog: [{name:`john`, msg:`hello`}, {name:`jim`, msg:`hi`}]
-            }
-            );
+            // await this.create(
+            // {
+            //     convoID: "1",
+            //     groupName: `hang out group`,
+            //     groupMembers: "[`example@umass.edu`, `jim`]",
+            //     msgLog: "[{name:`example@umass.edu`, msg:`hello`}, {name:`jim`, msg:`hi`}]"
+            // }
+            // );
         }
     }
     
