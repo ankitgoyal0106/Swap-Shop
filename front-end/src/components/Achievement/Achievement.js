@@ -68,7 +68,7 @@ export class Achievement extends BaseComponent {
                 achievementCounts: updatedAchievementCounts, 
             };
 
-            const response = await fetch(`http://localhost:3000/v1/profiles/${this.email}`, {
+            const response = await fetch(`http://localhost:3000/v1/profiles:${this.email}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
@@ -91,7 +91,7 @@ export class Achievement extends BaseComponent {
 
     async fetchProfileData() {
         try {
-            const response = await fetch(`http://localhost:3000/v1/profiles/${this.email}`);
+            const response = await fetch(`http://localhost:3000/v1/profiles:${this.email}`);
             if (!response.ok) {
                 throw new Error("Profile not found");
             }
