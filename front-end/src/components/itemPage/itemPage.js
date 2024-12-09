@@ -66,9 +66,11 @@ export class ItemPage extends BaseComponent {
         // Details box
         const detailsBox = document.createElement('div');
         detailsBox.className = 'details-box';
+
         const category = document.createElement('p');
         category.textContent = `Category: ${this.itemData.category}`;
         detailsBox.appendChild(category);
+
         const condition = document.createElement('p');
         condition.textContent = `Condition: ${this.itemData.condition}`;
         detailsBox.appendChild(condition);
@@ -78,6 +80,12 @@ export class ItemPage extends BaseComponent {
         const location = document.createElement('p');
         location.textContent = `Location: ${this.itemData.itemLocation}`;
         detailsBox.appendChild(location);
+        const postedAt = document.createElement('p');
+        postedAt.textContent = `Posted at: ${this.itemData.postedAt}`;
+        detailsBox.appendChild(postedAt);
+        const amountAvailable = document.createElement('p');
+        amountAvailable.textContent = `Amount Available: ${this.itemData.amountAvailable}`;
+        detailsBox.appendChild(amountAvailable);
         contentContainer.appendChild(detailsBox);
 
         this.container.appendChild(contentContainer);

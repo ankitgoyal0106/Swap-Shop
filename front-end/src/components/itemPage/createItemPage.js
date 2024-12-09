@@ -12,7 +12,6 @@ export class CreateItemPage extends BaseComponent {
         this.#container.classList.add("create-item-page");
     }
 
-
     render() {
         this.#container = document.createElement('div');
         this.#container.className = 'create-item-page';
@@ -278,28 +277,17 @@ export class CreateItemPage extends BaseComponent {
             itemLocation
         };
 
-        //this.#saveToIndexedDB(listingData);
-        //publish new item
+        // Publish new item
         this.#publishNewItem(listingData);
 
-        //TODO: Clear inputs
+        // Switch to item page
+        const hub = EventHub.getInstance();
+        hub.publish('SwitchToItemPage', null);
     }
 
     #publishNewItem(data){
         const hub = EventHub.getInstance();
         hub.publish(Events.NewItem, data);
-        hub.publish(Events.StoreItem, data);
+        hub.publish(Events.StoreItem, data);        
     }
-
-    // #displayMessage(message, type) {
-    //     const messageElement = document.getElementById("form-message");
-    //     messageElement.textContent = message;
-    //     messageElement.style.backgroundColor = "#624E88"; // Purple background
-    //     messageElement.style.color = "#ffffff"; // White text
-    //     messageElement.style.padding = '20px'; // Padding around the text
-    //     messageElement.style.textAlign = 'center'; // Center the text
-    //     messageElement.style.width = '100%'; // Full width
-    //     messageElement.style.fontFamily = 'Verdana, sans-serif'; // Match font with header
-    // }
-
 }
