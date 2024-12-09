@@ -289,6 +289,7 @@ export class CreateItemPage extends BaseComponent {
         const hub = EventHub.getInstance();
         hub.publish(Events.NewItem, data);
         hub.publish(Events.StoreItem, data);
+        hub.publish(Events.ListItem);
     }
 
     // #displayMessage(message, type) {

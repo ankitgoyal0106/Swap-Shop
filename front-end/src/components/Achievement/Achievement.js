@@ -18,7 +18,7 @@ export class Achievement extends BaseComponent {
         this.fetchProfileData(); 
         this.subscribeToItemEvents();
       }
-
+    
     //Subscribe to the events
     subscribeToItemEvents(){
         this.eventHub.subscribe(Events.ListItem, this.handleItemListed.bind(this));
@@ -42,7 +42,7 @@ export class Achievement extends BaseComponent {
     async incrementAchievementCount(field) {
         try {
             // Fetch the current profile data
-            const response = await fetch(`http://localhost:3000/v1/profiles/${this.email}`);
+            const response = await fetch(`http://localhost:3000/v1/profile/:${this.email}`);
             if (!response.ok) {
                 throw new Error("Profile not found");
             }
@@ -68,7 +68,7 @@ export class Achievement extends BaseComponent {
                 achievementCounts: updatedAchievementCounts, 
             };
 
-            const response = await fetch(`http://localhost:3000/v1/profiles:${this.email}`, {
+            const response = await fetch(`http://localhost:3000/v1/profile/:${this.email}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
@@ -91,7 +91,7 @@ export class Achievement extends BaseComponent {
 
     async fetchProfileData() {
         try {
-            const response = await fetch(`http://localhost:3000/v1/profiles:${this.email}`);
+            const response = await fetch(`http://localhost:3000/v1/profile/:${this.email}`);
             if (!response.ok) {
                 throw new Error("Profile not found");
             }
@@ -106,13 +106,17 @@ export class Achievement extends BaseComponent {
     }
 
     render() {
+        if (!this.#profileData) {
+            return null; 
+        }
+
         const container = document.createElement('div');
         container.classList.add('achievements');
     
         const achievementContent = document.createElement('div');
         achievementContent.className = 'achievement-content'
 
-        const { achievementCounts } = this.#profileData;
+        const achievementCounts = this.#profileData;
 
         //Array containing all the badgeData and the condition to get them
         const badgeData = [
