@@ -1,5 +1,6 @@
 import { BaseComponent } from "../BaseComponent/BaseComponent.js";
-// import { EventHub } from "../../eventhub/EventHub.js";
+import { ItemPage } from "../itemPage/itemPage.js";
+import { EventHub } from "../../eventhub/EventHub.js";
   export class explorePage extends BaseComponent {
     #container = null;
     #searchBar = null;
@@ -15,8 +16,6 @@ import { BaseComponent } from "../BaseComponent/BaseComponent.js";
       this.items = [];
       this.recommendedItems = this.#getRecommendedItems();
       this.recentlyViewedItems = this.#getRecentlyViewedItems();
-      // const hub = EventHub.getInstance();
-      // hub.subscribe(Events.StoreItem, data => this.#storeItem(data));
       this.#initializeItems();
 
       this.loadCSS("explorePage");
@@ -160,7 +159,14 @@ import { BaseComponent } from "../BaseComponent/BaseComponent.js";
       const itemTitle = document.createElement('h2');
       itemTitle.textContent = item.itemName;
       itemCard.appendChild(itemTitle);
-
+      itemCard.addEventListener('click', () => { 
+        console.log('Clicked on item:', item.itemName); 
+        const hub = EventHub.getInstance();
+        hub.publish('ViewItem', item);
+        hub.publish('SwitchToItemPage');
+        return item.ListingID;
+        // window.location.href = `http://localhost:3000/v1/item/${item.ListingID}`;
+      }); 
       const img = document.createElement('img');
       // const blobUrl = URL.createObjectURL(item.images[0]);
       // img.src = blobUrl; 
@@ -256,18 +262,18 @@ import { BaseComponent } from "../BaseComponent/BaseComponent.js";
   }
   
   #applyFilters(){
-    const lowPrice = this.#container.querySelector('.filter-section .filter-content .filter-options input:nth-child(1)').value;
-    const highPrice = this.#container.querySelector('.filter-section .filter-content .filter-options input:nth-child(2)').value;
+    let lowPrice = this.#container.querySelector('.filter-section .filter-content .filter-options input:nth-child(1)').value;
+    let highPrice = this.#container.querySelector('.filter-section .filter-content .filter-options input:nth-child(2)').value;
     const condition = this.#container.querySelector('.filter-section .filter-content .filter-options select').value;
     if(lowPrice === ''){
       lowPrice = 0;
     }
     if(highPrice === ''){
-      highPrice = 1000000;
+      highPrice = Infinity;
     }
-    const filteredItems = this.items;
-    for(let i = 0; i < this.items.length; i++){
-      if(this.items[i].price < lowPrice || this.items[i].price > highPrice || (condition !== 'any' && this.items[i].condition !== condition)){
+    for(let i = 0; i < filteredItems.length; i++){
+      console.log(filteredItems[i].price, lowPrice, highPrice, condition, filteredItems[i].condition);
+      if(filteredItems[i].price < lowPrice || filteredItems[i].price > highPrice || (condition !== 'any' && filteredItems[i].condition !== condition)){
          filteredItems.splice(i, 1);
          i--;
       }
@@ -345,8 +351,7 @@ import { BaseComponent } from "../BaseComponent/BaseComponent.js";
         if (!response.ok) {
           throw new Error('Failed to fetch items from the backend');
         }
-        const data = await response.json();
-        console.log('Parsed Data:', data.items);  
+        const data = await response.json(); 
         return data.items; 
       } catch (error) {
         console.error('Error fetching items:', error);

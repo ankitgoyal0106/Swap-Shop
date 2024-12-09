@@ -82,7 +82,6 @@ export class AppController {
                 <li><a href="#" id="homeBtn">Home</a></li>
                 <li><a href="#" id="exploreBtn">Explore</a></li>
                 <li><a href="#" id="profileBtn">Profile</a></li>
-                <li><a href="#" id="itemBtn">Item Page</a></li>
                 <li><a href="#" id="logoutBtn">Logout</a></li>
             `;
             this.#profilePage.render();
@@ -109,7 +108,6 @@ export class AppController {
         const exploreBtn = document.getElementById('exploreBtn');
         const profileBtn = document.getElementById('profileBtn');
         const loginBtn = document.getElementById('loginBtn');
-        const itemBtn = document.getElementById('itemBtn');
         const logoutBtn = document.getElementById('logoutBtn');
 
         homeBtn.addEventListener('click', () => {
@@ -131,12 +129,6 @@ export class AppController {
         if (loginBtn) {
             loginBtn.addEventListener('click', () => {
                 this.#toggleView('login');
-            });
-        }
-
-        if (itemBtn) {
-            itemBtn.addEventListener('click', () => {
-                this.#toggleView('item');
             });
         }
 
@@ -191,7 +183,6 @@ export class AppController {
                 <li><a href="#" id="homeBtn">Home</a></li>
                 <li><a href="#" id="exploreBtn">Explore</a></li>
                 <li><a href="#" id="profileBtn">Profile</a></li>
-                <li><a href="#" id="itemBtn">Item Page</a></li>
                 <li><a href="#" id="logoutBtn">Logout</a></li>
             `;
             this.#attachEventListeners();

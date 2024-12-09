@@ -130,7 +130,7 @@ export class EditProfilePage extends BaseComponent {
             //profilePicture: this.#profilePicture,
             name: `${editFirstName} ${editLastName}`,
             email: getEmailFromLocalStorage(), // Gets email from local storage
-            phone: phone,
+            phoneNo: phone,
             password: hash,
             updatedAt: new Date()
         };

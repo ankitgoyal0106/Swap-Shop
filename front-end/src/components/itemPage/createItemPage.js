@@ -12,7 +12,6 @@ export class CreateItemPage extends BaseComponent {
         this.#container.classList.add("create-item-page");
     }
 
-
     render() {
         this.#container = document.createElement('div');
         this.#container.className = 'create-item-page';
@@ -163,6 +162,16 @@ export class CreateItemPage extends BaseComponent {
         form.appendChild(priceLabel);
         form.appendChild(priceInput);
 
+        // Seller Email
+        const sellerEmailLabel = document.createElement("label");
+        sellerEmailLabel.textContent = "Seller Email:";
+        const sellerEmailInput = document.createElement("input");
+        sellerEmailInput.type = "email";
+        sellerEmailInput.id = "seller-email";
+        sellerEmailInput.required = true;
+        form.appendChild(sellerEmailLabel);
+        form.appendChild(sellerEmailInput);
+
         // Posted At
         const postedAtLabel = document.createElement("label");
         postedAtLabel.textContent = "Posted At (UTC):";
@@ -261,6 +270,7 @@ export class CreateItemPage extends BaseComponent {
         const price = document.getElementById('item-price').value;
         const amountAvailable = document.getElementById('amount-available').value;
         const itemLocation = document.getElementById('item-location').value;
+        const sellerEmail = document.getElementById('seller-email').value;
 
         const imageUrls = Array.from(images).map(file => URL.createObjectURL(file));
 
@@ -275,14 +285,16 @@ export class CreateItemPage extends BaseComponent {
             condition,
             price,
             amountAvailable,
-            itemLocation
+            itemLocation,
+            sellerEmail
         };
 
-        //this.#saveToIndexedDB(listingData);
-        //publish new item
+        // Publish new item
         this.#publishNewItem(listingData);
 
-        //TODO: Clear inputs
+        // Switch to item page
+        const hub = EventHub.getInstance();
+        hub.publish('SwitchToItemPage', listingData);
     }
 
     #publishNewItem(data){
@@ -291,16 +303,4 @@ export class CreateItemPage extends BaseComponent {
         hub.publish(Events.StoreItem, data);
         hub.publish(Events.ListItem);
     }
-
-    // #displayMessage(message, type) {
-    //     const messageElement = document.getElementById("form-message");
-    //     messageElement.textContent = message;
-    //     messageElement.style.backgroundColor = "#624E88"; // Purple background
-    //     messageElement.style.color = "#ffffff"; // White text
-    //     messageElement.style.padding = '20px'; // Padding around the text
-    //     messageElement.style.textAlign = 'center'; // Center the text
-    //     messageElement.style.width = '100%'; // Full width
-    //     messageElement.style.fontFamily = 'Verdana, sans-serif'; // Match font with header
-    // }
-
 }
