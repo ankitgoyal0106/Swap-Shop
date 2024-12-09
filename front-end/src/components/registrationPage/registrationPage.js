@@ -135,9 +135,9 @@ export class Registration extends BaseComponent {
                 "viewed": 0,
                 "easterEgg": false
             },
-            savedListings: "",
-            recentlyViewed: "",
-            conversationList: ""
+            savedListings: "[]",
+            recentlyViewed: "[]",
+            conversationList: "[]"
         };
 
         // Publish the profile data to the event hub
