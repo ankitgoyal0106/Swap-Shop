@@ -13,7 +13,7 @@ export class ViewProfile extends BaseComponent {
 
     render(){
         this.#container = document.createElement('div');
-        this.#container.classList.add('user-info-section');
+        this.#container.classList.add('profile-page');
         this.#setupContainerContent();
         this.#attachEventListeners();
 
@@ -26,21 +26,24 @@ export class ViewProfile extends BaseComponent {
     }
     #createUserInfoSection() {
         const userInfo = document.createElement('div');
-        userInfo.classList.add('user-info-section');
+        userInfo.className = 'user-info-section';
 
+        /* TODO: Implement Profile Picture as stretch goal
         const profilePicture = document.createElement('img');
         profilePicture.className = 'profile-picture';
         profilePicture.id = 'home-profile-picture';
         profilePicture.src = 'https://via.placeholder.com/150';
         profilePicture.alt = 'Profile Picture';
+        */
 
         const userName = document.createElement('h1');
         userName.className = 'user-name';
+        userName.id = 'user-name';
         userName.textContent = "Hello, FirstName!";
   
         // Additional user info can be added here
   
-        userInfo.appendChild(profilePicture);
+        //userInfo.appendChild(profilePicture);
         userInfo.appendChild(userName);
         return userInfo;
     }
@@ -102,12 +105,13 @@ export class ViewProfile extends BaseComponent {
         //}
         // TODO: Add additional user info here that needs to be loaded upon login
       });
-      hub.subscribe(Events.ProfileEditedSuccess, (profileData) => {
-        this.#container.querySelector('.user-name').textContent = `Hello, ${profileData.profile.name.split(' ')[0]}!`;
-        
-        //if (profileData.profilePicture) {
-        //  this.#container.querySelector('.profile-picture').src = profileData.profile.profilePicture;
-        //}
+
+      hub.subscribe(Events.PageReloadWhileLoggedIn, (profileData) => {
+        this.#container.querySelector('.user-name').textContent = `Hello, ${profileData.name.split(' ')[0]}!`;
+      });
+
+      hub.subscribe(Events.ChangedViewToProfile, (profileData) => {
+        this.#container.querySelector('.user-name').textContent = `Hello, ${profileData.name.split(' ')[0]}!`;
       });
     }
 }
