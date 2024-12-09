@@ -162,6 +162,16 @@ export class CreateItemPage extends BaseComponent {
         form.appendChild(priceLabel);
         form.appendChild(priceInput);
 
+        // Seller Email
+        const sellerEmailLabel = document.createElement("label");
+        sellerEmailLabel.textContent = "Seller Email:";
+        const sellerEmailInput = document.createElement("input");
+        sellerEmailInput.type = "email";
+        sellerEmailInput.id = "seller-email";
+        sellerEmailInput.required = true;
+        form.appendChild(sellerEmailLabel);
+        form.appendChild(sellerEmailInput);
+
         // Posted At
         const postedAtLabel = document.createElement("label");
         postedAtLabel.textContent = "Posted At (UTC):";
@@ -260,6 +270,7 @@ export class CreateItemPage extends BaseComponent {
         const price = document.getElementById('item-price').value;
         const amountAvailable = document.getElementById('amount-available').value;
         const itemLocation = document.getElementById('item-location').value;
+        const sellerEmail = document.getElementById('seller-email').value;
 
         const imageUrls = Array.from(images).map(file => URL.createObjectURL(file));
 
@@ -274,7 +285,8 @@ export class CreateItemPage extends BaseComponent {
             condition,
             price,
             amountAvailable,
-            itemLocation
+            itemLocation,
+            sellerEmail
         };
 
         // Publish new item
@@ -282,7 +294,7 @@ export class CreateItemPage extends BaseComponent {
 
         // Switch to item page
         const hub = EventHub.getInstance();
-        hub.publish('SwitchToItemPage', null);
+        hub.publish('SwitchToItemPage', listingData);
     }
 
     #publishNewItem(data){
