@@ -7,7 +7,7 @@ import bcryptjs from 'https://cdn.jsdelivr.net/npm/bcryptjs@2.4.3/+esm';
 export class EditProfilePage extends BaseComponent {
     #container = null;
     #hub = null;
-    #profilePicture = null;
+    //#profilePicture = null;
 
     constructor() {
         super();
@@ -15,14 +15,12 @@ export class EditProfilePage extends BaseComponent {
         this.#hub = EventHub.getInstance();
     }
 
-    //Need to add logic to get user data from the backend to populate the form
-    async render() {
+    render() {
         this.#container = document.createElement('div');
         this.#container.id = 'editProfile-container';
         this.#container.classList.add('editProfile-container');
         this.#buildProfileEditor();
-        this.#hub.subscribe(Events.Login, await this.#autoFillProfileData.bind(this));
-        this.#hub.subscribe(Events.Registered, await this.#autoFillProfileData.bind(this));
+        this.#addEventListeners();
 
         return this.#container;
     }
@@ -33,18 +31,19 @@ export class EditProfilePage extends BaseComponent {
         editProfileForm.classList.add('editProfileForm');
 
         // Adding each section of the form
-        editProfileForm.appendChild(this.#createProfileImageInput());
-        editProfileForm.appendChild(this.#createTextInput('editFirstName', 'First Name', 'text'));
-        editProfileForm.appendChild(this.#createTextInput('editLastName', 'Last Name', 'text'));
-        editProfileForm.appendChild(this.#createTextInput('editPhoneInput', 'Phone Number', 'tel'));
-        editProfileForm.appendChild(this.#createTextInput('editPassword', 'New Password', 'password'));
-        editProfileForm.appendChild(this.#createTextInput('confirmEditPassword', 'Confirm New Password', 'password'));
+        //editProfileForm.appendChild(this.#createProfileImageInput());
+        this.#createTextInput('editFirstName', 'First Name', 'text').forEach(element => editProfileForm.appendChild(element));
+        this.#createTextInput('editLastName', 'Last Name', 'text').forEach(element => editProfileForm.appendChild(element));
+        this.#createTextInput('editPhoneInput', 'Phone Number', 'tel').forEach(element => editProfileForm.appendChild(element));
+        this.#createTextInput('editPassword', 'New Password', 'password').forEach(element => editProfileForm.appendChild(element));
+        this.#createTextInput('confirmEditPassword', 'Confirm New Password', 'password').forEach(element => editProfileForm.appendChild(element));
         editProfileForm.appendChild(this.#createSubmitButton());
 
         this.#container.appendChild(editProfileForm);
     }
 
     // Private method to create profile image input
+    /*
     #createProfileImageInput() {
         const profileImage = document.createElement('div');
         profileImage.id = 'profileImage';
@@ -67,26 +66,25 @@ export class EditProfilePage extends BaseComponent {
                     profileImageDisplay.src = e.target.result;
                 };
                 reader.readAsDataURL(file);
-                this.#profilePicture = file;
+                this.#profilePicture = URL.createObjectURL(file);
             }
         });
 
         return profileImage;
-    }
+    }*/
 
     // Private method to create text inputs (e.g., name, email, phone, college)
     #createTextInput(id, placeholder, type = 'text') {
         const label = document.createElement('label');
         label.htmlFor = id;
-        label.textContent = placeholder;
+        label.textContent = placeholder + ':';
         label.classList.add('editProfileLabel');
 
         const input = document.createElement('input');
         input.id = id;
         input.classList.add(id);
         input.type = type;
-        input.placeholder = placeholder;
-        return input;
+        return [label, input];
     }
 
     // Private method to create submit button
@@ -129,7 +127,7 @@ export class EditProfilePage extends BaseComponent {
 
         // Prepare updated profile data
         const updatedProfileData = {
-            profilePicture: this.#profilePicture,
+            //profilePicture: this.#profilePicture,
             name: `${editFirstName} ${editLastName}`,
             email: getEmailFromLocalStorage(), // Gets email from local storage
             phone: phone,
@@ -140,21 +138,16 @@ export class EditProfilePage extends BaseComponent {
         // Publish the updated profile data
         this.#hub.publish(Events.ProfileEdited, updatedProfileData);
         alert('Profile updated');
-        console.log("Profile Data", updatedProfileData);
+        this.#container.querySelector('#editPassword').value = '';
+        this.#container.querySelector('#confirmEditPassword').value = '';
     }
-    
-    async #autoFillProfileData() {
-        const email = getEmailFromLocalStorage();
 
-        this.#hub.publish(Events.GetProfile, email);
-        this.#hub.subscribe(Events.GetProfileSuccess, (data) => {
-            populateProfileForm.bind(this)(data);
+    #addEventListeners() {
+        const hub = EventHub.getInstance();
+        hub.subscribe(Events.ChangedViewToEdit, (profileData) => {
+            this.#container.querySelector('#editFirstName').value = profileData.name.split(' ')[0];
+            this.#container.querySelector('#editLastName').value = profileData.name.split(' ')[1];
+            this.#container.querySelector('#editPhoneInput').value = profileData.phoneNo;
         });
-
-        function populateProfileForm(userData) {
-            this.#container.querySelector('#editFirstName').value = userData.name.split(' ')[0];
-            this.#container.querySelector('#editLastName').value = userData.name.split(' ')[1];
-            this.#container.querySelector('#editPhoneInput').value = userData.phone;
-        };
     }
 }
