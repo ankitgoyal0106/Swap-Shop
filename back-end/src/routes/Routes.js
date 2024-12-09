@@ -98,7 +98,7 @@ class Routes {
     //   Get the profile associated with a user's email. This endpoint returns an object with a 'profile' property
     //   containing an object of user data.
     // REQUEST
-    //   GET /profile:email
+    //   GET /profile/:email
     // RESPONSE
     //   {
     //     "profile": { ... } 
@@ -106,7 +106,7 @@ class Routes {
     // STATUS CODES
     //   200 - OK: The request was successful
     //   500 - Internal Server Error: The server encountered an error
-    this.router.get("/profile:email", async (req, res) => {
+    this.router.get("/profile/:email", async (req, res) => {
         await ProfileController.getProfile(req, res);
     });
 
