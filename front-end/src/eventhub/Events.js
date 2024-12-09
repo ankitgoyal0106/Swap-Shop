@@ -71,5 +71,9 @@ export const Events = {
     Logout: 'Logout',
     LogoutSuccess: 'LogoutSuccess',
     Registered: 'Registered',
-    RegisterProfile: 'RegisterProfile'
+    RegisterProfile: 'RegisterProfile',
+
+    PageReloadWhileLoggedIn: 'PageReloadWhileLoggedIn',
+    ChangedViewToProfile: 'ChangedViewToProfile',
+    ChangedViewToEdit: 'ChangedViewToLogin'
 };
