@@ -2,6 +2,8 @@ import { BaseComponent } from "../BaseComponent/BaseComponent.js";
 import { chatInterface } from "../chatroom/chatroom.js";
 import { EventHub } from "../../eventhub/EventHub.js";
 import { Events } from "../../eventhub/Events.js";
+import { ChatRepoFactory } from "../../services/ChatRepoFactory.js";
+import { ProfileRepoFactory } from "../../services/ProfileRepoFactory.js";
 import { saveEmailToLocalStorage, getEmailFromLocalStorage } from "../../services/LocalStorage.js";
 
 export class conversationList extends BaseComponent{
@@ -9,20 +11,30 @@ export class conversationList extends BaseComponent{
     
     constructor(){
         super();
-        saveEmailToLocalStorage("example@umass.edu"); //TODO: REMOVE LATER
-        this.userID = getEmailFromLocalStorage();
+        ChatRepoFactory.get();
+        ProfileRepoFactory.get("remote");
+        // saveEmailToLocalStorage("example2@umass.edu"); //TODO: REMOVE LATER
         //convoLog is array of strings of convoIDs
-        
-        this.convoLog = [];
-        //TODO: fetching profiles from back-end
+        this.convoLog = null;
         const hub = EventHub.getInstance();
-        hub.subscribe(Events.GetProfileSuccess, data => this.convoLog = data.conversationList); //on a successful retrieval, we can ge the conversationList for the user
+        hub.subscribe(Events.GetProfileSuccess, data => {
+            this.convoLog = JSON.parse(data.profile.conversationList);
+        }); //on a successful retrieval, we can ge the conversationList for the user
+        this.userID = getEmailFromLocalStorage();
         hub.publish(Events.GetProfile, this.userID); //query from database to retrieve profile data
 
         this.loadCSS("conversation");
     }
 
     render(){ 
+        //TODO: fetching profiles from back-end
+        const hub = EventHub.getInstance();
+        hub.subscribe(Events.GetProfileSuccess, data => {
+            this.convoLog = JSON.parse(data.profile.conversationList);
+        }); //on a successful retrieval, we can ge the conversationList for the user
+        this.userID = getEmailFromLocalStorage();
+        hub.publish(Events.GetProfile, this.userID); //query from database to retrieve profile data
+
         this.#container = document.createElement("div");
         this.#container.style.display = "block";
         this.#container.appendChild(this.#createConvoBar()); //renders the convoBar with backButton and addConvoButton (need to implement how to create new convos)
@@ -44,8 +56,8 @@ export class conversationList extends BaseComponent{
         return {
             convoID: generateUUIDv4(),
             groupName: userGroupName, //String
-            groupMembers: tempNames, //Array of Strings
-            msgLog: msgs //Array of Objects
+            groupMembers: JSON.stringify(tempNames), //Array of Strings
+            msgLog: JSON.stringify(msgs) //Array of Objects
         }
     }
 
@@ -73,34 +85,37 @@ export class conversationList extends BaseComponent{
         const convoContainer = document.createElement("div");
         convoContainer.id = "convoContainer";
         convoContainer.classList.add("convoContainer");
-        if(this.convoLog != []){
+        if(this.convoLog.length > 0){
             this.convoLog.forEach(id => {
-                const convoElem = this.#createContainerElem(id);
-                convoContainer.appendChild(convoElem);
+                const hub = EventHub.getInstance();
+                let convoObj; 
+                hub.clearHandlers(Events.GetConvoSuccess);
+                hub.subscribe(Events.GetConvoSuccess, data => {
+                    localStorage.setItem(data.convoID, JSON.stringify(data));
+                    convoObj = data;
+                    const convoElem = this.#createContainerElem(convoObj);
+                    convoContainer.appendChild(convoElem);
+                });
+                hub.publish(Events.GetConvo, id);
             });
         }
         return convoContainer;
     }
 
-    #createContainerElem(convoID){
+    #createContainerElem(convoObj){
         const convoBox = document.createElement("div");
         convoBox.classList.add("convoElement");
         //TODO: fetch conversation data structure by convoID and store into convoObj (used to extract the groupName to display in convoBox)
-        let convoObj;
-        const hub = EventHub.getInstance();
-        hub.subscribe(Events.GetConvoSuccess, data => convoObj = data);
-        hub.publish(Events.GetConvo, convoID);
-
-        //const upper = document.createTextNode(convoObj.groupName + " | Members: " + convoObj.groupMembers.length);
-        const upper = document.createTextNode(convoID);//TODO: REVERT CHANGE LATER
+        const upper = document.createTextNode(convoObj.groupName);
+        convoBox.appendChild(upper);
+        const makeRoom = () => new chatInterface(convoObj.convoID);//TODO: Questionable, investigate later (use localStorage to save instances and check if it needs to make a new object)
         convoBox.addEventListener("click", () => {
             //TODO: we want chatRoom to only be passed the convoID since email is in localStorage and msgLog is updated within it so a PUT reqeust from chatRoom interface should work
-            const chatRoom = new chatInterface(convoID);
+            const chatRoom = makeRoom();
             const parent = this.#container.parentElement;
             parent.innerHTML = "";
             parent.appendChild(chatRoom.render());
         })
-        convoBox.appendChild(upper);
         return convoBox;
     }
 
@@ -151,6 +166,9 @@ export class conversationList extends BaseComponent{
                 }
                 //TODO: use repo service to try and grab the email of the user. If it is sucessfully fetched, can add, if not throw an error
                 const hub = EventHub.getInstance();
+                hub.clearHandlers(Events.GetProfileSuccess);
+                hub.clearHandlers(Events.GetProfileFailure);
+                //hub.clearHandlers(Events.GetProfile);
                 hub.subscribe(Events.GetProfileSuccess, () => {
                     tempNames.push(newName);
                     newMember.value = "";
@@ -170,6 +188,15 @@ export class conversationList extends BaseComponent{
         const createGroupButton = document.createElement("button");
         const createGroupLabel = document.createTextNode("Create Group");
         createGroupButton.appendChild(createGroupLabel);
+        const hub = EventHub.getInstance();
+        const save = data => {
+            console.log("Successfully Saved Conversation", data);
+            const newConvoElem = this.#createContainerElem(data);
+            const convoContainer = document.getElementById("convoContainer");
+            convoContainer.appendChild(newConvoElem);
+        };
+        hub.clearHandlers(Events.SaveNewChatSuccess);
+        hub.subscribe(Events.SaveNewChatSuccess,save);
         createGroupButton.addEventListener("click", () => {
             const newGroup = document.getElementById("groupName");
             const newGroupName = newGroup.value;
@@ -198,18 +225,26 @@ export class conversationList extends BaseComponent{
                     tempNames.push(this.userID);//add current user into list of participants
                     
                     const convoObj = this.#makeConvoObj(newGroupName, tempNames);
-                    const newConvoElem = this.#createContainerElem(convoObj.convoID);//TODO: REVERT CHANGE LATER TO GROUPNAME
-                    const convoContainer = document.getElementById("convoContainer");
-                    convoContainer.appendChild(newConvoElem);
-                    console.log(this.convoLog);
 
                     //TODO: use repo service to create a new entry into the SQLite database
                     const hub = EventHub.getInstance();
-                    //tempNames.append() //append current user to the list of participants
                     hub.publish(Events.SaveNewChat, convoObj);
+
+                    //PUT this.convoLog into database entry for that profile based on email
                     this.convoLog.push(convoObj.convoID);
-                    //TODO: PUT this.convoLog into database entry for that profile based on email
-                    hub.publish(Events.ProfileEdited, {conversationListing: this.convoLog});
+                    hub.publish(Events.ProfileEdited, {email: this.userID, conversationList: JSON.stringify(this.convoLog)});//no need to fetch current user info, just update in database
+                    tempNames.forEach(name => {
+                        if(name.localeCompare(this.userID) !== 0){
+                            hub.clearHandlers(Events.GetProfileSuccess);//clears subscribers
+                            let name_convoLog; 
+                            hub.subscribe(Events.GetProfileSuccess, data => {//on success, will grab conversationList of profile and push new convoID into it
+                                name_convoLog = JSON.parse(data.profile.conversationList);
+                                name_convoLog.push(convoObj.convoID);
+                                hub.publish(Events.ProfileEdited, {email: name, conversationList: JSON.stringify(name_convoLog)});//broadcast edits to each profile
+                            });
+                            hub.publish(Events.GetProfile, name);//fetches profile info from back-end
+                        }
+                    })
                 }
             }
             
