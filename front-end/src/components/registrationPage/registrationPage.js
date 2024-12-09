@@ -1,7 +1,6 @@
 import { BaseComponent } from '../BaseComponent/BaseComponent.js';
 import { EventHub } from '../../eventhub/EventHub.js';
 import { Events } from '../../eventhub/Events.js';
-import { saveEmailToLocalStorage } from '../../services/LocalStorage.js';
 
 export class Registration extends BaseComponent {
     #container = null;
@@ -136,16 +135,18 @@ export class Registration extends BaseComponent {
                 "viewed": 0,
                 "easterEgg": false
             },
-            savedListings: [],
-            recentlyViewed: [],
-            conversationList: []
+            savedListings: "[]",
+            recentlyViewed: "[]",
+            conversationList: "[]"
         };
 
         // Publish the profile data to the event hub
         const hub = EventHub.getInstance();
-        hub.publish(Events.NewProfile, profileData);
-        hub.publish(Events.StoreProfile, profileData);
-        hub.publish(Events.Registered, profileData);
-        saveEmailToLocalStorage(profileData.email); // Add the email to the local storage to be used throughout the app
+        hub.publish(Events.RegisterProfile, profileData);
+        hub.subscribe(Events.Registered, (profileData) => {
+            console.log("Profile registered successfully", profileData);
+            alert("Registration successful! Please log in to continue.");
+            hub.publish(Events.SwitchToLoginPage, null);
+        });
     }
 }

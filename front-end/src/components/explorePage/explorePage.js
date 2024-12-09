@@ -1,5 +1,5 @@
 import { BaseComponent } from "../BaseComponent/BaseComponent.js";
-  
+
   export class explorePage extends BaseComponent {
     #container = null;
     #searchBar = null;
@@ -15,6 +15,10 @@ import { BaseComponent } from "../BaseComponent/BaseComponent.js";
       this.items = this.#getItems();
       this.recommendedItems = this.#getRecommendedItems();
       this.recentlyViewedItems = this.#getRecentlyViewedItems();
+      // const hub = EventHub.getInstance();
+      // hub.subscribe(Events.StoreItem, data => this.#storeItem(data));
+      this.#initializeItems();
+     
       this.loadCSS("explorePage");
     }
   
@@ -136,19 +140,22 @@ import { BaseComponent } from "../BaseComponent/BaseComponent.js";
       this.#recentlyViewedSection.append(recentlyViewedTitle, recentlyViewedContainer);
       return this.#recentlyViewedSection;
     }
-  
+      
     #createItemCard(item) {
       const itemCard = document.createElement('div');
       itemCard.className = 'item-card';
   
-      const img = document.createElement('img');
-      img.src = item.src;
-      img.alt = item.itemName;
-      itemCard.appendChild(img);
-  
       const itemTitle = document.createElement('h2');
       itemTitle.textContent = item.itemName;
       itemCard.appendChild(itemTitle);
+
+      const img = document.createElement('img');
+      // const blobUrl = URL.createObjectURL(item.images[0]);
+      // img.src = blobUrl; 
+      img.alt = item.itemName; // Use the item's name as alt text
+      img.className = 'item-image';
+      itemCard.appendChild(img);
+
   
       const itemDescription = document.createElement('p');
       itemDescription.textContent = item.itemDescription;
@@ -191,7 +198,7 @@ import { BaseComponent } from "../BaseComponent/BaseComponent.js";
               const minPriceInput = document.createElement('input');
               minPriceInput.type = 'number';
               minPriceInput.placeholder = 'Min';
-  
+            
               const maxPriceInput = document.createElement('input');
               maxPriceInput.type = 'number';
               maxPriceInput.placeholder = 'Max';
@@ -223,11 +230,39 @@ import { BaseComponent } from "../BaseComponent/BaseComponent.js";
           }
       );
   
+      // Apply Filters Button
+      const applyFiltersButton = document.createElement('button');
+      applyFiltersButton.textContent = 'Apply Filters';
+      applyFiltersButton.className = 'apply-filters-button';
+      applyFiltersButton.addEventListener('click', () => this.#applyFilters());
+
       // Append all filters to the section
       filterSection.append(filterTitle, priceFilterContainer, conditionFilterContainer);
+       // Append the apply filters button to the filter section
+       filterSection.appendChild(applyFiltersButton);
       return filterSection;
   }
   
+  #applyFilters(){
+    const lowPrice = this.#container.querySelector('.filter-section .filter-content .filter-options input:nth-child(1)').value;
+    const highPrice = this.#container.querySelector('.filter-section .filter-content .filter-options input:nth-child(2)').value;
+    const condition = this.#container.querySelector('.filter-section .filter-content .filter-options select').value;
+    if(lowPrice === ''){
+      lowPrice = 0;
+    }
+    if(highPrice === ''){
+      highPrice = 1000000;
+    }
+    const filteredItems = this.items;
+    for(let i = 0; i < this.items.length; i++){
+      if(this.items[i].price < lowPrice || this.items[i].price > highPrice || (condition !== 'any' && this.items[i].condition !== condition)){
+         filteredItems.splice(i, 1);
+         i--;
+      }
+    }
+    this.#displayFilteredItems(filteredItems);
+  }
+
   // Helper function to create a collapsible filter
   #createCollapsibleFilter(title, contentGenerator) {
       const filterContainer = document.createElement('div');
@@ -341,8 +376,24 @@ import { BaseComponent } from "../BaseComponent/BaseComponent.js";
           amountAvailable: 8,
           updatedAt: new Date('2023-01-10T10:00:00Z')
         }
-      ];
-    }
+
+        async #getItems(){
+          try{
+              const response = await fetch('http://localhost:3000/v1/items');
+              if(!response.ok){
+                  throw new Error('Failed to fetch items from the backend');
+              }
+            
+              const data = await response.json();
+              console.log('Parsed Data:', data.items);  
+              return data.items; 
+          } catch (error) {
+              console.error('Error fetching items:', error);
+              return [];
+            }
+       ];
+
+      }
   
     #getRecommendedItems() {
         return [ 

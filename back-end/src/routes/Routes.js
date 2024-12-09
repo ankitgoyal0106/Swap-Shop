@@ -1,10 +1,10 @@
 import express from "express";
 import ItemController from "../controller/ItemController.js";
+import ProfileController from "../controller/ProfileController.js";
 import {
   register,
   login,
-  logout,
-  getProfile,
+  logout
 } from "../controller/LoginController.js";
 import { authenticate } from "../auth/middleware.js";
 
@@ -23,41 +23,111 @@ class Routes {
         res.status(500).json({ message: "Registration failed" });
       }
     });
-    // User Login
-    this.router.post("/login", async (req, res) => {
-      try {
-        await login(req, res);
-      } catch (error) {
-        res.status(500).json({ message: "Login failed" });
-      }
+
+    // DESCRIPTION
+    //   Get profile data of the user trying to log in. This endpoint returns an object with a 'user' property
+    //   containing an object of the users profile data.
+    // REQUEST
+    //   GET /login/credentials?email=""&password=""
+    // RESPONSE
+    //   {
+    //     "user": { ... }
+    //   }
+    // STATUS CODES
+    //   200 - OK: The request was successful
+    //   401 - Unauthorized: The user is not authorized to access the requested resource
+    //   500 - Internal Server Error: The server encountered an error
+    this.router.get("/login/credentials", async (req, res) => {
+      await login(req, res);
     });
+
     // User Logout
-    this.router.post("/logout", authenticate, async (req, res) => {
-      try {
+    this.router.post("/logout", async (req, res) => {
         await logout(req, res);
-      } catch (error) {
-        res.status(500).json({ message: "Logout failed" });
-      }
     });
 
-    // Get All User Profiles
-    this.router.get("/profile", authenticate, async (req, res) => {
-      try {
-        await getProfile(req, res);
-      } catch (error) {
-        res.status(500).json({ message: "Failed to retrieve all profiles" });
-      }
+    // DESCRIPTION
+    //   Get all profiles. This endpoint returns an object with a 'profiles' property
+    //   containing an array profiles.
+    // REQUEST
+    //   GET /profiles
+    // RESPONSE
+    //   {
+    //     "profiles": [ ... ]
+    //   }
+    // STATUS CODES
+    //   200 - OK: The request was successful
+    //   500 - Internal Server Error: The server encountered an error
+    this.router.get("/profiles", async (req, res) => {
+        await ProfileController.getAllProfiles(req, res);
     });
 
-    // Get A User Profile By Email
-    this.router.get("/profile:email", authenticate, async (req, res) => {
-      try {
-        const email = req.params.email;
-        req.body.email = email;
-        await getProfile(req, res);
-      } catch {
-        res.status(500).json({ message: "Failed to retrieve profile" });
-      }
+    // DESCRIPTION
+    //   Add a new profile without registering. This endpoint creates a new profile with the provided
+    //   data and returns the created profile.
+    // REQUEST
+    //   POST /profile
+    //   {
+    //     "userID": "ID for the user (optional)",
+    //     "name": "User's full name as a string",
+    //     "email": "User's email as a string",
+    //     "phoneNo": "User's phone number as a string",
+    //     "college": "User's college as a string",
+    //     "password": "User's password as a string",
+    //     "createdAt": "Date the profile was created",
+    //     "updatedAt": "Date the profile was last updated",
+    //     "achievementCounts": "JSON of counts associated with the user for achievements (optional)",
+    //     "savedListings": "Stringified array of saved listings IDs (optional)",
+    //     "recentlyViewed": "Stringified array of recently viewed listings IDs (optional)",
+    //     "conversationList": "Stringified array of conversation IDs (optional)"
+    //   }
+    // RESPONSE
+    //   {
+    //     "profile": { ... }
+    //   }
+    // STATUS CODES
+    //   201 - Created: The profile was created successfully
+    //   400 - Bad Request: The request was invalid or missing required data
+    //   500 - Internal Server Error: The server encountered an error
+    this.router.post("/profile", async (req, res) => {
+        await ProfileController.createProfile(req, res);
+    });
+
+    // DESCRIPTION
+    //   Get the profile associated with a user's email. This endpoint returns an object with a 'profile' property
+    //   containing an object of user data.
+    // REQUEST
+    //   GET /profile/:email
+    // RESPONSE
+    //   {
+    //     "profile": { ... } 
+    //   }
+    // STATUS CODES
+    //   200 - OK: The request was successful
+    //   500 - Internal Server Error: The server encountered an error
+    this.router.get("/profile/:email", async (req, res) => {
+        await ProfileController.getProfile(req, res);
+    });
+
+    // DESCRIPTION
+    //   Put updated data in a profile associated with a user's email. This endpoint returns an object with a 'profile' property
+    //   containing an object of user's updated data.
+    // REQUEST
+    //   PUT /edit-profile
+    //   {
+    //     "email": email
+    //     ...
+    //   }
+    // RESPONSE
+    //   {
+    //     "profile": { ... } 
+    //   }
+    // STATUS CODES
+    //   201 - Created: The request was successful
+    //   400 - Bad Request: The request was invalid or missing required data
+    //   500 - Internal Server Error: The server encountered an error
+    this.router.put("/edit-profile", async (req, res) => {
+        await ProfileController.editProfile(req, res);
     });
 
     //Get Item
@@ -95,15 +165,6 @@ class Routes {
         await ItemController.removeItem(req, res);
       } catch (error) {
         res.status(500).json({ message: "Failed to remove item" });
-      }
-    });
-
-    //Update Profile
-    this.router.post("/edit-profile", async (req, res) => {
-      try {
-        await ProfileController.editProfile(req, res);
-      } catch (error) {
-        res.status(500).json({ message: "Failed to update profile" });
       }
     });
   }

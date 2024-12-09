@@ -33,10 +33,17 @@ const Profile = sequelize.define("Profile", {
         type: DataTypes.STRING,
         allowNull: false
     },
+    /*
     profilePicture: {
-        type: DataTypes.BLOB,
-        allowNull: true
-    },
+        type: DataTypes.TEXT,
+        allowNull: true,
+        get () {
+            return JSON.parse(this.getDataValue('profilePicture'));
+        },
+        set (value) {
+            this.setDataValue('profilePicture', JSON.stringify(value));
+        },
+    },*/
     createdAt: {
         type: DataTypes.DATE,
         allowNull: false
@@ -50,15 +57,15 @@ const Profile = sequelize.define("Profile", {
         allowNull: true
     },
     savedListings: {
-        type: DataTypes.ARRAY(DataTypes.STRING),
+        type: DataTypes.STRING,
         allowNull: true
     },
     recentlyViewed: {
-        type: DataTypes.ARRAY(DataTypes.STRING),
+        type: DataTypes.STRING,
         allowNull: true
     },
     conversationList: {
-        type: DataTypes.ARRAY(DataTypes.STRING),
+        type: DataTypes.STRING,
         allowNull: true
     }
 });
