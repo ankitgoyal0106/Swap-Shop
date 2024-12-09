@@ -6,6 +6,7 @@ import {
   login,
   logout
 } from "../controller/LoginController.js";
+import ChatController from "../controller/ChatController.js";
 import { authenticate } from "../auth/middleware.js";
 
 class Routes {
@@ -59,7 +60,7 @@ class Routes {
     });
 
     // Get A User Profile By Email
-    this.router.get("/profile:email", authenticate, async (req, res) => {
+    this.router.get("/profile/:email", async (req, res) => {
       try {
         const email = req.params.email;
         req.body.email = email;
@@ -114,6 +115,38 @@ class Routes {
       } catch (error) {
         res.status(500).json({ message: "Failed to remove item" });
       }
+    });
+
+
+    //Save New Chat
+    this.router.post("/savechat", async (req,res) => {
+      // try {
+        await ChatController.saveNewConvo(req, res);
+      // } catch (error) {
+      //   res.status(500).json({ message: "Failed to save new conversation" });
+      // }
+    });
+
+    //Update Message Log
+    this.router.put("/updatechat", async (req,res) => {
+      // try {
+        // const convoID = req.params.convoID;
+        // req.body.convoID = convoID;
+        await ChatController.updateConvo(req, res);
+      // } catch (error) {
+      //   res.status(500).json({ message: "Failed to update message log" });
+      // }
+    });
+    
+    //Get Conversation
+    this.router.get("/getconvo/:convoID", async (req,res) => {//TODO: not sure if I parameterized the directory path right
+      // try {
+        // const convoID = req.params.convoID;
+        // req.body.convoID = convoID;
+        await ChatController.getConvo(req, res);
+      // } catch {
+      //   res.status(500).json({ message: "Failed to retrieve profile" });
+      // }
     });
   }
 
