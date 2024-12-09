@@ -2,10 +2,10 @@ import { ChattingRepoRemoteService } from "./ChattingRepoRemoteService.js";
 //TODO: Import remote service
 
 /**
- * Factory class to create instances of item repository services.
+ * Factory class to create instances of chat repository services.
  *
  * This class provides a static method to get an appropriate instance
- * of a item repository service based on the specified repository type.
+ * of a chat repository service based on the specified repository type.
  * It cannot be instantiated.
  */
 export class ChatRepoFactory {

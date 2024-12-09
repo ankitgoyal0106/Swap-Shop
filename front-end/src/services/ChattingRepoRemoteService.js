@@ -36,7 +36,8 @@ export class ChattingRepoRemoteService extends Service {
 //   }
 
   async saveNewChat(convoData){//starting a new conversation with empty messageLog
-    const response = await fetch("/v1/savechat}", {
+    console.log("saving chat...");
+    const response = await fetch("http://localhost:3000/v1/savechat", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -49,42 +50,49 @@ export class ChattingRepoRemoteService extends Service {
       }
   
       const data = await response.json();
-      return data;
+      console.log("Saved Chat");
+      this.publish(Events.SaveNewChatSuccess, data);
+      return data;//publish here
   }
 
   //updating existing conversation entry for when messageLog is updated
   async updateChat(convoData) {
-    const response = await fetch(`/v1/updatechat/${convoData.convoID}`, {
+    const response = await fetch(`http://localhost:3000/v1/updatechat`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({msgLog: convoData.msgLog}),
+      body: JSON.stringify(convoData),
     });
 
     if (!response.ok) {
+      this.publish(Events.UpdateChatFailure, "Unable to update conversation");
       throw new Error("Failed to update chat");
     }
+    else{
+      const data = await response.json();
+      //TODO: put a publish here so front end can re-render
+      this.publish(Events.UpdateChatSuccess, data);//publish so front end components can be passed the data from the back end
+      console.log("Updated Chat");
 
-    const data = await response.json();
-    //TODO: put a publish here so front end can re-render
-    this.publish(Events.UpdateChatSuccess, data);//publish so front end components can be passed the data from the back end
+    }
   }
 
   //fetch for a single conversation entry
   async getConvo(convoID) {
-    const response = await fetch(`/v1/getconvo/${convoID}`);
-    if (!response.ok) {
-      throw new Error("Failed to get convo info");
-    }
-
-    const data = await response.json();
-    if(!data.ok){
-      //throw new Error("Failed to retrieve conversation");
+    const response = await fetch(`http://localhost:3000/v1/getconvo/${convoID}`);
+    
+    if(!response.ok){
       this.publish(Events.GetConvoFailure, `Unable to retrieve conversation`);
+      throw new Error("Failed to retrieve conversation");
     }
-
-    this.publish(Events.GetConvoSuccess, data);//publish so front end components can be passed the data from the back end
+    else{
+      const data = await response.json();
+      this.publish(Events.GetConvoSuccess, data);//publish so front end components can be passed the data from the back end
+      console.log("Got Convo");
+    }
   }
   
 }
+
+export default new ChattingRepoRemoteService();
