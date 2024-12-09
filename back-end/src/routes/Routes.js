@@ -79,12 +79,10 @@ class Routes {
     });
 
     //Get Item
-    const itemController = new ItemController(); 
     this.router.get("/items", async (req, res) => {
       try {
         await ItemController.getAllItems(req, res);
       } catch (error) {
-        console.error("Error in /items route:", error);
         res.status(500).json({ message: "Internal Server Error" });
       }
     });
@@ -112,7 +110,7 @@ class Routes {
     //Delete Item
     this.router.delete("/item", async (req, res) => {
       try {
-        await ItemController.deleteItem(req, res);
+        await ItemController.removeItem(req, res);
       } catch (error) {
         res.status(500).json({ message: "Failed to remove item" });
       }
