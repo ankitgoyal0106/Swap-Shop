@@ -162,7 +162,8 @@ import { EventHub } from "../../eventhub/EventHub.js";
       itemCard.addEventListener('click', () => { 
         console.log('Clicked on item:', item.itemName); 
         const hub = EventHub.getInstance();
-        hub.publish('SwitchToItemPage', item);
+        hub.publish('ViewItem', item);
+        hub.publish('SwitchToItemPage');
         return item.ListingID;
         // window.location.href = `http://localhost:3000/v1/item/${item.ListingID}`;
       }); 
