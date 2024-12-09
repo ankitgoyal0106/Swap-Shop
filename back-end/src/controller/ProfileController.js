@@ -2,13 +2,19 @@ import ProfileModelFactory from "../model/ProfileModelFactory.js";
 
 class ProfileController{
     constructor(){
-        ProfileModelFactory.getModel().then((model) => {
+        ProfileModelFactory.getModel("sqlite").then((model) => {
             this.model = model;
         });
     }
 
     async getProfile(req,res){
-        const profile = await this.model.read(req.body.email);//get profile for specific email
+        // let profile = null;
+        // setTimeout(async() => profile = await this.model.read(req.params.email), 5000);//get profile for specific email
+        // if(profile !== null){
+        //     return res.status(201).json({profile});
+        // }
+        // res.status(400).ok(false);
+        const profile = await this.model.read(req.params.email);//get profile for specific email
         res.json({profile});
     }
 

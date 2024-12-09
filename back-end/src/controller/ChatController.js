@@ -1,4 +1,4 @@
-import ModelFactory from "../model/ModelFactory.js";
+import ModelFactory from "../model/ChattingModelFactory.js";
 
 class ChatController{
     constructor(){
@@ -8,8 +8,8 @@ class ChatController{
     }
 
     async getConvo(req,res){
-        const item = await this.model.read(req.body.convoID);
-        res.json(item);
+        const convo = await this.model.read(req.params.convoID);
+        res.json(convo);
     }
 
     async saveNewConvo(req,res){
@@ -23,7 +23,7 @@ class ChatController{
             return res.status(201).json(convo);
         }
         catch(e){
-            return res.status(500).json({error: "Failed to create conversation. Please try again."})
+            return res.status(500);
         }
     }
 

@@ -137,7 +137,7 @@ export class Registration extends BaseComponent {
             },
             savedListings: "",
             recentlyViewed: "",
-            conversationList: ""
+            conversationList: "[]"
         };
 
         // Publish the profile data to the event hub
