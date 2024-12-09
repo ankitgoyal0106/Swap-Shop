@@ -103,7 +103,7 @@ class _SQLiteItemModel {
     }
 
     async update(item) {
-        const item_update = await Item.findByPk(item.listingID);
+        const item_update = await Item.findByPk(item.userID);
         if (!item_update) {
             return null;
         }
@@ -118,7 +118,7 @@ class _SQLiteItemModel {
             return;
         }
 
-        await Item.destroy({ where: { listingID: item.listingID } });
+        await Item.destroy({ where: { listingID: item.userID } });
         return item;
     }
 }
