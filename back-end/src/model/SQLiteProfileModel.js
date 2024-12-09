@@ -33,6 +33,7 @@ const Profile = sequelize.define("Profile", {
         type: DataTypes.STRING,
         allowNull: false
     },
+    /*
     profilePicture: {
         type: DataTypes.TEXT,
         allowNull: true,
@@ -42,7 +43,7 @@ const Profile = sequelize.define("Profile", {
         set (value) {
             this.setDataValue('profilePicture', JSON.stringify(value));
         },
-    },
+    },*/
     createdAt: {
         type: DataTypes.DATE,
         allowNull: false

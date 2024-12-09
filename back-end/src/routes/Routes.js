@@ -74,7 +74,6 @@ class Routes {
     //     "phoneNo": "User's phone number as a string",
     //     "college": "User's college as a string",
     //     "password": "User's password as a string",
-    //     "profilePicture": "",
     //     "createdAt": "Date the profile was created",
     //     "updatedAt": "Date the profile was last updated",
     //     "achievementCounts": "JSON of counts associated with the user for achievements (optional)",
