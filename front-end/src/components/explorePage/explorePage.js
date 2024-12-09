@@ -1,5 +1,5 @@
 import { BaseComponent } from "../BaseComponent/BaseComponent.js";
-
+// import { EventHub } from "../../eventhub/EventHub.js";
   export class explorePage extends BaseComponent {
     #container = null;
     #searchBar = null;
@@ -12,16 +12,16 @@ import { BaseComponent } from "../BaseComponent/BaseComponent.js";
     super();
       this.currentPage = 1;
       this.itemsPerPage = 12;
-      this.items = this.#getItems();
+      this.items = [];
       this.recommendedItems = this.#getRecommendedItems();
       this.recentlyViewedItems = this.#getRecentlyViewedItems();
       // const hub = EventHub.getInstance();
       // hub.subscribe(Events.StoreItem, data => this.#storeItem(data));
       this.#initializeItems();
-     
+
       this.loadCSS("explorePage");
     }
-  
+
     render() {
       this.#container = document.createElement('div');
       this.#container.className = 'explore-page';
@@ -92,18 +92,30 @@ import { BaseComponent } from "../BaseComponent/BaseComponent.js";
     }
 
     #updateItemsGrid() {
-      console.log('Updating items grid...');
       const category = this.#searchBar.querySelector('.category-dropdown').value;
       const searchQuery = this.#searchBar.querySelector('input').value.toLowerCase();
-  
-      this.items = this.#getItems().filter(item => {
-        return (item.itemName.toLowerCase().includes(searchQuery) || item.itemDescription.toLowerCase().includes(searchQuery)) && (category === 'all' || item.category.toLowerCase() === category);
+    
+      const filteredItems = this.items.filter(item => {
+        return (item.itemName.toLowerCase().includes(searchQuery) ||
+                item.itemDescription.toLowerCase().includes(searchQuery)) &&
+               (category === 'all' || item.category.toLowerCase() === category);
       });
-
-      this.#displayItems(this.currentPage);
-      return this.#itemsGrid;
+    
+      this.#displayFilteredItems(filteredItems); // Use a separate method to display filtered items
     }
     
+    #displayFilteredItems(filteredItems) {
+      this.#itemsGrid.innerHTML = '';
+      const start = (this.currentPage - 1) * this.itemsPerPage;
+      const end = start + this.itemsPerPage;
+      const paginatedItems = filteredItems.slice(start, end);
+    
+      paginatedItems.forEach(item => {
+        const itemCard = this.#createItemCard(item);
+        this.#itemsGrid.appendChild(itemCard);
+      });
+    }
+
     #createPaginationControls() {
       this.#paginationControls = document.createElement('div');
       this.#paginationControls.className = 'pagination-controls';
@@ -320,87 +332,34 @@ import { BaseComponent } from "../BaseComponent/BaseComponent.js";
         this.#paginationControls.querySelector('button:nth-child(2)').disabled = this.currentPage * this.itemsPerPage >= this.items.length;
       }
     }
-  
-    #getItems() {
-      return [
-        {
-          ListingID: '1',
-          itemName: 'Mock Electronic',
-          itemDescription: 'Description for item 2',
-          category: 'Electronics',
-          price: 100.0,
-          postedAt: new Date('2023-01-01T10:00:00Z'),
-          itemLocation: 'Location A',
-          images: ['img1.jpg', 'img2.jpg'],
-          amountAvailable: 10,
-          updatedAt: new Date('2023-01-02T10:00:00Z')
-        },
-        {
-          ListingID: '2',
-          itemName: 'Item 3',
-          itemDescription: 'Mock Clothing',
-          category: 'Clothing',
-          price: 50.0,
-          postedAt: new Date('2023-01-03T10:00:00Z'),
-          itemLocation: 'Location B',
-          images: ['img3.jpg', 'img4.jpg'],
-          amountAvailable: 5,
-          updatedAt: new Date('2023-01-04T10:00:00Z')
-        },
-        {
-          ListingID: '3',
-          itemName: 'Item 4',
-          itemDescription: 'Mock Books',
-          category: 'Books',
-          price: 20.0,
-          postedAt: new Date('2023-01-05T10:00:00Z'),
-          itemLocation: 'Location C',
-          images: ['img5.jpg', 'img6.jpg'],
-          amountAvailable: 15,
-          updatedAt: new Date('2023-01-06T10:00:00Z')
-        },
-        {
-          ListingID: '4',
-          itemName: 'Item 5',
-          itemDescription: 'Mock Furniture',
-          category: 'Furniture',
-          price: 200.0,
-          postedAt: new Date('2023-01-07T10:00:00Z'),
-          itemLocation: 'Location D',
-          images: ['img7.jpg', 'img8.jpg'],
-          amountAvailable: 2,
-          updatedAt: new Date('2023-01-08T10:00:00Z')
-        },
-        {
-          ListingID: '5',
-          itemName: 'Mock IClicker',
-          itemDescription: 'Brand New IClicker',
-          category: 'IClicker',
-          price: 30.0,
-          postedAt: new Date('2023-01-09T10:00:00Z'),
-          itemLocation: 'Location E',
-          images: ['img9.jpg', 'img10.jpg'],
-          amountAvailable: 8,
-          updatedAt: new Date('2023-01-10T10:00:00Z')
+
+    async #initializeItems() {
+       try {
+        this.items = await this.#getItems(); // Fetch items
+        if (!Array.isArray(this.items)) {
+          throw new Error("Fetched items is not an array");
         }
+        this.#displayItems(this.currentPage); // Display items only after fetching
+      } catch (error) {
+        console.error("Error initializing items:", error);
+        this.items = []; // Fallback to an empty array
+  }
+    }
 
-        async #getItems(){
-          try{
-              const response = await fetch('http://localhost:3000/v1/items');
-              if(!response.ok){
-                  throw new Error('Failed to fetch items from the backend');
-              }
-            
-              const data = await response.json();
-              console.log('Parsed Data:', data.items);  
-              return data.items; 
-          } catch (error) {
-              console.error('Error fetching items:', error);
-              return [];
-            }
-       ];
-
+    async #getItems() {
+      try {
+        const response = await fetch('http://localhost:3000/v1/items'); // Update the URL to match your backend route
+        if (!response.ok) {
+          throw new Error('Failed to fetch items from the backend');
+        }
+        const data = await response.json();
+        console.log('Parsed Data:', data.items);  
+        return data.items; 
+      } catch (error) {
+        console.error('Error fetching items:', error);
+        return [];
       }
+    }
   
     #getRecommendedItems() {
         return [ 

@@ -7,6 +7,8 @@ import { Achievement } from "../Achievement/Achievement.js";
 import {CreateItemPage} from "../itemPage/createItemPage.js";
 //TODO: Import other screens here
 import { EditProfilePage } from "../editProfilePage/editProfilePage.js";
+import { Events } from "../../eventhub/Events.js";
+import { getEmailFromLocalStorage } from "../../services/LocalStorage.js";
 
 export class ProfileContoller extends BaseComponent {
   #container = null;
@@ -191,6 +193,12 @@ export class ProfileContoller extends BaseComponent {
     }
 
     if (this.#currentView === 'profile'){
+      this.#viewProfile.render();
+      this.#hub.subscribe(Events.GetProfileSuccess, (data) => {
+        const hub = EventHub.getInstance();
+        hub.publish(Events.ChangedViewToProfile, data.profile);
+      });
+      this.#hub.publish(Events.GetProfile, getEmailFromLocalStorage());
       viewContainer.appendChild(this.#viewProfile.render());
     }
 
@@ -204,6 +212,12 @@ export class ProfileContoller extends BaseComponent {
     }
     //TODO: Add other views
     if (this.#currentView === 'edit'){
+      this.#editorPage.render();
+      this.#hub.subscribe(Events.GetProfileSuccess, (data) => {
+        const hub = EventHub.getInstance();
+        hub.publish(Events.ChangedViewToEdit, data.profile);
+      });
+      this.#hub.publish(Events.GetProfile, getEmailFromLocalStorage());
       viewContainer.appendChild(this.#editorPage.render());
     }
   }

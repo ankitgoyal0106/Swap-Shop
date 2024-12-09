@@ -8,13 +8,13 @@ class ProfileController{
     }
 
     async getProfile(req,res){
-        const profile = await this.model.read(req.body.email);//get profile for specific email
-        res.json({profile});
+        const profile = await this.model.read(req.params.email);//get profile for specific email
+        res.json({ profile });
     }
 
     async getAllProfiles(_req, res) {
         const profiles = await this.model.read();
-        res.json( { profiles } );
+        res.json({ profiles });
     }
 
     async createProfile(req,res){

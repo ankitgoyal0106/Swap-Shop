@@ -11,7 +11,7 @@ class Server{
 
 //Configure all the middleware
 configureMiddleware(){
-    this.app.use(express.static("../front-end/src"));
+    this.app.use(express.static("../../front-end/src"));
 
     this.app.use(express.json({ limit: "10mb" }));
 
