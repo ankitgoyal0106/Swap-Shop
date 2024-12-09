@@ -1,5 +1,6 @@
 import { BaseComponent } from "../BaseComponent/BaseComponent.js";
-// import { EventHub } from "../../eventhub/EventHub.js";
+import { ItemPage } from "../itemPage/itemPage.js";
+import { EventHub } from "../../eventhub/EventHub.js";
   export class explorePage extends BaseComponent {
     #container = null;
     #searchBar = null;
@@ -15,8 +16,6 @@ import { BaseComponent } from "../BaseComponent/BaseComponent.js";
       this.items = [];
       this.recommendedItems = this.#getRecommendedItems();
       this.recentlyViewedItems = this.#getRecentlyViewedItems();
-      // const hub = EventHub.getInstance();
-      // hub.subscribe(Events.StoreItem, data => this.#storeItem(data));
       this.#initializeItems();
 
       this.loadCSS("explorePage");
@@ -162,6 +161,8 @@ import { BaseComponent } from "../BaseComponent/BaseComponent.js";
       itemCard.appendChild(itemTitle);
       itemCard.addEventListener('click', () => { 
         console.log('Clicked on item:', item.itemName); 
+        const hub = EventHub.getInstance();
+        hub.publish('SwitchToItemPage', item);
         return item.ListingID;
         // window.location.href = `http://localhost:3000/v1/item/${item.ListingID}`;
       }); 
@@ -269,7 +270,6 @@ import { BaseComponent } from "../BaseComponent/BaseComponent.js";
     if(highPrice === ''){
       highPrice = Infinity;
     }
-    console.log(lowPrice, highPrice, condition);
     for(let i = 0; i < filteredItems.length; i++){
       console.log(filteredItems[i].price, lowPrice, highPrice, condition, filteredItems[i].condition);
       if(filteredItems[i].price < lowPrice || filteredItems[i].price > highPrice || (condition !== 'any' && filteredItems[i].condition !== condition)){
@@ -277,8 +277,6 @@ import { BaseComponent } from "../BaseComponent/BaseComponent.js";
          i--;
       }
     }
-    console.log(this.items);
-    console.log(filteredItems);
     this.#displayFilteredItems(filteredItems);
   }
 
@@ -352,8 +350,7 @@ import { BaseComponent } from "../BaseComponent/BaseComponent.js";
         if (!response.ok) {
           throw new Error('Failed to fetch items from the backend');
         }
-        const data = await response.json();
-        console.log('Parsed Data:', data.items);  
+        const data = await response.json(); 
         return data.items; 
       } catch (error) {
         console.error('Error fetching items:', error);
