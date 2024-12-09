@@ -133,7 +133,8 @@ export class EditProfilePage extends BaseComponent {
             name: `${editFirstName} ${editLastName}`,
             email: getEmailFromLocalStorage(), // Gets email from local storage
             phone: phone,
-            password: hash
+            password: hash,
+            updatedAt: new Date()
         };
 
         // Publish the updated profile data
@@ -146,7 +147,9 @@ export class EditProfilePage extends BaseComponent {
         const email = getEmailFromLocalStorage();
 
         this.#hub.publish(Events.GetProfile, email);
-        this.#hub.subscribe(Events.GetProfileSuccess, populateProfileForm.bind(this));
+        this.#hub.subscribe(Events.GetProfileSuccess, (data) => {
+            populateProfileForm.bind(this)(data);
+        });
 
         function populateProfileForm(userData) {
             this.#container.querySelector('#editFirstName').value = userData.name.split(' ')[0];

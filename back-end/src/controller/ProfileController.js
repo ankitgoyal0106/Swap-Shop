@@ -1,8 +1,8 @@
-import ModelFactory from "../model/ModelFactory.js";
+import ProfileModelFactory from "../model/ProfileModelFactory.js";
 
 class ProfileController{
     constructor(){
-        ModelFactory.getModel().then((model) => {
+        ProfileModelFactory.getModel().then((model) => {
             this.model = model;
         });
     }
@@ -12,6 +12,11 @@ class ProfileController{
         res.json({profile});
     }
 
+    async getAllProfiles(_req, res) {
+        const profiles = await this.model.read();
+        res.json( { profiles } );
+    }
+
     async createProfile(req,res){
         try{
             if (!req.body || !req.body.email) {
@@ -19,7 +24,7 @@ class ProfileController{
             }        
 
             const profile = await this.model.create(req.body);
-            
+
             return res.status(201).json(profile);
         }
         catch(e){

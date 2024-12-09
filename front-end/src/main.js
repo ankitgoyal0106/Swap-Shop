@@ -10,7 +10,7 @@ document.addEventListener("DOMContentLoaded", function () {
   app.appendChild(appController.render());
 
  // Begin profile repository service (Defaulting to indexedDB rn)
- const profileRepository = ProfileRepoFactory.get();
+ const profileRepository = ProfileRepoFactory.get("remote");
  // Begin item repository service (Defaulting to indexedDB rn)
  const itemRepository = ItemRepoFactory.get();
 
