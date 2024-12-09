@@ -55,19 +55,19 @@ export class ItemPage extends BaseComponent {
         const contentContainer = document.createElement('div');
         contentContainer.className = 'content-container';
 
+        //Seller profile container
         const sellerProfileContainer = document.createElement('div');
         sellerProfileContainer.className = 'seller-profile-container';
         const sellerEmail = document.createElement('p');
-        sellerEmail.textContent = `Seller: ${this.itemData.sellerEmail || 'Unknown'}`;
+        sellerEmail.textContent = `Seller: ${this.itemData.sellerEmail}`;
         sellerProfileContainer.appendChild(sellerEmail);
-        const sellerProfileButton = document.createElement('button');
-        sellerProfileButton.className = 'seller-profile-button';
-        sellerProfileButton.textContent = 'View Seller Profile';
-        sellerProfileButton.addEventListener('click', () => {
-            // Handle seller profile button click
-            alert('Seller profile button clicked');
-        });
-        sellerProfileContainer.appendChild(sellerProfileButton);
+        const postedAt = document.createElement('p');
+        postedAt.textContent = `Posted At: ${this.itemData.postedAt}`;
+        sellerProfileContainer.appendChild(postedAt);
+
+        const location = document.createElement('p');
+        location.textContent = `Location: ${this.itemData.itemLocation}`;
+        sellerProfileContainer.appendChild(location);
         contentContainer.appendChild(sellerProfileContainer);
 
         // Description box
@@ -97,14 +97,6 @@ export class ItemPage extends BaseComponent {
         const amountAvailable = document.createElement('p');
         amountAvailable.textContent = `Amount Available: ${this.itemData.amountAvailable}`;
         detailsBox.appendChild(amountAvailable);
-
-        const postedAt = document.createElement('p');
-        postedAt.textContent = `Posted At: ${this.itemData.postedAt}`;
-        detailsBox.appendChild(postedAt);
-
-        const location = document.createElement('p');
-        location.textContent = `Location: ${this.itemData.itemLocation}`;
-        detailsBox.appendChild(location);
 
         contentContainer.appendChild(detailsBox);
 
