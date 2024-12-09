@@ -16,10 +16,44 @@ export class chatInterface extends BaseComponent{
         super();
         this.userID = getEmailFromLocalStorage();
         this.convoID = convoID;
-        this.groupName = "";//fetch this using convoID
-        this.loadedMsgs = [];//fetch this using convoID
-        //setInterval(1000, () => {fetch using convoID and re-rendering}) //this will periodically make a fetch to the back end to keep the chat room up to date
+        this.groupName = JSON.parse(localStorage.getItem(this.convoID)).groupName;
+        this.loadedMsgs = JSON.parse(JSON.parse(localStorage.getItem(this.convoID)).msgLog);
+
+        //TODO: this will periodically make a fetch to the back end to keep the chat room up to date
         //new fear unlocked: if it takes too long to fetch, we might lose messages
+        // let intervalId = setInterval(() => {
+        //     console.log('Interval is running...');
+        //   }, 1000);
+        
+        //   document.getElementById('stopButton').addEventListener('click', () => {
+        //     clearInterval(intervalId); // Stops the interval
+        //     console.log('Interval stopped.');
+        const switches = [Events.SwitchToHomePage,Events.SwitchToExplorePage,Events.SwitchToLoginPage,Events.SwitchToItemPage,Events.SwitchProfileToNotif,Events.SwitchProfileToView,Events.SwitchProfileToConvo];
+
+        const hub = EventHub.getInstance();
+
+        const interval = setInterval( () => {
+
+        }, 1000);
+
+        switches.forEach( (event) => {
+            hub.subscribe(event, clearInterval(interval));
+        })
+        // setInterval(() => {
+        //     hub.subscribe(Events.GetConvoSuccess, data => {
+        //         if(data.msgLog.length > this.loadedMsgs){//TODO: new message incoming, need to update local
+        //             this.loadedMsgs = data.msgLog;
+        //         }
+        //         else if(data.msgLog.length < this.loadedMsgs){//TODO: new message pending, need to update database entry 
+        //             //not sure if this needs to be handled if it can be done in the sending part
+        //             hub.subscribe(Events.UpdateChatSuccess, data => this.loadedMsgs = data.msgLog);
+        //             hub.publish(Events.UpdateChat, {convoID: this.convoID, msgLog: this.loadedMsgs});
+        //         }
+        //         //when the two logs are the same, both are up to date
+        //     });
+        //     hub.publish(Events.GetConvo, this.convoID);
+        // }, 1000);
+        //subscribe event to page switch and make it so it stops whenever we switch pages
         this.loadCSS("chatroom");
     }
 
@@ -75,12 +109,7 @@ export class chatInterface extends BaseComponent{
         msgInput.type = "text";
         msgInput.placeholder = "Enter Message Here";
         msgInput.id = "msg";
-        msgInput.addEventListener("input", () =>{
-            hide.textContent = txt.value;
-            txt.style.width = hide.offsetWidth + "px";
-        })
-        //msgInput.classList.add("msgInput");
-
+    
         const send = () => {
             const userMsg = document.getElementById("msg");
             const chatBox = document.getElementById("chatBox");
@@ -90,8 +119,13 @@ export class chatInterface extends BaseComponent{
             this.#renderMsgs(chatBox);
             chatBox.scrollTop = chatBox.scrollHeight;
             userMsg.value = "";
-            //TODO: PUT request to server with this.loadedMsgs using repo service for given convoID
+            //TODO: PUT request to server with this.loadedMsgs using repo service for given convoID and update localStorage
+            const cachedData = JSON.parse(localStorage.getItem(this.convoID));
+            cachedData.msgLog = this.loadedMsgs;
+            localStorage.setItem(this.convoID, JSON.stringify(cachedData));
+            
             const hub = EventHub.getInstance();
+            hub.publish(Events.UpdateChat, {convoID: this.convoID, msgLog: JSON.stringify(this.loadedMsgs)});
         }
 
         form.addEventListener("submit",  event => {
@@ -105,12 +139,12 @@ export class chatInterface extends BaseComponent{
         //sendButton.type = "button";
         sendButton.addEventListener("click", send);
 
-        const backButton = document.createElement("button");
-        const backLabel = document.createTextNode("Back");
-        backButton.appendChild(backLabel);
-        backButton.addEventListener("click", () => {
-            console.log("back to conversation log page");
-        });
+        // const backButton = document.createElement("button");
+        // const backLabel = document.createTextNode("Back");
+        // backButton.appendChild(backLabel);
+        // backButton.addEventListener("click", () => {
+        //     console.log("back to conversation log page");
+        // });
 
         //inputBar.appendChild(backButton);
         form.appendChild(msgInput);
