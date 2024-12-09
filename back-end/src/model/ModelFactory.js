@@ -6,10 +6,10 @@ class _ModelFactory {
         if (model === "sqlite"){
             return SQLiteModel;
         } else if (model === "sqlite-fresh") {
-            await SQLiteItemModel.init(true);
+            await SQLiteModel.init(true);
             return SQLiteModel;
         } else {
-            return InMemoryModel;
+            return InMemoryItemModel;
         }
     }
 }
