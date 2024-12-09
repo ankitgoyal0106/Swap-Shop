@@ -59,6 +59,7 @@ export const Events = {
 
     //Conversation storage events
     SaveNewChat: `SaveNewChat`,
+    SaveNewChatSuccess: `SaveNewChatSuccess`,
 
     UpdateChat: `UpdateChat`,
     UpdateChatSuccess: `UpdateChatSuccess`,
@@ -76,6 +77,8 @@ export const Events = {
     ViewItem: 'ViewItem',
 
     ProfileEdited: 'EditedProfile',
+    ProfileEditedSuccess: `ProfileEditedSuccess`,
+    
     Login: 'Login',
     Logout: 'Logout',
     Registered: 'Registered',
