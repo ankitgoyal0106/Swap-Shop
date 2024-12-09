@@ -13,13 +13,8 @@ class ItemController{
     }
 
     async getAllItems(req,res){
-        try {
-            const items = await this.model.read();
-            res.status(200).json({ items });
-          } catch (error) {
-            console.error("Error fetching items:", error);
-            res.status(500).json({ message: "Failed to fetch items" });
-          }
+        const items = await this.model.read();
+        res.json({items});
     }
 
     async createItem(req,res){
@@ -37,17 +32,7 @@ class ItemController{
         }
     }
 
-    async updateItem(req, res) {
-        try {
-          const updatedItem = await this.model.update(req.body);
-          res.status(200).json({ message: "Item updated successfully", item: updatedItem });
-        } catch (error) {
-          console.error("Error updating item:", error);
-          res.status(500).json({ message: "Failed to update item" });
-        }
-      }
-    
-    async deleteItem(req,res){
+    async removeItem(req,res){
         await this.model.delete(req.body.itemID);
         res.json(await this.model.read())
     }

@@ -1,8 +1,6 @@
 {
-  "name": "front-end",
+  "name": "back-end",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.html",
   "type": "module",
   "license": "AGPL-version-3.0",
   "private": false,
@@ -24,14 +22,11 @@
   },
   "contributors": [],
   "scripts": {
-    "start-server": "http-server ./src -p 3000",
     "dev": "",
     "test": ""
   },
-  "devDependencies": {
-    "http-server": "^14.1.1"
-  },
   "dependencies": {
-    "bcryptjs": "^2.4.3"
+    "express": "^4.21.1",
+    "ws": "^8.18.0"
   }
 }
