@@ -1,6 +1,7 @@
 import { BaseComponent } from "../BaseComponent/BaseComponent.js";
 import { ItemPage } from "../itemPage/itemPage.js";
 import { EventHub } from "../../eventhub/EventHub.js";
+
   export class explorePage extends BaseComponent {
     #container = null;
     #searchBar = null;
@@ -164,16 +165,15 @@ import { EventHub } from "../../eventhub/EventHub.js";
         const hub = EventHub.getInstance();
         hub.publish('SwitchToItemPage', item);
         return item.ListingID;
-        // window.location.href = `http://localhost:3000/v1/item/${item.ListingID}`;
       }); 
-      const img = document.createElement('img');
-      // const blobUrl = URL.createObjectURL(item.images[0]);
-      // img.src = blobUrl; 
-      img.alt = item.itemName; // Use the item's name as alt text
-      img.className = 'item-image';
-      itemCard.appendChild(img);
 
-  
+      const img = document.createElement('img');
+   
+        img.src = item.images;
+        img.alt = item.itemName || 'Item Image';
+        img.className = 'item-image';
+        itemCard.appendChild(img);
+    
       const itemDescription = document.createElement('p');
       itemDescription.textContent = item.itemDescription;
       itemCard.appendChild(itemDescription);
@@ -359,36 +359,10 @@ import { EventHub } from "../../eventhub/EventHub.js";
     }
   
     #getRecommendedItems() {
-        return [ 
-          {
-            ListingID: '1',
-            itemName: 'Item 2',
-            itemDescription: 'Description for item 2',
-            category: 'Electronics',
-            price: 100.0,
-            postedAt: new Date('2023-01-01T10:00:00Z'),
-            itemLocation: 'Location A',
-            images: ['img1.jpg', 'img2.jpg'],
-            amountAvailable: 10,
-            updatedAt: new Date('2023-01-02T10:00:00Z')
-          }
-        ]
+        return [];
     }
 
     #getRecentlyViewedItems() {
-      return [
-        {
-          ListingID: '1',
-          itemName: 'Item 2',
-          itemDescription: 'Description for item 2',
-          category: 'Electronics',
-          price: 100.0,
-          postedAt: new Date('2023-01-01T10:00:00Z'),
-          itemLocation: 'Location A',
-          images: ['img1.jpg', 'img2.jpg'],
-          amountAvailable: 10,
-          updatedAt: new Date('2023-01-02T10:00:00Z')
-        }
-      ];
+      return [];
     }
   }

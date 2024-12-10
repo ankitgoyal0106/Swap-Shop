@@ -64,8 +64,8 @@ export class CreateItemPage extends BaseComponent {
         listingIDInput.id = "listing-id";
         listingIDInput.required = true;
         listingIDInput.value = this.generateUniqueId(); // Set the unique ID
-        form.appendChild(listingIDLabel);
-        form.appendChild(listingIDInput);
+        // form.appendChild(listingIDLabel);
+        // form.appendChild(listingIDInput);
 
          // Item Name
          const itemNameLabel = document.createElement("label");
@@ -126,6 +126,7 @@ export class CreateItemPage extends BaseComponent {
         const imageInput = document.createElement("input");
         imageInput.type = "file";
         imageInput.id = "item-image";
+        imageInput.style.color = "black"; 
         imageInput.accept = "image/*";
         imageInput.required = true;
         imageInput.multiple = true; // Allow multiple image uploads
@@ -171,8 +172,8 @@ export class CreateItemPage extends BaseComponent {
         postedAtInput.id = "posted-at";
         postedAtInput.required = true;
         postedAtInput.value = new Date().toISOString().slice(0, 16); // Set current date and time
-        form.appendChild(postedAtLabel);
-        form.appendChild(postedAtInput);
+        // form.appendChild(postedAtLabel);
+        // form.appendChild(postedAtInput);
 
          // Updated At
          const updatedAtLabel = document.createElement("label");
@@ -182,8 +183,8 @@ export class CreateItemPage extends BaseComponent {
          updatedAtInput.id = "updated-at";
          updatedAtInput.required = true;
          updatedAtInput.value = new Date().toISOString().slice(0, 16); // Set current date and time
-         form.appendChild(updatedAtLabel);
-         form.appendChild(updatedAtInput);
+         // form.appendChild(updatedAtLabel);
+         // form.appendChild(updatedAtInput);
 
         // Item Location
         const itemLocationLabel = document.createElement("label");
@@ -247,13 +248,13 @@ export class CreateItemPage extends BaseComponent {
         return 'listing-' + Date.now() + '-' + Math.floor(Math.random() * 1000);
     }
 
-    handleSubmit(event) {
+    async handleSubmit(event) {
         event.preventDefault();
 
-        const listingID = document.getElementById('listing-id').value;
-        const postedAt = document.getElementById('posted-at').value;
+        const listingID = this.generateUniqueId();
+        const postedAt =  new Date().toISOString().slice(0, 16);
         const images = document.getElementById('item-image').files;
-        const updatedAt = document.getElementById('updated-at').value;
+        const updatedAt = new Date().toISOString().slice(0, 16);
         const itemName = document.getElementById('item-name').value;
         const itemDescription = document.getElementById('item-description').value;
         const category = document.getElementById('item-category').value;
@@ -262,33 +263,53 @@ export class CreateItemPage extends BaseComponent {
         const amountAvailable = document.getElementById('amount-available').value;
         const itemLocation = document.getElementById('item-location').value;
 
-        const imageUrls = Array.from(images).map(file => URL.createObjectURL(file));
+        // Convert images to Base64
+        const imagePromises = Array.from(images).map(file => {
+            return new Promise((resolve, reject) => {
+                const reader = new FileReader();
+                reader.onload = () => resolve(reader.result);
+                reader.onerror = reject;
+                reader.readAsDataURL(file); // Read file as Base64
+            });
+        });
 
-        const listingData = {
-            listingID,
-            postedAt,
-            images: imageUrls, // Array of strings (URLs)
-            updatedAt,
-            itemName,
-            itemDescription,
-            category,
-            condition,
-            price,
-            amountAvailable,
-            itemLocation
-        };
+        try {
+            const base64Images = await Promise.all(imagePromises);
+
+            // Prepare the listingData object
+            const listingData = {
+                listingID,
+                postedAt,
+                images: base64Images, // Base64 strings of the images
+                updatedAt,
+                itemName,
+                itemDescription,
+                category,
+                condition,
+                price,
+                amountAvailable,
+                itemLocation,
+            };
+
+            // Publish the listingData object
+            this.#publishNewItem(listingData);
+            // Clear the form after successful submission
+            console.log('Listing created successfully:', listingData);
+        } catch (error) {
+            console.error('Error processing images:', error);
+        }
+    }
+
 
         //this.#saveToIndexedDB(listingData);
         //publish new item
-        this.#publishNewItem(listingData);
-
-        //TODO: Clear inputs
-    }
+        // this.#publishNewItem(listingData);
 
     #publishNewItem(data){
         const hub = EventHub.getInstance();
         hub.publish(Events.NewItem, data);
         hub.publish(Events.StoreItem, data);
+        form.reset();
     }
 
     // #displayMessage(message, type) {

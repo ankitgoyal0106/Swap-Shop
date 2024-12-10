@@ -41,7 +41,7 @@ const Item = sequelize.define("Item", {
         allowNull: false
     },
     images: {
-        type: DataTypes.TEXT,
+        type: DataTypes.BLOB,
         allowNull: false,
         get () {
             return JSON.parse(this.getDataValue('images'));
