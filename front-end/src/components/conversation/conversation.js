@@ -2,8 +2,6 @@ import { BaseComponent } from "../BaseComponent/BaseComponent.js";
 import { chatInterface } from "../chatroom/chatroom.js";
 import { EventHub } from "../../eventhub/EventHub.js";
 import { Events } from "../../eventhub/Events.js";
-import { ChatRepoFactory } from "../../services/ChatRepoFactory.js";
-import { ProfileRepoFactory } from "../../services/ProfileRepoFactory.js";
 import { saveEmailToLocalStorage, getEmailFromLocalStorage } from "../../services/LocalStorage.js";
 
 export class conversationList extends BaseComponent{
@@ -11,8 +9,6 @@ export class conversationList extends BaseComponent{
     
     constructor(){
         super();
-        // ChatRepoFactory.get();
-        // ProfileRepoFactory.get("remote");
         // saveEmailToLocalStorage("example2@umass.edu"); //TODO: REMOVE LATER
         //convoLog is array of strings of convoIDs
         this.convoLog = null;
@@ -29,10 +25,10 @@ export class conversationList extends BaseComponent{
     render(){ 
         //TODO: fetching profiles from back-end
         const hub = EventHub.getInstance();
-        // hub.subscribe(Events.GetProfileSuccess, data => {
-        //     this.convoLog = JSON.parse(data.profile.conversationList);
-        // }); //on a successful retrieval, we can ge the conversationList for the user
-        //this.userID = getEmailFromLocalStorage();
+        hub.subscribe(Events.GetProfileSuccess, data => {
+            this.convoLog = JSON.parse(data.profile.conversationList);
+        }); //on a successful retrieval, we can ge the conversationList for the user
+        this.userID = getEmailFromLocalStorage();
         hub.publish(Events.GetProfile, this.userID); //query from database to retrieve profile data
 
         this.#container = document.createElement("div");

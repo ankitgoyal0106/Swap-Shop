@@ -10,6 +10,8 @@ import { ItemPage } from "../itemPage/itemPage.js";
 import { getEmailFromLocalStorage } from "../../services/LocalStorage.js";
 import { logout } from "../../utility/Logout.js";
 import { ProfileRepoFactory } from "../../services/ProfileRepoFactory.js";
+import { ItemRepoFactory } from "../../services/ItemRepoFactory.js";
+import { ChatRepoFactory } from "../../services/ChatRepoFactory.js";
 
 export class AppController {
     #container = null;
@@ -48,7 +50,9 @@ export class AppController {
             itemLocation: "Here",
             images: imagePaths
         });
-        ProfileRepoFactory.get('remote');
+        ProfileRepoFactory.get("remote"); //TODO: check if this can
+        ItemRepoFactory.get();
+        ChatRepoFactory.get();
     }
 
     render() {
