@@ -10,6 +10,8 @@ import { ItemPage } from "../itemPage/itemPage.js";
 import { getEmailFromLocalStorage } from "../../services/LocalStorage.js";
 import { logout } from "../../utility/Logout.js";
 import { ProfileRepoFactory } from "../../services/ProfileRepoFactory.js";
+import { ItemRepoFactory } from "../../services/ItemRepoFactory.js";
+import { ChatRepoFactory } from "../../services/ChatRepoFactory.js";
 
 export class AppController {
     #container = null;
@@ -48,7 +50,9 @@ export class AppController {
             itemLocation: "Here",
             images: imagePaths
         });
-        ProfileRepoFactory.get('remote');
+        ProfileRepoFactory.get("remote"); //TODO: check if this can
+        ItemRepoFactory.get();
+        ChatRepoFactory.get();
     }
 
     render() {
@@ -82,7 +86,6 @@ export class AppController {
                 <li><a href="#" id="homeBtn">Home</a></li>
                 <li><a href="#" id="exploreBtn">Explore</a></li>
                 <li><a href="#" id="profileBtn">Profile</a></li>
-                <li><a href="#" id="itemBtn">Item Page</a></li>
                 <li><a href="#" id="logoutBtn">Logout</a></li>
             `;
             this.#profilePage.render();
@@ -109,7 +112,6 @@ export class AppController {
         const exploreBtn = document.getElementById('exploreBtn');
         const profileBtn = document.getElementById('profileBtn');
         const loginBtn = document.getElementById('loginBtn');
-        const itemBtn = document.getElementById('itemBtn');
         const logoutBtn = document.getElementById('logoutBtn');
 
         homeBtn.addEventListener('click', () => {
@@ -131,12 +133,6 @@ export class AppController {
         if (loginBtn) {
             loginBtn.addEventListener('click', () => {
                 this.#toggleView('login');
-            });
-        }
-
-        if (itemBtn) {
-            itemBtn.addEventListener('click', () => {
-                this.#toggleView('item');
             });
         }
 
@@ -191,7 +187,6 @@ export class AppController {
                 <li><a href="#" id="homeBtn">Home</a></li>
                 <li><a href="#" id="exploreBtn">Explore</a></li>
                 <li><a href="#" id="profileBtn">Profile</a></li>
-                <li><a href="#" id="itemBtn">Item Page</a></li>
                 <li><a href="#" id="logoutBtn">Logout</a></li>
             `;
             this.#attachEventListeners();

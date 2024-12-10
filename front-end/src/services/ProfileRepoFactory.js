@@ -13,7 +13,7 @@ export class ProfileRepoFactory {
     throw new Error("Cannot instantiate a ProfileRepoFactory object");
   }
 
-  static get(repoType = "local") {
+  static get(repoType = "remote") {
     if (repoType === "local") {
       return new ProfileRepositoryService();
     } else if (repoType === "remote") {

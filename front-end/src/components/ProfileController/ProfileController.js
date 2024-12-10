@@ -42,10 +42,10 @@ export class ProfileContoller extends BaseComponent {
     
     this.#notificationList.render();
     this.#viewProfile.render();
-    this.#conversationList.render();
+    //this.#conversationList.render();
     this.#achievements.render();
     //TODO: Render other screens here
-    this.#conversationList.render();
+    //this.#conversationList.render();
     this.#editorPage.render();
     this.#createitems.render();
 

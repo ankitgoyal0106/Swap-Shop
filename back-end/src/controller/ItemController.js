@@ -1,4 +1,4 @@
-import ModelFactory from "../model/ModelFactory.js";
+import ModelFactory from "../model/ItemModelFactory.js";
 
 class ItemController{
     constructor(){

@@ -12,7 +12,6 @@ export class CreateItemPage extends BaseComponent {
         this.#container.classList.add("create-item-page");
     }
 
-
     render() {
         this.#container = document.createElement('div');
         this.#container.className = 'create-item-page';
@@ -55,7 +54,8 @@ export class CreateItemPage extends BaseComponent {
         form.style.boxSizing = 'border-box';
         form.style.margin = '0 auto'; // Center the form horizontally
         form.style.fontFamily = 'Verdana, sans-serif'; // Match font with item grid
-
+        form.style.color = 'black'; // Set text color to black
+    
         // Listing ID
         const listingIDLabel = document.createElement("label");
         listingIDLabel.textContent = "Listing ID:";
@@ -64,20 +64,19 @@ export class CreateItemPage extends BaseComponent {
         listingIDInput.id = "listing-id";
         listingIDInput.required = true;
         listingIDInput.value = this.generateUniqueId(); // Set the unique ID
-        // form.appendChild(listingIDLabel);
-        // form.appendChild(listingIDInput);
 
-         // Item Name
-         const itemNameLabel = document.createElement("label");
-         itemNameLabel.textContent = "Item Name:";
-         const itemNameInput = document.createElement("input");
-         itemNameInput.type = "text";
-         itemNameInput.id = "item-name";
-         itemNameInput.required = true;
-         form.appendChild(itemNameLabel);
-         form.appendChild(itemNameInput);
-
-         // Item Description
+    
+        // Item Name
+        const itemNameLabel = document.createElement("label");
+        itemNameLabel.textContent = "Item Name:";
+        const itemNameInput = document.createElement("input");
+        itemNameInput.type = "text";
+        itemNameInput.id = "item-name";
+        itemNameInput.required = true;
+        form.appendChild(itemNameLabel);
+        form.appendChild(itemNameInput);
+    
+        // Item Description
         const descriptionLabel = document.createElement("label");
         descriptionLabel.textContent = "Description:";
         const descriptionInput = document.createElement("textarea");
@@ -85,7 +84,7 @@ export class CreateItemPage extends BaseComponent {
         descriptionInput.required = true;
         form.appendChild(descriptionLabel);
         form.appendChild(descriptionInput);
-
+    
         // Amount Available
         const amountLabel = document.createElement("label");
         amountLabel.textContent = "Amount Available:";
@@ -95,7 +94,7 @@ export class CreateItemPage extends BaseComponent {
         amountInput.required = true;
         form.appendChild(amountLabel);
         form.appendChild(amountInput);
-
+    
         // Category
         const categoryLabel = document.createElement("label");
         categoryLabel.textContent = "Category:";
@@ -107,7 +106,7 @@ export class CreateItemPage extends BaseComponent {
         defaultCategoryOption.value = "";
         defaultCategoryOption.textContent = "Select Category";
         categorySelect.appendChild(defaultCategoryOption);
-
+    
         const categories = ["electronics", "clothing", "books", "furniture", "iclicker"];
         categories.forEach(category => {
             const option = document.createElement("option");
@@ -115,11 +114,10 @@ export class CreateItemPage extends BaseComponent {
             option.textContent = category.charAt(0).toUpperCase() + category.slice(1);
             categorySelect.appendChild(option);
         });
-
+    
         form.appendChild(categoryLabel);
         form.appendChild(categorySelect);
         
-
         // Image Upload
         const imageLabel = document.createElement("label");
         imageLabel.textContent = "Upload Image:";
@@ -132,7 +130,15 @@ export class CreateItemPage extends BaseComponent {
         imageInput.multiple = true; // Allow multiple image uploads
         form.appendChild(imageLabel);
         form.appendChild(imageInput);
-
+    
+        imageInput.addEventListener("change", () => {
+            if (imageInput.files.length > 0) {
+                customFileLabel.textContent = Array.from(imageInput.files).map(file => file.name).join(", ");
+            } else {
+                customFileLabel.textContent = "No file chosen";
+            }
+        });
+    
         // Condition
         const conditionLabel = document.createElement("label");
         conditionLabel.textContent = "Condition:";
@@ -153,7 +159,7 @@ export class CreateItemPage extends BaseComponent {
         conditionSelect.appendChild(usedOption);
         form.appendChild(conditionLabel);
         form.appendChild(conditionSelect);
-
+    
         // Price
         const priceLabel = document.createElement("label");
         priceLabel.textContent = "Price:";
@@ -163,7 +169,17 @@ export class CreateItemPage extends BaseComponent {
         priceInput.required = true;
         form.appendChild(priceLabel);
         form.appendChild(priceInput);
-
+    
+        // Seller Email
+        const sellerEmailLabel = document.createElement("label");
+        sellerEmailLabel.textContent = "Seller Email:";
+        const sellerEmailInput = document.createElement("input");
+        sellerEmailInput.type = "email";
+        sellerEmailInput.id = "seller-email";
+        sellerEmailInput.required = true;
+        form.appendChild(sellerEmailLabel);
+        form.appendChild(sellerEmailInput);
+    
         // Posted At
         const postedAtLabel = document.createElement("label");
         postedAtLabel.textContent = "Posted At (UTC):";
@@ -185,7 +201,7 @@ export class CreateItemPage extends BaseComponent {
          updatedAtInput.value = new Date().toISOString().slice(0, 16); // Set current date and time
          // form.appendChild(updatedAtLabel);
          // form.appendChild(updatedAtInput);
-
+    
         // Item Location
         const itemLocationLabel = document.createElement("label");
         itemLocationLabel.textContent = "Item Location:";
@@ -195,27 +211,27 @@ export class CreateItemPage extends BaseComponent {
         itemLocationInput.required = true;
         form.appendChild(itemLocationLabel);
         form.appendChild(itemLocationInput);
-
+    
         // Geolocation Button
         const geoButton = document.createElement("button");
         geoButton.type = "button";
         geoButton.textContent = "Use Current Location";
         geoButton.addEventListener("click", this.geoFindMe.bind(this));
         form.appendChild(geoButton);
-
+    
         // Submit Button
         const submitButton = document.createElement("button");
         submitButton.type = "submit";
         submitButton.textContent = "Create Item";
         form.appendChild(submitButton);
-
+    
         // Message Element
         const messageElement = document.createElement("p");
         messageElement.id = "form-message";
         form.appendChild(messageElement);
-
+    
         form.addEventListener('submit', this.handleSubmit.bind(this));
-
+    
         return form;
     }
 
@@ -262,6 +278,7 @@ export class CreateItemPage extends BaseComponent {
         const price = document.getElementById('item-price').value;
         const amountAvailable = document.getElementById('amount-available').value;
         const itemLocation = document.getElementById('item-location').value;
+        const sellerEmail = document.getElementById('seller-email').value;
 
         // Convert images to Base64
         const imagePromises = Array.from(images).map(file => {
@@ -293,34 +310,22 @@ export class CreateItemPage extends BaseComponent {
 
             // Publish the listingData object
             this.#publishNewItem(listingData);
+            // Switch to item page
+            const hub = EventHub.getInstance();
+            hub.publish('SwitchToItemPage', listingData);
             // Clear the form after successful submission
-            console.log('Listing created successfully:', listingData);
+            // console.log('Listing created successfully:', listingData);
         } catch (error) {
             console.error('Error processing images:', error);
         }
     }
 
-
-        //this.#saveToIndexedDB(listingData);
-        //publish new item
-        // this.#publishNewItem(listingData);
+    }
 
     #publishNewItem(data){
         const hub = EventHub.getInstance();
         hub.publish(Events.NewItem, data);
         hub.publish(Events.StoreItem, data);
-        form.reset();
+        hub.publish(Events.ListItem);
     }
-
-    // #displayMessage(message, type) {
-    //     const messageElement = document.getElementById("form-message");
-    //     messageElement.textContent = message;
-    //     messageElement.style.backgroundColor = "#624E88"; // Purple background
-    //     messageElement.style.color = "#ffffff"; // White text
-    //     messageElement.style.padding = '20px'; // Padding around the text
-    //     messageElement.style.textAlign = 'center'; // Center the text
-    //     messageElement.style.width = '100%'; // Full width
-    //     messageElement.style.fontFamily = 'Verdana, sans-serif'; // Match font with header
-    // }
-
 }
