@@ -1,7 +1,8 @@
 import { BaseComponent } from "../BaseComponent/BaseComponent.js";
 import { EventHub } from "../../eventhub/EventHub.js";
 
-export class explorePage extends BaseComponent {
+
+  export class explorePage extends BaseComponent {
     #container = null;
     #searchBar = null;
     #itemsGrid = null;
@@ -152,29 +153,31 @@ export class explorePage extends BaseComponent {
     }
 
     #createItemCard(item) {
-        const itemCard = document.createElement('div');
-        itemCard.className = 'item-card';
+      const itemCard = document.createElement('div');
+      itemCard.className = 'item-card';
+  
+      const itemTitle = document.createElement('h2');
+      itemTitle.textContent = item.itemName;
+      itemCard.appendChild(itemTitle);
+      itemCard.addEventListener('click', () => { 
+        console.log('Clicked on item:', item.itemName); 
+        const hub = EventHub.getInstance();
+        hub.publish('SwitchToItemPage', item);
+        return item.ListingID;
+      }); 
 
-        const itemTitle = document.createElement('h2');
-        itemTitle.textContent = item.itemName;
-        itemCard.appendChild(itemTitle);
-        itemCard.addEventListener('click', () => {
-            console.log('Clicked on item:', item.itemName);
-            const hub = EventHub.getInstance();
-            hub.publish('ViewItem', item);
-            hub.publish('SwitchToItemPage', item);
-        });
-
-        const img = document.createElement('img');
-        img.alt = item.itemName; // Use the item's name as alt text
-        img.className = 'item-image';
-        itemCard.appendChild(img);
-
-        const itemDescription = document.createElement('p');
-        itemDescription.textContent = item.itemDescription;
-        itemCard.appendChild(itemDescription);
-
-        return itemCard;
+      const img = document.createElement('img');
+      
+      img.src = item.images;
+      img.alt = item.itemName || 'Item Image';
+      img.className = 'item-image';
+      itemCard.appendChild(img);
+    
+      const itemDescription = document.createElement('p');
+      itemDescription.textContent = item.itemDescription;
+      itemCard.appendChild(itemDescription);
+  
+      return itemCard;
     }
 
     #createRecommendedSection() {
@@ -354,36 +357,11 @@ export class explorePage extends BaseComponent {
     }
 
     #getRecommendedItems() {
-        return [
-            {
-                ListingID: '1',
-                itemName: 'Item 2',
-                itemDescription: 'Description for item 2',
-                category: 'Electronics',
-                price: 100.0,
-                postedAt: new Date('2023-01-01T10:00:00Z'),
-                itemLocation: 'Location A',
-                images: ['img1.jpg', 'img2.jpg'],
-                amountAvailable: 10,
-                updatedAt: new Date('2023-01-02T10:00:00Z')
-            }
-        ]
+        return [];
     }
 
     #getRecentlyViewedItems() {
-        return [
-            {
-                ListingID: '1',
-                itemName: 'Item 2',
-                itemDescription: 'Description for item 2',
-                category: 'Electronics',
-                price: 100.0,
-                postedAt: new Date('2023-01-01T10:00:00Z'),
-                itemLocation: 'Location A',
-                images: ['img1.jpg', 'img2.jpg'],
-                amountAvailable: 10,
-                updatedAt: new Date('2023-01-02T10:00:00Z')
-            }
-        ];
+      return [];
     }
+
 }
