@@ -67,3 +67,47 @@
 - **Task**: Bug fixes to conversationListing and chatInterface, updated data.md, and uploaded sequence diagram
 - **Details**: Adjusted data types for conversationListing and chatInterface to coincide with the data.md file. Created a sequence diagram for conversationListing.
 - **Link to Commit**: [Commit](https://github.com/ankitgoyal0106/Swap-Shop/commit/ae851853783ddf0e8388ab592716d00b2a18fff5)
+
+## November 17, 2024
+
+- **Task**: conversationListing feature diagram
+- **Details**: Completed the feature diagram for conversationListing
+- **Link to Commit**: [Commit](https://github.com/ankitgoyal0106/Swap-Shop/commit/fb0113923312bfca1597d1cbbfd9c7faac0ede98)
+
+## December 3, 2024
+
+- **Task**: created ProfileController for ModelFactory
+- **Details**: 
+- **Link to Commit**: [Commit](https://github.com/ankitgoyal0106/Swap-Shop/commit/eea2d98c978c55cb8ec808ced2aa4be42b972e58)
+
+## December 4, 2024
+
+- **Task**: Minor Changes/Additions
+- **Details**: Added templates and structure for back-end components
+- **Link to Commit**: [implemented ItemController](https://github.com/ankitgoyal0106/Swap-Shop/commit/eea2d98c978c55cb8ec808ced2aa4be42b972e58), [Template For Server.js](https://github.com/ankitgoyal0106/Swap-Shop/commit/f6f845450e2f0669ca9d259f974fad1bafc96a44)
+
+## December 6, 2024
+
+- **Task**: Fetching for Conversation entries
+- **Details**: Implemented basic structure for conversations in SQLite database with routing in the back-end and fetchAPI calls in the front-end
+- **Link to Commit**: [Commit](https://github.com/ankitgoyal0106/Swap-Shop/commit/290fa1fff8f3e201415d7af7eb9e59714a882b7f)
+
+## December 7, 2024
+
+- **Task**: Front-end and back-end Adjustments
+- **Details**: After dealing with how I wanted back-end to work with SQlite, changed stuff in the front-end to reflect and handle them appropriately
+- **Link to Commit**: [update back-end dependencies](https://github.com/ankitgoyal0106/Swap-Shop/commit/71a2d8893dbb7679b9054c0d6d8710f3af9f0e9e), [SQLiteChatModel and ChatController](https://github.com/ankitgoyal0106/Swap-Shop/commit/e3f7ff80466826605f8a7eec582c16178a6ed46a), [Added Events to Events.js](https://github.com/ankitgoyal0106/Swap-Shop/commit/346c62d6a92df708bac48b3190d950f818eec8ac), [implemented ChattingRepoRemoteService](https://github.com/ankitgoyal0106/Swap-Shop/commit/78fae4c7ddf043c5add033eb2cbbe682eafe1e93), [fetching conversations from database](https://github.com/ankitgoyal0106/Swap-Shop/commit/eb513ea4c698df47127cc8bd579cfd8b21131bf0), [cleaned up chatroom.js](https://github.com/ankitgoyal0106/Swap-Shop/commit/d0e2193106d03d0bbbf235c64a229eec11f462a2)
+
+## December 9, 2024
+
+- **Task**: Front-end and back-end Adjustments
+- **Details**: Worked more on implementing EventHub to handle fetchAPI requests 
+- **Link to Commit**: [clearHandlers](https://github.com/ankitgoyal0106/Swap-Shop/commit/96434549ee1aa128175c33ddf13911e848e20db1), [update sequalize data types](https://github.com/ankitgoyal0106/Swap-Shop/commit/a1a8f960d73a00f4592ea2c1df5b4146b66988d9), [ChattingRepoRemoteService success/failure](https://github.com/ankitgoyal0106/Swap-Shop/commit/ad88f39ed473e28c8cd204b0ecf1ff1e9c10e9ac), [bug fixes](https://github.com/ankitgoyal0106/Swap-Shop/commit/a9ca62ca73c435daf8ebecc55a61db44cef843f6), [ChatController in Routes.js](https://github.com/ankitgoyal0106/Swap-Shop/commit/4633635aea299978d90989ecc5afae12dac95306), [conversation.js fetches and renders data from database](https://github.com/ankitgoyal0106/Swap-Shop/commit/66f5c4993095aa52951d4968b31cdce6536f9c82), [cached data rather than fetching continously](https://github.com/ankitgoyal0106/Swap-Shop/commit/5845043726e9accd455cb386a1c9960321139dce), [move appController and ProfileRepoFactory instance](https://github.com/ankitgoyal0106/Swap-Shop/commit/6fe118452a0758810676adb87111ef2df281a2ec), [consequences of previous commit](https://github.com/ankitgoyal0106/Swap-Shop/commit/16ca828d0cb889385161119a777760147e329fff), [chatroom functionality with back-end](https://github.com/ankitgoyal0106/Swap-Shop/commit/816faa961371622184b6c9272cc4fc83a1f7289d), [update .gitignore](https://github.com/ankitgoyal0106/Swap-Shop/commit/48aa853c97fe9380e24f73ffce82a056ea6a7873), [removed extra conversationList.render() calls](https://github.com/ankitgoyal0106/Swap-Shop/commit/6f7e15e0ae5864cc76b285c24edd03b7efe5332d), [moved RepoFactory instantiations like what was done with ProfileRepoFactory before](https://github.com/ankitgoyal0106/Swap-Shop/commit/d9f73fd09dcbc60c5702ec7f5d9c90932fccf57b)
+
+## December 10, 2024
+
+- **Task**: Uploaded database
+- **Details**: locally had the database with the most recent changes so I committed that in order for groupmates to test if code works on their end and with the other components
+- **Link to Commit**: [update database.sequalize](https://github.com/ankitgoyal0106/Swap-Shop/commit/7b2b54c5ac6e53266bb9f013f6d8decbaa47646f)
+
+
