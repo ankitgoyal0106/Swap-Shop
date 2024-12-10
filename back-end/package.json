@@ -26,7 +26,13 @@
     "test": ""
   },
   "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
     "express": "^4.21.1",
+    "http-server": "^14.1.1",
+    "sequelize": "^6.37.5",
+    "sqlite3": "^5.1.7",
     "ws": "^8.18.0"
   }
 }
