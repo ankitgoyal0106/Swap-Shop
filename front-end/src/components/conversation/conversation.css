@@ -26,7 +26,7 @@ button{
     overflow-x:hidden;
     display:flex;
     scroll-behavior: smooth;
-    flex-direction: column;
+    flex-direction: column-reverse;
     /* grid-auto-flow:row;
     grid-row-gap: 1px; */
     border: 3px solid #f1f1f1;    
