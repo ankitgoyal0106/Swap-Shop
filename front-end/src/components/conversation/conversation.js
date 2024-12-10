@@ -11,8 +11,8 @@ export class conversationList extends BaseComponent{
     
     constructor(){
         super();
-        ChatRepoFactory.get();
-        ProfileRepoFactory.get("remote");
+        // ChatRepoFactory.get();
+        // ProfileRepoFactory.get("remote");
         // saveEmailToLocalStorage("example2@umass.edu"); //TODO: REMOVE LATER
         //convoLog is array of strings of convoIDs
         this.convoLog = null;
@@ -29,10 +29,10 @@ export class conversationList extends BaseComponent{
     render(){ 
         //TODO: fetching profiles from back-end
         const hub = EventHub.getInstance();
-        hub.subscribe(Events.GetProfileSuccess, data => {
-            this.convoLog = JSON.parse(data.profile.conversationList);
-        }); //on a successful retrieval, we can ge the conversationList for the user
-        this.userID = getEmailFromLocalStorage();
+        // hub.subscribe(Events.GetProfileSuccess, data => {
+        //     this.convoLog = JSON.parse(data.profile.conversationList);
+        // }); //on a successful retrieval, we can ge the conversationList for the user
+        //this.userID = getEmailFromLocalStorage();
         hub.publish(Events.GetProfile, this.userID); //query from database to retrieve profile data
 
         this.#container = document.createElement("div");
@@ -91,7 +91,7 @@ export class conversationList extends BaseComponent{
                 let convoObj; 
                 hub.clearHandlers(Events.GetConvoSuccess);
                 hub.subscribe(Events.GetConvoSuccess, data => {
-                    localStorage.setItem(data.convoID, JSON.stringify(data));
+                    // localStorage.setItem(data.convoID, JSON.stringify(data));
                     convoObj = data;
                     const convoElem = this.#createContainerElem(convoObj);
                     convoContainer.appendChild(convoElem);
@@ -99,6 +99,7 @@ export class conversationList extends BaseComponent{
                 hub.publish(Events.GetConvo, id);
             });
         }
+        convoContainer.scrollTop = convoContainer.scrollHeight;
         return convoContainer;
     }
 
@@ -108,6 +109,7 @@ export class conversationList extends BaseComponent{
         //TODO: fetch conversation data structure by convoID and store into convoObj (used to extract the groupName to display in convoBox)
         const upper = document.createTextNode(convoObj.groupName);
         convoBox.appendChild(upper);
+        localStorage.setItem(convoObj.convoID, JSON.stringify(convoObj));
         const makeRoom = () => new chatInterface(convoObj.convoID);//TODO: Questionable, investigate later (use localStorage to save instances and check if it needs to make a new object)
         convoBox.addEventListener("click", () => {
             //TODO: we want chatRoom to only be passed the convoID since email is in localStorage and msgLog is updated within it so a PUT reqeust from chatRoom interface should work
