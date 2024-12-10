@@ -59,10 +59,10 @@ const Item = sequelize.define("Item", {
         type: DataTypes.DATE,
         allowNull: false
     },
-    sellerEmail: {
-        type: DataTypes.STRING,
-        allowNull: false
-    }
+    // sellerEmail: {
+    //     type: DataTypes.STRING,
+    //     allowNull: false
+    // }
 });
 
 class _SQLiteItemModel {
@@ -90,7 +90,7 @@ class _SQLiteItemModel {
                 images: ['img1.jpg', 'img2.jpg'],
                 amountAvailable: 10,
                 updatedAt: new Date('2023-01-02T10:00:00Z'),
-                sellerEmail: 'aa@umass.edu'
+                // sellerEmail: 'aa@umass.edu'
             }
             );
         }
