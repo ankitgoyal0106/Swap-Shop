@@ -31,6 +31,10 @@ export class ProfileRepoRemoteService extends Service {
     this.subscribe(Events.Login, (credentials) => {
       this.login(credentials);
     });
+
+    this.subscribe(Events.ViewItem, (item) => {
+      this.addRecentlyViewed(item);
+    })
   }
 
   async #initProfiles() {
@@ -133,5 +137,10 @@ export class ProfileRepoRemoteService extends Service {
       this.publish(Events.ProfileEditedSuccess, data);
       return data;
     }
+  }
+
+  async addRecentlyViewed(item){
+    //TODO: Finish this
+    console.log(item);
   }
 }

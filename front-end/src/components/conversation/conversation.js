@@ -18,7 +18,9 @@ export class conversationList extends BaseComponent{
         this.convoLog = null;
         const hub = EventHub.getInstance();
         hub.subscribe(Events.GetProfileSuccess, data => {
-            this.convoLog = JSON.parse(data.profile.conversationList);
+            // TODO: Look at this later please
+            let convos = data.profile.conversationList;
+            this.convoLog = JSON.parse(convos);
         }); //on a successful retrieval, we can ge the conversationList for the user
         this.userID = getEmailFromLocalStorage();
         hub.publish(Events.GetProfile, this.userID); //query from database to retrieve profile data

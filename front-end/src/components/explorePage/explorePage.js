@@ -1,5 +1,7 @@
 import { BaseComponent } from "../BaseComponent/BaseComponent.js";
 import { EventHub } from "../../eventhub/EventHub.js";
+import { getEmailFromLocalStorage } from "../../services/LocalStorage.js";
+
 
 export class explorePage extends BaseComponent {
     #container = null;
@@ -163,6 +165,11 @@ export class explorePage extends BaseComponent {
             const hub = EventHub.getInstance();
             hub.publish('ViewItem', item);
             hub.publish('SwitchToItemPage', item);
+            //TODO: Prob change this later
+            hub.subscribe('GetProfileSuccess', (data) => {
+              console.log(data);
+            });
+            hub.publish('GetProfile', getEmailFromLocalStorage());
         });
 
         const img = document.createElement('img');
