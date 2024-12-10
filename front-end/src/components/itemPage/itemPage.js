@@ -14,7 +14,8 @@ export class ItemPage extends BaseComponent {
 
     subscribeToEvents() {
         const hub = EventHub.getInstance();
-        hub.subscribe(Events.NewItem, this.updateItemPage.bind(this));
+        hub.subscribe('ViewItem', this.updateItemPage.bind(this));
+        hub.subscribe('SwitchToItemPage', this.updateItemPage.bind(this));
     }
 
     updateItemPage(itemData) {
