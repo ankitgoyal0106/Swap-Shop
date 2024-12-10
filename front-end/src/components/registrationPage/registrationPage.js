@@ -135,8 +135,8 @@ export class Registration extends BaseComponent {
                 "viewed": 0,
                 "easterEgg": false
             },
-            savedListings: "",
-            recentlyViewed: "",
+            savedListings: "[]",
+            recentlyViewed: "[]",
             conversationList: "[]"
         };
 

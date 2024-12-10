@@ -5,7 +5,11 @@ import { ProfileLoginPage } from "../ProfileLoginPage/ProfileLoginPage.js";
 import { Registration } from "../registrationPage/registrationPage.js";
 import {CreateItemPage} from "../itemPage/createItemPage.js";
 import { EventHub } from "../../eventhub/EventHub.js";
+import { Events } from "../../eventhub/Events.js";
 import { ItemPage } from "../itemPage/itemPage.js";
+import { getEmailFromLocalStorage } from "../../services/LocalStorage.js";
+import { logout } from "../../utility/Logout.js";
+import { ProfileRepoFactory } from "../../services/ProfileRepoFactory.js";
 
 export class AppController {
     #container = null;
@@ -44,6 +48,7 @@ export class AppController {
             itemLocation: "Here",
             images: imagePaths
         });
+        ProfileRepoFactory.get('remote');
     }
 
     render() {
@@ -70,6 +75,28 @@ export class AppController {
     }
 
     #setupContainerContent(){
+        const navBar = document.querySelector('.navbar__menu');
+        if (localStorage.getItem('email') !== null) {
+            navBar.innerHTML = '';
+            navBar.innerHTML = `
+                <li><a href="#" id="homeBtn">Home</a></li>
+                <li><a href="#" id="exploreBtn">Explore</a></li>
+                <li><a href="#" id="profileBtn">Profile</a></li>
+                <li><a href="#" id="logoutBtn">Logout</a></li>
+            `;
+            this.#profilePage.render();
+            this.#hub.subscribe(Events.GetProfileSuccess, (data) => {
+                const hub = EventHub.getInstance();
+                hub.publish(Events.PageReloadWhileLoggedIn, data.profile);
+            });
+            this.#hub.publish(Events.GetProfile, getEmailFromLocalStorage());
+        } else {
+            navBar.innerHTML = '';
+            navBar.innerHTML = `
+                <li><a href="#" id="homeBtn">Home</a></li>
+                <li><a href="#" id="loginBtn">Login</a></li>
+            `;
+        }
         this.#container.innerHTML = `
             <div id="viewContainer"></div>
             `
@@ -81,27 +108,41 @@ export class AppController {
         const exploreBtn = document.getElementById('exploreBtn');
         const profileBtn = document.getElementById('profileBtn');
         const loginBtn = document.getElementById('loginBtn');
-        const itemBtn = document.getElementById('itemBtn');
+        const logoutBtn = document.getElementById('logoutBtn');
 
         homeBtn.addEventListener('click', () => {
             this.#toggleView('home');
         });
 
-        exploreBtn.addEventListener('click', () => {
-            this.#toggleView('explore');
-        });
+        if (exploreBtn) {
+            exploreBtn.addEventListener('click', () => {
+                this.#toggleView('explore');
+            });
+        }
 
-        profileBtn.addEventListener('click', () => {
-            this.#toggleView('profile');
-        });
+        if (profileBtn) {
+            profileBtn.addEventListener('click', () => {
+                this.#toggleView('profile');
+            });
+        }
 
-        loginBtn.addEventListener('click', () => {
-            this.#toggleView('login');
-        });
+        if (loginBtn) {
+            loginBtn.addEventListener('click', () => {
+                this.#toggleView('login');
+            });
+        }
 
-        itemBtn.addEventListener('click', () => {
-            this.#toggleView('item');
-        });
+        if (logoutBtn) {
+            logoutBtn.addEventListener('click', () => {
+                this.#hub.publish(Events.Logout, null);
+                navBar.innerHTML = '';
+                navBar.innerHTML = `
+                    <li><a href="#" id="homeBtn">Home</a></li>
+                    <li><a href="#" id="loginBtn">Login</a></li>
+                `;
+                logout();
+            });
+        }
 
         this.#hub.subscribe('SwitchToHomePage', () => {
             this.#currentView = 'home';
@@ -134,7 +175,26 @@ export class AppController {
         this.#hub.subscribe('SwitchToItemPage', () => {
             this.#currentView = 'item';
             this.#renderCurrentView();
-        })
+        });
+        const navBar = document.querySelector('.navbar__menu');
+        this.#hub.subscribe(Events.LoginSuccess, () =>{
+            navBar.innerHTML = '';
+            navBar.innerHTML = `
+                <li><a href="#" id="homeBtn">Home</a></li>
+                <li><a href="#" id="exploreBtn">Explore</a></li>
+                <li><a href="#" id="profileBtn">Profile</a></li>
+                <li><a href="#" id="logoutBtn">Logout</a></li>
+            `;
+            this.#attachEventListeners();
+        });
+        this.#hub.subscribe(Events.LogoutSuccess, () => {
+            navBar.innerHTML = '';
+            navBar.innerHTML = `
+                <li><a href="#" id="homeBtn">Home</a></li>
+                <li><a href="#" id="loginBtn">Login</a></li>
+            `;
+            this.#attachEventListeners();
+        });
     }
 
     #toggleView(view) {

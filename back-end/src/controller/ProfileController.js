@@ -8,19 +8,13 @@ class ProfileController{
     }
 
     async getProfile(req,res){
-        // let profile = null;
-        // setTimeout(async() => profile = await this.model.read(req.params.email), 5000);//get profile for specific email
-        // if(profile !== null){
-        //     return res.status(201).json({profile});
-        // }
-        // res.status(400).ok(false);
         const profile = await this.model.read(req.params.email);//get profile for specific email
-        res.json({profile});
+        res.json({ profile });
     }
 
     async getAllProfiles(_req, res) {
         const profiles = await this.model.read();
-        res.json( { profiles } );
+        res.json({ profiles });
     }
 
     async createProfile(req,res){

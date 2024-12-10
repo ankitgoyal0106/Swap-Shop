@@ -77,10 +77,15 @@ export const Events = {
     ViewItem: 'ViewItem',
 
     ProfileEdited: 'EditedProfile',
-    ProfileEditedSuccess: `ProfileEditedSuccess`,
-    
+    ProfileEditedSuccess: 'ProfileEditedSuccess',
     Login: 'Login',
+    LoginSuccess: 'LoginSuccess',
     Logout: 'Logout',
+    LogoutSuccess: 'LogoutSuccess',
     Registered: 'Registered',
-    RegisterProfile: 'RegisterProfile'
+    RegisterProfile: 'RegisterProfile',
+
+    PageReloadWhileLoggedIn: 'PageReloadWhileLoggedIn',
+    ChangedViewToProfile: 'ChangedViewToProfile',
+    ChangedViewToEdit: 'ChangedViewToLogin'
 };
