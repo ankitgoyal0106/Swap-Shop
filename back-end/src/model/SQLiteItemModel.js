@@ -5,6 +5,7 @@ const sequelize = new Sequelize({
     dialect: "sqlite",
     storage: "database.sqlite"
 });
+
 //Define the Item model
 const Item = sequelize.define("Item", {
     listingID: {
@@ -57,6 +58,10 @@ const Item = sequelize.define("Item", {
     updatedAt: {
         type: DataTypes.DATE,
         allowNull: false
+    },
+    sellerEmail: {
+        type: DataTypes.STRING,
+        allowNull: false
     }
 });
 
@@ -84,7 +89,8 @@ class _SQLiteItemModel {
                 itemLocation: 'Location A',
                 images: ['img1.jpg', 'img2.jpg'],
                 amountAvailable: 10,
-                updatedAt: new Date('2023-01-02T10:00:00Z')
+                updatedAt: new Date('2023-01-02T10:00:00Z'),
+                sellerEmail: 'aa@umass.edu'
             }
             );
         }
