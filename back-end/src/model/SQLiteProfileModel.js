@@ -95,16 +95,29 @@ class _SQLiteProfileModel {
         return await Profile.findAll();
     }
 
+    //CHANGED THIS FUNCTION
     async update(profile) {
-        const profileu = await Profile.findByPk(profile.email);
+        console.log("Received profile for update:", profile);
+    
+        // Find the profile by email
+        const profileu = await Profile.findOne({ where: { email: profile.email } });
+        
         if (!profileu) {
+            console.log(`No profile found with email: ${profile.email}`);
+            return null;  
+        }
+    
+        // Attempt to update the profile
+        try {
+            const updatedProfile = await profileu.update(profile, { returning: true });
+            return updatedProfile;  // Return the updated profile
+        } catch (error) {
+            console.error("Error updating profile:", error);
             return null;
         }
-
-        await profileu.update(profile);
-        return profileu;
     }
-
+    
+    
     async delete(profile = null) {
         if (profile === null) {
             await Profile.destroy({ truncate: true });

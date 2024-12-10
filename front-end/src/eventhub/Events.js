@@ -69,9 +69,9 @@ export const Events = {
     GetConvoSuccess: `GetConvoSuccess`,
     GetConvoFailure: `GetConvoFailure`,
 
+    //Achievements
     SignUp: 'SignUp',
     ListItem: 'ListItem',
-    StartNewChat: 'StartNewChat',
     MarkItemSold: 'MarkItemSold',
     FindEasterEgg: 'FindEasterEgg',
     ViewItem: 'ViewItem',
