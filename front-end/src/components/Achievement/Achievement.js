@@ -42,33 +42,50 @@ export class Achievement extends BaseComponent {
     async incrementAchievementCount(field) {
         try {
             // Fetch the current profile data
-            const response = await fetch(`http://localhost:3000/v1/profile/:${this.email}`);
+            const response = await fetch(`http://localhost:3000/v1/profile/${this.email}`);
             if (!response.ok) {
                 throw new Error("Profile not found");
             }
 
             const profileData = await response.json();
-            const achievementCounts = profileData.achievementCounts || {};
+            const achievementCounts = profileData.profile.achievementCounts || {};
 
             // Increment the achievement count
             achievementCounts[field] = (achievementCounts[field] || 0) + 1;
 
-
             // Update the profile
-            await this.updateProfileData(achievementCounts);
+            const updatedProfileData = {
+                ...profileData.profile,
+                achievementCounts,
+            };
+
+            const putResponse = await fetch(`http://localhost:3000/v1/edit-profile`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(updatedProfileData),
+            });
+    
+            if (!putResponse.ok) {
+                throw new Error("Failed to update profile");
+            }
+    
+            const updatedData = await putResponse.json();
         } catch (error) {
             console.error("Error incrementing achievement count:", error);
         }
     }
     
-    async updateProfileData(updatedAchievementCounts) {
+    
+    async updateProfileData(profileData, updatedAchievementCounts) {
         try {
             const updatedProfileData = {
-                ...this.#profileData, 
+                ...profileData, 
                 achievementCounts: updatedAchievementCounts, 
             };
 
-            const response = await fetch(`http://localhost:3000/v1/profile/:${this.email}`, {
+            const response = await fetch(`http://localhost:3000/v1/edit-profile`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
@@ -77,11 +94,13 @@ export class Achievement extends BaseComponent {
             });
 
             if (!response.ok) {
-                throw new Error("Failed to update profile");
+                const errorData = await response.json();
+                throw new Error(`Failed to update profile: ${errorData.message || 'Unknown error'}`);
             }
 
             const updatedData = await response.json();
             this.#profileData = updatedData;
+            this.render();
             this.eventHub.publish(Events.ProfileEdited, updatedData);
 
         } catch (error) {
@@ -91,7 +110,7 @@ export class Achievement extends BaseComponent {
 
     async fetchProfileData() {
         try {
-            const response = await fetch(`http://localhost:3000/v1/profile/:${this.email}`);
+            const response = await fetch(`http://localhost:3000/v1/profile/${this.email}`);
             if (!response.ok) {
                 throw new Error("Profile not found");
             }
@@ -115,8 +134,7 @@ export class Achievement extends BaseComponent {
     
         const achievementContent = document.createElement('div');
         achievementContent.className = 'achievement-content'
-
-        const achievementCounts = this.#profileData;
+        const achievementCounts = this.#profileData?.profile?.achievementCounts || {};
 
         //Array containing all the badgeData and the condition to get them
         const badgeData = [
