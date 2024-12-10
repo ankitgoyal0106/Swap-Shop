@@ -11,13 +11,13 @@ export class conversationList extends BaseComponent{
         super();
         // saveEmailToLocalStorage("example2@umass.edu"); //TODO: REMOVE LATER
         //convoLog is array of strings of convoIDs
-        this.convoLog = null;
+        this.convoLog = [];
         const hub = EventHub.getInstance();
         hub.subscribe(Events.GetProfileSuccess, data => {
             this.convoLog = JSON.parse(data.profile.conversationList);
         }); //on a successful retrieval, we can ge the conversationList for the user
         this.userID = getEmailFromLocalStorage();
-        hub.publish(Events.GetProfile, this.userID); //query from database to retrieve profile data
+        //hub.publish(Events.GetProfile, this.userID); //query from database to retrieve profile data
 
         this.loadCSS("conversation");
     }
@@ -25,11 +25,12 @@ export class conversationList extends BaseComponent{
     render(){ 
         //TODO: fetching profiles from back-end
         const hub = EventHub.getInstance();
+        hub.clearHandlers(Events.GetProfileSuccess); //TODO: look at later
         hub.subscribe(Events.GetProfileSuccess, data => {
             this.convoLog = JSON.parse(data.profile.conversationList);
         }); //on a successful retrieval, we can ge the conversationList for the user
         this.userID = getEmailFromLocalStorage();
-        hub.publish(Events.GetProfile, this.userID); //query from database to retrieve profile data
+        // hub.publish(Events.GetProfile, this.userID); //query from database to retrieve profile data
 
         this.#container = document.createElement("div");
         this.#container.style.display = "block";
@@ -81,6 +82,8 @@ export class conversationList extends BaseComponent{
         const convoContainer = document.createElement("div");
         convoContainer.id = "convoContainer";
         convoContainer.classList.add("convoContainer");
+        const hub = EventHub.getInstance();
+        hub.publish(Events.GetProfile, this.userID); 
         if(this.convoLog.length > 0){
             this.convoLog.forEach(id => {
                 const hub = EventHub.getInstance();
@@ -103,7 +106,7 @@ export class conversationList extends BaseComponent{
         const convoBox = document.createElement("div");
         convoBox.classList.add("convoElement");
         //TODO: fetch conversation data structure by convoID and store into convoObj (used to extract the groupName to display in convoBox)
-        const upper = document.createTextNode(convoObj.groupName);
+        const upper = document.createTextNode(convoObj.groupName + " | # of members: " + JSON.parse(convoObj.groupMembers).length);
         convoBox.appendChild(upper);
         localStorage.setItem(convoObj.convoID, JSON.stringify(convoObj));
         const makeRoom = () => new chatInterface(convoObj.convoID);//TODO: Questionable, investigate later (use localStorage to save instances and check if it needs to make a new object)
