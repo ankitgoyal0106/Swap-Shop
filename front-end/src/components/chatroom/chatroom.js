@@ -21,39 +21,32 @@ export class chatInterface extends BaseComponent{
 
         //TODO: this will periodically make a fetch to the back end to keep the chat room up to date
         //new fear unlocked: if it takes too long to fetch, we might lose messages
-        // let intervalId = setInterval(() => {
-        //     console.log('Interval is running...');
-        //   }, 1000);
-        
-        //   document.getElementById('stopButton').addEventListener('click', () => {
-        //     clearInterval(intervalId); // Stops the interval
-        //     console.log('Interval stopped.');
-        const switches = [Events.SwitchToHomePage,Events.SwitchToExplorePage,Events.SwitchToLoginPage,Events.SwitchToItemPage,Events.SwitchProfileToNotif,Events.SwitchProfileToView,Events.SwitchProfileToConvo];
+        const switches = [Events.SwitchToHomePage,Events.SwitchToExplorePage,Events.SwitchToLoginPage,Events.SwitchToItemPage,Events.SwitchProfileToNotif,Events.SwitchProfileToView,Events.SwitchProfileToConvo, `SwitchProfileToAchievements`];
 
         const hub = EventHub.getInstance();
 
         const interval = setInterval( () => {
-
+            //console.log("waiting...");
+            hub.clearHandlers(Events.GetConvoSuccess);
+            hub.subscribe(Events.GetConvoSuccess, data => {//updates loadedMsgs when there is a 200 status, otherwise gets a 304 and doesn't change
+                this.loadedMsgs = JSON.parse(data.msgLog);//updates messages in memory
+                localStorage.setItem(data.convoID, JSON.stringify(data)); //updates messages in localStorage to be used later
+                
+                const chatBox = document.getElementById("chatBox");
+                chatBox.innerHTML = "";
+                this.#renderMsgs(chatBox);
+                chatBox.scrollTop = chatBox.scrollHeight;
+            });
+            hub.publish(Events.GetConvo, this.convoID);
         }, 1000);
 
-        switches.forEach( (event) => {
-            hub.subscribe(event, clearInterval(interval));
+        switches.forEach( (event) => {//want to stop running the interval when we are not looking at the chatRoom (substitute for WebSockets)
+            hub.subscribe(event, data => {
+                clearInterval(interval);
+                //interval = null;
+            });
         })
-        // setInterval(() => {
-        //     hub.subscribe(Events.GetConvoSuccess, data => {
-        //         if(data.msgLog.length > this.loadedMsgs){//TODO: new message incoming, need to update local
-        //             this.loadedMsgs = data.msgLog;
-        //         }
-        //         else if(data.msgLog.length < this.loadedMsgs){//TODO: new message pending, need to update database entry 
-        //             //not sure if this needs to be handled if it can be done in the sending part
-        //             hub.subscribe(Events.UpdateChatSuccess, data => this.loadedMsgs = data.msgLog);
-        //             hub.publish(Events.UpdateChat, {convoID: this.convoID, msgLog: this.loadedMsgs});
-        //         }
-        //         //when the two logs are the same, both are up to date
-        //     });
-        //     hub.publish(Events.GetConvo, this.convoID);
-        // }, 1000);
-        //subscribe event to page switch and make it so it stops whenever we switch pages
+        
         this.loadCSS("chatroom");
     }
 
@@ -67,6 +60,7 @@ export class chatInterface extends BaseComponent{
         this.#container.appendChild(title);
         const chatBox = this.#createChat();
         this.#renderMsgs(chatBox);
+        chatBox.scrollTop = chatBox.scrollHeight;
         this.#container.appendChild(chatBox);
         this.#container.appendChild(this.#createInputBar());
         return this.#container;
