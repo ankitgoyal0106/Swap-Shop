@@ -103,7 +103,7 @@ export class conversationList extends BaseComponent{
         const convoBox = document.createElement("div");
         convoBox.classList.add("convoElement");
         //TODO: fetch conversation data structure by convoID and store into convoObj (used to extract the groupName to display in convoBox)
-        const upper = document.createTextNode(convoObj.groupName);
+        const upper = document.createTextNode(convoObj.groupName + " | # of members: " + JSON.parse(convoObj.groupMembers).length);
         convoBox.appendChild(upper);
         localStorage.setItem(convoObj.convoID, JSON.stringify(convoObj));
         const makeRoom = () => new chatInterface(convoObj.convoID);//TODO: Questionable, investigate later (use localStorage to save instances and check if it needs to make a new object)
