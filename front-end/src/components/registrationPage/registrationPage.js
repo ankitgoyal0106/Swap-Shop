@@ -85,7 +85,7 @@ export class Registration extends BaseComponent {
         return { label, input: select };
     }
 
-    #onSubmit(event) {
+    async #onSubmit(event) {
         event.preventDefault();
         const form = document.querySelector('#registration-form');
         const formData = new FormData(form);
@@ -114,31 +114,36 @@ export class Registration extends BaseComponent {
             alert("Please enter a valid email address.");
             return;
         }
-
-        console.log("Form submitted successfully", userData);
         // Further processing of the form data, such as sending it to a server, can be done here
-        const timestamp = new Date().toISOString();
-        // Encrypt the user data before storing
-        const encryptedPassword = btoa(userData.password); // Simple base64 encoding for demonstration purposes
+        const timestamp = new Date();
+
+        // Create the user profile as an object
         const profileData = {
-            userID: crypto.randomUUID(), // Generate a unique ID for each user
             name: `${userData['first-name']} ${userData['last-name']}`,
             email: userData.email,
             phoneNo: userData['phone-number'],
             college: userData.college,
-            password: encryptedPassword,
+            password: userData.password,
             profilePicture: null,
             createdAt: timestamp,
             updatedAt: timestamp,
-            achievements: [],
-            savedListings: [],
-            recentlyViewed: [],
-            conversationList: []
+            achievementCounts: {
+                "listed": 0,
+                "sold": 0,
+                "viewed": 0,
+                "easterEgg": false
+            },
+            savedListings: "[]",
+            recentlyViewed: "[]",
+            conversationList: "[]"
         };
 
-        console.log("Profile Data:", profileData);
+        // Publish the profile data to the event hub
         const hub = EventHub.getInstance();
-        hub.publish(Events.NewProfile, profileData);
-        hub.publish(Events.StoreProfile, profileData);
+        hub.publish(Events.RegisterProfile, profileData);
+        hub.subscribe(Events.Registered, (profileData) => {
+            alert("Registration successful! Please log in to continue.");
+            hub.publish(Events.SwitchToLoginPage, null);
+        });
     }
 }

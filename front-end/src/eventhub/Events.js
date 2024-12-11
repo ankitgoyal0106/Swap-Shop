@@ -7,6 +7,7 @@ export const Events = {
     SwitchToExplorePage: 'SwitchToExplorePage',
     SwitchToProfilePage: 'SwitchToProfilePage',
     SwitchToLoginPage: 'SwitchToLoginPage',
+    SwitchToItemPage: 'SwitchToItemPage',
 
     NewProfile: 'NewProfile',
 
@@ -44,12 +45,52 @@ export const Events = {
     ClearNotificationsSuccess: 'ClearNotificationsSuccess',
     ClearNotificationsFailure: 'ClearNotificationsFailure',
 
+    //Items storage events
+    NewItem: 'NewItem',
+    StoreItem: 'StoreItem',
+    StoreItemSuccess: 'StoreItemSuccess',
+    StoreItemFailure: 'StoreItemFailure',
+    
+    LoadItemsFailure: 'LoadItemsFailure',
+
+    ClearItems: 'ClearItems',
+    ClearItemsSuccess: 'ClearItemsSuccess',
+    ClearItemsFailure: 'ClearItemsFailure',
+
+    //Conversation storage events
+    SaveNewChat: `SaveNewChat`,
+    SaveNewChatSuccess: `SaveNewChatSuccess`,
+
+    UpdateChat: `UpdateChat`,
+    UpdateChatSuccess: `UpdateChatSuccess`,
+    UpdateChatFailure: `UpdateChatFailure`,
+
+    GetConvo: `GetConvo`,
+    GetConvoSuccess: `GetConvoSuccess`,
+    GetConvoFailure: `GetConvoFailure`,
+
+    //Achievements
     SignUp: 'SignUp',
     ListItem: 'ListItem',
-    StartNewChat: 'StartNewChat',
     MarkItemSold: 'MarkItemSold',
     FindEasterEgg: 'FindEasterEgg',
     ViewItem: 'ViewItem',
 
-    ProfileEdited: 'EditedProfile'
+    ProfileEdited: 'EditedProfile',
+    ProfileEditedSuccess: 'ProfileEditedSuccess',
+    Login: 'Login',
+    LoginSuccess: 'LoginSuccess',
+    Logout: 'Logout',
+    LogoutSuccess: 'LogoutSuccess',
+    Registered: 'Registered',
+    RegisterProfile: 'RegisterProfile',
+
+    ChangedViewToProfile: 'ChangedViewToProfile',
+    ChangedViewToEdit: 'ChangedViewToLogin',
+
+    GetItemsWithEmail: 'GetItemsWithEmail',
+    GetItemsWithEmailSuccess: 'GetItemsWithEmailSuccess',
+
+    DeleteItem: 'DeleteItem',
+    DeleteItemSuccess: 'DeleteItemSuccess'
 };

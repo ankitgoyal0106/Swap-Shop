@@ -13,6 +13,13 @@ export class EventHub {
       // Return an unsubscribe function for convenience
       return () => this.unsubscribe(event, listener);
     }
+
+    clearHandlers(event) {
+      if (!this.events[event]) return;
+
+      // Remove all listeners on this event
+      this.events[event] = [];
+    }
   
     // Publish an event
     publish(event, data) {

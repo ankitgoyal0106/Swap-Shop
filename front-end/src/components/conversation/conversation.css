@@ -20,16 +20,14 @@ button{
     margin-top: 10px; /*make relative*/
     margin-left:5%;
     margin-right:5%;
-    /* width: 80%; */
-    /* height: 400px; /*make relative*/
-    /* overflow-y: auto; */
+    width: 80%;
+    /* height: 400px;
+    overflow-y:scroll; */
     overflow-x:hidden;
     display:flex;
+    scroll-behavior: smooth;
     flex-direction: column-reverse;
-    /* grid-auto-flow:row;
-    grid-row-gap: 1px; */
-    border: 3px solid #f1f1f1;    
-    /* background-color: #624E88; */
+    border: 3px solid #f1f1f1;
     font-family: Arial, sans-serif;
 }
 
@@ -42,8 +40,8 @@ button{
     font-size: 30px;
     margin-left:auto;
     margin-right:auto;
-    height: 100px;
-    width: 95% ;
+    height: 4rem;
+    width: 85%;
     border: solid;
     border-color: #E6D9A2;
     border: 1px solid #F5F7F8;

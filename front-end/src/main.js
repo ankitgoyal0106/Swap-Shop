@@ -1,51 +1,23 @@
-
-
-// import { conversationList } from "./components/conversation/conversation.js";
-// import { explorePage } from "./components/explorePage/explorePage.js";
-// import { homeComponent } from "./components/homePage/homePage.js";
-// import {CreateItemPage} from "./components/itemPage/createItemPage.js";
-// import { profilePage } from "./components/mainProfilePage/mainProfilePage.js";
-
-
-import { ProfileRepositoryService } from "./services/ProfileRepositoryService.js";
+// import { ProfileRepoFactory } from "./services/ProfileRepoFactory.js";
+// import { ItemRepoFactory } from "./services/ItemRepoFactory.js";
+// import { ChatRepoFactory } from "./services/ChatRepoFactory.js";
 import { AppController } from "./components/AppController/AppController.js";
 
-
 document.addEventListener("DOMContentLoaded", function () {
- const appController = new AppController();
 
   //INITIALIZATION  FOR THE "APP"
-  const app = document.getElementById("app");
+  // const app = document.getElementById("app");
+  // app.appendChild(appController.render());
+
+//  // Begin profile repository service (Defaulting to indexedDB rn)
+//  const profileRepository = ProfileRepoFactory.get("remote"); //TODO: check if this can
+//  // Begin item repository service (Defaulting to indexedDB rn)
+//  const itemRepository = ItemRepoFactory.get();
+//  const conversastionRepo = ChatRepoFactory.get();
+
+ const appController = new AppController();
+ const app = document.getElementById("app");
   app.appendChild(appController.render());
-
-
-  // // Event listener for the Explore button
-  // document.getElementById('exploreBtn').addEventListener('click', function () {
-  //   // Implement the explorePage functionality here
-  //   const explorePageComponent = new explorePage();
-  //   app.innerHTML = '';
-  //   app.appendChild(explorePageComponent.render());
-  // });
-
-  // // Event listener for the Profile button 
-  // document.getElementById('profileBtn').addEventListener('click', function () {
-  //   // Implement the profilePage functionality here
-  //   const profilePageComponent = new profilePage();
-  //   app.innerHTML = '';
-  //   app.appendChild(profilePageComponent.render());
-  // });
-
-  // Event listener for the Create Item button 
-  // document.getElementById('itemBtn').addEventListener('click', function () {
-  //   // Implement the profilePage functionality here
-  //   const createItemComponent = new CreateItemPage();
-  //   app.innerHTML = '';
-  //   app.appendChild(createItemComponent.render());
-  // });
-
- // Begin the IndexDB for Profile Data
- //TODO: Implement profile repository factory services
- const profileRepository = new ProfileRepositoryService();
 
 });
 
