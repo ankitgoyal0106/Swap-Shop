@@ -2,7 +2,7 @@ import ModelFactory from "../model/ChattingModelFactory.js";
 
 class ChatController{
     constructor(){
-        ModelFactory.getModel("sqlite").then((model) => {
+        ModelFactory.getModel().then((model) => {
             this.model = model;
           });
     }

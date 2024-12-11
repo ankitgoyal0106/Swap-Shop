@@ -2,7 +2,7 @@ import ModelFactory from "../model/ItemModelFactory.js";
 
 class ItemController{
     constructor(){
-        ModelFactory.getModel("sqlite").then((model) => {
+        ModelFactory.getModel().then((model) => {
             this.model = model;
           });
     }
