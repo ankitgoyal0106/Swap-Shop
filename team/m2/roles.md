@@ -46,9 +46,9 @@ A markdown file detailing each team member's role and their top 3 commits for th
 
 - **Role**: Delegate milestone tasks to team members and ensure that all responsibilities have been assigned
 - **Top Three Commits**:
-   1. [Update of 'features.md' file](https://github.com/ankitgoyal0106/Swap-Shop/commit/cc1eceb673a83605d47cdcd59df802d9d9e6b680)
-   2. [Creation of Navigation Bar](https://github.com/ankitgoyal0106/Swap-Shop/commit/c7da78a331eb359c3424158e2f9ec3bf406f7a88)
-   3. [Creation and Upload of Achievement Badges in Achievement Page](https://github.com/ankitgoyal0106/Swap-Shop/commit/9a7f49bdfec0c1dc996b61ddb600d5ef2fb0db2c)
+   1. [Commit for the creation of server.js](https://github.com/ankitgoyal0106/Swap-Shop/commit/320588c6894a2be1acf8734500e45a7b3c299e27)
+   2. [Commit for the creation of routes.js](https://github.com/ankitgoyal0106/Swap-Shop/commit/dace5fe4b5d373eaaf5ff2936553e18ecaae0cff)
+   3. [Created code to use EventsHub, fetch profile data and render achievements upon task completion](https://github.com/ankitgoyal0106/Swap-Shop/commit/ba72774e38da73760268af49d63b70e2e649ad80)
 
 ## Snigdha Thatikonda - Note Taker
 
