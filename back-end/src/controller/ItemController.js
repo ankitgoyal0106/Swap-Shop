@@ -1,8 +1,8 @@
-import ModelFactory from "../model/ModelFactory.js";
+import ModelFactory from "../model/ItemModelFactory.js";
 
 class ItemController{
     constructor(){
-        ModelFactory.getModel("sqlite").then((model) => {
+        ModelFactory.getModel().then((model) => {
             this.model = model;
           });
     }
@@ -10,6 +10,11 @@ class ItemController{
     async getItem(req,res){
         const item = await this.model.read(req.body.itemID);
         res.json(item);
+    }
+
+    async getAllItemsByEmail(req, res) {
+        const items = await this.model.read(null, req.params.email);
+        res.json({ items });
     }
 
     async getAllItems(req,res){
@@ -33,8 +38,8 @@ class ItemController{
     }
 
     async removeItem(req,res){
-        await this.model.delete(req.body.itemID);
-        res.json(await this.model.read())
+        const itemID = await this.model.delete(req.params.itemID);
+        res.json({ itemID });
     }
 }
 

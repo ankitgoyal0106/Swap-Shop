@@ -67,3 +67,40 @@
   1. [Commit](https://github.com/ankitgoyal0106/Swap-Shop/commit/13ec93d15b3a8ac64b43759e2591fbe4a2433307)
 
 
+## December 3, 2024
+
+- **Task:** Merge PR.
+- **Details:**  reviewed and merged various pull requests (#111, #116, #117)
+- **Link to Commit:**
+  1. [Most recent Commit](https://github.com/ankitgoyal0106/Swap-Shop/commit/7a79e9814f61b5cbb7d9736aeee103ef5a22f216)
+ 
+## December 4, 2024
+
+- **Task:** Move the Create item button from the nav bar to profile page.
+- **Details:**  Deleted the create item button from the nav bar and added a button for create item in the profile page so that a user can create an item from their profile
+- **Link to Commit:**
+  1. [delete the button from nav bar](https://github.com/ankitgoyal0106/Swap-Shop/commit/e710adbac554dff4c1d1229b3922d86d901d1006)
+  2. [move it to profile page](https://github.com/ankitgoyal0106/Swap-Shop/commit/29a446d213ae6738a2c9658b4714bf67b5403008)
+
+- **Task:** Authentication Middleware 
+- **Details:** Added middleware to authenticate users by verifying email and password. Ensures only valid users can access protected routes.
+- **Link to Commit:**
+  1. [commit to the changes made](https://github.com/ankitgoyal0106/Swap-Shop/commit/322e43b1aa354d46535740ce35c0184a9bed00b6)
+     
+- **Task:** User authentication
+- **Details:** Set up Express application with session management and SQLite integration. Provides a foundation for handling authentication, serving static files, and managing routes efficiently.
+- **Link to Commit:**
+  1. [commit](https://github.com/ankitgoyal0106/Swap-Shop/commit/fa75dd0f623398aa844401bdbef92b0d7db01c64)
+
+- **Task:** LoginController
+- **Details:** Implemented user registration, login, and logout functionality using SQLite and bcrypt for secure password handling. Enables user account management and session handling for authentication flow.
+- **Link to Commit:**
+  1. [commit](https://github.com/ankitgoyal0106/Swap-Shop/commit/a502d8e395a8937f3b949941bb6031592fa58568)
+
+- **Task:** User Routes
+- **Details:** Added routes for user registration, login, logout, and profile retrieval. Integrated authentication middleware for secure access to protected endpoints.
+- **Link to Commit:**
+  1. [commit](https://github.com/ankitgoyal0106/Swap-Shop/commit/81471eae41d0d46e40a4850e5dc151c002accfa2)
+
+
+

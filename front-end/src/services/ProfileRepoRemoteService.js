@@ -27,6 +27,10 @@ export class ProfileRepoRemoteService extends Service {
     this.subscribe(Events.ProfileEdited, (data) => {
       this.updateProfile(data);
     });
+
+    this.subscribe(Events.Login, (credentials) => {
+      this.login(credentials);
+    });
   }
 
   async #initProfiles() {
@@ -34,14 +38,14 @@ export class ProfileRepoRemoteService extends Service {
 
     if (!response.ok) {
       throw new Error("Failed to fetch profiles");
-    }
+    } else {
+      const data = await response.json();
 
-    const data = await response.json();
-
-    data.profiles.forEach(async (profile) => {
+      data.profiles.forEach(async (profile) => {
 
       this.publish(Events.NewProfile, profile);
     });
+    }
   }
 
   async registerProfile(profileData) {
@@ -55,11 +59,26 @@ export class ProfileRepoRemoteService extends Service {
 
     if (!response.ok) {
       throw new Error("Failed to register profile");
+    } else {
+      const data = await response.json();
+      this.publish(Events.Registered, data);
+      return data
     }
+  }
 
-    const data = await response.json();
-    this.publish(Events.Registered, data);
-    return data
+  async login(credentials) {
+    const queryParams = new URLSearchParams(credentials).toString();
+    const response = await fetch(`http://localhost:3000/v1/login/credentials?${queryParams}`);
+
+    if (!response.ok) {
+      const message = await response.json().then((e) => e.message);
+      alert(message);
+      throw new Error("Failed to login");
+    } else {
+      const data = await response.json();
+      this.publish(Events.LoginSuccess, data);
+      return data;
+    }
   }
 
   async storeProfile(profileData) {
@@ -74,12 +93,11 @@ export class ProfileRepoRemoteService extends Service {
 
     if (!response.ok) {
       throw new Error("Failed to store profile");
+    } else {
+      const data = await response.json();
+      return data;
     }
-
-    const data = await response.json();
-    return data;
   }
-
 
   async deleteProfile() {
     //TODO: Create delete profile method. Def need to add parameter.
@@ -93,13 +111,11 @@ export class ProfileRepoRemoteService extends Service {
         "Content-Type": "application/json",
       }
     });
-
-    if (!response.ok) {
+    const data = await response.json();
+    if (data.profile === null) {
+      this.publish(Events.GetProfileFailure, `Profile does not exist`);
       throw new Error("Failed to fetch profile");
     }
-
-    const data = await response.json();
-    
     this.publish(Events.GetProfileSuccess, data);
   }
 
@@ -114,9 +130,10 @@ export class ProfileRepoRemoteService extends Service {
 
     if (!response.ok) {
       throw new Error("Failed to update profile");
+    } else {
+      const data = await response.json();
+      this.publish(Events.ProfileEditedSuccess, data);
+      return data;
     }
-
-    const data = await response.json();
-    return data;
   }
 }

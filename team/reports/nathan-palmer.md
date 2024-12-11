@@ -100,3 +100,131 @@
 - **Task**: New diagrams for ui-diagrams and a quick bug fix for profile.
 - **Details**: Created and added new diagrams for the ui-diagrams file, as well as a standardization of the structure of that file. Additionally, a quick fix to ensure the profile page boots to the info section.
 - **Link to Commit**: [Commit](https://github.com/ankitgoyal0106/Swap-Shop/commit/a7c64a3d877df31cc9e02d65effe2ed66876a7d1)
+
+- **Task**: Catching up on my commit log.
+- **Details**: Logged all commits between milestone 2 and 3.
+- **Link to Commit**: [Commit](https://github.com/ankitgoyal0106/Swap-Shop/commit/8f9221ab78f2010dd6729d9557c7aadaa332ef02)
+
+## November 16, 2024
+
+- **Task**: Addition of UI diagrams for chat pages.
+- **Details**: Added diagrams for the chat pages in ui-diagrams.md. 
+- **Link to Commit**: [Commit](https://github.com/ankitgoyal0106/Swap-Shop/commit/386420733a637d91d1c149dcb23f95f15472b0de)
+
+## November 17, 2024
+
+- **Task**: UI diagram additions.
+- **Details**: Added diagrams for the achievement, home, and new item page to ui-diagrams.md.
+- **Link to Commit**: [Commit](https://github.com/ankitgoyal0106/Swap-Shop/commit/3d4e9578b6ec05a4a076e18142fc4351260a9493)
+
+## November 22, 2024
+
+- **Task**: Initial creation of the backend file structure.
+- **Details**: Creation of the folder and file hierarchy for the initial backend files such as a controller, model factory, routes, etc. Done for organizational purposes.
+- **Link to Commit**: [Commit](https://github.com/ankitgoyal0106/Swap-Shop/commit/3895c1318dfd429bc65df19050d9b1dabe78494c)
+
+- **Task**: Additions to backend file structure.
+- **Details**: Addition of middleware and passport files in the backend structure.
+- **Link to Commit**: [Commit](https://github.com/ankitgoyal0106/Swap-Shop/commit/d0b24a2e996a4a3dcd10f4427059a26424107d98)
+
+## December 3, 2024
+
+- **Task**: Creation of a model factory.
+- **Details**: Pulled code for a default model factory, in order for creation of database specific ones later.
+- **Link to Commit**: [Commit](https://github.com/ankitgoyal0106/Swap-Shop/commit/11961283a5aa64cd73cce3852726fb02537b0e23)
+
+- **Task**: Implementation of the Item Repository services in the front end.
+- **Details**: Implemented a service for the item repository in the front end, as it was not previously completed and is necessary for backend development.
+- **Link to Commit**: [Commit](https://github.com/ankitgoyal0106/Swap-Shop/commit/fab6a2c03c7cde28634bf1a22967081e3731f2ee)
+
+- **Task**: Setup of profile repository factory service as well as a remote service for profiles. 
+- **Details**: Changed the profile service from being hardcoded into indexedDB into being a factory system. Then implemented the remote service for profiles for further backend development.
+- **Link to Commit**: [Commit](https://github.com/ankitgoyal0106/Swap-Shop/commit/96212361d90c6c2bdee0ad9cad01d0f2695dcc91)
+
+## December 4, 2024
+
+- **Task**: Item Page Rendering
+- **Details**: Implemented the item page into the app controller in order for it to be rendered when necessary. (Added to app controller and events, then provided infrastructure for that)
+- **Link to Commit**: [Commit](https://github.com/ankitgoyal0106/Swap-Shop/commit/717229f8db87af0e9c4be527ff0d031c8f82b92a)
+
+- **Task**: Bug fix for item page control.
+- **Details**: Fixed a bug in the app controller that was not allowing the page to switch to the create item page.
+- **Link to Commit**: [Commit](https://github.com/ankitgoyal0106/Swap-Shop/commit/4c9e25be40962230606e8980bee5aa622fe7ba68#diff-bf0c81b9a29913b8a5bebeb99bcaa3901c65212abecf6d08843863e448993ec6R100)
+
+## December 5, 2024
+
+- **Task**: Creation of a test page.
+- **Details**: Creation of an html test page to test individual modules with the backend service.
+- **Link to Commit**: [Commit](https://github.com/ankitgoyal0106/Swap-Shop/commit/f5fd479c98723e13ee33d52dcb20f35f38e04753)
+
+- **Task**: Testing of server access for in memory.
+- **Details**: Setup a default route for server testing that just returns a 200 status.
+- **Link to Commit**: [Commit](https://github.com/ankitgoyal0106/Swap-Shop/commit/c2e1c8cbab718ce8fc17333d8c697adbdd9ea11e)
+
+## December 6, 2024
+
+- **Task**: Debugged in memory item model.
+- **Details**: Debugged the in memory item model to ensure that the backend can interface with the front end properly before integrating SQLite
+- **Link to Commit**: [Commit](https://github.com/ankitgoyal0106/Swap-Shop/commit/977df4bdfe3741cfc97363f427aa848f5ca7a889)
+
+- **Task**: Test page functioning with SQLite.
+- **Details**: Got SQLite functioning and able to receive info from the item creation page.
+- **Link to Commit**: [Commit](https://github.com/ankitgoyal0106/Swap-Shop/commit/b6fb04d13342819bb0dbf6ba6e1bad30c005b93c)
+
+- **Task**: Tested SQLite item page creation with the main app.
+- **Details**: Tested to ensure SQLite functions with the code in the app.
+- **Link to Commit**: [Commit](https://github.com/ankitgoyal0106/Swap-Shop/commit/648f2efe52e5c1eab8bb943d5e3004fca3a5ece8)
+
+- **Task**: Fixed Rendering Issues
+- **Details**: Temporarily disabled bcrypt in order to allow usage of the app while Scott debugs the issue.
+- **Link to Commit**: [Commit](https://github.com/ankitgoyal0106/Swap-Shop/commit/39849470ec9aa38cf7cf162472fd009b2284d5bb)
+
+- **Task**: Final SQLite Bug Fix
+- **Details**: Fixed a final bug preventing use of the SQLite functions for the item page.
+- **Link to Commit**: [Commit](https://github.com/ankitgoyal0106/Swap-Shop/commit/ed37a1e3d15d986e8f9bbbdf5b31dd4b62bdf024)
+
+## December 7, 2024
+
+- **Task**: Register User Function Debugging
+- **Details**: Scott and I pair debugged the user registration function in order for it to interface with SQLite.
+- **Link to Commit**: [Commit](https://github.com/ankitgoyal0106/Swap-Shop/commit/3f22541aff5b75c6de686e55e128112845ac8c2f)
+
+- **Task**: Removed authentication from /profiles route
+- **Details**: Removed the authenticate tag from the /profiles route in order to allow testing of the profiles database.
+- **Link to Commit**: [Commit](https://github.com/ankitgoyal0106/Swap-Shop/commit/7dd64a622008e8805d4d3c3a80f3e4f51917e2d0)
+
+## December 9, 2024
+
+- **Task**: Explore Page Bug Fixes
+- **Details**: Adjusted a few changes that were made through a PR merge in order to fix bugs that arose. Now the explore page will properly render.
+- **Link to Commit**: [Commit](https://github.com/ankitgoyal0106/Swap-Shop/commit/8d104b53c85cba590daea08f4901bf5abbd7016f)
+
+- **Task**: Removed Item Button
+- **Details**: Removed the item page button from the task bar, as the styling was completed and it can now be accessed by clicking on an item in the explore page.
+- **Link to Commit**: [Commit](https://github.com/ankitgoyal0106/Swap-Shop/commit/5367c707376aa6c93d77c0bd921317572c3ad65d)
+
+- **Task**: Added a publish to the explore page.
+- **Details**: Added a publish event for viewing an item in order to properly render item page and increment both achievements and recently viewed.
+- **Link to Commit**: [Commit](https://github.com/ankitgoyal0106/Swap-Shop/commit/a34013273a070a619d96d0405b0a1c5a2ad4d31d)
+
+## December 10, 2024
+
+- **Task**: Fixed Rendering of Explore Page
+- **Details**: Changed Item Model Factory to fix item database access.
+- **Link to Commit**: [Commit](https://github.com/ankitgoyal0106/Swap-Shop/commit/2850136987361104be78b14d856237a9cdd8ebfd)
+
+- **Task**: Fixed import for model factory
+- **Details**: Changed model factory import after renaming the item model factory.
+- **Link to Commit**: [Commit](https://github.com/ankitgoyal0106/Swap-Shop/commit/8c357fa2f012e274f749efcbb6e2cabae0cc332a)
+
+- **Task**: Commented out seller email.
+- **Details**: Commented out seller email section of SQLite model so we could present a working product. Will bug fix soon.
+- **Link to Commit**: [Commit](https://github.com/ankitgoyal0106/Swap-Shop/commit/3bf87295ed8c8a54242307272918f939aabe0a8e)
+
+- **Task**: Fixed seller email.
+- **Details**: Reinitialized the item database to properly interact with the seller email field.
+- **Link to Commit**: [Commit](https://github.com/ankitgoyal0106/Swap-Shop/commit/92e71e0f6c5067fe0327aaca544039966db255d5)
+
+- **Task**: Recently Viewed
+- **Details**: Completed implementation of the recently viewed section of the explore page.
+- **Link to Commit**: [Commit](https://github.com/ankitgoyal0106/Swap-Shop/commit/a78d5d3be6de9a9405588707f8b628c17ca356f3)

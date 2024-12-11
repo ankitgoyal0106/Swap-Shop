@@ -1,13 +1,13 @@
 import InMemoryItemModel from "./InMemoryItemModel.js";
-import SQLiteModel from "./SQLiteItemModel.js";
+import SQLiteConvoModel from "./SQLiteConvoModel.js";
 
 class _ModelFactory {
     async getModel(model = "sqlite"){
         if (model === "sqlite"){
-            return SQLiteModel;
+            return SQLiteConvoModel;
         } else if (model === "sqlite-fresh") {
-            await SQLiteModel.init(true);
-            return SQLiteModel;
+            await SQLiteConvoModel.init(true);
+            return SQLiteConvoModel;
         } else {
             return InMemoryItemModel;
         }

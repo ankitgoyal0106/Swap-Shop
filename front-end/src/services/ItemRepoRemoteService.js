@@ -15,6 +15,14 @@ export class ItemRepoRemoteService extends Service {
     this.subscribe(Events.ClearItems, () => {
       this.clearItems();
     });
+
+    this.subscribe(Events.GetItemsWithEmail, (email) => {
+      this.getItemsWithEmail(email);
+    });
+
+    this.subscribe(Events.DeleteItem, (itemID) => {
+      this.deleteItem(itemID);
+    });
   }
 
   async #initItems() {
@@ -65,6 +73,20 @@ export class ItemRepoRemoteService extends Service {
     return data;
   }
 
+  async deleteItem(itemID) {
+    const response = await fetch(`http://localhost:3000/v1/item/${itemID}`, {
+      method: "DELETE",
+    });
+
+    if (!response.ok) {
+      throw new Error("Failed to delete item");
+    } else {
+      const data = await response.json();
+      this.publish(Events.DeleteItemSuccess, data);
+      return data;
+    }
+  }
+
   async getItems() {
     const response = await fetch("http://localhost:3000/v1/items");
     if (!response.ok) {
@@ -75,4 +97,14 @@ export class ItemRepoRemoteService extends Service {
     return data.items;
   }
   
+  async getItemsWithEmail(email) {
+    const response = await fetch(`http://localhost:3000/v1/items/${email}`);
+    if (!response.ok) {
+      throw new Error("Failed to fetch items");
+    } else {
+      const data = await response.json();
+      this.publish(Events.GetItemsWithEmailSuccess, data);
+      return data;
+    }
+  }
 }

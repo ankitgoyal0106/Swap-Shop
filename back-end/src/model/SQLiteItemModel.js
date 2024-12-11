@@ -5,6 +5,7 @@ const sequelize = new Sequelize({
     dialect: "sqlite",
     storage: "database.sqlite"
 });
+
 //Define the Item model
 const Item = sequelize.define("Item", {
     listingID: {
@@ -41,7 +42,7 @@ const Item = sequelize.define("Item", {
         allowNull: false
     },
     images: {
-        type: DataTypes.TEXT,
+        type: DataTypes.BLOB,
         allowNull: false,
         get () {
             return JSON.parse(this.getDataValue('images'));
@@ -56,6 +57,10 @@ const Item = sequelize.define("Item", {
     },
     updatedAt: {
         type: DataTypes.DATE,
+        allowNull: false
+    },
+    sellerEmail: {
+        type: DataTypes.STRING,
         allowNull: false
     }
 });
@@ -84,7 +89,8 @@ class _SQLiteItemModel {
                 itemLocation: 'Location A',
                 images: ['img1.jpg', 'img2.jpg'],
                 amountAvailable: 10,
-                updatedAt: new Date('2023-01-02T10:00:00Z')
+                updatedAt: new Date('2023-01-02T10:00:00Z'),
+                sellerEmail: 'aa@umass.edu'
             }
             );
         }
@@ -94,9 +100,13 @@ class _SQLiteItemModel {
         return await Item.create(Item);
     }
 
-    async read(listingID = null) {
+    async read(listingID = null, email = null) {
         if (listingID) {
             return await Item.findByPk(listingID);
+        }
+
+        if (email) {
+            return await Item.findAll({ where: { sellerEmail: email } });
         }
 
         return await Item.findAll();
@@ -112,14 +122,14 @@ class _SQLiteItemModel {
         return item_update;
     }
 
-    async delete(item = null) {
-        if (item === null) {
+    async delete(itemID = null) {
+        if (itemID === null) {
             await Item.destroy({ truncate: true });
             return;
         }
 
-        await Item.destroy({ where: { listingID: item.userID } });
-        return item;
+        await Item.destroy({ where: { listingID: itemID } });
+        return itemID;
     }
 }
 

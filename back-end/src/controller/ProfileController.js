@@ -7,14 +7,19 @@ class ProfileController{
         });
     }
 
-    async getProfile(req,res){
-        const profile = await this.model.read(req.body.email);//get profile for specific email
-        res.json({profile});
+    async getProfile(req, res) {
+        const profile = await this.model.read(req.params.email);
+        
+        if (!profile) {
+            return res.status(404).json({ error: "Profile not found" });
+        }
+        
+        res.json({ profile }); 
     }
 
     async getAllProfiles(_req, res) {
         const profiles = await this.model.read();
-        res.json( { profiles } );
+        res.json({ profiles });
     }
 
     async createProfile(req,res){

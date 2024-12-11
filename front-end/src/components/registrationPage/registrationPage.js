@@ -114,8 +114,6 @@ export class Registration extends BaseComponent {
             alert("Please enter a valid email address.");
             return;
         }
-
-        console.log("Form submitted successfully", userData);
         // Further processing of the form data, such as sending it to a server, can be done here
         const timestamp = new Date();
 
@@ -135,16 +133,15 @@ export class Registration extends BaseComponent {
                 "viewed": 0,
                 "easterEgg": false
             },
-            savedListings: "",
-            recentlyViewed: "",
-            conversationList: ""
+            savedListings: "[]",
+            recentlyViewed: "[]",
+            conversationList: "[]"
         };
 
         // Publish the profile data to the event hub
         const hub = EventHub.getInstance();
         hub.publish(Events.RegisterProfile, profileData);
         hub.subscribe(Events.Registered, (profileData) => {
-            console.log("Profile registered successfully", profileData);
             alert("Registration successful! Please log in to continue.");
             hub.publish(Events.SwitchToLoginPage, null);
         });

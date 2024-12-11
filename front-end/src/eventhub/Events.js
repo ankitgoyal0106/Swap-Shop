@@ -57,16 +57,40 @@ export const Events = {
     ClearItemsSuccess: 'ClearItemsSuccess',
     ClearItemsFailure: 'ClearItemsFailure',
 
+    //Conversation storage events
+    SaveNewChat: `SaveNewChat`,
+    SaveNewChatSuccess: `SaveNewChatSuccess`,
+
+    UpdateChat: `UpdateChat`,
+    UpdateChatSuccess: `UpdateChatSuccess`,
+    UpdateChatFailure: `UpdateChatFailure`,
+
+    GetConvo: `GetConvo`,
+    GetConvoSuccess: `GetConvoSuccess`,
+    GetConvoFailure: `GetConvoFailure`,
+
+    //Achievements
     SignUp: 'SignUp',
     ListItem: 'ListItem',
-    StartNewChat: 'StartNewChat',
     MarkItemSold: 'MarkItemSold',
     FindEasterEgg: 'FindEasterEgg',
     ViewItem: 'ViewItem',
 
     ProfileEdited: 'EditedProfile',
+    ProfileEditedSuccess: 'ProfileEditedSuccess',
     Login: 'Login',
+    LoginSuccess: 'LoginSuccess',
     Logout: 'Logout',
+    LogoutSuccess: 'LogoutSuccess',
     Registered: 'Registered',
-    RegisterProfile: 'RegisterProfile'
+    RegisterProfile: 'RegisterProfile',
+
+    ChangedViewToProfile: 'ChangedViewToProfile',
+    ChangedViewToEdit: 'ChangedViewToLogin',
+
+    GetItemsWithEmail: 'GetItemsWithEmail',
+    GetItemsWithEmailSuccess: 'GetItemsWithEmailSuccess',
+
+    DeleteItem: 'DeleteItem',
+    DeleteItemSuccess: 'DeleteItemSuccess'
 };
