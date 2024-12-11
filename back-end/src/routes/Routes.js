@@ -151,6 +151,11 @@ class Routes {
       }
     });
 
+    //Get Items by Email
+    this.router.get("/items/:email", async (req, res) => {
+      await ItemController.getAllItemsByEmail(req, res);
+    });
+
     //Create Item
     this.router.post("/item", async (req, res) => {
       try {
@@ -167,6 +172,11 @@ class Routes {
       } catch (error) {
         res.status(500).json({ message: "Failed to remove item" });
       }
+    });
+
+    //Delete Items given ID
+    this.router.delete("/item/:itemID", async (req, res) => {
+      await ItemController.removeItem(req, res);
     });
 
 

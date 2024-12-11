@@ -85,7 +85,12 @@ export const Events = {
     Registered: 'Registered',
     RegisterProfile: 'RegisterProfile',
 
-    PageReloadWhileLoggedIn: 'PageReloadWhileLoggedIn',
     ChangedViewToProfile: 'ChangedViewToProfile',
-    ChangedViewToEdit: 'ChangedViewToLogin'
+    ChangedViewToEdit: 'ChangedViewToLogin',
+
+    GetItemsWithEmail: 'GetItemsWithEmail',
+    GetItemsWithEmailSuccess: 'GetItemsWithEmailSuccess',
+
+    DeleteItem: 'DeleteItem',
+    DeleteItemSuccess: 'DeleteItemSuccess'
 };

@@ -306,6 +306,7 @@ export class CreateItemPage extends BaseComponent {
                 price,
                 amountAvailable,
                 itemLocation,
+                sellerEmail
             };
 
             // Publish the listingData object

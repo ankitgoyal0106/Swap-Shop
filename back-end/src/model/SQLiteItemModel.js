@@ -100,9 +100,13 @@ class _SQLiteItemModel {
         return await Item.create(item);
     }
 
-    async read(listingID = null) {
+    async read(listingID = null, email = null) {
         if (listingID) {
             return await Item.findByPk(listingID);
+        }
+
+        if (email) {
+            return await Item.findAll({ where: { sellerEmail: email } });
         }
 
         return await Item.findAll();
@@ -118,14 +122,14 @@ class _SQLiteItemModel {
         return item_update;
     }
 
-    async delete(item = null) {
-        if (item === null) {
+    async delete(itemID = null) {
+        if (itemID === null) {
             await Item.destroy({ truncate: true });
             return;
         }
 
-        await Item.destroy({ where: { listingID: item.userID } });
-        return item;
+        await Item.destroy({ where: { listingID: itemID } });
+        return itemID;
     }
 }
 

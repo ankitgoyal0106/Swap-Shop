@@ -2,20 +2,27 @@ import { BaseComponent } from "../BaseComponent/BaseComponent.js";
 import { EventHub } from "../../eventhub/EventHub.js";
 import { Events } from "../../eventhub/Events.js";
 import { getEmailFromLocalStorage } from "../../services/LocalStorage.js";
+import { ItemRepoFactory } from "../../services/ItemRepoFactory.js";
 
 export class ViewProfile extends BaseComponent {
     #container = null;
+    #changeViewCount = 0;
+    #deleteItemCount = 0;
 
     constructor() {
         super();
         this.loadCSS('ViewProfile');
+        this.#container = document.createElement('div');
+        this.#container.classList.add('profile-page');
+        ItemRepoFactory.get();
     }
 
     render(){
-        this.#container = document.createElement('div');
-        this.#container.classList.add('profile-page');
+        this.#container.innerHTML = '';
         this.#setupContainerContent();
         this.#attachEventListeners();
+        this.#changeViewCount = 0;
+        this.#deleteItemCount = 0;
 
         return this.#container;
     }
@@ -39,79 +46,105 @@ export class ViewProfile extends BaseComponent {
         const userName = document.createElement('h1');
         userName.className = 'user-name';
         userName.id = 'user-name';
-        userName.textContent = "Hello, FirstName!";
+        userName.textContent = "";
   
         // Additional user info can be added here
-  
+        const message = document.createElement('h3');
+        message.textContent = 'Your Listed Items:';
+        message.id = 'profile-message';
+        message.className = 'profile-message';
+
         //userInfo.appendChild(profilePicture);
         userInfo.appendChild(userName);
+        userInfo.appendChild(message);
         return userInfo;
     }
 
     #createItemsGrid() {
         const itemsGrid = document.createElement('div');
         itemsGrid.className = 'items-grid';
-  
-        const items = this.#getUserItems();
+        return itemsGrid;
+      }
 
-        // Display user's items
+      #createItemCards(items, itemsGrid) {
         items.forEach(item => {
           const itemCard = this.#createItemCard(item);
           itemsGrid.appendChild(itemCard);
         });
-  
-        return itemsGrid;
+
+        this.#container.appendChild(itemsGrid);
       }
 
       #createItemCard(item) {
         const itemCard = document.createElement('div');
         itemCard.className = 'item-card';
-  
-        const img = document.createElement('img');
-        img.src = item.src;
-        img.alt = item.title;
-        itemCard.appendChild(img);
-  
+
         const itemTitle = document.createElement('h2');
-        itemTitle.textContent = item.title;
+        itemTitle.textContent = item.itemName;
         itemCard.appendChild(itemTitle);
-  
+        itemTitle.addEventListener('click', () => {
+            console.log('Clicked on item:', item.itemName);
+            const hub = EventHub.getInstance();
+            hub.publish('ViewItem', item);
+            hub.publish('SwitchToItemPage', item);
+        });
+
+        // const img = document.createElement('img');
+        // img.alt = item.itemName; // Use the item's name as alt text
+        // img.className = 'item-image';
+        // itemCard.appendChild(img);
+
         const itemDescription = document.createElement('p');
-        itemDescription.textContent = item.description;
+        itemDescription.textContent = item.itemDescription;
         itemCard.appendChild(itemDescription);
-  
+
+        const deleteBtn = document.createElement('button');
+        deleteBtn.textContent = 'Delete';
+        deleteBtn.className = 'delete-btn';
+        deleteBtn.id = 'delete-btn';
+        deleteBtn.addEventListener('click', (e) => {
+          e.preventDefault();
+          const hub = EventHub.getInstance();
+          hub.publish(Events.DeleteItem, item.listingID);
+          hub.publish(Events.SwitchToProfilePage, null);
+        });
+        itemCard.appendChild(deleteBtn);
+
         return itemCard;
-      }
+    }
 
       #getUserItems() {
-        // Hardcoded items listed by the user
-        return [
-          { src: '', title: 'User Item 1', description: 'Description for user item 1' },
-          { src: '', title: 'User Item 2', description: 'Description for user item 2' },
-          { src: '', title: 'User Item 3', description: 'Description for user item 3' },
-          { src: '', title: 'User Item 4', description: 'Description for user item 4' },
-          { src: '', title: 'User Item 5', description: 'Description for user item 5' },
-          { src: '', title: 'User Item 6', description: 'Description for user item 6' },
-          // Add more items as needed
-        ];
+        if (!getEmailFromLocalStorage()) {
+          return;
+        }
+
+        const hub = EventHub.getInstance();
+        const email = getEmailFromLocalStorage();
+        hub.publish(Events.GetItemsWithEmail, email);
       }
 
-    #attachEventListeners() {
-      const hub = EventHub.getInstance();
-      hub.subscribe(Events.LoginSuccess, (profileData) => {
-        this.#container.querySelector('.user-name').textContent = `Hello, ${profileData.user.name.split(' ')[0]}!`;
-        //if (profileData.user.profilePicture) {
-        //  this.#container.querySelector('.profile-picture').src = profileData.user.profilePicture;
-        //}
-        // TODO: Add additional user info here that needs to be loaded upon login
-      });
+      #attachEventListeners() {
+        const hub = EventHub.getInstance();
 
-      hub.subscribe(Events.PageReloadWhileLoggedIn, (profileData) => {
-        this.#container.querySelector('.user-name').textContent = `Hello, ${profileData.name.split(' ')[0]}!`;
-      });
+        // Subscribe to events
+        hub.subscribe(Events.ChangedViewToProfile, (profileData) => {
+          this.#container.querySelector('.user-name').textContent = `Hello, ${profileData.name.split(' ')[0]}!`;
+          if (this.#changeViewCount === 0) {
+            this.#getUserItems();
+            this.#changeViewCount++;
+          }
+        });
+        hub.subscribe(Events.GetItemsWithEmailSuccess, (data) => {
+          const itemsGrid = this.#container.querySelector('.items-grid');
+          itemsGrid.innerHTML = '';
+          this.#createItemCards(data.items, itemsGrid);
+        });
 
-      hub.subscribe(Events.ChangedViewToProfile, (profileData) => {
-        this.#container.querySelector('.user-name').textContent = `Hello, ${profileData.name.split(' ')[0]}!`;
-      });
-    }
+        hub.subscribe(Events.DeleteItemSuccess, () => {
+          if (this.#deleteItemCount === 0) {
+            this.#deleteItemCount++;
+            this.#getUserItems();
+          }
+        });
+      }
 }
