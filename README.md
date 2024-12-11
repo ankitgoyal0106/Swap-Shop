@@ -1,5 +1,7 @@
 # Overview
 
+Demo Video: https://youtu.be/dbsIR8psC8k
+
 Swap Shop is a web application designed to connect college students with each other and with local businesses, such as farmer's market vendors, to facilitate the exchange of goods. It addresses the challenges students face when buying or selling used items on campus and provides a more efficient alternative to existing platforms like campus Snapchat stories. Additionally, it offers an organized space for local businesses to advertise their products, enhancing the connection between students and the local community.
 
 # Problem Statement
