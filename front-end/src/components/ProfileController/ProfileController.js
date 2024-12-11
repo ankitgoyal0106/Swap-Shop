@@ -193,7 +193,6 @@ export class ProfileContoller extends BaseComponent {
     }
 
     if (this.#currentView === 'profile'){
-      this.#viewProfile.render();
       this.#hub.subscribe(Events.GetProfileSuccess, (data) => {
         const hub = EventHub.getInstance();
         hub.publish(Events.ChangedViewToProfile, data.profile);

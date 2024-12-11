@@ -88,12 +88,6 @@ export class AppController {
                 <li><a href="#" id="profileBtn">Profile</a></li>
                 <li><a href="#" id="logoutBtn">Logout</a></li>
             `;
-            this.#profilePage.render();
-            this.#hub.subscribe(Events.GetProfileSuccess, (data) => {
-                const hub = EventHub.getInstance();
-                hub.publish(Events.PageReloadWhileLoggedIn, data.profile);
-            });
-            this.#hub.publish(Events.GetProfile, getEmailFromLocalStorage());
         } else {
             navBar.innerHTML = '';
             navBar.innerHTML = `
@@ -235,6 +229,13 @@ export class AppController {
         }else if(this.#currentView === 'explore'){
             viewContainer.appendChild(this.#explorePage.render());
         }else if(this.#currentView === 'profile'){
+            this.#hub.subscribe(Events.GetProfileSuccess, (data) => {
+                if (this.#currentView === 'profile') {
+                    const hub = EventHub.getInstance();
+                    hub.publish(Events.ChangedViewToProfile, data.profile);
+                }
+            });
+            this.#hub.publish(Events.GetProfile, getEmailFromLocalStorage());
             viewContainer.appendChild(this.#profilePage.render());
         }else if(this.#currentView === 'login'){
             viewContainer.appendChild(this.#loginPage.render());
