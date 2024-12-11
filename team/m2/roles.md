@@ -39,8 +39,8 @@ A markdown file detailing each team member's role and their top 3 commits for th
 - **Role**: Track project deadlines and communicate the dates with the team to assure each one is met. Assure each task gets done in a timely manner.
 - **Top Three Commits**:
    1. [Commit for Registration Page Rough Draft](https://github.com/ankitgoyal0106/Swap-Shop/commit/255fcf065edd444d8c6369590060b2085614734a)
-   2. [Commit for Profile Editing Page Rough Draft](https://github.com/ankitgoyal0106/Swap-Shop/commit/6343a034adf47e12846e351bf88cb80639211715)
-   3. [Commit for Creating the Profile Repo Service and Adding Event Names](https://github.com/ankitgoyal0106/Swap-Shop/commit/3e332b5878854175dacdef12056e8e25a6a4153d)
+   2. [Commit for Login Logic](https://github.com/ankitgoyal0106/Swap-Shop/commit/ecf8855c1419389a79ccaaeb3607e4f25095d3e9)
+   3. [Commit for Frontend Updates for Items](https://github.com/ankitgoyal0106/Swap-Shop/commit/29b920ffe0c09e9ebafe814284bd46f7e5b41b95)
 
 ## Emily Larkin - Task Manager
 
