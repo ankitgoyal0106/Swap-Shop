@@ -1,7 +1,9 @@
 import { BaseComponent } from "../BaseComponent/BaseComponent.js";
 import { EventHub } from "../../eventhub/EventHub.js";
+import { getEmailFromLocalStorage } from "../../services/LocalStorage.js";
 
-export class explorePage extends BaseComponent {
+
+  export class explorePage extends BaseComponent {
     #container = null;
     #searchBar = null;
     #itemsGrid = null;
@@ -15,13 +17,25 @@ export class explorePage extends BaseComponent {
         this.itemsPerPage = 12;
         this.items = [];
         this.recommendedItems = this.#getRecommendedItems();
-        this.recentlyViewedItems = this.#getRecentlyViewedItems();
+        this.recentlyViewedItems = [];
         this.#initializeItems();
+        this.eventHub = EventHub.getInstance();
+        this.email = getEmailFromLocalStorage();
+        this.subscribeToItemEvents();
 
         this.loadCSS("explorePage");
     }
 
+    subscribeToItemEvents(){
+        this.eventHub.subscribe('GetProfileSuccess', (data) => {
+            this.recentlyViewedItems = JSON.parse(data.profile.recentlyViewed);
+        });
+    }
+
     render() {
+        if(this.email){
+            this.eventHub.publish('GetProfile', this.email);
+        } 
         this.#container = document.createElement('div');
         this.#container.className = 'explore-page';
 
@@ -44,6 +58,59 @@ export class explorePage extends BaseComponent {
         this.#displayItems(this.currentPage);
 
         return this.#container;
+    }
+
+    async handleViewItem(data){
+        await this.updateReventlyViewed(data);
+    }
+
+    async updateReventlyViewed(itemData){
+        try {
+            //Fetch current profile
+            const response = await fetch(`http://localhost:3000/v1/profile/${this.email}`);
+            if (!response.ok) {
+                throw new Error("Profile not found");
+            }
+
+            const profileData = await response.json();
+            const recents = profileData.profile.recentlyViewed;
+            let recentlyViewed;
+            if(recents === "[]"){
+                recentlyViewed = [];
+            }else{
+                recentlyViewed = JSON.parse(recents);
+                console.log(recentlyViewed);
+            }
+
+            // Add item to recently viewed
+            recentlyViewed.unshift(itemData);
+            if(recentlyViewed.length > 5){
+                recentlyViewed.pop();
+            }
+
+            recentlyViewed = JSON.stringify(recentlyViewed);
+
+            const updatedProfileData = {
+                ...profileData.profile,
+                recentlyViewed,
+            };
+
+            const putResponse = await fetch(`http://localhost:3000/v1/edit-profile`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type' : 'application/json',  
+                },
+                body: JSON.stringify(updatedProfileData),
+            });
+
+            if(!putResponse.ok){
+                throw new Error("Failed to update profile");
+            }
+
+            const updatedData = await putResponse.json();
+        } catch (error){
+            console.error("Error adding to recently viewed:", error);
+        }
     }
 
     #createTitle() {
@@ -146,35 +213,38 @@ export class explorePage extends BaseComponent {
             const itemCard = this.#createItemCard(item);
             recentlyViewedContainer.appendChild(itemCard);
         });
-
+        
         this.#recentlyViewedSection.append(recentlyViewedTitle, recentlyViewedContainer);
         return this.#recentlyViewedSection;
     }
 
     #createItemCard(item) {
-        const itemCard = document.createElement('div');
-        itemCard.className = 'item-card';
+      const itemCard = document.createElement('div');
+      itemCard.className = 'item-card';
+  
+      const itemTitle = document.createElement('h2');
+      itemTitle.textContent = item.itemName;
+      itemCard.appendChild(itemTitle);
+      itemCard.addEventListener('click', () => { 
+        console.log('Clicked on item:', item.itemName); 
+        const hub = EventHub.getInstance();
+        hub.publish('SwitchToItemPage', item);
+        this.handleViewItem(item);
+        return item.ListingID;
+      }); 
 
-        const itemTitle = document.createElement('h2');
-        itemTitle.textContent = item.itemName;
-        itemCard.appendChild(itemTitle);
-        itemCard.addEventListener('click', () => {
-            console.log('Clicked on item:', item.itemName);
-            const hub = EventHub.getInstance();
-            hub.publish('ViewItem', item);
-            hub.publish('SwitchToItemPage', item);
-        });
-
-        const img = document.createElement('img');
-        img.alt = item.itemName; // Use the item's name as alt text
-        img.className = 'item-image';
-        itemCard.appendChild(img);
-
-        const itemDescription = document.createElement('p');
-        itemDescription.textContent = item.itemDescription;
-        itemCard.appendChild(itemDescription);
-
-        return itemCard;
+      const img = document.createElement('img');
+      
+      img.src = item.images;
+      img.alt = item.itemName || 'Item Image';
+      img.className = 'item-image';
+      itemCard.appendChild(img);
+    
+      const itemDescription = document.createElement('p');
+      itemDescription.textContent = item.itemDescription;
+      itemCard.appendChild(itemDescription);
+  
+      return itemCard;
     }
 
     #createRecommendedSection() {
@@ -354,36 +424,7 @@ export class explorePage extends BaseComponent {
     }
 
     #getRecommendedItems() {
-        return [
-            {
-                ListingID: '1',
-                itemName: 'Item 2',
-                itemDescription: 'Description for item 2',
-                category: 'Electronics',
-                price: 100.0,
-                postedAt: new Date('2023-01-01T10:00:00Z'),
-                itemLocation: 'Location A',
-                images: ['img1.jpg', 'img2.jpg'],
-                amountAvailable: 10,
-                updatedAt: new Date('2023-01-02T10:00:00Z')
-            }
-        ]
+        return [];
     }
-
-    #getRecentlyViewedItems() {
-        return [
-            {
-                ListingID: '1',
-                itemName: 'Item 2',
-                itemDescription: 'Description for item 2',
-                category: 'Electronics',
-                price: 100.0,
-                postedAt: new Date('2023-01-01T10:00:00Z'),
-                itemLocation: 'Location A',
-                images: ['img1.jpg', 'img2.jpg'],
-                amountAvailable: 10,
-                updatedAt: new Date('2023-01-02T10:00:00Z')
-            }
-        ];
-    }
+        
 }

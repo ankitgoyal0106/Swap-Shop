@@ -99,22 +99,24 @@ export class ProfileRepoRemoteService extends Service {
     }
   }
 
-
   async deleteProfile() {
     //TODO: Create delete profile method. Def need to add parameter.
     this.publish(Events.DeleteProfileSuccess);
   }
 
   async getProfile(email) {
-    const response = await fetch(`http://localhost:3000/v1/profile/${email}`);
-
-    if (!response.ok) {
+    const response = await fetch(`http://localhost:3000/v1/profile/${email}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      }
+    });
+    const data = await response.json();
+    if (data.profile === null) {
       this.publish(Events.GetProfileFailure, `Profile does not exist`);
       throw new Error("Failed to fetch profile");
-    } else {
-      const data = await response.json();
-      this.publish(Events.GetProfileSuccess, data);
     }
+    this.publish(Events.GetProfileSuccess, data);
   }
 
   async updateProfile(profileData) {

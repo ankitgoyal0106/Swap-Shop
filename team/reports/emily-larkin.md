@@ -75,3 +75,62 @@
 - **Task:** Update my role in roles.md and also update personal log.
 - **Details:** Ensured that the top 3 commits were listed in roles.md and successfully updated my personal log with all commits and project contributions. 
 
+
+
+## Milestone 2 Contributions
+
+### December 3, 2024
+- **Task:** Edit the achievement badges to be bigger
+- **Details:** I remade the achievement badges so that they would appear bigger and could be viewed easier when displayed in profile.
+- [Commit for image badges](https://github.com/ankitgoyal0106/Swap-Shop/commit/26452f7c227877c079788a5130b0da6d6b148c8d)
+
+
+### December 4, 2024
+- **Task:** Create server.js file
+- **Details:** I wrote the code (following the example code from class) to create a simple server for the application to use.
+- [Commit server.js](https://github.com/ankitgoyal0106/Swap-Shop/commit/320588c6894a2be1acf8734500e45a7b3c299e27)
+
+- **Task:** Completed some pull requests 
+- **Details:** I authored some pull requests to review the registration page and also changes to the server. 
+
+- **Task:** Create routes.js file
+- **Details:** I wrote the code (following the example code from class) to create the routes.js file. This included setting up the sections for the middleware and basic structure for the routes that others could add depending on the routes that they needed.
+- [Commit route.js](https://github.com/ankitgoyal0106/Swap-Shop/commit/dace5fe4b5d373eaaf5ff2936553e18ecaae0cff)
+
+
+### December 6, 2024
+
+- **Task:** Updated the achievements in events.js
+- **Details:** This commit just cleaned up some of the code that we didn't need. We had events that were never going to be called that I didn't think was necessary to keep. 
+- [Commit to clean up events.js](https://github.com/ankitgoyal0106/Swap-Shop/commit/087e9e1d779c3cd66409f0ee87776a6e9772f782)
+
+- **Task:** Pull data from profile to render achievement
+- **Details:** This commit created the code necessary to pull data from a users profile to use to see if the user had earned a badge.
+- [Commit](https://github.com/ankitgoyal0106/Swap-Shop/commit/4df485fef2b610f628adca95eb33564d2d4fd249)
+
+- **Task:** Add conditions to check for badge earned
+- **Details:** This commit created the code necessary to check whether or not a user had earned a badge by creating conditions within the array that stored the badges. Another commit also was made to fix bugs.
+- [Commit](https://github.com/ankitgoyal0106/Swap-Shop/commit/32ac68e5aaa484338bf0cb0f998b5c99cf7aa9ce)
+- [Commit](https://github.com/ankitgoyal0106/Swap-Shop/commit/c5cbf235a68ee5d9c5f4e2308c5b6aedbcd46011)
+
+### December 7, 2024
+
+- **Task:** Rewrote Achievement Page Code
+- **Details:** The following commits were made to recreate the code for the achievements page with a better understanding of the backend model. Only changes in Achievements.js needed to be made and all other code from prior changes in different files was reverted. New changes were made and waited to be tested once the back-end was running
+- [Reverted changes in profileRepoRemoteServices.js](https://github.com/ankitgoyal0106/Swap-Shop/commit/040445382da1faa53fa837d9fb2395e4ce65c9d9)
+- [Added necessary code with the eventshub to fetch user data from backend](https://github.com/ankitgoyal0106/Swap-Shop/commit/ba72774e38da73760268af49d63b70e2e649ad80)
+- [Debug edit to achievement.js](https://github.com/ankitgoyal0106/Swap-Shop/commit/7f396718b4517e1f7ef695bdbab54ea0c444397f)
+
+
+### December 9, 2024
+
+- **Task:** Debugged Achievements.js
+- **Details:** Some small syntax errors needed to be resolved in the file in order for the page to correctly render and also fetch user data from the backend profile.
+- [Debugged Achievements.js](https://github.com/ankitgoyal0106/Swap-Shop/commit/c196b591daea24d7adcba9ebdb0a9c8836e5d3e9)
+
+
+### December 10, 2024
+- **Task:** Debugged Achievements.js for proper functioning
+- **Details:** Some small syntax errors needed to be resolved in the file in order for the page to correctly render and also fetch user data from the backend profile. Completion of this commit ensured that the achievements page was correctly working to display badges once certain tasks were completed.
+- [Debugged Achievements.js](https://github.com/ankitgoyal0106/Swap-Shop/commit/dd39b8ba3fae553d2a3997ac737a18d21369b2c1)
+
