@@ -54,6 +54,6 @@ A markdown file detailing each team member's role and their top 3 commits for th
 
 - **Role**: Record information and notes for team meetings, submit any assignments involving all group members.
 - **Top Three Commits**
-   1. [Initial Create Item page form](https://github.com/ankitgoyal0106/Swap-Shop/commit/cceb18b7911913380da1735f37fd313239c9439a)
-   2. [Implemented IndexedDB](https://github.com/ankitgoyal0106/Swap-Shop/commit/d8ef419d461eea5926e1a471c73b6aad5d6ad11d)
-   3. [Updated roles.md, users.md, snigdha-thatikonda.md] (https://github.com/ankitgoyal0106/Swap-Shop/commit/6d10aa183da6a4ff0c6a7cd8930aff08dff4c083)
+   1. [SQLLite Item Model](https://github.com/ankitgoyal0106/Swap-Shop/commit/70b235a623e3fa8aef9eaa90d35ccbdd9fe84c34)
+   2. [Populating itemPage from createItemPage](https://github.com/ankitgoyal0106/Swap-Shop/commit/8aaaceaf612cf871daa6aa2f2ae4805919b93da2)
+   3. [Populating itemPage from ExplorePage](https://github.com/ankitgoyal0106/Swap-Shop/commit/8aaaceaf612cf871daa6aa2f2ae4805919b93da2)
