@@ -193,6 +193,38 @@
 - **Details**: Removed the authenticate tag from the /profiles route in order to allow testing of the profiles database.
 - **Link to Commit**: [Commit](https://github.com/ankitgoyal0106/Swap-Shop/commit/7dd64a622008e8805d4d3c3a80f3e4f51917e2d0)
 
-- **Task**: 
-- **Details**: 
-- **Link to Commit**: [Commit]()
+## December 9, 2024
+
+- **Task**: Explore Page Bug Fixes
+- **Details**: Adjusted a few changes that were made through a PR merge in order to fix bugs that arose. Now the explore page will properly render.
+- **Link to Commit**: [Commit](https://github.com/ankitgoyal0106/Swap-Shop/commit/8d104b53c85cba590daea08f4901bf5abbd7016f)
+
+- **Task**: Removed Item Button
+- **Details**: Removed the item page button from the task bar, as the styling was completed and it can now be accessed by clicking on an item in the explore page.
+- **Link to Commit**: [Commit](https://github.com/ankitgoyal0106/Swap-Shop/commit/5367c707376aa6c93d77c0bd921317572c3ad65d)
+
+- **Task**: Added a publish to the explore page.
+- **Details**: Added a publish event for viewing an item in order to properly render item page and increment both achievements and recently viewed.
+- **Link to Commit**: [Commit](https://github.com/ankitgoyal0106/Swap-Shop/commit/a34013273a070a619d96d0405b0a1c5a2ad4d31d)
+
+## December 10, 2024
+
+- **Task**: Fixed Rendering of Explore Page
+- **Details**: Changed Item Model Factory to fix item database access.
+- **Link to Commit**: [Commit](https://github.com/ankitgoyal0106/Swap-Shop/commit/2850136987361104be78b14d856237a9cdd8ebfd)
+
+- **Task**: Fixed import for model factory
+- **Details**: Changed model factory import after renaming the item model factory.
+- **Link to Commit**: [Commit](https://github.com/ankitgoyal0106/Swap-Shop/commit/8c357fa2f012e274f749efcbb6e2cabae0cc332a)
+
+- **Task**: Commented out seller email.
+- **Details**: Commented out seller email section of SQLite model so we could present a working product. Will bug fix soon.
+- **Link to Commit**: [Commit](https://github.com/ankitgoyal0106/Swap-Shop/commit/3bf87295ed8c8a54242307272918f939aabe0a8e)
+
+- **Task**: Fixed seller email.
+- **Details**: Reinitialized the item database to properly interact with the seller email field.
+- **Link to Commit**: [Commit](https://github.com/ankitgoyal0106/Swap-Shop/commit/92e71e0f6c5067fe0327aaca544039966db255d5)
+
+- **Task**: Recently Viewed
+- **Details**: Completed implementation of the recently viewed section of the explore page.
+- **Link to Commit**: [Commit](https://github.com/ankitgoyal0106/Swap-Shop/commit/a78d5d3be6de9a9405588707f8b628c17ca356f3)
