@@ -10,46 +10,40 @@ A file that describes the types of data the application will handle, but without
     - `phoneNo` (string): The user's phone number.
     - `college` (string): The college that the user attends.
     - `password` (string): An encrypted version of the user's password.
-    - `profilePicture` (string): A link to the user's profile picture.
-    - `createdAt` (timestamp): The date and time when the account was created.
-    - `updatedAt` (timestamp): The last time when the buyer's profile was updated.
-    - `achievements` (array): A list of JSON achievements unlocked by the user.
-    - `savedListings` (array): A list of `listingIDs` that the user has saved.
-    - `recentlyViewed` (array): A list of `listingIDs` that were recently viewed by the user.
-    - `conversationList` (array): A list of `conversationID` that the user is included in 
+    - `createdAt` (date): The date and time when the account was created.
+    - `updatedAt` (date): The last time when the buyer's profile was updated.
+    - `achievementCounts` (JSON): A list of JSON achievements unlocked by the user.
+    - `savedListings` (string): A list of `listingIDs` that the user has saved.
+    - `recentlyViewed` (string): A list of `listingIDs` that were recently viewed by the user.
+    - `conversationList` (string): A list of `conversationID` that the user is included in 
 - **Data Source**: User-input data when registering or updating their profile.
 
 ### 2. Listings Data
 - **Description**: Represents items posted for sale or exchange by users.
 - **Attributes**:
-    - `listingID` (string): A unique identifier for each listing.
+    - `listingID` (UIUD): A unique identifier for each listing.
     - `itemName` (string): The name of the listed item.
-    - `itemDescription` (string): A description of the listed item.
-    - `category` (String): The category or type of item.
+    - `itemDescription` (text): A description of the listed item.
+    - `category` (string): The category or type of item.
+    - 'condition' (string): Whether the item is used or new.
     - `price` (float): The price of the listed item.
     - `associatedUser` (string): The `userID` of the user that the item is posted by.
-    - `postedAt` (timestamp): The date and time when the item was posted.
+    - `postedAt` (date): The date and time when the item was posted.
     - `itemLocation` (string): The location of the listing.
-    - `images` (array of string): Links to images uploaded for item.
-    - `amountAvailable` (float): The amount of items that are available.
-    - `updatedAt` (timestamp): The last time the listing was updated.
-- **Data Source**: This will be data entered by the user upon the listing of a new item for their company.
+    - `images` (BLOB): Links to images uploaded for item.
+    - `amountAvailable` (integer): The amount of items that are available.
+    - `updatedAt` (date): The last time the listing was updated.
+    - 'sellerEmail' (string): The email of the seller listing the item.
+- **Data Source**: This will be data entered by the user upon the listing of a new item on the Create Item Page Form.
 
 ### 3. Conversation
 - **Description**: Stores all conversation data exchanged between buyers and sellers.
 - **Attributes**:
-    - `conversationID` (string): The ID of the conversation (group of messages) between two users.
-    - `conversationName` (string): The name of the conversation between two users.
-    - `users` (array): String of all `userID` in the conversation.
-    - `messages` (array): An array of message objects specific to the conversation (Relate to Messages below)
+    - `convoID` (string): The ID of the conversation (group of messages) between two users.
+    - `groupName` (string): The name of the chatroom.
+    - `groupMembers` (string): A list of all the participants in the chat.
+    - `msgLog` (string): An array of message objects {name:, msg:} that represent the messages sent between users. It stores messages exchanged between buyers and sellers.
 
-- **Data Source** User-input data through in-app messaging.
-
-### 4. Messages
-- **Description**: Stores messages exchanged between buyers and sellers.
-- **Attributes**:
-    - `senderID` (string): The `userID` of the sender.
-    - `content` (string): The actual message text.
 - **Data Source** User-input data through in-app messaging.
 
 ## Data Relationships
