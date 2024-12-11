@@ -1,5 +1,6 @@
 import { BaseComponent } from "../BaseComponent/BaseComponent.js";
 import { EventHub } from "../../eventhub/EventHub.js";
+import { getEmailFromLocalStorage } from "../../services/LocalStorage.js";
 
 
   export class explorePage extends BaseComponent {
@@ -16,13 +17,25 @@ import { EventHub } from "../../eventhub/EventHub.js";
         this.itemsPerPage = 12;
         this.items = [];
         this.recommendedItems = this.#getRecommendedItems();
-        this.recentlyViewedItems = this.#getRecentlyViewedItems();
+        this.recentlyViewedItems = [];
         this.#initializeItems();
+        this.eventHub = EventHub.getInstance();
+        this.email = getEmailFromLocalStorage();
+        this.subscribeToItemEvents();
 
         this.loadCSS("explorePage");
     }
 
+    subscribeToItemEvents(){
+        this.eventHub.subscribe('GetProfileSuccess', (data) => {
+            this.recentlyViewedItems = JSON.parse(data.profile.recentlyViewed);
+        });
+    }
+
     render() {
+        if(this.email){
+            this.eventHub.publish('GetProfile', this.email);
+        } 
         this.#container = document.createElement('div');
         this.#container.className = 'explore-page';
 
@@ -45,6 +58,59 @@ import { EventHub } from "../../eventhub/EventHub.js";
         this.#displayItems(this.currentPage);
 
         return this.#container;
+    }
+
+    async handleViewItem(data){
+        await this.updateReventlyViewed(data);
+    }
+
+    async updateReventlyViewed(itemData){
+        try {
+            //Fetch current profile
+            const response = await fetch(`http://localhost:3000/v1/profile/${this.email}`);
+            if (!response.ok) {
+                throw new Error("Profile not found");
+            }
+
+            const profileData = await response.json();
+            const recents = profileData.profile.recentlyViewed;
+            let recentlyViewed;
+            if(recents === "[]"){
+                recentlyViewed = [];
+            }else{
+                recentlyViewed = JSON.parse(recents);
+                console.log(recentlyViewed);
+            }
+
+            // Add item to recently viewed
+            recentlyViewed.unshift(itemData);
+            if(recentlyViewed.length > 5){
+                recentlyViewed.pop();
+            }
+
+            recentlyViewed = JSON.stringify(recentlyViewed);
+
+            const updatedProfileData = {
+                ...profileData.profile,
+                recentlyViewed,
+            };
+
+            const putResponse = await fetch(`http://localhost:3000/v1/edit-profile`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type' : 'application/json',  
+                },
+                body: JSON.stringify(updatedProfileData),
+            });
+
+            if(!putResponse.ok){
+                throw new Error("Failed to update profile");
+            }
+
+            const updatedData = await putResponse.json();
+        } catch (error){
+            console.error("Error adding to recently viewed:", error);
+        }
     }
 
     #createTitle() {
@@ -147,7 +213,7 @@ import { EventHub } from "../../eventhub/EventHub.js";
             const itemCard = this.#createItemCard(item);
             recentlyViewedContainer.appendChild(itemCard);
         });
-
+        
         this.#recentlyViewedSection.append(recentlyViewedTitle, recentlyViewedContainer);
         return this.#recentlyViewedSection;
     }
@@ -163,6 +229,7 @@ import { EventHub } from "../../eventhub/EventHub.js";
         console.log('Clicked on item:', item.itemName); 
         const hub = EventHub.getInstance();
         hub.publish('SwitchToItemPage', item);
+        this.handleViewItem(item);
         return item.ListingID;
       }); 
 
@@ -359,9 +426,5 @@ import { EventHub } from "../../eventhub/EventHub.js";
     #getRecommendedItems() {
         return [];
     }
-
-    #getRecentlyViewedItems() {
-      return [];
-    }
-
+        
 }
