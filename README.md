@@ -10,4 +10,16 @@ Similarly, students may be interested in visiting local farmers' markets but fin
 
 Swap Shop addresses these issues by creating a seamless platform where students and local sellers can easily buy, sell, or exchange items.
 
+# Running Instructions
 
+1. Download the project locally.
+2. Open a new terminal.
+4. Navigate to the project folder (`326-Group-Project`).
+3. Run `npm install` in the terminal.
+4. Change directories to the `front-end` folder (`cd front-end`).
+5. Run `npm install` in the `front-end` as well.
+6. Go back up to the `326-Group-Project` folder using the command `cd ..`.
+7. Change directories to the `back-end` folder (`cd back-end`).
+8. Again, do `npm install` here.
+9. Change directories to the `src` folder (`cd src`).
+10. Finally, enter the command `node server.js` and control-click on the link that is printed to the console in order to open the project in a new tab.
