@@ -14,9 +14,9 @@ A markdown file detailing each team member's role and their top 3 commits for th
 
 - **Role**: Manage group communication by keeping contact in the group chat, as well as including all members in group discussions.
 - **Top Three Commits**:
-   1. [Commit 1](https://github.com/ankitgoyal0106/Swap-Shop/commit/5047e6895db59ea05080a97d7253d4fee929a7de): Completed and styled the notifications page setup.
-   2. [Commit 2](https://github.com/ankitgoyal0106/Swap-Shop/commit/402525c6ec42b76227874e8c2cee6d846985dc90): Restructured the profile page for stylization and the implementation of multi-view page use.
-   3. [Commit 3](https://github.com/ankitgoyal0106/Swap-Shop/commit/07cfd63d5261ef09abd0d50bc2b4201844f37af6): Implementation of fake backend for notification storage. (To be completed in milestone 3)
+   1. [Commit 1](https://github.com/ankitgoyal0106/Swap-Shop/commit/a78d5d3be6de9a9405588707f8b628c17ca356f3): Completed implementation of the recently viewed section of the explore page.
+   2. [Commit 2](https://github.com/ankitgoyal0106/Swap-Shop/commit/5047e6895db59ea05080a97d7253d4fee929a7de): Completed and styled the notifications page setup.
+   3. [Commit 3](https://github.com/ankitgoyal0106/Swap-Shop/commit/402525c6ec42b76227874e8c2cee6d846985dc90): Restructured the profile page for stylization and the implementation of multi-view page use.
 
 ## Ankit Goyal - Repository Manager
 
