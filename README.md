@@ -14,12 +14,12 @@ Swap Shop addresses these issues by creating a seamless platform where students 
 
 1. Download the project locally.
 2. Open a new terminal.
-4. Navigate to the project folder (`326-Group-Project`).
-3. Run `npm install` in the terminal.
-4. Change directories to the `front-end` folder (`cd front-end`).
-5. Run `npm install` in the `front-end` as well.
-6. Go back up to the `326-Group-Project` folder using the command `cd ..`.
-7. Change directories to the `back-end` folder (`cd back-end`).
-8. Again, do `npm install` here.
-9. Change directories to the `src` folder (`cd src`).
-10. Finally, enter the command `node server.js` and control-click on the link that is printed to the console in order to open the project in a new tab.
+3. Navigate to the project folder (`326-Group-Project`).
+4. Run `npm install` in the terminal.
+5. Change directories to the `front-end` folder (`cd front-end`).
+6. Run `npm install` in the `front-end` as well.
+7. Go back up to the `326-Group-Project` folder using the command `cd ..`.
+8. Change directories to the `back-end` folder (`cd back-end`).
+9. Again, do `npm install` here.
+10. Change directories to the `src` folder (`cd src`).
+11. Finally, enter the command `node server.js` and control-click on the link that is printed to the console in order to open the project in a new tab.
