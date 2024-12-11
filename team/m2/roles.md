@@ -6,9 +6,9 @@ A markdown file detailing each team member's role and their top 3 commits for th
 
 - **Role**: Responsible for overseeing the organization and maintenance of all project documentation.
 - **Top Three Commits**:
-  1. [Commit 1](https://github.com/ankitgoyal0106/Swap-Shop/commit/8c6267cdc375995335f2dba1dda6e72c13d4d361): Completed implementation of conversationListing feature that allows users to view and add ongoing conversation groups
-  2. [Commit 2](https://github.com/ankitgoyal0106/Swap-Shop/commit/c4325367e9fb4a8687d388615aa77f72aed502d3): Completed implementation of chatRooms feature that creates an interface for the chat log of a specific conversation
-  3. [Commit 3](https://github.com/ankitgoyal0106/Swap-Shop/commit/d36cab0cf806127ae0105c3c077f57ef517513c6): Updated contributionl log with most recent changes
+  1. [Commit 1](https://github.com/ankitgoyal0106/Swap-Shop/commit/66f5c4993095aa52951d4968b31cdce6536f9c82): Implemented conversations functionality which keeps track of conversations created between users and updates the profiles of participants to have newly created conversations which populate the front-end UI
+  2. [Commit 2](https://github.com/ankitgoyal0106/Swap-Shop/commit/816faa961371622184b6c9272cc4fc83a1f7289d): Implemented chatRoom functionality with persistent chat log with updates in real-time by fetching updates to conversation entry from backend using setInterval
+  3. [Commit 3](https://github.com/ankitgoyal0106/Swap-Shop/commit/6fe118452a0758810676adb87111ef2df281a2ec): Needed to move around RepoFactory instances with appController instantiation since the previous ordering messed up EventHub. Resolving allowed front-end components to effortlessly subscribe and pubilsh events as intended
 
 ## Nathan Palmer - Communication Lead
 
