@@ -128,7 +128,6 @@ export class ViewProfile extends BaseComponent {
 
         // Subscribe to events
         hub.subscribe(Events.ChangedViewToProfile, (profileData) => {
-          console.log("HERE")
           this.#container.querySelector('.user-name').textContent = `Hello, ${profileData.name.split(' ')[0]}!`;
           if (this.#changeViewCount === 0) {
             this.#getUserItems();
