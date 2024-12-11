@@ -30,9 +30,9 @@ A markdown file detailing each team member's role and their top 3 commits for th
 
 - **Role**: Schedule weekly group meetings, book meeting rooms, and ensure that all deliverables meet the necessary quality standards.
 - **Top Three Commits**:
--  1. [Creation of the Explore Page Files and initial key features](https://github.com/ankitgoyal0106/Swap-Shop/commit/ac4a778e5356dc5a5a0c7931ce05fe8cf1e9abeb)
-- 2. [Made the search bar functional for inputs to match title or description and if the category matches the dropdown](https://github.com/ankitgoyal0106/Swap-Shop/commit/831678c7fea11d8e5417c593afe8c24dd312dac3)
--  3. [Altered the explore page JS to be a class](https://github.com/ankitgoyal0106/Swap-Shop/commit/9de56d87ccc63029eadd3c30873cd02688ad0d6e)
+-  1. [Explore page populates with items that are fetched from the backend](https://github.com/ankitgoyal0106/Swap-Shop/commit/c7d0dc7503d4f9a9806ff0050cb6a90f60774b96)
+- 2. [Stored images correctly to backend and loaded on explore page frontend](https://github.com/ankitgoyal0106/Swap-Shop/commit/6867a31fc97e4b9a42306548dd0542ec5bc66af7)
+-  3. [Implementation of SQLite Model for items](https://github.com/ankitgoyal0106/Swap-Shop/commit/21204731be49b454ac98712aba66fa11880bd8b5)
 
 ## Scott Puopolo - Project Manager (Timekeeper)
 
